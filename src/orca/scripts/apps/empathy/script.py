@@ -129,7 +129,9 @@ class Script(gtk.Script):
         # events we need to present text added to the chatroom are
         # missing.
         #
-        allPageTabs = self.utilities.descendantsWithRole(
+        #allPageTabs = 
+        #TODO duplicate code
+        self.utilities.descendantsWithRole(
             event.source, pyatspi.ROLE_PAGE_TAB)
 
         gtk.Script.onWindowActivated(self, event)

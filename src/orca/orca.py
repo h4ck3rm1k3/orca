@@ -53,7 +53,7 @@ try:
     from gi.repository import Gdk
     # Note: This last import is here due to bgo #673396.
     # See bgo#673397 for the rest of the story.
-    from gi.repository.GdkX11 import X11Screen
+    #from gi.repository.GdkX11 import X11Screen
 except:
     pass
 
@@ -241,7 +241,7 @@ def _processKeyboardEvent(event):
         keyboardEvent.present()
         if keyboardEvent.isModifierKey() and not isOrcaModifier:
             return False
- 
+
     # Special modes.
     if not isPressedEvent and keyboardEvent.event_string == "Escape":
         script.exitLearnMode(keyboardEvent)
@@ -273,7 +273,7 @@ def _processKeyboardEvent(event):
     elif not keyboardEvent.isModifierKey():
         _orcaModifierPressed = False
         orca_state.bypassNextCommand = False
- 
+
     return isOrcaModifier or orca_state.learnModeEnabled
 
 ########################################################################
@@ -361,7 +361,7 @@ def _createOrcaXmodmap():
 
     global _capsLockCleared
 
-    cmd = []
+    #cmd = []
     if "Caps_Lock" in settings.orcaModifierKeys:
         _setCapsLockAsOrcaModifier(True)
         _capsLockCleared = True

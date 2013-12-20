@@ -31,7 +31,7 @@ import pyatspi
 
 from . import debug
 
-class LabelInference:
+class LabelInference(object):
 
     def __init__(self, script):
         """Creates an instance of the LabelInference class.
@@ -333,7 +333,7 @@ class LabelInference:
         lExtents = self._getExtents(lObj, start, end)
         distance = extents[0] - (lExtents[0] + lExtents[2])
         if 0 <= distance <= proximity:
-            strings = [content[3] or content[0].name for content in onLeft]
+            strings = [_content[3] or _content[0].name for _content in onLeft]
             return ''.join(strings)
 
         return None
@@ -380,7 +380,7 @@ class LabelInference:
         rExtents = self._getExtents(rObj, start, end)
         distance = rExtents[0] - (extents[0] + extents[2])
         if distance <= proximity or self._preferRight(obj):
-            strings = [content[3] or content[0].name for content in onRight]
+            strings = [_content[3] or _content[0].name for _content in onRight]
             return ''.join(strings)
 
         return None

@@ -257,7 +257,7 @@ class Script(Gecko.Script):
                 self.setCaretPosition(obj, offset)
                 return
 
-        # If we get a "object:property-change:accessible-name" event for 
+        # If we get a "object:property-change:accessible-name" event for
         # the first item in the Suggestions lists for the spell checking
         # dialog, then speak the first two labels in that dialog. These
         # will by the "Misspelled word:" label and the currently misspelled
@@ -270,7 +270,7 @@ class Script(Gecko.Script):
         if self.utilities.hasMatchingHierarchy(obj, rolesList):
             dialog = obj.parent.parent
 
-            # Translators: this is what the name of the spell checking 
+            # Translators: this is what the name of the spell checking
             # dialog in Thunderbird begins with. The translated form
             # has to match what Thunderbird is using.  We hate keying
             # off stuff like this, but we're forced to do so in this case.

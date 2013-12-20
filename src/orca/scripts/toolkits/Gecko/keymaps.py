@@ -30,7 +30,7 @@ __license__   = "LGPL"
 
 import orca.settings as settings
 
-# Storing values 
+# Storing values
 defaultModifierMask = settings.defaultModifierMask
 ORCA_MODIFIER_MASK = settings.ORCA_MODIFIER_MASK
 NO_MODIFIER_MASK = settings.NO_MODIFIER_MASK
@@ -44,7 +44,7 @@ SHIFT_MODIFIER_MASK = settings.SHIFT_MODIFIER_MASK
 arrowKeymap = (
     ("Right", defaultModifierMask, NO_MODIFIER_MASK, "goNextCharacterHandler"),
 
-    ("Left", defaultModifierMask, NO_MODIFIER_MASK, 
+    ("Left", defaultModifierMask, NO_MODIFIER_MASK,
     "goPreviousCharacterHandler"),
 
     ("Right", defaultModifierMask, CTRL_MODIFIER_MASK, "goNextWordHandler"),
@@ -72,7 +72,7 @@ commonKeymap = (
     ("f9", defaultModifierMask, ORCA_MODIFIER_MASK, "reviewLiveAnnouncement"),
 
     # misc
-    
+
     ("backslash", defaultModifierMask, SHIFT_MODIFIER_MASK,
     "setLivePolitenessOff"),
 
@@ -88,12 +88,12 @@ commonKeymap = (
     ("Right", defaultModifierMask, ORCA_MODIFIER_MASK,
     "goNextObjectInOrderHandler"),
 
-    ("Left", defaultModifierMask, ORCA_MODIFIER_MASK, 
+    ("Left", defaultModifierMask, ORCA_MODIFIER_MASK,
     "goPreviousObjectInOrderHandler"),
 )
 
 desktopKeymap = (
-    ("KP_Multiply", defaultModifierMask, ORCA_MODIFIER_MASK, 
+    ("KP_Multiply", defaultModifierMask, ORCA_MODIFIER_MASK,
     "moveToMouseOverHandler"),
 )
 

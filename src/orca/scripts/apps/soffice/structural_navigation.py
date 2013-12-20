@@ -64,7 +64,8 @@ class StructuralNavigation(structural_navigation.StructuralNavigation):
         # Check for dynamic row and column headers.
         #
         try:
-            table = obj.parent.queryTable()
+            #table = 
+            obj.parent.queryTable()
         except:
             return False
 

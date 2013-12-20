@@ -133,7 +133,8 @@ class Utilities(script_utilities.Utilities):
             return -1
 
         try:
-            table = obj.parent.queryTable()
+            #table = 
+            obj.parent.queryTable()
         except:
             return -1
 

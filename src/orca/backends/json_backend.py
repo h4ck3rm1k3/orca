@@ -31,11 +31,11 @@ from json import load, dump
 import os
 from orca import settings, acss
 
-class Backend:
+class Backend(object):
 
     def __init__(self, prefsDir):
         """ Initialize the JSON Backend.
-        """ 
+        """
         self.general = {}
         self.pronunciations = {}
         self.keybindings = {}
@@ -66,7 +66,7 @@ class Backend:
 
     def saveProfileSettings(self, profile, general,
                                   pronunciations, keybindings):
-        """ Save minimal subset defined in the profile against current 
+        """ Save minimal subset defined in the profile against current
             defaults. """
         if profile is None:
             profile = 'default'
@@ -108,7 +108,7 @@ class Backend:
         try:
             generalSettings['activeProfile'] = profileSettings['profile']
         except KeyError:
-            generalSettings['activeProfile'] = ["Default", "default"] 
+            generalSettings['activeProfile'] = ["Default", "default"]
         return generalSettings
 
     def getPronunciations(self, profile='default'):
@@ -133,7 +133,7 @@ class Backend:
 
     def isFirstStart(self):
         """ Check if we're in first start. """
- 
+
         return not os.path.exists(self.settingsFile)
 
     def _setProfileKey(self, key, value):

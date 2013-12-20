@@ -30,7 +30,7 @@ __license__   = "LGPL"
 
 from . import settings
 
-# Storing values 
+# Storing values
 defaultModifierMask = settings.defaultModifierMask
 ORCA_MODIFIER_MASK = settings.ORCA_MODIFIER_MASK
 NO_MODIFIER_MASK = settings.NO_MODIFIER_MASK
@@ -38,7 +38,7 @@ ORCA_SHIFT_MODIFIER_MASK = settings.ORCA_SHIFT_MODIFIER_MASK
 
 keymap = (
 
-    ("KP_Divide", defaultModifierMask, ORCA_MODIFIER_MASK, 
+    ("KP_Divide", defaultModifierMask, ORCA_MODIFIER_MASK,
     "routePointerToItemHandler"),
 
     # We want the user to be able to combine modifiers with the
@@ -82,7 +82,7 @@ keymap = (
     ("KP_Home", defaultModifierMask, NO_MODIFIER_MASK,
     "reviewPreviousLineHandler"),
 
-    ("KP_Home", defaultModifierMask, ORCA_MODIFIER_MASK, 
+    ("KP_Home", defaultModifierMask, ORCA_MODIFIER_MASK,
     "reviewHomeHandler"),
 
     ("KP_Up", defaultModifierMask, NO_MODIFIER_MASK,
@@ -94,13 +94,13 @@ keymap = (
     ("KP_Up", defaultModifierMask, NO_MODIFIER_MASK,
     "reviewPhoneticCurrentLineHandler", 3),
 
-    ("KP_Page_Up", defaultModifierMask, NO_MODIFIER_MASK, 
+    ("KP_Page_Up", defaultModifierMask, NO_MODIFIER_MASK,
     "reviewNextLineHandler"),
 
     ("KP_Page_Up", defaultModifierMask, ORCA_MODIFIER_MASK,
     "reviewEndHandler"),
 
-    ("KP_Left", defaultModifierMask, NO_MODIFIER_MASK, 
+    ("KP_Left", defaultModifierMask, NO_MODIFIER_MASK,
     "reviewPreviousItemHandler"),
 
     ("KP_Left", defaultModifierMask, ORCA_MODIFIER_MASK,

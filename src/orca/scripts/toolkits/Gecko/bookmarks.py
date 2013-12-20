@@ -45,11 +45,11 @@ class GeckoBookmarks(bookmarks.Bookmarks):
     def __init__(self, script):
         bookmarks.Bookmarks.__init__(self, script)
         self._currentbookmarkindex = {}
-        
-        
+
+
     def addBookmark(self, inputEvent):
         """ Add an in-page accessible object bookmark for this key and
-        webpage URI. """ 
+        webpage URI. """
         # form bookmark dictionary key
         index = (inputEvent.hw_code, self.getURIKey())
         # convert the current object to a path and bookmark it
@@ -59,11 +59,11 @@ class GeckoBookmarks(bookmarks.Bookmarks):
         utterances = [(messages.BOOKMARK_ENTERED)]
         utterances.extend(self._script.speechGenerator.generateSpeech(obj))
         speech.speak(utterances)
-        
+
     def goToBookmark(self, inputEvent, index=None):
         """ Go to the bookmark indexed at this key and this page's URI """
         index = index or (inputEvent.hw_code, self.getURIKey())
-        
+
         try:
             path, characterOffset = self._bookmarks[index]
         except KeyError:
@@ -71,7 +71,7 @@ class GeckoBookmarks(bookmarks.Bookmarks):
             return
         # convert our path to an object
         obj = self.pathToObj(path)
-       
+
         if obj:
             # restore the location
             self._script.setCaretPosition(obj, characterOffset)
@@ -82,9 +82,9 @@ class GeckoBookmarks(bookmarks.Bookmarks):
             self._currentbookmarkindex[index[1]] = index[0]
         else:
             self._script.systemBeep()
-        
+
     def bookmarkCurrentWhereAmI(self, inputEvent):
-        """ Report "Where am I" information for this bookmark relative to the 
+        """ Report "Where am I" information for this bookmark relative to the
         current pointer location."""
         index = (inputEvent.hw_code, self.getURIKey())
         try:
@@ -93,9 +93,9 @@ class GeckoBookmarks(bookmarks.Bookmarks):
         except KeyError:
             self._script.systemBeep()
             return
-            
+
         [cur_obj, cur_characterOffset] = self._script.getCaretContext()
-        
+
         # Are they the same object?
         if self._script.utilities.isSameObject(cur_obj, obj):
             self._script.presentMessage(messages.BOOKMARK_IS_CURRENT_OBJECT)
@@ -104,7 +104,7 @@ class GeckoBookmarks(bookmarks.Bookmarks):
         elif self._script.utilities.isSameObject(cur_obj.parent, obj.parent):
             self._script.presentMessage(messages.BOOKMARK_PARENT_IS_SAME)
             return
-        
+
         # Do they share a common ancestor?
         # bookmark's ancestors
         bookmark_ancestors = []
@@ -123,15 +123,15 @@ class GeckoBookmarks(bookmarks.Bookmarks):
             p = p.parent
 
         self._script.presentMessage(messages.BOOKMARK_COMPARISON_UNKNOWN)
-        
+
     def saveBookmarks(self, inputEvent):
         """ Save the bookmarks for this script. """
         saved = {}
-         
+
         # save obj as a path instead of an accessible
         for index, bookmark in list(self._bookmarks.items()):
             saved[index] = bookmark[0], bookmark[1]
-            
+
         try:
             self.saveBookmarksToDisk(saved)
             self._script.presentMessage(messages.BOOKMARKS_SAVED)
@@ -141,24 +141,24 @@ class GeckoBookmarks(bookmarks.Bookmarks):
         # Notify the observers
         for o in self._saveObservers:
             o()
-            
+
     def goToNextBookmark(self, inputEvent):
         """ Go to the next bookmark location.  If no bookmark has yet to be
         selected, the first bookmark will be used.  """
-        # The convenience of using a dictionary to add/goto a bookmark is 
-        # offset by the difficulty in finding the next bookmark.  We will 
-        # need to sort our keys to determine the next bookmark on a page by 
+        # The convenience of using a dictionary to add/goto a bookmark is
+        # offset by the difficulty in finding the next bookmark.  We will
+        # need to sort our keys to determine the next bookmark on a page by
         # page basis.
         bm_keys = list(self._bookmarks.keys())
         current_uri = self.getURIKey()
-        
+
         # mine out the hardware keys for this page and sort them
         thispage_hwkeys = []
         for bm_key in bm_keys:
             if bm_key[1] == current_uri:
                 thispage_hwkeys.append(bm_key[0])
         thispage_hwkeys.sort()
-        
+
         # no bookmarks for this page
         if len(thispage_hwkeys) == 0:
             self._script.systemBeep()
@@ -168,8 +168,8 @@ class GeckoBookmarks(bookmarks.Bookmarks):
                          current_uri not in self._currentbookmarkindex:
             self.goToBookmark(None, index=(thispage_hwkeys[0], current_uri))
             return
-        
-        # find current bookmark hw_code in our sorted list.  
+
+        # find current bookmark hw_code in our sorted list.
         # Go to next one if possible
         try:
             index = thispage_hwkeys.index( \
@@ -178,20 +178,20 @@ class GeckoBookmarks(bookmarks.Bookmarks):
                                  thispage_hwkeys[index+1], current_uri))
         except (ValueError, KeyError, IndexError):
             self.goToBookmark(None, index=(thispage_hwkeys[0], current_uri))
-            
+
     def goToPrevBookmark(self, inputEvent):
         """ Go to the previous bookmark location.  If no bookmark has yet to be
         selected, the first bookmark will be used.  """
         bm_keys = list(self._bookmarks.keys())
         current_uri = self.getURIKey()
-        
+
         # mine out the hardware keys for this page and sort them
         thispage_hwkeys = []
         for bm_key in bm_keys:
             if bm_key[1] == current_uri:
                 thispage_hwkeys.append(bm_key[0])
         thispage_hwkeys.sort()
-        
+
         # no bookmarks for this page
         if len(thispage_hwkeys) == 0:
             self._script.systemBeep()
@@ -201,30 +201,30 @@ class GeckoBookmarks(bookmarks.Bookmarks):
                          current_uri not in self._currentbookmarkindex:
             self.goToBookmark(None, index=(thispage_hwkeys[0], current_uri))
             return
-        
-        # find current bookmark hw_code in our sorted list.  
+
+        # find current bookmark hw_code in our sorted list.
         # Go to next one if possible
         try:
             index = thispage_hwkeys.index( \
                             self._currentbookmarkindex[current_uri])
-            self.goToBookmark(None, 
+            self.goToBookmark(None,
                               index=(thispage_hwkeys[index-1], current_uri))
         except (ValueError, KeyError, IndexError):
-            self.goToBookmark(None, index=(thispage_hwkeys[0], current_uri))    
-            
+            self.goToBookmark(None, index=(thispage_hwkeys[0], current_uri))
+
     def _objToPickle(self, obj=None):
-        """Given an object, return it's saving (pickleable) format.  In this 
-        case, the obj path is determined relative to the document frame and is 
+        """Given an object, return it's saving (pickleable) format.  In this
+        case, the obj path is determined relative to the document frame and is
         returned as a list.  If obj is not provided, the current caret context
         is used.  """
         return self._objToPath(start_obj=obj)
-                               
+
     def _objToPath(self, start_obj=None):
-        """Given an object, return it's path from the root accessible.  If obj 
+        """Given an object, return it's path from the root accessible.  If obj
         is not provided, the current caret context is used. """
         if not start_obj:
-            [start_obj, characterOffset] = self._script.getCaretContext()    
-            
+            [start_obj, characterOffset] = self._script.getCaretContext()
+
         if start_obj is None \
                      or start_obj.getRole() == pyatspi.ROLE_DOCUMENT_FRAME:
             return []
@@ -238,17 +238,17 @@ class GeckoBookmarks(bookmarks.Bookmarks):
                     return path
                 path.append(p.getIndexInParent())
                 p = p.parent
-            
+
             return []
-            
+
     def _pickleToObj(self, obj):
         """Return the s with the given path (relative to the
         document frame). """
-        
+
         # could test for different obj types.  We'll just assume it is
         # list that represents a path for now.
         return self.pathToObj(obj)
-            
+
     def pathToObj(self, path):
         """Return the object with the given path (relative to the
         document frame). """
@@ -258,11 +258,11 @@ class GeckoBookmarks(bookmarks.Bookmarks):
                 returnobj = returnobj[childnumber]
             except IndexError:
                 return None
-            
+
         return returnobj
-            
+
     def getURIKey(self):
-        """Returns the URI key for a given page as a URI stripped of 
+        """Returns the URI key for a given page as a URI stripped of
         parameters?query#fragment as seen in urlparse."""
         uri = self._script.utilities.documentFrameURI()
         if uri:

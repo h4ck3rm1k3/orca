@@ -30,7 +30,7 @@ __license__   = "LGPL"
 
 from . import settings
 
-# Storing values 
+# Storing values
 defaultModifierMask = settings.defaultModifierMask
 ORCA_MODIFIER_MASK = settings.ORCA_MODIFIER_MASK
 NO_MODIFIER_MASK = settings.NO_MODIFIER_MASK
@@ -101,7 +101,7 @@ keymap = (
     "addBookmark"),
 
     # 'Go to bookmark' key bindings
-    
+
     ("1", defaultModifierMask, ORCA_MODIFIER_MASK,
     "goToBookmark"),
     ("2", defaultModifierMask, ORCA_MODIFIER_MASK,

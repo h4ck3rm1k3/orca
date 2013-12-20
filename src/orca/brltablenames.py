@@ -19,7 +19,7 @@
 # Boston MA  02110-1301 USA.
 
 """Braille translation table names. These have been put in their own module
-so that we can present them in the correct language when users change the 
+so that we can present them in the correct language when users change the
 synthesizer language on the fly without having to reload a bunch of modules."""
 
 __id__        = "$Id$"

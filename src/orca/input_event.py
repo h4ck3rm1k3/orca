@@ -41,7 +41,7 @@ KEYBOARD_EVENT     = "keyboard"
 BRAILLE_EVENT      = "braille"
 MOUSE_BUTTON_EVENT = "mouse:button"
 
-class InputEvent:
+class InputEvent(object):
 
     def __init__(self, eventType):
         """Creates a new input event of the given type.
@@ -440,7 +440,7 @@ class MouseButtonEvent(InputEvent):
         self.button = event.type[len("mouse:button:"):-1]
         self.time = time.time()
 
-class InputEventHandler:
+class InputEventHandler(object):
 
     def __init__(self, function, description, learnModeEnabled=True):
         """Creates a new InputEventHandler instance.  All bindings

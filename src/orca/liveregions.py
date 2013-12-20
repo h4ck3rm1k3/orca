@@ -18,14 +18,14 @@ LIVE_RUDE      = 3
 # Seconds a message is held in the queue before it is discarded
 MSG_KEEPALIVE_TIME = 45  # in seconds
 
-# The number of messages that are cached and can later be reviewed via 
+# The number of messages that are cached and can later be reviewed via
 # LiveRegionManager.reviewLiveAnnouncement.
 CACHE_SIZE = 9  # corresponds to one of nine key bindings
 
-class PriorityQueue:
+class PriorityQueue(object):
     """ This class represents a thread **UNSAFE** priority queue where priority
-    is determined by the given integer priority.  The entries are also   
-    maintained in chronological order. 
+    is determined by the given integer priority.  The entries are also
+    maintained in chronological order.
 
     TODO: experiment with Queue.Queue to make thread safe
     """
@@ -36,7 +36,7 @@ class PriorityQueue:
         """ Add a new element to the queue according to 1) priority and
         2) timestamp. """
         bisect.insort_left(self.queue, (priority, time.time(), data, obj))
-       
+
     def dequeue(self):
         """get the highest priority element from the queue.  """
         return self.queue.pop(0)
@@ -46,7 +46,7 @@ class PriorityQueue:
         self.queue = []
 
     def purgeByKeepAlive(self):
-        """ Purge items from the queue that are older than the keepalive 
+        """ Purge items from the queue that are older than the keepalive
         time """
         currenttime = time.time()
         myfilter = lambda item: item[1] + MSG_KEEPALIVE_TIME > currenttime
@@ -59,7 +59,7 @@ class PriorityQueue:
         self.queue = list(filter(myfilter, self.queue))
 
     def clumpContents(self):
-        """ Combines messages with the same 'label' by appending newer  
+        """ Combines messages with the same 'label' by appending newer
         'content' and removing the newer message.  This operation is only
         applied to the next dequeued message for performance reasons and is
         often applied in conjunction with filterContents() """
@@ -67,13 +67,13 @@ class PriorityQueue:
             newqueue = []
             newqueue.append(self.queue[0])
             targetlabels = newqueue[0][2]['labels']
-            targetcontent = newqueue[0][2]['content']
+            #TODO: NOT USED: targetcontent = newqueue[0][2]['content']
             for i in range(1, len(self.queue)):
                 if self.queue[i][2]['labels'] == targetlabels:
                     newqueue[0][2]['content'].extend \
                                    (self.queue[i][2]['content'])
                 else:
-                    newqueue.append(self.queue[i]) 
+                    newqueue.append(self.queue[i])
 
             self.queue = newqueue
 
@@ -88,7 +88,7 @@ class PriorityQueue:
                 found = False
                 for j in range(len(newcontent)):
                     if oldcontent[i].find(newcontent[j]) != -1 \
-                        or newcontent[j].find(oldcontent[i]) != -1: 
+                        or newcontent[j].find(oldcontent[i]) != -1:
                         if len(oldcontent[i]) > len(newcontent[j]):
                             newcontent[j] = oldcontent[i]
                         found = True
@@ -98,13 +98,13 @@ class PriorityQueue:
                     newcontent.append(oldcontent[i])
 
             self.queue[0][2]['content'] = newcontent
- 
+
     def __len__(self):
         """ Return the length of the queue """
         return len(self.queue)
 
 
-class LiveRegionManager:
+class LiveRegionManager(object):
     def __init__(self, script):
         self._script = script
         # message priority queue
@@ -122,7 +122,7 @@ class LiveRegionManager:
         self.lastliveobj = None
 
         # Used to track whether a user wants to monitor all live regions
-        # Not to be confused with the global Gecko.liveRegionsOn which 
+        # Not to be confused with the global Gecko.liveRegionsOn which
         # completely turns off live region support.  This one is based on
         # a user control by changing politeness levels to LIVE_OFF or back
         # to the bookmark or markup politeness value.
@@ -167,7 +167,7 @@ class LiveRegionManager:
             return
         if politeness == LIVE_NONE:
             # All the 'registered' LIVE_NONE objects will be set to off
-            # if not monitoring.  We will ignore LIVE_NONE objects that 
+            # if not monitoring.  We will ignore LIVE_NONE objects that
             # arrive after the user switches off monitoring.
             if not self.monitoring:
                 return
@@ -186,7 +186,7 @@ class LiveRegionManager:
             self.msg_queue.enqueue(message, politeness, event.source)
 
     def pumpMessages(self):
-        """ Main gobject callback for live region support.  Handles both 
+        """ Main gobject callback for live region support.  Handles both
         purging the message queue and outputting any queued messages that
         were queued up in the handleEvent() method.
         """
@@ -195,13 +195,13 @@ class LiveRegionManager:
         # Note: Do all additional work within if statement to prevent
         # it from being done for each event loop callback
         # Note: isSpeaking() returns False way too early.  A strategy using
-        # a message length (in secs) could be used but don't forget many 
+        # a message length (in secs) could be used but don't forget many
         # parameters such as rate,expanded text and others must be considered.
         if len(self.msg_queue) > 0 \
                   and not speech.isSpeaking() \
                   and orca_state.lastInputEvent \
                   and time.time() - orca_state.lastInputEvent.time > 1:
-            # House cleaning on the message queue.  
+            # House cleaning on the message queue.
             # First we will purge the queue of old messages
             self.msg_queue.purgeByKeepAlive()
             # Next, we will filter the messages
@@ -230,10 +230,10 @@ class LiveRegionManager:
 
         # See you again soon, stay in event loop if we still have messages.
         if len(self.msg_queue) > 0:
-            return True 
+            return True
         else:
             return False
-        
+
     def getLiveNoneObjects(self):
         """Return the live objects that are registered and have a politeness
         of LIVE_NONE. """
@@ -252,10 +252,10 @@ class LiveRegionManager:
 
         try:
             # The current priority is either a previous override or the
-            # live property.  If an exception is thrown, an override for 
+            # live property.  If an exception is thrown, an override for
             # this object has never occurred and the object does not have
             # live markup.  In either case, set the override to LIVE_NONE.
-            cur_priority = self._politenessOverrides[(uri, objectid)] 
+            cur_priority = self._politenessOverrides[(uri, objectid)]
         except KeyError:
             cur_priority = self._liveStringToType(obj)
 
@@ -275,7 +275,7 @@ class LiveRegionManager:
         speech.speak(utterances)
 
     def goLastLiveRegion(self):
-        """Move the caret to the last announced live region and speak the 
+        """Move the caret to the last announced live region and speak the
         contents of that object"""
         if self.lastliveobj:
             self._script.setCaretPosition(self.lastliveobj, 0)
@@ -297,12 +297,12 @@ class LiveRegionManager:
         # get the URI of the page.  It is used as a partial key.
         uri = self._script.bookmarks.getURIKey()
 
-        # The user is currently monitoring live regions but now wants to 
+        # The user is currently monitoring live regions but now wants to
         # change all live region politeness on page to LIVE_OFF
         if self.monitoring:
             self._script.presentMessage(messages.LIVE_REGIONS_ALL_OFF)
             self.msg_queue.clear()
-            
+
             # First we'll save off a copy for quick restoration
             self._restoreOverrides = copy.copy(self._politenessOverrides)
 
@@ -327,10 +327,10 @@ class LiveRegionManager:
                 self._politenessOverrides[key] = value
             self._script.presentMessage(messages.LIVE_REGIONS_ALL_RESTORED)
             # Toggle our flag
-            self.monitoring = True  
+            self.monitoring = True
 
     def generateLiveRegionDescription(self, obj, **args):
-        """Used in conjuction with whereAmI to output description and 
+        """Used in conjuction with whereAmI to output description and
         politeness of the given live region object"""
         objectid = self._getObjectId(obj)
         uri = self._script.bookmarks.getURIKey()
@@ -362,7 +362,7 @@ class LiveRegionManager:
             liveprioritystr = 'none'
 
         # We will only output useful information
-        # 
+        #
         if results or liveprioritystr != 'none':
             results.append(messages.LIVE_REGIONS_LEVEL % liveprioritystr)
 
@@ -376,11 +376,11 @@ class LiveRegionManager:
     def _getMessage(self, event):
         """Gets the message associated with a given live event."""
         attrs = self._getAttrDictionary(event.source)
-        content = [] 
+        content = []
         labels = []
-        
+
         # A message is divided into two parts: labels and content.  We
-        # will first try to get the content.  If there is None, 
+        # will first try to get the content.  If there is None,
         # assume it is an invalid message and return None
         if event.type.startswith('object:children-changed:add'):
             # Get the text based on the atomic property
@@ -475,12 +475,12 @@ class LiveRegionManager:
             # We will try the table interface first for it's parent
             try:
                 itable = obj.parent.queryTable()
-                # I'm in a table, now what row are we in?  Look in the first 
+                # I'm in a table, now what row are we in?  Look in the first
                 # columm of that row.
                 #
                 # Note: getRowHeader() fails for most markup.  We will use the
-                # relation when the markup is good (when getRowHeader() works) 
-                # so we won't see this code in those cases.  
+                # relation when the markup is good (when getRowHeader() works)
+                # so we won't see this code in those cases.
                 index = self._script.utilities.cellIndex(obj)
                 row = itable.getRowAtIndex(index)
                 header = itable.getAccessibleAt(row, 0)
@@ -489,9 +489,9 @@ class LiveRegionManager:
             except NotImplementedError:
                 pass
 
-            # Last ditch effort is to see if our parent is a table row <tr> 
+            # Last ditch effort is to see if our parent is a table row <tr>
             # element.
-            parentattrs = self._getAttrDictionary(obj.parent) 
+            parentattrs = self._getAttrDictionary(obj.parent)
             if 'tag' in parentattrs and parentattrs['tag'] == 'TR':
                 return [self._script.utilities.expandEOCs( \
                                   obj.parent.getChildAtIndex(0)).strip()]
@@ -531,13 +531,13 @@ class LiveRegionManager:
         """Returns the politeness enum for a given object"""
         attrs = attributes or self._getAttrDictionary(obj)
         try:
-            if attrs['container-live'] == 'off': 
+            if attrs['container-live'] == 'off':
                 return LIVE_OFF
-            elif attrs['container-live'] == 'polite':  
+            elif attrs['container-live'] == 'polite':
                 return LIVE_POLITE
-            elif attrs['container-live'] == 'assertive': 
+            elif attrs['container-live'] == 'assertive':
                 return LIVE_ASSERTIVE
-            elif attrs['container-live'] == 'rude': 
+            elif attrs['container-live'] == 'rude':
                 return LIVE_RUDE
             else: return LIVE_NONE
         except KeyError:
@@ -545,15 +545,15 @@ class LiveRegionManager:
 
     def _liveTypeToString(self, politeness):
         """Returns the politeness level as a string given a politeness enum"""
-        if politeness == LIVE_OFF: 
+        if politeness == LIVE_OFF:
             return 'off'
-        elif politeness == LIVE_POLITE: 
+        elif politeness == LIVE_POLITE:
             return 'polite'
-        elif politeness == LIVE_ASSERTIVE: 
+        elif politeness == LIVE_ASSERTIVE:
             return 'assertive'
-        elif politeness == LIVE_RUDE: 
+        elif politeness == LIVE_RUDE:
             return 'rude'
-        elif politeness == LIVE_NONE: 
+        elif politeness == LIVE_NONE:
             return 'none'
         else: return 'unknown'
 
@@ -562,9 +562,9 @@ class LiveRegionManager:
             return dict([attr.split(':', 1) for attr in obj.getAttributes()])
         except:
             return {}
-    
+
     def _getPath(self, obj):
-        """ Returns, as a tuple of integers, the path from the given object 
+        """ Returns, as a tuple of integers, the path from the given object
         to the document frame."""
         docframe = self._script.utilities.documentFrame()
         path = []

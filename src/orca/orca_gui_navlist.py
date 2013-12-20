@@ -33,7 +33,7 @@ from . import debug
 from . import guilabels
 from . import orca_state
 
-class OrcaNavListGUI:
+class OrcaNavListGUI(object):
 
     def __init__(self, title, columnHeaders, rows, selectedRow):
         self._tree = None

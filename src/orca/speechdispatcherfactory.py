@@ -19,12 +19,7 @@
 
 # # [[[TODO: richb - Pylint is giving us a bunch of warnings along these
 # lines throughout this file:
-#
-#  W0142:202:SpeechServer._send_command: Used * or ** magic
-#
-# So for now, we just disable these warnings in this module.]]]
-#
-# pylint: disable-msg=W0142
+
 
 """Provides an Orca speech server for Speech Dispatcher backend."""
 
@@ -52,7 +47,7 @@ try:
     import speechd
 except:
     _speechd_available = False
-else:    
+else:
     _speechd_available = True
     try:
         getattr(speechd, "CallbackType")
@@ -61,17 +56,17 @@ else:
     else:
         _speechd_version_ok = True
 
-PUNCTUATION = re.compile('[^\w\s]', re.UNICODE)
-ELLIPSIS = re.compile('(\342\200\246|\.\.\.\s*)')
+PUNCTUATION = re.compile(r'[^\w\s]', re.UNICODE)
+ELLIPSIS = re.compile(r'(\342\200\246|\.\.\.\s*)')
 
 class SpeechServer(speechserver.SpeechServer):
     # See the parent class for documentation.
 
     _active_servers = {}
-    
+
     DEFAULT_SERVER_ID = 'default'
     _SERVER_NAMES = {DEFAULT_SERVER_ID: guilabels.DEFAULT_SYNTHESIZER}
-    
+
     KEY_NAMES = {
         '_':     'underscore',
         ' ':     'space',
@@ -98,7 +93,7 @@ class SpeechServer(speechserver.SpeechServer):
 
         Attempt to create the server if it doesn't exist yet.  Returns None
         when it is not possible to create the server.
-        
+
         """
         if serverId not in cls._active_servers:
             cls(serverId)
@@ -157,7 +152,7 @@ class SpeechServer(speechserver.SpeechServer):
             }
 
         self._default_voice_name = guilabels.SPEECH_DEFAULT_VOICE % serverId
-        
+
         try:
             self._init()
         except:
@@ -196,7 +191,7 @@ class SpeechServer(speechserver.SpeechServer):
                 self.reset()
                 return command(*args, **kwargs)
         else:
-            # It is not possible tho catch the error with older SD versions. 
+            # It is not possible tho catch the error with older SD versions.
             return command(*args, **kwargs)
 
     def _set_rate(self, acss_rate):
@@ -229,7 +224,7 @@ class SpeechServer(speechserver.SpeechServer):
             name = acss_family.get(speechserver.VoiceFamily.NAME)
             if name != self._default_voice_name:
                 self._send_command(set_synthesis_voice, name)
-            
+
     def _apply_acss(self, acss):
         if acss is None:
             acss = settings.voices[settings.DEFAULT_VOICE]
@@ -394,9 +389,9 @@ class SpeechServer(speechserver.SpeechServer):
         families = [speechserver.VoiceFamily({ \
               speechserver.VoiceFamily.NAME: name,
               #speechserver.VoiceFamily.GENDER: speechserver.VoiceFamily.MALE,
-              speechserver.VoiceFamily.DIALECT: dialect,
-              speechserver.VoiceFamily.LOCALE: lang})
-                    for name, lang, dialect in voices]
+              speechserver.VoiceFamily.DIALECT: _dialect,
+              speechserver.VoiceFamily.LOCALE: _lang})
+                    for name, _lang, _dialect in voices]
         return families
 
     def speak(self, text=None, acss=None, interrupt=True):
@@ -473,16 +468,16 @@ class SpeechServer(speechserver.SpeechServer):
     def reset(self, text=None, acss=None):
         self._client.close()
         self._init()
-        
+
     def list_output_modules(self):
         """Return names of available output modules as a tuple of strings.
 
         This method is not a part of Orca speech API, but is used internally
         by the Speech Dispatcher backend.
-        
+
         The returned tuple can be empty if the information can not be
         obtained (e.g. with an older Speech Dispatcher version).
-        
+
         """
         try:
             return self._send_command(self._client.list_output_modules)

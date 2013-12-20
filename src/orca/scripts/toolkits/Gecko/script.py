@@ -44,7 +44,7 @@ __license__   = "LGPL"
 from gi.repository import Gtk
 import pyatspi
 import time
-import urllib.parse
+#import urllib.parse
 
 import orca.braille as braille
 import orca.cmdnames as cmdnames
@@ -479,7 +479,7 @@ class Script(default.Script):
         value = script_settings.controlCaretNavigation
         self.controlCaretNavigationCheckButton = \
             Gtk.CheckButton.new_with_mnemonic(label)
-        self.controlCaretNavigationCheckButton.set_active(value) 
+        self.controlCaretNavigationCheckButton.set_active(value)
         generalGrid.attach(self.controlCaretNavigationCheckButton, 0, 0, 1, 1)
 
         label = guilabels.USE_STRUCTURAL_NAVIGATION
@@ -535,7 +535,7 @@ class Script(default.Script):
             Gtk.CheckButton.new_with_mnemonic(label)
         self.speakCellHeadersCheckButton.set_active(value)
         tableGrid.attach(self.speakCellHeadersCheckButton, 0, 2, 1, 1)
-           
+
         label = guilabels.TABLE_SKIP_BLANK_CELLS
         value = _settingsManager.getSetting('skipBlankCells')
         self.skipBlankCellsCheckButton = \
@@ -639,7 +639,7 @@ class Script(default.Script):
         # are now part of settings.py so that other scripts can implement
         # structural navigation. But until that happens, there's no need
         # to move these controls/change the preferences dialog.
-        # 
+        #
         value = self.speakCellCoordinatesCheckButton.get_active()
         prefs.writelines("orca.settings.speakCellCoordinates = %s\n" % value)
         _settingsManager.setSetting('speakCellCoordinates', value)
@@ -1023,7 +1023,7 @@ class Script(default.Script):
         except:
             return
         if role != pyatspi.ROLE_DOCUMENT_FRAME:
-             return
+            return
 
         try:
             focusRole = orca_state.locusOfFocus.getRole()
@@ -1035,7 +1035,7 @@ class Script(default.Script):
         if focusRole == pyatspi.ROLE_LIST_ITEM \
            and not self.inDocumentContent(orca_state.locusOfFocus):
             return
- 
+
         finishedLoading = False
         if event.detail1:
             self._loadingDocumentContent = True
@@ -1046,10 +1046,10 @@ class Script(default.Script):
         else:
             message = messages.PAGE_LOADING_END
             finishedLoading = True
- 
+
         if not _settingsManager.getSetting('onlySpeakDisplayedText'):
             self.presentMessage(message)
- 
+
         if not finishedLoading:
             return
 
@@ -1057,7 +1057,7 @@ class Script(default.Script):
         # the first time the user arrows off of a link into non-focusable text),
         # onFocused will start chatting unnecessarily.
         self._currentFrame = obj
- 
+
         # First try to figure out where the caret is on the newly loaded page.
         # If it is on an editable object (e.g., a text entry), then present just
         # that object. Otherwise, force the caret to the top of the page and
@@ -1069,13 +1069,13 @@ class Script(default.Script):
             [obj, characterOffset] = self.getCaretContext()
             atTop = True
         if not obj:
-             return
+            return
         if not atTop and not obj.getState().contains(pyatspi.STATE_FOCUSABLE):
             self.clearCaretContext()
             [obj, characterOffset] = self.getCaretContext()
             if not obj:
                 return
- 
+
         # For braille, we just show the current line containing the caret. For
         # speech, however, we will start a Say All operation if the caret is in
         # an unfocusable area (e.g., it's not in a text entry area such as
@@ -1257,7 +1257,7 @@ class Script(default.Script):
         # TODO - JD: Once there are separate scripts for the Gecko toolkit
         # and the Firefox browser, the stuff below belongs in the browser
         # script and not in the toolkit script.
- 
+
         try:
             eventRole = event.source.getRole()
             focusedRole = orca_state.locusOfFocus.getRole()
@@ -1805,7 +1805,7 @@ class Script(default.Script):
 
         if obj:
             self.generatorCache['inDocumentContent'][obj] = result
-            
+
         return result
 
     def useCaretNavigationModel(self, keyboardEvent):
@@ -2166,7 +2166,7 @@ class Script(default.Script):
                 return False
             attrs = self._getAttrDictionary(event.source)
             return 'container-live' in attrs \
-                   or event.source.getRole() == pyatspi.ROLE_ALERT 
+                   or event.source.getRole() == pyatspi.ROLE_ALERT
         else:
             return False
 
@@ -2465,7 +2465,7 @@ class Script(default.Script):
         else:
             return state.contains(pyatspi.STATE_SHOWING) \
                    and state.contains(pyatspi.STATE_VISIBLE)
- 
+
     def getHeadingLevel(self, obj):
         """Determines the heading level of the given object.  A value
         of 0 means there is no heading level."""
@@ -2584,7 +2584,7 @@ class Script(default.Script):
             elif self.utilities.isEntry(item[0]):
                 label = \
                     self.labelInference.inferFromTextLeft(item[0]) \
-                    or self.labelInference.inferFromTextRight(item[0]) 
+                    or self.labelInference.inferFromTextRight(item[0])
                 index = len(lineContents) - 1
                 while label and index >= 0:
                     prevItem = lineContents[index]
@@ -3361,7 +3361,7 @@ class Script(default.Script):
 
         if not obj:
             return []
-        
+
         # If it's an ARIA widget, we want the default generators to give
         # us all the details.
         #
@@ -3398,7 +3398,7 @@ class Script(default.Script):
         text = self.utilities.queryNonEmptyText(obj)
         if not text:
             offset = 0
-        else:            
+        else:
             if offset == -1:
                 offset = 0
 
@@ -3585,8 +3585,8 @@ class Script(default.Script):
 
     def getObjectContentsAtOffset(self, obj, characterOffset):
         """Returns an ordered list where each element is composed of
-        an [obj, startOffset, endOffset, string] tuple.  The list is 
-        created via an in-order traversal of the document contents 
+        an [obj, startOffset, endOffset, string] tuple.  The list is
+        created via an in-order traversal of the document contents
         starting and stopping at the given object.
         """
 
@@ -3716,7 +3716,7 @@ class Script(default.Script):
                     utterance = self.speechGenerator.getRoleName(obj)
                     if utterance:
                         utterances.append(utterance)
-  
+
             # If the object is a heading, or is contained within a heading,
             # speak that role information at the end of the object.
             #
@@ -4361,7 +4361,7 @@ class Script(default.Script):
 
             if not found:
                 self._nextLineContents = line
-                prevLine = self.findPreviousLine(line[0][0], line[0][1])
+                #prevLine = self.findPreviousLine(line[0][0], line[0][1])
                 line = self.currentLineContents
                 useful = self.getMeaningfulObjectsFromLine(line)
                 prevObj = useful[-1][0]
@@ -4507,7 +4507,8 @@ class Script(default.Script):
         """
         if self.inDocumentContent(acc):
             try:
-                ai = acc.queryAction()
+                #ai = NOT USED
+                acc.queryAction()
             except NotImplementedError:
                 return True
         default.Script.speakWordUnderMouse(self, acc)

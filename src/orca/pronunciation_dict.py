@@ -39,7 +39,7 @@ def getPronunciation(word, pronunciations=None):
     - pronunciations: an optional dictionary used to get the pronunciation
       from.
 
-    Returns a string that represents what this word sounds like, or 
+    Returns a string that represents what this word sounds like, or
     the word if there is no representation.
     """
 

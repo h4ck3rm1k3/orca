@@ -170,7 +170,7 @@ def getClickCountString(count):
         return _("triple click")
     return ""
 
-class KeyBinding:
+class KeyBinding(object):
     """A single key binding, consisting of a keycode, a modifier mask,
     and the InputEventHandler.
     """

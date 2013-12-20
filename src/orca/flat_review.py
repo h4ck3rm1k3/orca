@@ -48,8 +48,10 @@ whitespace_re = re.compile(r'(\s+)', re.DOTALL | re.IGNORECASE | re.M)
 
 EMBEDDED_OBJECT_CHARACTER = '\ufffc'
 
-class Char:
-    """Represents a single char of an Accessibility_Text object."""
+class Char(object):
+    """
+    Represents a single char of an Accessibility_Text object.
+    """
 
     def __init__(self,
                  word,
@@ -73,7 +75,7 @@ class Char:
         self.width = width
         self.height = height
 
-class Word:
+class Word(object):
     """Represents a single word of an Accessibility_Text object, or
     the entire name of an Image or Component if the associated object
     does not implement the Accessibility_Text interface.  As a rule of
@@ -105,7 +107,7 @@ class Word:
         self.y = y
         self.width = width
         self.height = height
-
+        self.chars = None
     def __getattr__(self, attr):
         """Used for lazily determining the chars of a word.  We do
         this to reduce the total number of round trip calls to the app,
@@ -124,7 +126,7 @@ class Word:
 
                 # Pylint is confused and flags this warning:
                 #
-                # W0201:132:Word.__getattr__: Attribute 'chars' defined 
+                # W0201:132:Word.__getattr__: Attribute 'chars' defined
                 # outside __init__
                 #
                 # So for now, we just disable this error in this method.
@@ -141,8 +143,8 @@ class Word:
                     # Sometimes we get more than a character's worth. See
                     # Bug #495303. We can try to correct this.
                     #
-                    if len(char):
-                        char[0]
+                    #if len(char):
+                    #    char[0]
                     [x, y, width, height] = text.getRangeExtents(
                         startOffset,
                         startOffset + 1,
@@ -160,7 +162,7 @@ class Word:
         else:
             return self.__dict__[attr]
 
-class Zone:
+class Zone(object):
     """Represents text that is a portion of a single horizontal line."""
 
     def __init__(self,
@@ -200,7 +202,7 @@ class Zone:
 
             # Pylint is confused and flags this warning:
             #
-            # W0201:203:Zone.__getattr__: Attribute 'words' defined 
+            # W0201:203:Zone.__getattr__: Attribute 'words' defined
             # outside __init__
             #
             # So for now, we just disable this error in this method.
@@ -363,14 +365,17 @@ class StateZone(Zone):
                 else:
                     speechState = object_properties.STATE_NOT_PRESSED
                 brailleState = \
-                    object_properties.RADIO_BUTTON_INDICATORS_BRAILLE[stateCount]
+                    object_properties.RADIO_BUTTON_INDICATORS_BRAILLE[
+                        stateCount]
             else:
                 if stateCount:
                     speechState = object_properties.STATE_SELECTED_RADIO_BUTTON
                 else:
-                    speechState = object_properties.STATE_UNSELECTED_RADIO_BUTTON
+                    speechState = \
+                    object_properties.STATE_UNSELECTED_RADIO_BUTTON
                 brailleState = \
-                    object_properties.RADIO_BUTTON_INDICATORS_BRAILLE[stateCount]
+                    object_properties.RADIO_BUTTON_INDICATORS_BRAILLE[
+                        stateCount]
 
             if attr == "string":
                 return speechState
@@ -407,7 +412,7 @@ class ValueZone(Zone):
                     orientation = object_properties.STATE_HORIZONTAL
                 elif stateset.contains(pyatspi.STATE_VERTICAL):
                     orientation = object_properties.STATE_VERTICAL
-                        
+
             try:
                 value = self.accessible.queryValue()
             except NotImplementedError:
@@ -445,7 +450,7 @@ class ValueZone(Zone):
             return Zone.__getattr__(self, attr)
 
 
-class Line:
+class Line(object):
     """A Line is a single line across a window and is composed of Zones."""
 
     def __init__(self,
@@ -515,13 +520,13 @@ class Line:
                 # to handle problems with Java text. See Bug 435553.
                 if isinstance(zone, TextZone) and \
                    ((zone.accessible.getRole() in \
-                         (pyatspi.ROLE_TEXT,  
+                         (pyatspi.ROLE_TEXT,
                           pyatspi.ROLE_PASSWORD_TEXT,
                           pyatspi.ROLE_TERMINAL)) or \
-                    # [[[TODO: Eitan - HACK: 
+                    # [[[TODO: Eitan - HACK:
                     # This is just to get FF3 cursor key routing support.
                     # We really should not be determining all this stuff here,
-                    # it should be in the scripts. 
+                    # it should be in the scripts.
                     # Same applies to roles above.]]]
                     (zone.accessible.getRole() in \
                          (pyatspi.ROLE_PARAGRAPH,
@@ -565,7 +570,7 @@ class Line:
 
         return self.brailleRegions
 
-class Context:
+class Context(object):
     """Information regarding where a user happens to be exploring
     right now.
     """
@@ -750,7 +755,7 @@ class Context:
         # We convert the string to unicode and walk through it.  While doing
         # this, we keep two sets of offsets:
         #
-        # substring{Start,End}Offset: where in the accessible text 
+        # substring{Start,End}Offset: where in the accessible text
         # implementation we are
         #
         # unicodeStartOffset: where we are in the unicodeString
@@ -849,7 +854,7 @@ class Context:
         upperMax = lowerMax = text.characterCount
         upperMid = lowerMid = int(upperMax / 2)
         upperMin = lowerMin = 0
-        upperY = lowerY = 0
+        #upperY = lowerY = 0
         oldMid = 0
 
         # performing binary search to locate first line inside clipped area
@@ -858,7 +863,7 @@ class Context:
             [x, y, width, height] = text.getRangeExtents(upperMid,
                                                          upperMid+1,
                                                          0)
-            upperY = y
+            #TODO : not used upperY = y
             if y > cliprect.y:
                 upperMax = upperMid
             else:
@@ -873,7 +878,7 @@ class Context:
             [x, y, width, height] = text.getRangeExtents(lowerMid,
                                                          lowerMid+1,
                                                          0)
-            lowerY = y
+            #TODO: not used lowerY = y
             if y > limit:
                 lowerMax = lowerMid
             else:
@@ -933,13 +938,13 @@ class Context:
             textZones = self.splitTextIntoZones(
                 accessible, string, startOffset, cliprect)
 
-            # We need to account for the fact that newlines at the end of 
+            # We need to account for the fact that newlines at the end of
             # text are treated as being on the same line when they in fact
             # are a whole separate blank line.  So, we check for this and
             # make up a new text zone for these cases.  See bug 434654.
             #
             if (endOffset == length) and (string[-1:] == "\n"):
-                [x, y, width, height] = text.getRangeExtents(startOffset, 
+                [x, y, width, height] = text.getRangeExtents(startOffset,
                                                              endOffset,
                                                              0)
                 if not textZones:
@@ -1039,7 +1044,7 @@ class Context:
                 action = accessible.queryAction()
             except NotImplementedError:
                 action = None
-                
+
             if action:
                 hasToggle = False
                 for i in range(0, action.nActions):
@@ -1051,7 +1056,7 @@ class Context:
                         hasToggle = True
                         break
                 if hasToggle:
-                    self._insertStateZone(zones, accessible, 
+                    self._insertStateZone(zones, accessible,
                                           pyatspi.ROLE_CHECK_BOX)
 
         if zone:
@@ -1107,7 +1112,7 @@ class Context:
             iimage = accessible.queryImage()
         except NotImplementedError:
             iimage = None
-        
+
         if (len(zones) == 0) and iimage:
             # Check for accessible.name, if it exists and has len > 0, use it
             # Otherwise, do the same for accessible.description
@@ -1239,9 +1244,13 @@ class Context:
         # If we're at a leaf node, then we've got a good one on our hands.
         #
         try:
-            childCount = root.childCount
-        except (LookupError, RuntimeError):
-            childCount = -1
+            #childCount =
+            root.childCount
+        except (LookupError, RuntimeError) as exp:
+           #TODO: not used  childCount = -1
+            debug.println(debug.LEVEL_FINE,
+                          'Error has occured %s' % exp)
+            pass
         if root.childCount <= 0:
             return self.getZonesFromAccessible(root, rootexts)
 
@@ -1320,7 +1329,7 @@ class Context:
                     debug.println(debug.LEVEL_WARNING,
                                   "flat_review.getShowingZones: " +
                                   "WARNING CHILD.PARENT != PARENT!!!")
-                                  
+
                 if self.script.utilities.pursueForFlatReview(child):
                     zones.extend(self.getShowingZones(child))
 
@@ -1647,7 +1656,7 @@ class Context:
 
         return moved
 
-    def goPrevious(self, flatReviewType=ZONE, 
+    def goPrevious(self, flatReviewType=ZONE,
                    wrap=WRAP_ALL, omitWhitespace=True):
         """Moves this context's locus of interest to the first char
         of the previous type.

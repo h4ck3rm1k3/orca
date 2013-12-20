@@ -89,7 +89,9 @@ class Script(default.Script):
         """
 
         if event.source.getRole() == pyatspi.ROLE_SPLIT_PANE:
-            textObjects = self.utilities.descendantsWithRole(
+            #textObjects =
+            # duplicate code
+            self.utilities.descendantsWithRole(
                 event.source, pyatspi.ROLE_TEXT)
             return
 

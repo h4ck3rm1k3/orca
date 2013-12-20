@@ -33,7 +33,7 @@ if False:
     pygst.require("0.10")
     import gst
 
-class Sound:
+class Sound(object):
     """Class to hold a path to a sound file to play."""
     def __init__(self, path):
         self._path = path

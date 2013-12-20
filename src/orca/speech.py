@@ -283,7 +283,7 @@ def speakCharacter(character, acss=None):
 
     spokenCharacter = chnames.getCharacterName(character)
     debug.println(debug.LEVEL_INFO, "SPEECH OUTPUT: '" + spokenCharacter + "'")
-    log.info("SPEECH OUTPUT: '%s'" % spokenCharacter)
+    log.info("SPEECH OUTPUT: '%s'", spokenCharacter)
 
     if _speechserver:
         _speechserver.speakCharacter(character, acss=acss)
@@ -394,5 +394,5 @@ def _processMultiCaseString(string):
 
     string = multiCaseReg1.sub('\\1 \\2', string)
     string = multiCaseReg2.sub('\\1 \\2', string)
-    string = multiCaseReg3.sub('\\1 \\2', string)    
+    string = multiCaseReg3.sub('\\1 \\2', string)
     return string

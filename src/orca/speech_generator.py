@@ -38,7 +38,7 @@ from . import settings_manager
 from . import sound
 from . import text_attribute_names
 
-class Pause:
+class Pause(object):
     """A dummy class to indicate we want to insert a pause into an
     utterance."""
     def __init__(self):
@@ -46,7 +46,7 @@ class Pause:
 
 PAUSE = [Pause()]
 
-class LineBreak:
+class LineBreak(object):
     """A dummy class to indicate we want to break an utterance into
     separate calls to speak."""
     def __init__(self):
@@ -576,7 +576,8 @@ class SpeechGenerator(generator.Generator):
         result = []
         acss = self.voice(DEFAULT)
         try:
-            image = obj.queryImage()
+            #image =
+            obj.queryImage()
         except:
             pass
         else:
@@ -998,7 +999,7 @@ class SpeechGenerator(generator.Generator):
         textContents = ""
         selected = False
 
-        nSelections = textObj.getNSelections()
+        #nSelections = textObj.getNSelections()
 
         [current, other] = self._script.utilities.hasTextSelections(obj)
         if current or other:
@@ -1045,6 +1046,7 @@ class SpeechGenerator(generator.Generator):
         """
         try:
             text = obj.queryText()
+            debug.println(debug.LEVEL_FINE, "got text: %s" % text)
         except NotImplementedError:
             return []
 

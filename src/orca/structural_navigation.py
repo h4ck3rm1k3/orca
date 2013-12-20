@@ -48,7 +48,7 @@ from . import speech
 #                                                                           #
 #############################################################################
 
-class MatchCriteria:
+class MatchCriteria(object):
     """Contains the criteria which will be used to generate a collection
     matchRule.  We don't want to create the rule until we need it and
     are ready to use it. In addition, the creation of an AT-SPI match
@@ -120,7 +120,7 @@ class MatchCriteria:
 #                                                                         #
 ###########################################################################
 
-class StructuralNavigationObject:
+class StructuralNavigationObject(object):
     """Represents a document object which has identifiable characteristics
     which can be used for the purpose of navigation to and among instances
     of that object. These characteristics may be something as simple as a
@@ -500,7 +500,7 @@ class StructuralNavigationObject:
 #                                                                           #
 #############################################################################
 
-class StructuralNavigation:
+class StructuralNavigation(object):
     """This class implements the structural navigation functionality which
     is available to scripts. Scripts interested in implementing structural
     navigation need to override getEnabledStructuralNavigationTypes() and
@@ -547,7 +547,7 @@ class StructuralNavigation:
 
     # Roles which are recognized as being a form field. Note that this
     # is for the purpose of match rules and predicates and refers to
-    # AT-SPI roles. 
+    # AT-SPI roles.
     #
     FORM_ROLES = [pyatspi.ROLE_CHECK_BOX,
                   pyatspi.ROLE_RADIO_BUTTON,
@@ -720,7 +720,7 @@ class StructuralNavigation:
     #                                                                       #
     #########################################################################
 
-    def goCell(self, structuralNavigationObject, thisCell, 
+    def goCell(self, structuralNavigationObject, thisCell,
                currentCoordinates, desiredCoordinates):
         """The method used for navigation among cells in a table.
 
@@ -730,7 +730,7 @@ class StructuralNavigation:
         - thisCell: the pyatspi accessible TABLE_CELL we're currently in
         - currentCoordinates: the [row, column] of thisCell.  Note, we
           cannot just get the coordinates because in table cells which
-          span multiple rows and/or columns, the value returned by 
+          span multiple rows and/or columns, the value returned by
           table.getRowAtIndex() is the first row the cell spans. Likewise,
           the value returned by table.getColumnAtIndex() is the left-most
           column.  Therefore, we keep track of the row and column from
@@ -818,7 +818,7 @@ class StructuralNavigation:
         - structuralNavigationObject: the StructuralNavigationObject which
           represents the object of interest.
         - isNext: If True, we're interested in the next accessible object
-          which matches structuralNavigationObject.  If False, we're 
+          which matches structuralNavigationObject.  If False, we're
           interested in the previous accessible object which matches.
         - obj: the current object (typically the locusOfFocus).
         - arg: optional arguments which may need to be passed along to
@@ -995,7 +995,7 @@ class StructuralNavigation:
                         matchRule,
                         collection.SORT_ORDER_CANONICAL,
                         collection.TREE_INORDER,
-                        1, 
+                        1,
                         True)
                     wrapped = True
                     if len(results) > 0 \
@@ -1006,7 +1006,7 @@ class StructuralNavigation:
                             lastObj,
                             matchRule,
                             collection.SORT_ORDER_CANONICAL,
-                            collection.TREE_INORDER, 
+                            collection.TREE_INORDER,
                             True,
                             1,
                             True)
@@ -2512,7 +2512,7 @@ class StructuralNavigation:
                                         settings.NO_MODIFIER_MASK,
                                         nextDesc])
 
-            listDesc = cmdnames.HEADING_AT_LEVEL_LIST %i
+            listDesc = cmdnames.HEADING_AT_LEVEL_LIST % i
             listAtLevelBindings.append([str(i),
                                         settings.SHIFT_ALT_MODIFIER_MASK,
                                         listDesc])
@@ -2645,7 +2645,7 @@ class StructuralNavigation:
         # example, the xml-roles attribute can be a space-separate list
         # of roles.  We'd like to make a match if the xml-roles attribute
         # has one (or any) of the roles we care about.  Instead, we're
-        # restricted to an exact match.  So, the below will only work in 
+        # restricted to an exact match.  So, the below will only work in
         # the cases where the xml-roles attribute value consists solely of a
         # single role.  In practice, this seems to be the case that we run
         # into for the landmark roles.

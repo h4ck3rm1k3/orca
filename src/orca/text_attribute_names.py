@@ -30,7 +30,7 @@ from .orca_i18n import C_
 from . import orca_state
 
 # Translators: this is a structure to assist in the generation of
-# localized strings for the various text attributes. 
+# localized strings for the various text attributes.
 #
 # Information can be found in the Atk documentation at:
 # http://library.gnome.org/devel/atk/1.22/AtkText.html#AtkTextAttribute
@@ -46,7 +46,7 @@ from . import orca_state
 # accordance with relevant standards such as:
 #   CSS level 2 (http://www.w3.org/TR/1998/REC-CSS2-19980512),
 #   XHTML 1.0   (http://www.w3.org/TR/2002/REC-xhtml1-20020801), and
-#   WICD        (http://www.w3.org/TR/2005/WD-WICD-20051121/). 
+#   WICD        (http://www.w3.org/TR/2005/WD-WICD-20051121/).
 #
 # Where possible, specific URL references will also be given below for
 # each text attribute.
@@ -70,7 +70,7 @@ _textAttributeTable["bg-color"] = C_("textattr", "background color")
 #
 _textAttributeTable["bg-full-height"] = C_("textattr", "background full height")
 
-# Translators: this attribute specifies whether a GdkBitmap is set for 
+# Translators: this attribute specifies whether a GdkBitmap is set for
 # stippling the background color. It will be a "true" or "false" value.
 # See
 # http://library.gnome.org/devel/atk/1.22/AtkText.html#AtkTextAttribute
@@ -111,7 +111,7 @@ _textAttributeTable["fg-color"] = C_("textattr", "foreground color")
 #
 _textAttributeTable["fg-stipple"] = C_("textattr", "foreground stipple")
 
-# Translators: this attribute specifies the effect applied to the font 
+# Translators: this attribute specifies the effect applied to the font
 # used by the text.
 # See:
 # http://www.w3.org/TR/2002/WD-css3-fonts-20020802/#font-effect
@@ -171,8 +171,8 @@ _textAttributeTable["left-margin"] = C_("textattr", "left margin")
 _textAttributeTable["line-height"] = C_("textattr", "line height")
 
 # Translators: this attribute refers to the named style which is associated
-# with the entire paragraph and which controls the default formatting 
-# (font, text size, alignment, etc.) of that paragraph. Examples of 
+# with the entire paragraph and which controls the default formatting
+# (font, text size, alignment, etc.) of that paragraph. Examples of
 # paragraph styles include "Heading 1", "Heading 2", "Caption", "Footnote",
 # "Text Body", "Title", and "Subtitle".
 # See:
@@ -180,7 +180,7 @@ _textAttributeTable["line-height"] = C_("textattr", "line height")
 #
 _textAttributeTable["paragraph-style"] = C_("textattr", "paragraph style")
 
-# Translators: this attribute specifies the pixels of blank space to 
+# Translators: this attribute specifies the pixels of blank space to
 # leave above each newline-terminated line.
 # See:
 # http://library.gnome.org/devel/atk/1.22/AtkText.html#AtkTextAttribute
@@ -208,7 +208,7 @@ _textAttributeTable["pixels-inside-wrap"] = C_("textattr", "pixels inside wrap")
 #
 _textAttributeTable["right-margin"] = C_("textattr", "right margin")
 
-# Translators: this attribute specifies the number of pixels that the 
+# Translators: this attribute specifies the number of pixels that the
 # text characters are risen above the baseline.
 # See:
 # http://library.gnome.org/devel/atk/1.22/AtkText.html#AtkTextAttribute
@@ -247,7 +247,7 @@ _textAttributeTable["strikethrough"] = C_("textattr", "strike through")
 
 # Translators: this attribute specifies the slant style of the text,
 # if set. Values are "normal", "oblique" or "italic".
-# See: 
+# See:
 # http://library.gnome.org/devel/atk/1.22/AtkText.html#AtkTextAttribute
 #
 _textAttributeTable["style"] = C_("textattr", "style")
@@ -260,7 +260,7 @@ _textAttributeTable["style"] = C_("textattr", "style")
 _textAttributeTable["text-decoration"] = C_("textattr", "text decoration")
 
 # Translators: this attribute specifies the angle at which the text is
-# displayed (i.e. rotated from the norm) and is represented in degrees 
+# displayed (i.e. rotated from the norm) and is represented in degrees
 # of rotation.
 # See:
 # http://www.w3.org/TR/2003/CR-css3-text-20030514/#glyph-orientation-horizontal
@@ -745,7 +745,7 @@ _textAttributeTable["spelling"] = C_("textattr", "spelling")
 _textAttributeTable["text-spelling"] = C_("textattr", "spelling")
 
 def getTextAttributeKey(localizedTextAttr):
-    """Given a localized text attribute, return the original text 
+    """Given a localized text attribute, return the original text
     attribute, (i.e. the key value).
 
     Arguments:

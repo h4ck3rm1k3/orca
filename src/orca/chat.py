@@ -48,7 +48,7 @@ _settingsManager = settings_manager.getManager()
 #                                                                           #
 #############################################################################
 
-class RingList:
+class RingList(object):
     def __init__(self, length):
         self.__data__ = []
         self.__full__ = 0
@@ -89,7 +89,7 @@ class RingList:
 #                                                                           #
 #############################################################################
 
-class Conversation:
+class Conversation(object):
 
     # The number of messages to keep in the history
     #
@@ -142,9 +142,9 @@ class Conversation:
         - messageNumber: the index of the message to get.
         """
 
-        messages = self._messageHistory.get()
+        messages1 = self._messageHistory.get()
 
-        return messages[messageNumber]
+        return messages1[messageNumber]
 
     def getTypingStatus(self):
         """Returns the typing status of the buddy in this conversation."""
@@ -166,7 +166,7 @@ class Conversation:
 #                                                                           #
 #############################################################################
 
-class ConversationList:
+class ConversationList(object):
 
     def __init__(self, messageListLength):
 
@@ -223,10 +223,10 @@ class ConversationList:
         - messageNumber: the index of the message to get.
         """
 
-        messages = self._messageHistory.get()
+        messages2 = self._messageHistory.get()
         rooms = self._roomHistory.get()
 
-        return messages[messageNumber], rooms[messageNumber]
+        return messages2[messageNumber], rooms[messageNumber]
 
     def hasConversation(self, conversation):
         """Returns True if we know about this conversation.

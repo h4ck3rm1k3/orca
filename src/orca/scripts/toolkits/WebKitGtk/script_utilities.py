@@ -152,7 +152,7 @@ class Utilities(script_utilities.Utilities):
 
         objects = []
         try:
-            objs = [obj[htext.getLinkIndex(offset)] for offset in offsets]
+            objs = [obj[htext.getLinkIndex(_offset)] for _offset in offsets]
         except:
             objs = []
         ranges = [self.getHyperlinkRange(x) for x in objs]

@@ -116,7 +116,7 @@ class Script(gtk.Script):
 
     def onShowingChanged(self, event):
         """Callback for object:state-changed:showing accessibility events."""
- 
+
         obj = event.source
         if obj.getRole() == pyatspi.ROLE_ALERT and event.detail1:
             labels = self.utilities.unrelatedLabels(obj)
@@ -124,5 +124,5 @@ class Script(gtk.Script):
             self.presentMessage(
                 message, voice=self.voices.get(settings.DEFAULT_VOICE))
             return
- 
+
         gtk.Script.onShowingChanged(self, event)

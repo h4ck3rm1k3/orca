@@ -27,7 +27,7 @@ __license__   = "LGPL"
 
 import pyatspi
 
-import orca.script_utilities as script_utilities
+#import orca.script_utilities as script_utilities
 import orca.scripts.toolkits.gtk as gtk
 
 class Utilities(gtk.Utilities):

@@ -31,7 +31,7 @@ import pyatspi
 
 from .acss import ACSS
 from .orca_i18n import _
-from .orca_i18n import C_
+#from .orca_i18n import C_
 
 # These are the settings that Orca supports the user customizing.
 #

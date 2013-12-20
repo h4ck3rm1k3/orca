@@ -44,7 +44,7 @@ from orca.orca_i18n import _ # for gettext support
 #                                                                      #
 ########################################################################
 
-class RingList:
+class RingList(object):
     def __init__(self, length):
         self.__data__ = []
         self.__full__ = 0
@@ -87,9 +87,9 @@ class Script(default.Script):
     def __init__(self, app):
         """Creates a new script for the given application.
            This script tries to fix some accessibility problems found in
-           the gnome-mud application, and also improves the user experience. 
+           the gnome-mud application, and also improves the user experience.
            For more details see bug #
- 
+
 
         Arguments:
         - app: the application to create a script for.
@@ -136,14 +136,14 @@ class Script(default.Script):
         return keyBindings
 
     def readPreviousMessage(self, inputEvent):
-        #This function speaks the latest n messages. Orca+F1 the latest one, 
+        #This function speaks the latest n messages. Orca+F1 the latest one,
         #Orca+F2 the latest two and so.
 
         debug.println(self.debugLevel, "gnome-mud.readPreviousMessage.")
 
         i = int(inputEvent.event_string[1:])
         messageNo = Script.MESSAGE_LIST_LENGTH - i
-     
+
         text = ""
         messages = self.previousMessages.get()
         for i in range (messageNo, Script.MESSAGE_LIST_LENGTH):
@@ -158,7 +158,7 @@ class Script(default.Script):
         #Whenever a new text is inserted in the incoming message text area,
         #We want to speak and add it to the ringList structure only those lines
         #that contain some text and if the application is the current
-        #locusOfFocus. 
+        #locusOfFocus.
         rolesList = [pyatspi.ROLE_TERMINAL,
                      pyatspi.ROLE_FILLER]
         if self.utilities.hasMatchingHierarchy(event.source, rolesList):

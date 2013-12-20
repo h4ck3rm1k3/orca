@@ -261,7 +261,7 @@ def _printBrailleEvent(level, command):
         level,
         "BRAILLE EVENT: %s" % repr(command))
 
-class Region:
+class Region(object):
     """A Braille region to be displayed on the display.  The width of
     each region is determined by its string.
     """
@@ -281,7 +281,7 @@ class Region:
         # If louis is None, then we don't go into contracted mode.
         self.contracted = settings.enableContractedBraille and \
                           louis is not None
-
+        self.brailleOffset = None
         self.expandOnCursor = expandOnCursor
 
         # The uncontracted string for the line.
@@ -648,7 +648,8 @@ class Text(Region):
         """
 
         try:
-            text = self.accessible.queryText()
+            #text = 
+            self.accessible.queryText()
         except NotImplementedError:
             return ''
 
@@ -719,7 +720,7 @@ class Text(Region):
             if self.label:
                 # Transform the offsets.
                 outPos = \
-                       [offset - len(self.label) - 1 for offset in outPos]
+                       [_offset - len(self.label) - 1 for _offset in outPos]
             for i, m in enumerate(regionMask):
                 try:
                     contractedMask[outPos[i]] |= m
@@ -816,7 +817,7 @@ class ReviewText(Region):
         orca_state.activeScript.utilities.setCaretOffset(
             self.accessible, caretOffset)
 
-class Line:
+class Line(object):
     """A horizontal line on the display.  Each Line is composed of a sequential
     set of Regions.
     """

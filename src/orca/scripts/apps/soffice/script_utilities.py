@@ -254,9 +254,13 @@ class Utilities(script_utilities.Utilities):
         getColHeader = headersRow != None
         if onlyIfNew:
             getRowHeader = \
-                getRowHeader and objRow != self._script.pointOfReference.get("lastRow")
+                getRowHeader and objRow != \
+                                           self._script.pointOfReference.get(
+                                               "lastRow")
             getColHeader = \
-                getColHeader and objCol!= self._script.pointOfReference.get("lastColumn")
+                getColHeader and objCol != \
+                                           self._script.pointOfReference.get(
+                                               "lastColumn")
 
         parentTable = table.queryTable()
         rowHeader, colHeader = None, None

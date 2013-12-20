@@ -141,7 +141,7 @@ class SpeechGenerator(WebKitGtk.SpeechGenerator):
         return result
 
     def generateSpeech(self, obj, **args):
-        result = []
+        #result = []
         if obj.getRole() == pyatspi.ROLE_FRAME:
             focusedObj = self._script.utilities.focusedObject(obj)
             if focusedObj and focusedObj.getRole() == pyatspi.ROLE_PUSH_BUTTON:

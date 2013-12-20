@@ -31,7 +31,7 @@ from gi.repository import GObject, Gdk, Gtk
 from . import guilabels
 from . import orca_state
 
-class OrcaCommandListGUI:
+class OrcaCommandListGUI(object):
 
     def __init__(self, title, columnHeaders, rows, canPerformCommands):
         self._focusedObject = orca_state.locusOfFocus
@@ -110,7 +110,7 @@ class OrcaCommandListGUI:
         self._gui.destroy()
 
     def _onOKClicked(self, widget):
-        handler = self._getSelectedHandler()
+        #handler = self._getSelectedHandler()
         self._gui.destroy()
 
     def _getSelectedHandler(self):

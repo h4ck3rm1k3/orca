@@ -357,7 +357,7 @@ def getAccessibleDetails(level, acc, indent="", includeApp=True):
 
 
 # The following code originated from the following URL:
-# 
+#
 # http://www.dalkescientific.com/writings/diary/archive/ \
 #                                     2005/04/20/tracing_python_code.html
 #
@@ -403,9 +403,9 @@ def _shouldTraceIt():
 
 def traceit(frame, event, arg):
     """Line tracing utility to output all lines as they are executed by
-    the interpreter.  This is to be used by sys.settrace and is for 
+    the interpreter.  This is to be used by sys.settrace and is for
     debugging purposes.
-   
+
     Arguments:
     - frame: is the current stack frame
     - event: 'call', 'line', 'return', 'exception', 'c_call', 'c_return',

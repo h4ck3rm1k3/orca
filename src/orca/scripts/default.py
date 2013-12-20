@@ -59,7 +59,7 @@ import orca.mouse_review as mouse_review
 import orca.text_attribute_names as text_attribute_names
 import orca.notification_messages as notification_messages
 
-from orca.orca_i18n import _
+#from orca.orca_i18n import _
 from orca.orca_i18n import ngettext
 
 _settingsManager = settings_manager.getManager()
@@ -839,8 +839,10 @@ class Script(script.Script):
         #
         try:
             text = obj.queryText()
+            debug.println(debug.LEVEL_INFO, "text found %s" %  text)
         except NotImplementedError:
-            text = None
+            #text = None
+            pass
 
         result = self.brailleGenerator.generateBraille(obj)
         self.addBrailleRegionsToLine(result[0], line)
@@ -1764,7 +1766,7 @@ class Script(script.Script):
         return True
 
     def _appendToClipboard(self, clipboard, text, newText):
-        """Appends newText to text and places the results in the 
+        """Appends newText to text and places the results in the
         clipboard."""
 
         text = text.rstrip("\n")
@@ -2123,7 +2125,7 @@ class Script(script.Script):
         obj = event.source
         if not self.utilities.isSameObject(obj, orca_state.locusOfFocus):
             return
- 
+
         # Radio buttons normally change their state when you arrow to them,
         # so we handle the announcement of their state changes in the focus
         # handling code.  However, we do need to handle radio buttons where
@@ -2136,7 +2138,7 @@ class Script(script.Script):
         oldObj, oldState = self.pointOfReference.get('checkedChange', (None, 0))
         if hash(oldObj) == hash(obj) and oldState == event.detail1:
             return
- 
+
         self.updateBraille(obj)
         speech.speak(self.speechGenerator.generateSpeech(obj, alreadyFocused=True))
         self.pointOfReference['checkedChange'] = hash(obj), event.detail1
@@ -2266,6 +2268,7 @@ class Script(script.Script):
         obj = orca_state.locusOfFocus
         try:
             text = obj.queryText()
+            debug.println(debug.LEVEL_INFO, "text found %s" %  text)
         except:
             return
 
@@ -2381,7 +2384,7 @@ class Script(script.Script):
         keyString, mods = self.utilities.lastKeyAndModifiers()
         if keyString == "space":
             return
- 
+
         # Save the event source, if it is a menu or combo box. It will be
         # useful for optimizing componentAtDesktopCoords in the case that
         # the pointer is hovering over a menu item. The alternative is to
@@ -2450,7 +2453,7 @@ class Script(script.Script):
             if event.detail1:
                 self.presentToolTip(obj)
                 return
- 
+
             if orca_state.locusOfFocus and keyString == "F1":
                 obj = orca_state.locusOfFocus
                 self.updateBraille(obj)
@@ -2595,7 +2598,7 @@ class Script(script.Script):
         if event.source.getRole() == pyatspi.ROLE_SLIDER:
             return
 
-        state = event.source.getState()            
+        state = event.source.getState()
         if event.source.getRole() == pyatspi.ROLE_TABLE_CELL \
            and not state.contains(pyatspi.STATE_FOCUSED) \
            and not state.contains(pyatspi.STATE_SELECTED):
@@ -3009,11 +3012,13 @@ class Script(script.Script):
                         [startOffset, endOffset] = \
                             self.utilities.offsetsForPhrase(obj)
                     self.sayPhrase(obj, startOffset, endOffset)
-                    selSpoken = self._speakContiguousSelection(obj,
+                    #selSpoken = NOT USED
+                    self._speakContiguousSelection(obj,
                                                    pyatspi.RELATION_FLOWS_TO)
                 else:
-                    selSpoken = self._speakContiguousSelection(obj,
-                                                 pyatspi.RELATION_FLOWS_FROM)
+                    #selSpoken = NOT USED
+                    self._speakContiguousSelection(obj,
+                                                   pyatspi.RELATION_FLOWS_FROM)
 
                     # If we have just crossed a paragraph boundary with
                     # Shift+Down, what we've selected in this object starts
@@ -3554,7 +3559,7 @@ class Script(script.Script):
         # spoken when the object receives keyboard focus.
         #
         speechResult = brailleResult = None
-        text = ""
+        #NOT USED text = ""
         if obj.description:
             speechResult = brailleResult = obj.description
         else:
@@ -3897,7 +3902,7 @@ class Script(script.Script):
             context = self.getFlatReviewContext()
             location = query.findQuery(context, self.justEnteredFlatReviewMode)
             if not location:
-                message = _("string not found")
+                #NOT USED message = _("string not found")
                 self.presentMessage(messages.STRING_NOT_FOUND)
             else:
                 context.setCurrent(location.lineIndex, location.zoneIndex, \

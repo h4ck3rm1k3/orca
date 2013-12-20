@@ -189,7 +189,7 @@ class GeckoStructuralNavigation(structural_navigation.StructuralNavigation):
         role = obj.getRole()
         if not role in self.OBJECT_ROLES:
             return False
- 
+
         embeddedObjectChar = self._script.EMBEDDED_OBJECT_CHARACTER
         if role in [pyatspi.ROLE_LIST, pyatspi.ROLE_TABLE]:
             # These roles are often serving as containers. We want to see

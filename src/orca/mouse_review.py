@@ -48,7 +48,7 @@ from . import settings
 _eventManager = event_manager.getManager()
 _scriptManager = script_manager.getManager()
 
-class BoundingBox:
+class BoundingBox(object):
     """A bounding box, currently it is used to test if a given point is
     inside the bounds of the box.
     """
@@ -76,7 +76,7 @@ class BoundingBox:
         return (self.x <= x <= self.x + self.width) and \
             (self.y <= y <= self.y + self.height)
 
-class _WordContext:
+class _WordContext(object):
     """A word on which the mouse id hovering above. This class should have
     enough info to make it unique, so we know when we have left the word.
     """
@@ -103,7 +103,7 @@ class _WordContext:
         return int(not(self.word == other.word and self.acc == other.acc and
                        self.start == other.start and self.end == other.end))
 
-class _ItemContext:
+class _ItemContext(object):
     """An _ItemContext holds all the information of the item we are currently
     hovering above. If the accessible supports word speaking, we also store
     a word context here.
@@ -140,7 +140,7 @@ class _ItemContext:
         word, start, end = self.script.utilities.wordAtCoords(self.acc, x, y)
         return _WordContext(word, self.acc, start, end)
 
-class MouseReviewer:
+class MouseReviewer(object):
     """Main class for the mouse-review feature.
     """
     def __init__(self):

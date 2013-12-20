@@ -39,7 +39,7 @@ from .braille_rolenames import shortRoleNames
 
 _settingsManager = settings_manager.getManager()
 
-class Space:
+class Space(object):
     """A dummy class to indicate we want to insert a space into an
     utterance, but only if there is text prior to the space."""
     def __init__(self, delimiter=" "):
@@ -226,7 +226,7 @@ class BrailleGenerator(generator.Generator):
         except:
             alertAndDialogCount = 0
         if alertAndDialogCount > 0:
-             result.append(messages.dialogCountBraille(alertAndDialogCount))
+            result.append(messages.dialogCountBraille(alertAndDialogCount))
 
         return result
 

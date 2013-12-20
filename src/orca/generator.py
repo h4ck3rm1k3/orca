@@ -58,7 +58,7 @@ def _formatExceptionInfo(maxTBlevel=5):
 #
 METHOD_PREFIX = "_generate"
 
-class Generator:
+class Generator(object):
     """Takes accessible objects and generates a presentation for those
     objects.  See the generate method, which is the primary entry
     point."""
@@ -73,7 +73,14 @@ class Generator:
         self._script = script
         self._methodsDict = {}
         for method in \
-            [z for z in [getattr(self, y).__get__(self, self.__class__) for y in [x for x in dir(self) if x.startswith(METHOD_PREFIX)]] if isinstance(z, collections.Callable)]:
+            [z for z in [getattr(self, y).__get__(
+                self, self.__class__) for y in [
+                    x for x in dir(self) 
+                    if x.startswith(METHOD_PREFIX)]
+                     ] if isinstance(
+                         z, 
+                         collections.Callable)
+            ]:
             name = method.__name__[len(METHOD_PREFIX):]
             name = name[0].lower() + name[1:]
             self._methodsDict[name] = method
@@ -219,9 +226,10 @@ class Generator:
                     suffix = self._script.formatting.getSuffix(**args)
                     formatting = '%s + %s + %s' % (prefix, formatting, suffix)
                 args['recursing'] = True
-                firstTimeCalled = True
-            else:
-                firstTimeCalled = False
+                #firstTimeCalled = True
+            #else:
+                #firstTimeCalled = False
+
 
             details = debug.getAccessibleDetails(debug.LEVEL_ALL, obj)
             duration = "%.4f" % (time.time() - startTime)
@@ -230,7 +238,7 @@ class Generator:
                 debug.LEVEL_ALL,
                 "generate %s for %s %s (args=%s) using '%s'" \
                 % (self._mode,
-                   args['formatType'], 
+                   args['formatType'],
                    details,
                    repr(args),
                    formatting))
@@ -312,7 +320,8 @@ class Generator:
                 result.append(description)
         # To make the unlabeled icons in gnome-panel more accessible.
         try:
-            role = args.get('role', obj.getRole())
+            #role =
+            args.get('role', obj.getRole())
         except (LookupError, RuntimeError):
             return result
         if not result and obj.getRole() == pyatspi.ROLE_ICON \
@@ -329,7 +338,11 @@ class Generator:
         the assumption being that the user was able to see the text prior
         to giving the widget focus.
         """
-        result = [x for x in obj.getAttributes() if x.startswith('placeholder-text:')]
+        result = [
+            x for x in
+            obj.getAttributes()
+            if x.startswith('placeholder-text:')
+        ]
         return [x.replace('placeholder-text:', '') for x in result]
 
     def _generateLabelAndName(self, obj, **args):
@@ -854,7 +867,7 @@ class Generator:
             table = obj.queryTable()
         except:
             return []
-        return [messages.tableSize(table.nRows, table.nColumns)]       
+        return [messages.tableSize(table.nRows, table.nColumns)]
 
     def _generateTableCellRow(self, obj, **args):
         """Orca has a feature to automatically read an entire row of a table
@@ -874,7 +887,7 @@ class Generator:
         isDetailedWhereAmI = args.get('formatType', None) == 'detailedWhereAmI'
         if (settings.readTableCellRow or isDetailedWhereAmI) and parentTable \
            and (not self._script.utilities.isLayoutOnly(obj.parent)):
-            parent = obj.parent
+            #parent = obj.parent
             index = self._script.utilities.cellIndex(obj)
             row = parentTable.getRowAtIndex(index)
             column = parentTable.getColumnAtIndex(index)

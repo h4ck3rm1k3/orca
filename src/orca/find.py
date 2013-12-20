@@ -34,7 +34,7 @@ from . import flat_review
 from . import messages
 from . import orca_state
 
-class SearchQuery:
+class SearchQuery(object):
     """Represents a search that the user wants to perform."""
 
     def __init__(self):

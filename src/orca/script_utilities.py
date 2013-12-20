@@ -48,7 +48,7 @@ from . import settings
 #                                                                           #
 #############################################################################
 
-class Utilities:
+class Utilities(object):
 
     EMBEDDED_OBJECT_CHARACTER = '\ufffc'
     SUPERSCRIPT_DIGITS = \
@@ -59,7 +59,7 @@ class Utilities:
          '\u2085', '\u2086', '\u2087', '\u2088', '\u2089']
 
     flags = re.UNICODE
-    WORDS_RE = re.compile("(\W+)", flags)
+    WORDS_RE = re.compile(r"(\W+)", flags)
     SUPERSCRIPTS_RE = re.compile("[%s]+" % "".join(SUPERSCRIPT_DIGITS), flags)
     SUBSCRIPTS_RE = re.compile("[%s]+" % "".join(SUBSCRIPT_DIGITS), flags)
 
@@ -1261,7 +1261,7 @@ class Utilities:
         isCell = lambda x: x and x.getRole() == pyatspi.ROLE_TABLE_CELL
         cellChildren = list(filter(isCell, [x for x in obj]))
         if len(cellChildren) == obj.childCount:
-            return True        
+            return True
 
         return False
 
@@ -1524,12 +1524,20 @@ class Utilities:
         Returns a list of unrelated labels under the given root.
         """
 
-        allLabels = self.descendantsWithRole(root, pyatspi.ROLE_LABEL, onlyShowing)
+        allLabels = self.descendantsWithRole(
+            root,
+            pyatspi.ROLE_LABEL,
+            onlyShowing)
         try:
             labels = [x for x in allLabels if not x.getRelationSet()]
             labels = [x for x in labels if x.parent and x.name != x.parent.name]
             if onlyShowing:
-                labels = [x for x in labels if x.getState().contains(pyatspi.STATE_SHOWING)]
+                labels = [
+                    x for x
+                    in labels
+                    if x.getState().contains(
+                            pyatspi.STATE_SHOWING)
+                ]
         except:
             return []
 
@@ -2340,7 +2348,6 @@ class Utilities:
         """
 
         from . import punctuation_settings
-        from . import chnames
 
         style = settings.verbalizePunctuationStyle
         isPunctChar = True
@@ -2595,9 +2602,11 @@ class Utilities:
         Returns True if the given character is a word delimiter.
         """
 
-        return character in self._script.whitespace \
-               or character in '!*+,-./:;<=>?@[\]^_{|}' \
-               or character == self._script.NO_BREAK_SPACE_CHARACTER
+        return (
+            character in self._script.whitespace
+            or character in '!*+,-./:;<=>?@[\]^_{|}'
+            or character == self._script.NO_BREAK_SPACE_CHARACTER
+        )
 
     @staticmethod
     def isVisibleRegion(ax, ay, awidth, aheight, bx, by, bwidth, bheight):
@@ -2818,10 +2827,10 @@ class Utilities:
     @staticmethod
     def unicodeValueString(character):
         """ Returns a four hex digit representation of the given character
-        
+
         Arguments:
         - The character to return representation
-        
+
         Returns a string representaition of the given character unicode vlue
         """
 

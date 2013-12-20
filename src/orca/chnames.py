@@ -713,17 +713,17 @@ chnames['\u2713'] = _("check mark")
 chnames['\u2714'] = _("heavy check mark")
 
 # Translators: this is the spoken word for the character 'x' (U+2717)
-# This symbol is included here because it can be used as a bullet in 
-# an OOo list.  The goal is to inform the user of the appearance of 
-# the bullet, while making it clear that it is a bullet and not simply 
-# the typed letter 'x'.  "Ballot x" might confuse the user.  Hence the 
+# This symbol is included here because it can be used as a bullet in
+# an OOo list.  The goal is to inform the user of the appearance of
+# the bullet, while making it clear that it is a bullet and not simply
+# the typed letter 'x'.  "Ballot x" might confuse the user.  Hence the
 # use of "x-shaped bullet".
 #
 chnames['\u2717'] = _("x-shaped bullet")
 
 # Translators: this is the spoken word for the character '➔' (U+2794)
-# This symbol is included here because it can be used as a bullet in 
-# an OOo list. The goal is to inform the user of the appearance of 
+# This symbol is included here because it can be used as a bullet in
+# an OOo list. The goal is to inform the user of the appearance of
 # the bullet without too much verbiage, hence simply "right-pointing arrow".
 #
 chnames['\u2794'] = _("right-pointing arrow")
@@ -841,20 +841,20 @@ chnames['\u208d'] = _("subscript left paren")
 chnames['\u208e'] = _("subscript right paren")
 
 # Translators: this is the spoken word for the character '➢' (U+27a2)
-# This symbol is included here because it can be used as a bullet in an 
-# OOo list. The goal is to inform the user of the appearance of the bullet 
+# This symbol is included here because it can be used as a bullet in an
+# OOo list. The goal is to inform the user of the appearance of the bullet
 # without too much verbiage, hence simply "right-pointing arrowhead".
 #
 chnames['\u27a2'] = _("right-pointing arrowhead")
 
-# Translators:  StarOffice/OOo includes private-use unicode character U+E00A 
-# as a bullet which looks like the black square: ■ (U+25A0).  Therefore, 
+# Translators:  StarOffice/OOo includes private-use unicode character U+E00A
+# as a bullet which looks like the black square: ■ (U+25A0).  Therefore,
 # please use the same translation for this character.
 #
 chnames['\ue00a'] = _("black square")
 
-# Translators:  StarOffice/OOo includes private-use unicode character U+E00C 
-# as a bullet which looks like the black diamond: ◆ (U+25C6).  Therefore, 
+# Translators:  StarOffice/OOo includes private-use unicode character U+E00C
+# as a bullet which looks like the black diamond: ◆ (U+25C6).  Therefore,
 # please use the same translation for this character.
 #
 chnames['\ue00c'] = _("black diamond")

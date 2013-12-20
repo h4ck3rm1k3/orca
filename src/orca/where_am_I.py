@@ -33,7 +33,7 @@ from . import speech
 # settings.verbalizePunctuationStyle = settings.PUNCTUATION_STYLE_SOME
 # if we're doing an extended where am I.]]]
 
-class WhereAmI:
+class WhereAmI(object):
 
     def __init__(self, script):
         """Create a new WhereAmI that will be used to speak information

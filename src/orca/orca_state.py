@@ -102,8 +102,8 @@ searchQuery = None
 #
 learnModeEnabled = False
 
-# Whether we should use the pronunciation dictionary to help speak 
-# certain words. This will be True everywhere except when focus is 
+# Whether we should use the pronunciation dictionary to help speak
+# certain words. This will be True everywhere except when focus is
 # in the Pronunciation Dictionary in the Orca Preferences dialog.
 #
 usePronunciationDictionary = True
@@ -116,7 +116,7 @@ orcaOS = None
 #
 appOS = None
 
-# Handle to the Glade warning dialog object that is displayed, if the 
+# Handle to the Glade warning dialog object that is displayed, if the
 # user has attempted to start a second instance of a preferences dialog.
 #
 orcaWD = None

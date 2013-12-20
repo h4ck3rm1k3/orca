@@ -66,7 +66,7 @@ class BrailleGenerator(braille_generator.BrailleGenerator):
     def _generateRoleName(self, obj, **args):
         """Prevents some roles from being spoken."""
         result = []
-        role = args.get('role', obj.getRole())
+        #TOD USED role = args.get('role', obj.getRole())
         if not obj.getRole() in [pyatspi.ROLE_SECTION,
                                  pyatspi.ROLE_FORM,
                                  pyatspi.ROLE_UNKNOWN]:

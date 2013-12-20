@@ -39,7 +39,7 @@ from . import settings
 
 _scriptManager = script_manager.getManager()
 
-class EventManager:
+class EventManager(object):
 
     def __init__(self):
         debug.println(debug.LEVEL_FINEST, 'INFO: Initializing event manager')
@@ -449,7 +449,7 @@ class EventManager:
             state = event.source.getState()
         except (LookupError, RuntimeError):
             return False, "Error getting event.source's state"
-        
+
         if not script:
             script = self._getScriptForEvent(event)
 
@@ -546,7 +546,7 @@ class EventManager:
         debug.println(debug.LEVEL_FINEST, "Script for event: %s" % script.name)
         setNewActiveScript, reason = self._isActivatableEvent(event, script)
         if setNewActiveScript:
-            app = event.host_application or event.source.getApplication()
+            #app = event.host_application or event.source.getApplication()
             _scriptManager.setActiveScript(script, reason)
 
         script.processObjectEvent(event)

@@ -43,7 +43,7 @@ _settingsManager = settings_manager.getManager()
 
 (ACTUAL, REPLACEMENT) = list(range(2))
 
-class OrcaPrefs:
+class OrcaPrefs(object):
 
     def __init__(self, prefsDict, appName=None, appScript=None,
                  keyBindingsTreeModel=None,

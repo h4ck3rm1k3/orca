@@ -33,7 +33,7 @@ __license__   = "LGPL"
 from .orca_i18n import _
 
 # Translators: this command will move the mouse pointer to the current item
-#  without clicking on it.             
+#  without clicking on it.
 ROUTE_POINTER_TO_ITEM = _("Routes the pointer to the current item.")
 
 # Translators: the 'flat review' feature of Orca allows the blind user to
@@ -55,7 +55,8 @@ RIGHT_CLICK_REVIEW_ITEM = _("Performs right click on current flat review item.")
 # Translators: the Orca "SayAll" command allows the user to press a key and have
 # the entire document in a window be automatically spoken to the user. If the
 # user presses any key during a SayAll operation, the speech will be interrupted
-# and the cursor will be positioned at the point where the speech was interrupted.
+# and the cursor will be positioned at the point where the
+# speech was interrupted.
 SAY_ALL = _("Speaks entire document.")
 
 # Translators: the "Where am I" feature of Orca allows a user to press a key and
@@ -461,7 +462,8 @@ BOOKMARK_CURRENT_WHERE_AM_I = \
 # a web page.
 BOOKMARK_GO_TO_PREVIOUS = _("Go to previous bookmark location.")
 
-# Translators: this command moves the user to the location stored at the bookmark.
+# Translators: this command moves the user to the location
+# stored at the bookmark.
 # Note that in this context, the "bookmark" is storing the location of an
 # accessible object, typically on a web page.
 BOOKMARK_GO_TO = _("Go to bookmark.")
@@ -476,7 +478,8 @@ BOOKMARK_GO_TO_NEXT = _("Go to next bookmark location.")
 # the given input key command.
 BOOKMARK_ADD = _("Add bookmark.")
 
-# Translators: this event handler saves all bookmarks for the current application
+# Translators: this event handler saves all bookmarks for
+# the current application
 # to disk.
 BOOKMARK_SAVE = _("Save bookmarks.")
 

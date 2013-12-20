@@ -51,9 +51,9 @@ class Script(default.Script):
         self.debugLevel = debug.LEVEL_FINEST
 
     def onNameChanged(self, event):
-        # Since we haven't feed back informationb when the 
-        # "work online/offline" status changes, we speech/braille the 
-        # statusbar content which is the the information that sets the 
+        # Since we haven't feed back informationb when the
+        # "work online/offline" status changes, we speech/braille the
+        # statusbar content which is the the information that sets the
         # work online or work offline mode.
         #
         if event.source.getRole() != pyatspi.ROLE_STATUS_BAR:
@@ -65,7 +65,7 @@ class Script(default.Script):
                      pyatspi.ROLE_FILLER,
                      pyatspi.ROLE_FRAME]
 
-        # We only speak the statusbar's changes when the application is 
+        # We only speak the statusbar's changes when the application is
         # with the focus and is the "work online/offline button is focused.
         #
         if self.utilities.hasMatchingHierarchy(
@@ -95,11 +95,11 @@ class Script(default.Script):
         # etc.]]]
         #
 
-        # Here we handle the case when focus is in the "Work online/offline" 
+        # Here we handle the case when focus is in the "Work online/offline"
         # button near the status bar that has an image without a description.
-        # We speak and braille "Online/Offline button" here, until the 
-        # developer of the application adds a description to the images 
-        # associated with the button, which shows the online or offline 
+        # We speak and braille "Online/Offline button" here, until the
+        # developer of the application adds a description to the images
+        # associated with the button, which shows the online or offline
         # work mode.
         #
         rolesList = [pyatspi.ROLE_PUSH_BUTTON,
@@ -107,21 +107,21 @@ class Script(default.Script):
                      pyatspi.ROLE_FILLER,
                      pyatspi.ROLE_FRAME]
 
-        # We are checking if the button with the focus is the button to 
+        # We are checking if the button with the focus is the button to
         # turn on/off the work mode in liferea. This push button is
-        # hierarchically located in the main window of the application 
+        # hierarchically located in the main window of the application
         # (frame), inside a filler and inside another filler.
         #
         if self.utilities.hasMatchingHierarchy(event.source, rolesList):
-            # If we are focusing this button we construct a utterance and 
+            # If we are focusing this button we construct a utterance and
             # a braille region to speak/braille "online/offline button".
-            # Here we declare utterances and add the localized string 
+            # Here we declare utterances and add the localized string
             # "online/offline".
             #
             utterances = []
-            utterances.append(_("Work online / offline")) 
+            utterances.append(_("Work online / offline"))
 
-            # Here we extend the utterances with the speech generator for 
+            # Here we extend the utterances with the speech generator for
             # the object with focus (the push button).
             #
             utterances.extend(speechGen.generateSpeech(event.source))
@@ -129,11 +129,11 @@ class Script(default.Script):
             # Finally we speak/braille the utterances/regions.
             #
             speech.speak(utterances)
-           
+
             regions = brailleGen.generateBraille(event.source)
             regions[0].insert(0, self.getNewBrailleRegion(utterances[0] + " "))
             self.displayBrailleRegions(regions)
-           
+
             return
 
         # Here we handle the case when the focus is in the headlines table.
@@ -147,5 +147,5 @@ class Script(default.Script):
                 table, pyatspi.ROLE_TABLE_CELL)
             eventsynthesizer.clickObject(cells[1], 1)
 
-        default.Script.locusOfFocusChanged(self, event, 
+        default.Script.locusOfFocusChanged(self, event,
                                            oldLocusOfFocus, newLocusOfFocus)

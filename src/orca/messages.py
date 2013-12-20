@@ -47,49 +47,49 @@ BOLD = _("bold")
 
 # Translators: Orca has a feature in which users can store/save a particular
 # location in an application window and return to it later by pressing a
-# keystroke. These stored/saved locations are "bookmarks". This string is 
+# keystroke. These stored/saved locations are "bookmarks". This string is
 # presented to the user when a new bookmark has been entered into the list
 # of bookmarks.
 BOOKMARK_ENTERED = _("bookmark entered")
 
 # Translators: Orca has a feature in which users can store/save a particular
 # location in an application window and return to it later by pressing a
-# keystroke. These stored/saved locations are "bookmarks". This string is 
+# keystroke. These stored/saved locations are "bookmarks". This string is
 # presented to the user to indicate the comparative locations of the current
 # object and the bookmarked object could not be determined.
 BOOKMARK_COMPARISON_UNKNOWN = _('comparison unknown')
 
 # Translators: Orca has a feature in which users can store/save a particular
 # location in an application window and return to it later by pressing a
-# keystroke. These stored/saved locations are "bookmarks". This string is 
+# keystroke. These stored/saved locations are "bookmarks". This string is
 # presented to the user to indicate the current object is the same object
 # pointed to by a given bookmark.
 BOOKMARK_IS_CURRENT_OBJECT = _("bookmark is current object")
 
 # Translators: Orca has a feature in which users can store/save a particular
 # location in an application window and return to it later by pressing a
-# keystroke. These stored/saved locations are "bookmarks". This string is 
+# keystroke. These stored/saved locations are "bookmarks". This string is
 # presented to the user to indicate the current object's parent and the
 # bookmarked object's parent are the same.
 BOOKMARK_PARENT_IS_SAME = _("bookmark and current object have same parent")
 
 # Translators: Orca has a feature in which users can store/save a particular
 # location in an application window and return to it later by pressing a
-# keystroke. These stored/saved locations are "bookmarks". This string is 
+# keystroke. These stored/saved locations are "bookmarks". This string is
 # presented to the user to indicate the current object and the bookmarked
 # object share a common ancestor.
 BOOKMARK_SHARED_ANCESTOR = _("shared ancestor %s")
 
 # Translators: Orca has a feature in which users can store/save a particular
 # location in an application window and return to it later by pressing a
-# keystroke. These stored/saved locations are "bookmarks". This string is 
+# keystroke. These stored/saved locations are "bookmarks". This string is
 # presented to the user when the active list of bookmarks have been saved to
 # disk.
 BOOKMARKS_SAVED = _("bookmarks saved")
 
 # Translators: Orca has a feature in which users can store/save a particular
 # location in an application window and return to it later by pressing a
-# keystroke. These stored/saved locations are "bookmarks". This string is 
+# keystroke. These stored/saved locations are "bookmarks". This string is
 # presented to the user when an error was encountered, preventing the active
 # list of bookmarks being saved to disk.
 BOOKMARKS_SAVED_FAILURE = _("bookmarks could not be saved")
@@ -295,7 +295,7 @@ CHAT_BUDDY_TYPING_ON = _("announce when your buddies are typing.")
 # channels at the same time, it can be confusing to know what room or channel
 # a given message came from just from hearing/reading it. This string to be
 # translated is presented to the user to clarify where an incoming message
-# came from. The name of the chat room is the string substitution. 
+# came from. The name of the chat room is the string substitution.
 CHAT_MESSAGE_FROM_ROOM = _("Message from chat room %s")
 
 # Translators: This message is presented to inform the user that a new chat
@@ -836,7 +836,8 @@ LEARN_MODE_START_SPEECH = \
     _("Entering learn mode.  Press any key to hear its function.  " \
       "To view the screen reader's documentation, press F1. " \
       "To get a list of the screen reader's default shortcuts, press F2. " \
-      "To get a list of the screen reader's shortcuts for the current application, " \
+      "To get a list of the screen reader's" \
+      " shortcuts for the current application, " \
       "press F3. " \
       "To exit learn mode, press the escape key.")
 
@@ -1058,7 +1059,7 @@ MISSPELLED_WORD = _("Misspelled word: %s")
 # containing the misspelled word in the document. This is known as the context.
 MISSPELLED_WORD_CONTEXT = _("Context is %s")
 
-# Translators: Hovering the mouse over certain objects on a web page causes a 
+# Translators: Hovering the mouse over certain objects on a web page causes a
 # new object to appear such as a pop-up menu. Orca has a command will move the
 # user to the object which just appeared as a result of the user hovering the
 # mouse. If this command fails, Orca will present this message.
@@ -1439,7 +1440,7 @@ STRING_NOT_FOUND = _("string not found")
 # Shift H to the previous heading, T to the next table, and so on. Some users
 # prefer to turn this off to use Firefox's search when typing feature. This
 # message is presented when the user toggles the structural navigation feature
-# of Orca. It should be a brief informative message.            
+# of Orca. It should be a brief informative message.
 STRUCTURAL_NAVIGATION_KEYS_OFF = _("Structural navigation keys off.")
 
 # Translators: The structural navigation keys are designed to move the caret
@@ -1447,7 +1448,7 @@ STRUCTURAL_NAVIGATION_KEYS_OFF = _("Structural navigation keys off.")
 # Shift H to the previous heading, T to the next table, and so on. Some users
 # prefer to turn this off to use Firefox's search when typing feature. This
 # message is presented when the user toggles the structural navigation feature
-# of Orca. It should be a brief informative message.            
+# of Orca. It should be a brief informative message.
 STRUCTURAL_NAVIGATION_KEYS_ON = _("Structural navigation keys on.")
 
 # Translators: Orca has a command that allows the user to move to the next
@@ -1715,9 +1716,10 @@ def shortcutsFoundApp(count, appName):
     # Translators: This message is presented when the user is in a list of
     # shortcuts associated with Orca commands specific to the current
     # application. It appears as the title of the dialog containing the list.
-    return ngettext("%(count)d Screen reader shortcut for %(application)s found.",
-                    "%(count)d Screen reader shortcuts for %(application)s found.",
-                    count) % {"count" : count, "application" : appName}
+    return ngettext(
+        "%(count)d Screen reader shortcut for %(application)s found.",
+        "%(count)d Screen reader shortcuts for %(application)s found.",
+        count) % {"count" : count, "application" : appName}
 
 def spacesCount(count):
     # Translators: This message is presented to inform the user of the number of

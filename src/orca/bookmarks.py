@@ -29,14 +29,14 @@ from . import settings_manager
 
 _settingsManager = settings_manager.getManager()
 
-class Bookmarks:
+class Bookmarks(object):
     """Represents a default bookmark handler."""
     def __init__(self, script):
         self._script = script
-        self._bookmarks = {} 
+        self._bookmarks = {}
         self._saveObservers = []
         self._loadObservers = []
-        self._loadBookmarks() 
+        self._loadBookmarks()
         self._currentbookmarkindex = None
 
     def addSaveObserver(self, observer):
@@ -78,16 +78,16 @@ class Bookmarks:
         speech.speak(utterances)
 
     def bookmarkCurrentWhereAmI(self, inputEvent):
-        """ Report "Where am I" information for this bookmark relative to the 
+        """ Report "Where am I" information for this bookmark relative to the
         current pointer location."""
         try:
             context = self._bookmarkToContext( \
                           self._bookmarks[inputEvent.hw_code])
         except KeyError:
             self._script.systemBeep()
-            return   
+            return
 
-        obj = context.getCurrentAccessible()    
+        obj = context.getCurrentAccessible()
         cur_obj = orca_state.locusOfFocus
 
         # Are they the same object?
@@ -110,7 +110,8 @@ class Bookmarks:
         p = cur_obj.parent
         while p:
             if bookmark_ancestors.count(p) > 0:
-                msg = messages.BOOKMARK_SHARED_ANCESTOR % p.getLocalizedRoleName()
+                msg = messages.BOOKMARK_SHARED_ANCESTOR % \
+                      p.getLocalizedRoleName()
                 self._script.presentMessage(msg)
                 return
             p = p.parent
@@ -118,7 +119,7 @@ class Bookmarks:
         self._script.presentMessage(messages.BOOKMARK_COMPARISON_UNKNOWN)
 
     def saveBookmarks(self, inputEvent):
-        """ Save the bookmarks for this script. """        
+        """ Save the bookmarks for this script. """
         try:
             self.saveBookmarksToDisk(self._bookmarks)
             self._script.presentMessage(messages.BOOKMARKS_SAVED)
@@ -145,7 +146,7 @@ class Bookmarks:
             self.goToBookmark(None, index=hwkeys[0])
             return
 
-        # find current bookmark hw_code in our sorted list.  
+        # find current bookmark hw_code in our sorted list.
         # Go to next one if possible
         try:
             index = hwkeys.index(self._currentbookmarkindex)
@@ -166,7 +167,7 @@ class Bookmarks:
             self.goToBookmark(None, index=hwkeys[0])
             return
 
-        # find current bookmark hw_code in our sorted list.  
+        # find current bookmark hw_code in our sorted list.
         # Go to previous one if possible
         try:
             index = hwkeys.index(self._currentbookmarkindex)
@@ -201,7 +202,7 @@ class Bookmarks:
             return None
 
     def saveBookmarksToDisk(self, bookmarksObj, filename=None):
-        """ Write bookmarks to disk.  bookmarksObj must be a pickleable 
+        """ Write bookmarks to disk.  bookmarksObj must be a pickleable
         object. """
         filename = filename or self._script.name.split(' ')[0]
         orcaDir = _settingsManager.getPrefsDir()

@@ -65,7 +65,7 @@ _eventManager = event_manager.getManager()
 _scriptManager = script_manager.getManager()
 _settingsManager = settings_manager.getManager()
 
-class Script:
+class Script(object):
     """The specific focus tracking scripts for applications.
     """
 
@@ -438,9 +438,12 @@ class Script:
             return False
 
         focus    = ["object:state-changed:focused"]
-        typing   = ["object:text-changed:insert", "object:text-changed:delete"]
-        arrowing = ["object:text-caret-moved", "object:text-selection-changed",
-                    "object:selection-changed", "object:active-descendant-changed"]
+        typing   = ["object:text-changed:insert",
+                    "object:text-changed:delete"]
+        arrowing = ["object:text-caret-moved",
+                    "object:text-selection-changed",
+                    "object:selection-changed",
+                    "object:active-descendant-changed"]
 
         skip = False
         if (event.type in arrowing or event.type in typing) \

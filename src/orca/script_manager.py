@@ -30,7 +30,7 @@ from . import debug
 from . import orca_state
 from .scripts import apps, toolkits
 
-class ScriptManager:
+class ScriptManager(object):
 
     def __init__(self):
         debug.println(debug.LEVEL_FINEST, 'INFO: Initializing script manager')

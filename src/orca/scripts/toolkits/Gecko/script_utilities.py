@@ -66,22 +66,19 @@ class Utilities(script_utilities.Utilities):
         that have attributes."""
 
         index = -1
-        parent = self.ancestorWithRole(obj,
-                                       [pyatspi.ROLE_TABLE, 
+        #parent =
+        self.ancestorWithRole(obj,
+                                       [pyatspi.ROLE_TABLE,
                                         pyatspi.ROLE_TREE_TABLE,
                                         pyatspi.ROLE_TREE],
                                        [pyatspi.ROLE_DOCUMENT_FRAME])
-        try:
-            table = parent.queryTable()
-        except:
-            pass
+
+        attrs = dict([attr.split(':', 1) for attr in obj.getAttributes()])
+        index = attrs.get('table-cell-index')
+        if index:
+            index = int(index)
         else:
-            attrs = dict([attr.split(':', 1) for attr in obj.getAttributes()])
-            index = attrs.get('table-cell-index')
-            if index:
-                index = int(index)
-            else:
-                index = obj.getIndexInParent()
+            index = obj.getIndexInParent()
 
         return index
 
@@ -347,7 +344,7 @@ class Utilities(script_utilities.Utilities):
 
         # First figure out what columns are visible as there's no point
         # in examining cells which we know won't be visible.
-        # 
+        #
         visibleColumns = []
         for i in range(table.nColumns):
             header = table.getColumnHeader(i)
@@ -570,7 +567,7 @@ class Utilities(script_utilities.Utilities):
                 lastObj[3] = unicodeText[offset:m.start(0)]
 
             offset = m.start(0) + 1
- 
+
             # Recursively tack on the child's objects.
             #
             childIndex = self._script.getChildIndex(obj, childOffset)
@@ -582,7 +579,7 @@ class Utilities(script_utilities.Utilities):
             if end > childOffset + 1:
                 restOfText = unicodeText[offset:len(unicodeText)]
                 objects.append([obj, childOffset + 1, end, restOfText])
- 
+
         if obj.getRole() in [pyatspi.ROLE_IMAGE, pyatspi.ROLE_TABLE]:
             # Imagemaps that don't have alternative text won't implement
             # the text interface, but they will have children (essentially

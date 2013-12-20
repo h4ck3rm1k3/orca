@@ -30,7 +30,7 @@ __license__   = "LGPL"
 
 from . import settings
 
-# Storing values 
+# Storing values
 defaultModifierMask = settings.defaultModifierMask
 ORCA_MODIFIER_MASK = settings.ORCA_MODIFIER_MASK
 NO_MODIFIER_MASK = settings.NO_MODIFIER_MASK
@@ -38,7 +38,7 @@ ORCA_SHIFT_MODIFIER_MASK = settings.ORCA_SHIFT_MODIFIER_MASK
 ORCA_CTRL_MODIFIER_MASK = settings.ORCA_CTRL_MODIFIER_MASK
 
 keymap = (
-    
+
     ("9", defaultModifierMask, ORCA_MODIFIER_MASK,
     "routePointerToItemHandler"),
 
@@ -68,7 +68,7 @@ keymap = (
 
     ("slash", defaultModifierMask, ORCA_MODIFIER_MASK,
     "getTitleHandler", 1),
-    
+
     ("slash", defaultModifierMask, ORCA_MODIFIER_MASK,
     "getStatusBarHandler", 2),
 
@@ -106,7 +106,7 @@ keymap = (
     "reviewPreviousItemHandler"),
 
     ("j", defaultModifierMask, ORCA_CTRL_MODIFIER_MASK,
-    "reviewAboveHandler"), 
+    "reviewAboveHandler"),
 
     ("k", defaultModifierMask, ORCA_MODIFIER_MASK,
     "reviewCurrentItemHandler", 1),

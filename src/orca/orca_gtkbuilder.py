@@ -30,7 +30,7 @@ from gi.repository import Gtk
 
 from .orca_i18n import _
 
-class GtkBuilderWrapper:
+class GtkBuilderWrapper(object):
     """
     Superclass for GtkBuilder based applications. Just derive from this
     and your subclass should create methods whose names correspond to
@@ -53,7 +53,8 @@ class GtkBuilderWrapper:
         # bug. See bgo bug 589362.
         #
         for obj in self.builder.get_objects():
-            success = self.localize_widget(obj)
+            #success = 
+            self.localize_widget(obj)
 
         # Set default application icon.
         self.set_orca_icon()

@@ -61,7 +61,7 @@ class OrcaSetupGUI(orca_gui_prefs.OrcaSetupGUI):
         - windowName: name of the component to get from the GtkBuilder file.
         """
 
-        orca_gui_prefs.OrcaSetupGUI.__init__(self, fileName, 
+        orca_gui_prefs.OrcaSetupGUI.__init__(self, fileName,
                                              windowName, prefsDict)
 
         # Initialize variables to None to keep pylint happy.
@@ -82,7 +82,7 @@ class OrcaSetupGUI(orca_gui_prefs.OrcaSetupGUI):
 
     def initAppGUIState(self, thisAppScript):
         """Before we show the GUI to the user we want to remove the
-        General tab and gray out the Speech systems and servers 
+        General tab and gray out the Speech systems and servers
         controls on the speech tab.
 
         Arguments:
@@ -111,8 +111,8 @@ class OrcaSetupGUI(orca_gui_prefs.OrcaSetupGUI):
             self.get_widget("notebook").append_page(appPage, label)
 
     def _createPronunciationTreeView(self, pronunciations=None):
-        """Create the pronunciation dictionary tree view for this specific 
-        application. We call the super class method passing in the 
+        """Create the pronunciation dictionary tree view for this specific
+        application. We call the super class method passing in the
         application specific pronunciation dictionary.
 
         Arguments:
@@ -124,12 +124,12 @@ class OrcaSetupGUI(orca_gui_prefs.OrcaSetupGUI):
                               self, appScript.app_pronunciation_dict)
 
     def showGUI(self):
-        """Show the app-specific Orca configuration GUI window. This 
+        """Show the app-specific Orca configuration GUI window. This
         assumes that the GUI has already been created.
         """
 
         self.app = orca_state.activeScript.app
-        self.applicationName = self.app.name 
+        self.applicationName = self.app.name
         title = guilabels.PREFERENCES_APPLICATION_TITLE % self.applicationName
         self.get_widget("orcaSetupWindow").set_title(title)
 
@@ -174,13 +174,13 @@ class OrcaSetupGUI(orca_gui_prefs.OrcaSetupGUI):
             while myiter != None:
                 iterChild = treeModel.iter_children(myiter)
                 while iterChild != None:
-                    descrip = treeModel.get_value(iterChild, 
+                    descrip = treeModel.get_value(iterChild,
                                                   orca_gui_prefs.DESCRIP)
                     keyBind.handler = input_event.InputEventHandler(None,
                                                                     descrip)
                     if keyBinds.hasKeyBinding(keyBind,
                                               typeOfSearch="description"):
-                        treeModel.set_value(iterChild, 
+                        treeModel.set_value(iterChild,
                                             orca_gui_prefs.MODIF, True)
                     iterChild = treeModel.iter_next(iterChild)
                 myiter = treeModel.iter_next(myiter)
@@ -191,8 +191,8 @@ class OrcaSetupGUI(orca_gui_prefs.OrcaSetupGUI):
         """Fills the TreeView with the list of Orca keybindings. The
         application specific ones are prepended to the list.
 
-        Arguments:        
-        - clearModel: if True, initially clear out the key bindings model. 
+        Arguments:
+        - clearModel: if True, initially clear out the key bindings model.
         """
 
         if clearModel:
@@ -201,7 +201,7 @@ class OrcaSetupGUI(orca_gui_prefs.OrcaSetupGUI):
         # Get the key bindings for the application script.
         #
         self.appKeyBindings = appScript.getKeyBindings()
-        self.appKeyBindings = appScript.overrideAppKeyBindings(appScript, 
+        self.appKeyBindings = appScript.overrideAppKeyBindings(appScript,
                                                      self.appKeyBindings)
 
         # Get the key bindings for the default script.
@@ -213,7 +213,7 @@ class OrcaSetupGUI(orca_gui_prefs.OrcaSetupGUI):
         iterOrca = self._createNode(guilabels.KB_GROUP_DEFAULT)
         iterUnbound = self._createNode(guilabels.KB_GROUP_UNBOUND)
 
-        # Find the key bindings that are in the application script but 
+        # Find the key bindings that are in the application script but
         # not in the default script.
         #
         for kb in self.appKeyBindings.keyBindings:
@@ -253,7 +253,7 @@ class OrcaSetupGUI(orca_gui_prefs.OrcaSetupGUI):
 
     def windowDestroyed(self, widget):
         """Signal handler for the "destroyed" signal for the orcaSetupWindow
-           GtkWindow widget. Reset orca_state.appOS to None, so that the 
+           GtkWindow widget. Reset orca_state.appOS to None, so that the
            GUI can be rebuilt from the GtkBuilder file the next time the user
            wants to display the configuration GUI.
 

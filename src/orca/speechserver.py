@@ -66,7 +66,7 @@ class VoiceFamily(dict):
         if props:
             self.update(props)
 
-class SayAllContext:
+class SayAllContext(object):
 
     PROGRESS    = 0
     INTERRUPTED = 1

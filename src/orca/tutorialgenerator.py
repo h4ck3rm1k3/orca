@@ -35,7 +35,7 @@ from . import settings
 
 from .orca_i18n import _         # for gettext support
 
-class TutorialGenerator:
+class TutorialGenerator(object):
     """Takes accessible objects and produces a tutorial string to speak
     for those objects.  See the getTutorialString method, which is the
     primary entry point.  Subclasses can feel free to override/extend
@@ -636,23 +636,23 @@ class TutorialGenerator:
                 parent_table = None
             if settings.readTableCellRow and parent_table \
                 and not self._script.utilities.isLayoutOnly(obj.parent):
-                parent = obj.parent
-                index = self._script.utilities.cellIndex(obj)
-                row = parent_table.getRowAtIndex(index)
-                column = parent_table.getColumnAtIndex(index)
+                #parent = obj.parent
+                #index = self._script.utilities.cellIndex(obj)
+                #row = parent_table.getRowAtIndex(index)
+                #column = parent_table.getColumnAtIndex(index)
 
                 # This is an indication of whether we should speak all the
                 # table cells (the user has moved focus up or down a row),
                 # or just the current one (focus has moved left or right in
                 # the same row).
                 #
-                speakAll = True
-                if "lastRow" in self._script.pointOfReference and \
-                    "lastColumn" in self._script.pointOfReference:
-                    pointOfReference = self._script.pointOfReference
-                    speakAll = (pointOfReference["lastRow"] != row) or \
-                        ((row == 0 or row == parent_table.nRows-1) and \
-                           pointOfReference["lastColumn"] == column)
+                #speakAll = True
+                #if "lastRow" in self._script.pointOfReference and \
+                #    "lastColumn" in self._script.pointOfReference:
+                    #pointOfReference = self._script.pointOfReference
+                    #speakAll = (pointOfReference["lastRow"] != row) or \
+                    #    ((row == 0 or row == parent_table.nRows-1) and \
+                    #       pointOfReference["lastColumn"] == column)
 
                 utterances.extend(self._getTutorialForTableCell(obj,
                                         alreadyFocused, forceTutorial))

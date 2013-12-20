@@ -31,7 +31,7 @@ __license__   = "LGPL"
 import io
 import logging
 
-class Logger:
+class Logger(object):
 
     def __init__(self):
         self._logs = {}
