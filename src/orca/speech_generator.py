@@ -19,14 +19,17 @@
 
 """Utilities for obtaining speech utterances for objects."""
 
-__id__        = "$Id:$"
-__version__   = "$Revision:$"
-__date__      = "$Date:$"
+__id__ = "$Id:$"
+__version__ = "$Revision:$"
+__date__ = "$Date:$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
-import urllib.parse, urllib.request, urllib.error, urllib.parse
+import urllib.parse
+import urllib.request
+import urllib.error
+import urllib.parse
 from gi.repository import Atspi, Atk
 
 from . import debug
@@ -38,17 +41,23 @@ from . import settings_manager
 from . import sound
 from . import text_attribute_names
 
+
 class Pause(object):
+
     """A dummy class to indicate we want to insert a pause into an
     utterance."""
+
     def __init__(self):
         pass
 
 PAUSE = [Pause()]
 
+
 class LineBreak(object):
+
     """A dummy class to indicate we want to break an utterance into
     separate calls to speak."""
+
     def __init__(self):
         pass
 
@@ -63,12 +72,12 @@ LINE_BREAK = [LineBreak()]
 #
 METHOD_PREFIX = "_generate"
 
-DEFAULT        = "default"
-UPPERCASE      = "uppercase"
-HYPERLINK      = "hyperlink"
-SYSTEM         = "system"
-STATE          = "state" # Candidate for sound
-VALUE          = "value" # Candidate for sound
+DEFAULT = "default"
+UPPERCASE = "uppercase"
+HYPERLINK = "hyperlink"
+SYSTEM = "system"
+STATE = "state"  # Candidate for sound
+VALUE = "value"  # Candidate for sound
 
 voiceType = {
     DEFAULT: settings.DEFAULT_VOICE,
@@ -81,12 +90,13 @@ voiceType = {
 
 _settingsManager = settings_manager.getManager()
 
+
 class SpeechGenerator(generator.Generator):
+
     """Takes accessible objects and produces a string to speak for
     those objects.  See the generateSpeech method, which is the primary
     entry point.  Subclasses can feel free to override/extend the
     speechGenerators instance field as they see fit."""
-
     # pylint: disable-msg=W0142
 
     def __init__(self, script):
@@ -117,12 +127,11 @@ class SpeechGenerator(generator.Generator):
 
     def generateSpeech(self, obj, **args):
         return self.generate(obj, **args)
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Name, role, and label information                                 #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateName(self, obj, **args):
         """Returns an array of strings for use by speech and braille that
@@ -192,7 +201,8 @@ class SpeechGenerator(generator.Generator):
         to giving the widget focus.
         """
         acss = self.voice(DEFAULT)
-        result = generator.Generator._generatePlaceholderText(self, obj, **args)
+        result = generator.Generator._generatePlaceholderText(
+            self, obj, **args)
         if result:
             result.extend(acss)
         return result
@@ -338,12 +348,11 @@ class SpeechGenerator(generator.Generator):
         if result:
             result.extend(acss)
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # State information                                                 #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateCheckedState(self, obj, **args):
         """Returns an array of strings for use by speech and braille that
@@ -370,7 +379,8 @@ class SpeechGenerator(generator.Generator):
             return []
 
         acss = self.voice(STATE)
-        result = generator.Generator._generateExpandableState(self, obj, **args)
+        result = generator.Generator._generateExpandableState(
+            self, obj, **args)
         if result:
             result.extend(acss)
         return result
@@ -384,7 +394,7 @@ class SpeechGenerator(generator.Generator):
             return []
 
         acss = self.voice(STATE)
-        result = generator.Generator.\
+        result = generator.Generator. \
             _generateMenuItemCheckedState(self, obj, **args)
         if result:
             result.extend(acss)
@@ -440,12 +450,11 @@ class SpeechGenerator(generator.Generator):
         if result:
             result.extend(acss)
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Link information                                                  #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateLinkInfo(self, obj, **args):
         """Returns an array of strings (and possibly voice and audio
@@ -474,9 +483,9 @@ class SpeechGenerator(generator.Generator):
             link_uri_info = urllib.parse.urlparse(link_uri)
             if link_uri_info[0] in ["ftp", "ftps", "file"]:
                 fileName = link_uri_info[2].split('/')
-                result.append(messages.LINK_TO_FILE \
-                              % {"uri" : link_uri_info[0],
-                                 "file" : fileName[-1]})
+                result.append(messages.LINK_TO_FILE
+                              % {"uri": link_uri_info[0],
+                                 "file": fileName[-1]})
             else:
                 linkOutput = messages.LINK_WITH_PROTOCOL % link_uri_info[0]
                 text = self._script.utilities.displayedText(obj)
@@ -519,9 +528,9 @@ class SpeechGenerator(generator.Generator):
                 #
                 linkdomain = link_uri_info[1].split('.')
                 docdomain = doc_uri_info[1].split('.')
-                if len(linkdomain) > 1 and len(docdomain) > 1  \
-                    and linkdomain[-1] == docdomain[-1]  \
-                    and linkdomain[-2] == docdomain[-2]:
+                if len(linkdomain) > 1 and len(docdomain) > 1 \
+                    and linkdomain[-1] == docdomain[-1] \
+                        and linkdomain[-2] == docdomain[-2]:
                     result.append(messages.LINK_SAME_SITE)
                 else:
                     result.append(messages.LINK_DIFFERENT_SITE)
@@ -561,12 +570,11 @@ class SpeechGenerator(generator.Generator):
         if result:
             result.extend(acss)
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Image information                                                 #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateImage(self, obj, **args):
         """Returns an array of strings (and possibly voice and audio
@@ -576,7 +584,7 @@ class SpeechGenerator(generator.Generator):
         result = []
         acss = self.voice(DEFAULT)
         try:
-            #image =
+            # image =
             obj.queryImage()
         except:
             pass
@@ -585,12 +593,11 @@ class SpeechGenerator(generator.Generator):
             result.extend(self.generate(obj, **args))
             result.extend(acss)
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Table interface information                                       #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateNewRowHeader(self, obj, **args):
         """Returns an array of strings (and possibly voice and audio
@@ -611,15 +618,15 @@ class SpeechGenerator(generator.Generator):
             except:
                 priorParent = None
 
-            if (obj.getRole() == pyatspi.ROLE_TABLE_CELL) \
-                or (obj.parent and obj.parent.getRole() == pyatspi.ROLE_TABLE):
+            if (obj.getRole() == pyatspi.ROLE_TABLE_CELL) or (obj.parent and
+                obj.parent.getRole() == pyatspi.ROLE_TABLE):
                 try:
                     table = priorParent.queryTable()
                 except:
                     table = None
                 if table \
-                   and ((priorObj.getRole() == pyatspi.ROLE_TABLE_CELL) \
-                         or (priorObj.getRole() == pyatspi.ROLE_TABLE)):
+                   and ((priorObj.getRole() == pyatspi.ROLE_TABLE_CELL)
+                        or (priorObj.getRole() == pyatspi.ROLE_TABLE)):
                     index = self._script.utilities.cellIndex(priorObj)
                     oldRow = table.getRowAtIndex(index)
                 else:
@@ -634,7 +641,7 @@ class SpeechGenerator(generator.Generator):
                     newRow = table.getRowAtIndex(index)
                     if (newRow >= 0) \
                        and (index != newRow) \
-                       and ((newRow != oldRow) \
+                       and ((newRow != oldRow)
                             or (obj.parent != priorParent)):
                         result = self._generateRowHeader(obj, **args)
         if result:
@@ -660,15 +667,15 @@ class SpeechGenerator(generator.Generator):
             except:
                 priorParent = None
 
-            if (obj.getRole() == pyatspi.ROLE_TABLE_CELL) \
-                or (obj.parent and obj.parent.getRole() == pyatspi.ROLE_TABLE):
+            if (obj.getRole() == pyatspi.ROLE_TABLE_CELL) or (obj.parent and
+                obj.parent.getRole() == pyatspi.ROLE_TABLE):
                 try:
                     table = priorParent.queryTable()
                 except:
                     table = None
                 if table \
-                   and ((priorObj.getRole() == pyatspi.ROLE_TABLE_CELL) \
-                         or (priorObj.getRole() == pyatspi.ROLE_TABLE)):
+                   and ((priorObj.getRole() == pyatspi.ROLE_TABLE_CELL)
+                        or (priorObj.getRole() == pyatspi.ROLE_TABLE)):
                     index = self._script.utilities.cellIndex(priorObj)
                     oldCol = table.getColumnAtIndex(index)
                 else:
@@ -683,7 +690,7 @@ class SpeechGenerator(generator.Generator):
                     newCol = table.getColumnAtIndex(index)
                     if (newCol >= 0) \
                        and (index != newCol) \
-                       and ((newCol != oldCol) \
+                       and ((newCol != oldCol)
                             or (obj.parent != priorParent)):
                         result = self._generateColumnHeader(obj, **args)
         if result:
@@ -736,7 +743,7 @@ class SpeechGenerator(generator.Generator):
                 parentRole = obj.parent.getRole()
 
         if objRole == pyatspi.ROLE_TABLE_CELL \
-           and (parentRole == pyatspi.ROLE_TREE_TABLE \
+           and (parentRole == pyatspi.ROLE_TREE_TABLE
                 or parentRole == pyatspi.ROLE_TABLE):
             checkIfSelected = True
 
@@ -835,12 +842,12 @@ class SpeechGenerator(generator.Generator):
             index = self._script.utilities.cellIndex(obj)
             col = table.getColumnAtIndex(index)
             row = table.getRowAtIndex(index)
-            result.append(messages.TABLE_COLUMN_DETAILED \
-                          % {"index" : (col + 1),
-                             "total" : table.nColumns})
-            result.append(messages.TABLE_ROW_DETAILED \
-                          % {"index" : (row + 1),
-                             "total" : table.nRows})
+            result.append(messages.TABLE_COLUMN_DETAILED
+                          % {"index": (col + 1),
+                             "total": table.nColumns})
+            result.append(messages.TABLE_ROW_DETAILED
+                          % {"index": (row + 1),
+                             "total": table.nRows})
         if result:
             result.extend(acss)
         return result
@@ -875,12 +882,11 @@ class SpeechGenerator(generator.Generator):
         if result:
             result.extend(acss)
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Terminal information                                              #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateTerminal(self, obj, **args):
         """Returns an array of strings (and possibly voice and audio
@@ -902,12 +908,11 @@ class SpeechGenerator(generator.Generator):
         if result:
             result.extend(acss)
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Text interface information                                        #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateCurrentLineText(self, obj, **args):
         """Returns an array of strings for use by speech and braille
@@ -916,7 +921,8 @@ class SpeechGenerator(generator.Generator):
         array if this is not a text object.]]]
         """
         acss = self.voice(DEFAULT)
-        result = generator.Generator._generateCurrentLineText(self, obj, **args)
+        result = generator.Generator._generateCurrentLineText(
+            self, obj, **args)
         if result and result[0]:
             if result[0] == "\n":
                 result[0] = messages.BLANK
@@ -998,7 +1004,6 @@ class SpeechGenerator(generator.Generator):
         caretOffset = textObj.caretOffset
         textContents = ""
         selected = False
-
         #nSelections = textObj.getNSelections()
 
         [current, other] = self._script.utilities.hasTextSelections(obj)
@@ -1029,9 +1034,9 @@ class SpeechGenerator(generator.Generator):
                 textContents = line
             else:
                 char = textObj.getTextAtOffset(caretOffset,
-                    pyatspi.TEXT_BOUNDARY_CHAR)
+                                               pyatspi.TEXT_BOUNDARY_CHAR)
                 if char[0] == "\n" and startOffset == caretOffset \
-                       and _settingsManager.getSetting('speakBlankLines'):
+                        and _settingsManager.getSetting('speakBlankLines'):
                     textContents = (messages.BLANK)
 
         self._script.generatorCache['textInformation'] = \
@@ -1149,7 +1154,8 @@ class SpeechGenerator(generator.Generator):
             noOfSelections = textObj.getNSelections()
             if noOfSelections == 1:
                 [string, startOffset, endOffset] = \
-                   textObj.getTextAtOffset(0, pyatspi.TEXT_BOUNDARY_LINE_START)
+                    textObj.getTextAtOffset(
+                        0, pyatspi.TEXT_BOUNDARY_LINE_START)
                 if startOffset == 0 and endOffset == len(string):
                     result = [messages.TEXT_SELECTED]
                     result.extend(acss)
@@ -1172,10 +1178,10 @@ class SpeechGenerator(generator.Generator):
         acss = self.voice(SYSTEM)
         if not _settingsManager.getSetting('enableSpeechIndentation'):
             return []
-        line =  args.get('alreadyFocused', "")
+        line = args.get('alreadyFocused', "")
         if not line:
             [line, caretOffset, startOffset] = \
-              self._script.getTextLineAtCaret(obj)
+                self._script.getTextLineAtCaret(obj)
 
         # For the purpose of speaking the text indentation, replace
         # occurances the non breaking space character with spaces.
@@ -1195,20 +1201,19 @@ class SpeechGenerator(generator.Generator):
                 offset += 1
             if tabCount:
                 utterance += "%s " % messages.tabsCount(tabCount)
-            if not (spaceCount  or tabCount):
+            if not (spaceCount or tabCount):
                 break
-            spaceCount  = tabCount = 0
+            spaceCount = tabCount = 0
 
         result = [utterance]
         if result and result[0]:
             result.extend(acss)
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Tree interface information                                        #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateNewNodeLevel(self, obj, **args):
         """Returns an array of strings (and possibly voice and audio
@@ -1230,14 +1235,13 @@ class SpeechGenerator(generator.Generator):
             result.extend(self._generateNodeLevel(obj, **args))
             result.extend(acss)
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Value interface information                                       #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
-    def _generatePercentage(self, obj, **args ):
+    def _generatePercentage(self, obj, **args):
         """Returns an array of strings (and possibly voice and audio
         specifications) that represents the percentage value of the
         object.  This is typically for progress bars. [[[WDW - we
@@ -1261,12 +1265,11 @@ class SpeechGenerator(generator.Generator):
         if result:
             result.extend(acss)
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Hierarchy and related dialog information                          #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateNewRadioButtonGroup(self, obj, **args):
         """Returns an array of strings (and possibly voice and audio
@@ -1290,11 +1293,11 @@ class SpeechGenerator(generator.Generator):
             relations = obj.getRelationSet()
             for relation in relations:
                 if (not radioGroupLabel) \
-                    and (relation.getRelationType() \
+                    and (relation.getRelationType()
                          == pyatspi.RELATION_LABELLED_BY):
                     radioGroupLabel = relation.getTarget(0)
                 if (not inSameGroup) \
-                    and (relation.getRelationType() \
+                    and (relation.getRelationType()
                          == pyatspi.RELATION_MEMBER_OF):
                     for i in range(0, relation.getNTargets()):
                         target = relation.getTarget(i)
@@ -1302,8 +1305,8 @@ class SpeechGenerator(generator.Generator):
                             inSameGroup = True
                             break
             if (not inSameGroup) and radioGroupLabel:
-                result.append(self._script.utilities.\
-                                  displayedText(radioGroupLabel))
+                result.append(self._script.utilities.
+                              displayedText(radioGroupLabel))
                 result.extend(acss)
         return result
 
@@ -1350,7 +1353,7 @@ class SpeechGenerator(generator.Generator):
             result.extend(acss)
         return result
 
-    def _generateNoChildren(self, obj, **args ):
+    def _generateNoChildren(self, obj, **args):
         """Returns an array of strings (and possibly voice and audio
         specifications) that says if this object has no children at
         all (e.g., it's an empty table or list).  object has.  [[[WDW
@@ -1414,10 +1417,10 @@ class SpeechGenerator(generator.Generator):
         result.append(messages.selectedItemsCount(selectedCount, childCount))
         result.extend(acss)
         result.append(self._script.formatting.getString(
-                          mode='speech',
-                          stringType='iconindex') \
-                      % {"index" : obj.getIndexInParent() + 1,
-                         "total" : childCount})
+            mode='speech',
+            stringType='iconindex')
+            % {"index": obj.getIndexInParent() + 1,
+               "total": childCount})
         result.extend(acss)
         return result
 
@@ -1439,7 +1442,7 @@ class SpeechGenerator(generator.Generator):
         selectedItems = self._script.utilities.selectedChildren(container)
         return list(map(self._generateLabelAndName, selectedItems))
 
-    def _generateUnfocusedDialogCount(self, obj,  **args):
+    def _generateUnfocusedDialogCount(self, obj, **args):
         """Returns an array of strings (and possibly voice and audio
         specifications) that says how many unfocused alerts and
         dialogs are associated with the application for this object.
@@ -1528,7 +1531,7 @@ class SpeechGenerator(generator.Generator):
         """
         if args.get('role', obj.getRole()) == pyatspi.ROLE_ICON \
            and args.get('formatType', None) \
-               in ['basicWhereAmI', 'detailedWhereAmI']:
+                in ['basicWhereAmI', 'detailedWhereAmI']:
             return [object_properties.ROLE_ICON_PANEL]
         elif obj.parent.getRole() == pyatspi.ROLE_TABLE_CELL:
             obj = obj.parent
@@ -1579,10 +1582,10 @@ class SpeechGenerator(generator.Generator):
             # in the reverse order.
             position = total - position + 1
             result.append(self._script.formatting.getString(
-                              mode='speech',
-                              stringType='groupindex') \
-                          % {"index" : position,
-                             "total" : total})
+                mode='speech',
+                stringType='groupindex')
+                % {"index": position,
+                   "total": total})
             result.extend(acss)
         return result
 
@@ -1592,7 +1595,7 @@ class SpeechGenerator(generator.Generator):
         object in a list.
         """
         if _settingsManager.getSetting('onlySpeakDisplayedText') \
-           or not (_settingsManager.getSetting('enablePositionSpeaking') \
+           or not (_settingsManager.getSetting('enablePositionSpeaking')
                    or args.get('forceList', False)):
             return []
 
@@ -1646,7 +1649,7 @@ class SpeechGenerator(generator.Generator):
         for i in range(0, total):
             childName = self._generateName(childNodes[i])
             if childName == name:
-                position = i+1
+                position = i + 1
                 break
 
         if not total:
@@ -1663,14 +1666,14 @@ class SpeechGenerator(generator.Generator):
                 if nextName == name:
                     position = index
 
-        if (_settingsManager.getSetting('enablePositionSpeaking') \
-             or args.get('forceList', False)) \
+        if (_settingsManager.getSetting('enablePositionSpeaking')
+            or args.get('forceList', False)) \
            and position >= 0:
             result.append(self._script.formatting.getString(
-                              mode='speech',
-                              stringType='groupindex') \
-                          % {"index" : position,
-                             "total" : total})
+                mode='speech',
+                stringType='groupindex')
+                % {"index": position,
+                   "total": total})
             result.extend(acss)
         return result
 
@@ -1731,18 +1734,17 @@ class SpeechGenerator(generator.Generator):
         if dialog:
             result.append(self._generateLabelAndName(dialog))
         alertAndDialogCount = \
-                    self._script.utilities.unfocusedAlertAndDialogCount(obj)
+            self._script.utilities.unfocusedAlertAndDialogCount(obj)
         if alertAndDialogCount > 0:
             dialogs = [messages.dialogCountSpeech(alertAndDialogCount)]
             dialogs.extend(acss)
             result.append(dialogs)
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Keyboard shortcut information                                     #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateAccelerator(self, obj, **args):
         """Returns an array of strings (and possibly voice and audio
@@ -1777,7 +1779,7 @@ class SpeechGenerator(generator.Generator):
             [mnemonic, shortcut, accelerator] = \
                 self._script.utilities.mnemonicShortcutAccelerator(obj)
             if mnemonic:
-                mnemonic = mnemonic[-1] # we just want a single character
+                mnemonic = mnemonic[-1]  # we just want a single character
             if not mnemonic and shortcut:
                 mnemonic = shortcut
             if mnemonic:
@@ -1785,12 +1787,11 @@ class SpeechGenerator(generator.Generator):
                 result.extend(acss)
 
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Tutorial information                                              #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateTutorial(self, obj, **args):
         """Returns an array of strings (and possibly voice and audio
@@ -1808,26 +1809,25 @@ class SpeechGenerator(generator.Generator):
         alreadyFocused = args.get('alreadyFocused', False)
         forceTutorial = args.get('forceTutorial', False)
         result.extend(self._script.tutorialGenerator.getTutorial(
-                obj,
-                alreadyFocused,
-                forceTutorial))
+            obj,
+            alreadyFocused,
+            forceTutorial))
         if args.get('role', obj.getRole()) == pyatspi.ROLE_ICON \
-            and args.get('formatType', 'unfocused') == 'basicWhereAmI':
+                and args.get('formatType', 'unfocused') == 'basicWhereAmI':
             frame, dialog = self._script.utilities.frameAndDialog(obj)
             if frame:
                 result.extend(self._script.tutorialGenerator.getTutorial(
-                        frame,
-                        alreadyFocused,
-                        forceTutorial))
+                    frame,
+                    alreadyFocused,
+                    forceTutorial))
         if result and result[0]:
             result.extend(acss)
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Other things for prosody and voice selection                      #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generatePause(self, obj, **args):
         return PAUSE

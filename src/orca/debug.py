@@ -22,11 +22,11 @@ level, which is held in the debugLevel field.  All other methods take
 a debug level, which is compared to the current debug level to
 determine if the content should be output."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import inspect
 import traceback
@@ -115,7 +115,7 @@ debugFile = None
 #
 # debug.eventDebugFilter = rc.compile('focus:|window:activate')
 #
-eventDebugLevel  = LEVEL_FINEST
+eventDebugLevel = LEVEL_FINEST
 eventDebugFilter = None
 
 # What module(s) should be traced if traceit is being used. By default
@@ -163,6 +163,7 @@ TRACE_ROLES = []
 #
 TRACE_ONLY_PROCESSING_EVENTS = True
 
+
 def printException(level):
     """Prints out information regarding the current exception.
 
@@ -174,6 +175,7 @@ def printException(level):
         println(level)
         traceback.print_exc(100, debugFile)
         println(level)
+
 
 def printStack(level):
     """Prints out the current stack.
@@ -187,7 +189,8 @@ def printStack(level):
         traceback.print_stack(None, 100, debugFile)
         println(level)
 
-def println(level, text = ""):
+
+def println(level, text=""):
     """Prints the text to stderr unless debug is enabled.
 
     If debug is enabled the text will be redirected to the
@@ -218,6 +221,7 @@ def println(level, text = ""):
                 text = "Exception when trying to write text"
                 sys.stderr.writelines([text, "\n"])
 
+
 def printResult(level, result=None):
     """Prints the return result, along with information about the
     method, arguments, and any errors encountered."""
@@ -240,6 +244,7 @@ def printResult(level, result=None):
         inspect.getmodulename(current[1]), current[3], fArgs)
     string = '%s\n%s %s' % (callString, 'RESULT:', result)
     println(level, '%s' % string)
+
 
 def printObjectEvent(level, event, sourceInfo=None):
     """Prints out an Python Event object.  The given level may be
@@ -265,6 +270,7 @@ def printObjectEvent(level, event, sourceInfo=None):
     if sourceInfo:
         println(level, "             %s" % sourceInfo)
 
+
 def printInputEvent(level, string):
     """Prints out an input event.  The given level may be overridden
     if the eventDebugLevel (see setEventDebugLevel) is greater.
@@ -275,6 +281,7 @@ def printInputEvent(level, string):
     """
 
     println(max(level, eventDebugLevel), string)
+
 
 def printDetails(level, indent, accessible, includeApp=True):
     """Lists the details of the given accessible with the given
@@ -290,6 +297,7 @@ def printDetails(level, indent, accessible, includeApp=True):
     if level >= debugLevel and accessible:
         println(level,
                 getAccessibleDetails(level, accessible, indent, includeApp))
+
 
 def getAccessibleDetails(level, acc, indent="", includeApp=True):
     """Returns a string, suitable for printing, that describes the
@@ -340,8 +348,8 @@ def getAccessibleDetails(level, acc, indent="", includeApp=True):
     if relations:
         relation_strings = []
         for relation in relations:
-            relation_strings.append( \
-                          pyatspi.relationToString(relation.getRelationType()))
+            relation_strings.append(
+                pyatspi.relationToString(relation.getRelationType()))
         rel_string = ' '.join(relation_strings)
     else:
         rel_string = ''
@@ -355,13 +363,13 @@ def getAccessibleDetails(level, acc, indent="", includeApp=True):
 
     return string
 
-
 # The following code originated from the following URL:
 #
 # http://www.dalkescientific.com/writings/diary/archive/ \
 #                                     2005/04/20/tracing_python_code.html
 #
 import linecache
+
 
 def _getFileAndModule(frame):
     filename, module = None, None
@@ -375,6 +383,7 @@ def _getFileAndModule(frame):
             filename = filename[:-1]
 
     return filename, module
+
 
 def _shouldTraceIt():
     objEvent = orca_state.currentObjectEvent
@@ -400,6 +409,7 @@ def _shouldTraceIt():
         return False
 
     return True
+
 
 def traceit(frame, event, arg):
     """Line tracing utility to output all lines as they are executed by
@@ -453,12 +463,15 @@ def traceit(frame, event, arg):
 
     return traceit
 
+
 def getOpenFDCount(pid):
-    procs = subprocess.check_output([ 'lsof', '-w', '-Ff', '-p', str(pid)])
+    procs = subprocess.check_output(['lsof', '-w', '-Ff', '-p', str(pid)])
     procs = procs.decode('UTF-8').split('\n')
-    files = list(filter(lambda s: s and s[0] == 'f' and s[1:].isdigit(), procs))
+    files = list(
+        filter(lambda s: s and s[0] == 'f' and s[1:].isdigit(), procs))
 
     return len(files)
+
 
 def getCmdline(pid):
     try:
@@ -471,6 +484,7 @@ def getCmdline(pid):
 
     return cmdline
 
+
 def pidOf(procName):
     openFile = subprocess.Popen('pgrep %s' % procName,
                                 shell=True,
@@ -478,6 +492,7 @@ def pidOf(procName):
     pids = openFile.read()
     openFile.close()
     return [int(p) for p in pids.split()]
+
 
 def examineProcesses():
     desktop = pyatspi.Registry.getDesktop(0)
@@ -493,8 +508,8 @@ def examineProcesses():
         else:
             if name == '':
                 name = 'WARNING: Possible hang'
-        println(LEVEL_ALL, '%3i. %s (pid: %s) %s file descriptors: %i' \
-                    % (i+1, name, pid, cmd, fds))
+        println(LEVEL_ALL, '%3i. %s (pid: %s) %s file descriptors: %i'
+                % (i + 1, name, pid, cmd, fds))
 
     # Other 'suspect' processes which might not show up as accessible apps.
     otherApps = ['apport']
@@ -507,5 +522,5 @@ def examineProcesses():
         for pid in pids:
             cmd = getCmdline(pid)
             fds = getOpenFDCount(pid)
-            println(LEVEL_ALL, 'INFO: %s (pid: %s) %s file descriptors: %i' \
-                        % (app, pid, cmd, fds))
+            println(LEVEL_ALL, 'INFO: %s (pid: %s) %s file descriptors: %i'
+                    % (app, pid, cmd, fds))

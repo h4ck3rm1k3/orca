@@ -21,17 +21,18 @@
 
 """Displays a GUI for Orca navigation list dialogs"""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2012 Igalia, S.L."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from gi.repository import GObject, Gdk, Gtk
 
 from . import debug
 from . import guilabels
 from . import orca_state
+
 
 class OrcaNavListGUI(object):
 
@@ -70,8 +71,8 @@ class OrcaNavListGUI(object):
 
         for i, header in enumerate(columnHeaders):
             cell = Gtk.CellRendererText()
-            column = Gtk.TreeViewColumn(header, cell, text=i+1)
-            column.set_sort_column_id(i+1)
+            column = Gtk.TreeViewColumn(header, cell, text=i + 1)
+            column.set_sort_column_id(i + 1)
             self._tree.append_column(column)
 
         for row in rows:
@@ -89,7 +90,6 @@ class OrcaNavListGUI(object):
         btn = dialog.add_button(guilabels.BTN_JUMP_TO, Gtk.ResponseType.APPLY)
         btn.grab_default()
         btn.connect('clicked', self._onJumpToClicked)
-
 
         self._activateButton = dialog.add_button(
             guilabels.ACTIVATE, Gtk.ResponseType.OK)
@@ -173,6 +173,7 @@ class OrcaNavListGUI(object):
             return None
 
         return model.get_value(model.get_iter(paths[0]), 0)
+
 
 def showUI(title='', columnHeaders=[], rows=[()], selectedRow=0):
     gui = OrcaNavListGUI(title, columnHeaders, rows, selectedRow)

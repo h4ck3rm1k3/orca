@@ -22,11 +22,11 @@
 """Settings manager module. This will load/save user settings from a 
 defined settings backend."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Consorcio Fernando de los Rios."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import imp
 import importlib
@@ -54,7 +54,9 @@ except:
 
 _scriptManager = script_manager.getManager()
 
+
 class SettingsManager(object):
+
     """Settings backend manager. This class manages orca user's settings
     using different backends"""
     _instance = None
@@ -72,7 +74,8 @@ class SettingsManager(object):
         backend='json'
         """
 
-        debug.println(debug.LEVEL_FINEST, 'INFO: Initializing settings manager')
+        debug.println(debug.LEVEL_FINEST,
+                      'INFO: Initializing settings manager')
 
         self.backendModule = None
         self._backend = None
@@ -83,9 +86,9 @@ class SettingsManager(object):
         # Dictionaries for store the default values
         # The keys and values are defined at orca.settings
         #
-        ## self.defaultGeneral contain some constants names as values
+        # self.defaultGeneral contain some constants names as values
         self.defaultGeneral = {}
-        ## self.defaultGeneralValues contain the actual values, no constants
+        # self.defaultGeneralValues contain the actual values, no constants
         self.defaultGeneralValues = {}
         self.defaultPronunciations = {}
         self.defaultKeybindings = {}
@@ -161,6 +164,7 @@ class SettingsManager(object):
         """Let the active backend to create the initial structure
         for storing the settings and save the default ones from
         orca.settings"""
+
         def _createDir(dirName):
             if not os.path.isdir(dirName):
                 os.makedirs(dirName)
@@ -267,7 +271,7 @@ class SettingsManager(object):
         return self._prefsDir
 
     def setSetting(self, settingName, settingValue):
-        self._setSettingsRuntime({settingName:settingValue})
+        self._setSettingsRuntime({settingName: settingValue})
 
     def getSetting(self, settingName):
         return getattr(settings, settingName)
@@ -346,7 +350,7 @@ class SettingsManager(object):
             return False
 
         vEnable = GLib.Variant('b', enable)
-        _proxy.Set('(ssv)', 'org.a11y.Status', 'IsEnabled', vEnable)            
+        _proxy.Set('(ssv)', 'org.a11y.Status', 'IsEnabled', vEnable)
 
     def isScreenReaderServiceEnabled(self):
         """Returns True if the screen reader service is enabled. Note that
@@ -466,7 +470,7 @@ class SettingsManager(object):
 
         # Elements that need to stay updated in main configuration.
         self.defaultGeneral['startingProfile'] = general.get('startingProfile',
-                                                              _profile)
+                                                             _profile)
 
         self._setProfileGeneral(general)
         self._setProfilePronunciations(pronunciations)
@@ -551,7 +555,8 @@ class SettingsManager(object):
             try:
                 imp.reload(module)
             except:
-                debug.println(debug.LEVEL_FINEST, "Could not load %s.py" % name)
+                debug.println(debug.LEVEL_FINEST, "Could not load %s.py" %
+                              name)
                 module = None
             else:
                 debug.println(debug.LEVEL_FINEST, "Loaded %s.py" % name)
@@ -578,12 +583,14 @@ class SettingsManager(object):
             script.app_pronunciation_dict = \
                 pronunciations(script, script.app_pronunciation_dict)
 
+
 def getVoiceKey(voice):
     voicesKeys = getattr(settings, 'voicesKeys')
     for key in list(voicesKeys.keys()):
         if voicesKeys[key] == voice:
             return key
     return ""
+
 
 def getValueForKey(prefsDict, key):
     need2repr = ['brailleEOLIndicator', 'brailleContractionTable',
@@ -597,7 +604,7 @@ def getValueForKey(prefsDict, key):
         if isinstance(prefsDict[key], str):
             if key in need2repr:
                 value = "\'%s\'" % prefsDict[key]
-            elif key  == 'voices':
+            elif key == 'voices':
                 key = getVoiceKey(key)
                 value = prefsDict[key]
             else:
@@ -611,16 +618,18 @@ def getValueForKey(prefsDict, key):
             value = prefsDict[key]
     return value
 
+
 def getRealValues(prefs):
     """Get the actual values for any constant stored on a
     general settings dictionary.
     prefs is a dictionary with the userCustomizableSettings keys
     and values."""
-    #for key in prefs.keys():
+    # for key in prefs.keys():
     #    prefs[key] = getValueForKey(prefs, key)
     return prefs
 
 _manager = SettingsManager()
+
 
 def getManager():
     return _manager

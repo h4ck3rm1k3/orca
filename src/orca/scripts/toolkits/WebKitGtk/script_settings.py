@@ -19,11 +19,11 @@
 # Free Software Foundation, Inc., Franklin Street, Fifth Floor,
 # Boston MA  02110-1301 USA.
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010-2011 The Orca Team"
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 # If True, it tells Orca to automatically perform a SayAll operation
 # when a page is first loaded.

@@ -20,4 +20,3 @@
 """ Custom script for The notification daemon."""
 
 from .script import Script
-

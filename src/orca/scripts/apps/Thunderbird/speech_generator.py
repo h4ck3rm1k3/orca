@@ -20,11 +20,11 @@
 """ Custom script for Thunderbird 3.
 """
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2004-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -32,13 +32,15 @@ import orca.scripts.toolkits.Gecko as Gecko
 
 from orca.orca_i18n import _
 
-########################################################################
-#                                                                      #
+#
+#
 # Custom SpeechGenerator for Thunderbird                               #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class SpeechGenerator(Gecko.SpeechGenerator):
+
     """Provides a speech generator specific to Thunderbird.
     """
 
@@ -55,7 +57,7 @@ class SpeechGenerator(Gecko.SpeechGenerator):
         result = []
         if not self._script.isEditableMessage(obj):
             result.extend(Gecko.SpeechGenerator._generateName(
-                    self, obj, **args))
+                self, obj, **args))
 
         return result
 
@@ -68,7 +70,7 @@ class SpeechGenerator(Gecko.SpeechGenerator):
             pass
         else:
             result.extend(Gecko.SpeechGenerator._generateRoleName(
-                              self, obj, **args))
+                self, obj, **args))
 
         return result
 
@@ -99,10 +101,10 @@ class SpeechGenerator(Gecko.SpeechGenerator):
         #
         if obj.name.startswith(_("Check Spelling")) \
            and self._script.utilities.hasMatchingHierarchy(
-                   obj, [pyatspi.ROLE_DIALOG,
-                         pyatspi.ROLE_APPLICATION]):
+               obj, [pyatspi.ROLE_DIALOG,
+                     pyatspi.ROLE_APPLICATION]):
             pass
         else:
             result.extend(Gecko.SpeechGenerator._generateUnrelatedLabels(
-                              self, obj, **args))
+                self, obj, **args))
         return result

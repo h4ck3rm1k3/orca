@@ -19,11 +19,11 @@
 # Boston MA  02110-1301 USA.
 
 """Module for notification messages"""
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Informal Informatica LTDA."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -52,17 +52,20 @@ invalidKeys = 0
 # input event handlers
 inputEventHandlers = {}
 
+
 def repeatLastNotificationMessage(script=None, inputEvent=None):
     """ Repeats the last notification message. """
 
     _showNotificationMessage(1)
     return True
 
+
 def repeatPreviousNotificationMessage(script=None, inputEvent=None):
     """ Repeats the previous notification message. """
 
     _showNotificationMessage(2)
     return True
+
 
 def enableNotificationMessageListMode(script=None, inputEvent=None):
     """ Enables the list of notification message. """
@@ -71,22 +74,24 @@ def enableNotificationMessageListMode(script=None, inputEvent=None):
     return True
 
 inputEventHandlers["repeatLastNotificationMessageHandler"] = \
-        input_event.InputEventHandler(
-            repeatLastNotificationMessage,
-            cmdnames.NOTIFICATION_MESSAGES_LAST)
+    input_event.InputEventHandler(
+        repeatLastNotificationMessage,
+        cmdnames.NOTIFICATION_MESSAGES_LAST)
 
 inputEventHandlers["repeatPreviousNotificationMessageHandler"] = \
-        input_event.InputEventHandler(
-            repeatPreviousNotificationMessage,
-            cmdnames.NOTIFICATION_MESSAGES_PREVIOUS)
+    input_event.InputEventHandler(
+        repeatPreviousNotificationMessage,
+        cmdnames.NOTIFICATION_MESSAGES_PREVIOUS)
 
 inputEventHandlers["enableNotificationMessageListModeHandler"] = \
-        input_event.InputEventHandler(
-            enableNotificationMessageListMode,
-            cmdnames.NOTIFICATION_MESSAGES_LIST)
+    input_event.InputEventHandler(
+        enableNotificationMessageListMode,
+        cmdnames.NOTIFICATION_MESSAGES_LIST)
+
 
 def _showMessage(msg):
     orca_state.activeScript.presentMessage(msg)
+
 
 def saveMessage(msg):
     """save the message in a list to be presented later"""
@@ -96,14 +101,16 @@ def saveMessage(msg):
 
     notificationMessages.append(msg)
 
-    debug.println(debug.LEVEL_FINEST, \
-                   "saveMessage (queue length: %s)"\
-                   % (size()))
+    debug.println(debug.LEVEL_FINEST,
+                  "saveMessage (queue length: %s)"
+                  % (size()))
+
 
 def size():
     """ return the size of the queue messages """
 
     return len(notificationMessages)
+
 
 def _messagesPresent():
 
@@ -112,6 +119,7 @@ def _messagesPresent():
         return False
 
     return True
+
 
 def _listModeEnable():
     """ enable the list mode if the queue is not empty """
@@ -128,6 +136,7 @@ def _listModeEnable():
 
     return True
 
+
 def _showNotificationMessage(index):
     global indexNotificationMessages
     if not _messagesPresent():
@@ -142,12 +151,13 @@ def _showNotificationMessage(index):
 
     indexNotificationMessages = index
     index = size() - index
-    debug.println(debug.LEVEL_FINEST, \
-                   "_showNotificationMessage (queue length: %s, index: %s)"\
-                   % (size(), index))
+    debug.println(debug.LEVEL_FINEST,
+                  "_showNotificationMessage (queue length: %s, index: %s)"
+                  % (size(), index))
     if index >= 0 and index < size():
         msg = notificationMessages[index]
         _showMessage(msg)
+
 
 def exitListNotificationMessagesMode():
     """ Turns list notification messages mode off. """
@@ -155,6 +165,7 @@ def exitListNotificationMessagesMode():
     global listNotificationMessagesModeEnabled
     listNotificationMessagesModeEnabled = False
     _showMessage(messages.NOTIFICATION_LIST_EXIT)
+
 
 def listNotificationMessages(event):
     """ When list notification messages  mode is enabled, this function
@@ -182,10 +193,10 @@ def listNotificationMessages(event):
         indexNotificationMessages -= 1
     elif event.event_string == "Down":
         indexNotificationMessages += 1
-    elif event.event_string in\
-                   [ '1', '2', '3', '4', '5', '6', '7', '8', '9' ]:
+    elif event.event_string in \
+            ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
         indexNotificationMessages = int(event.event_string)
-    elif event.event_string in [ 'h', 'H']:
+    elif event.event_string in ['h', 'H']:
         _help(True)
         speak = False
     elif event.event_string == "space":
@@ -203,7 +214,8 @@ def listNotificationMessages(event):
 
     return consumed
 
-def _help(longHelp = False):
+
+def _help(longHelp=False):
     msg = messages.messagesCount(size())
     msg += messages.NOTIFICATION_LIST_HELP
     if longHelp:

@@ -18,12 +18,12 @@
 # Free Software Foundation, Inc., Franklin Street, Fifth Floor,
 # Boston MA  02110-1301 USA.
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc., " \
                 "Copyright (c) 2010 Joanmarie Diggs"
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -33,11 +33,12 @@ import orca.speech_generator as speech_generator
 
 _settingsManager = settings_manager.getManager()
 
-########################################################################
-#                                                                      #
+#
+#
 # Speech Generator                                                     #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class SpeechGenerator(speech_generator.SpeechGenerator):
 
@@ -76,8 +77,8 @@ class SpeechGenerator(speech_generator.SpeechGenerator):
             # into a menu; not a huge ancestry.
             #
             return result
-        result.extend(speech_generator.SpeechGenerator.\
-                          _generateNewAncestors(self, obj, **args))
+        result.extend(speech_generator.SpeechGenerator.
+                      _generateNewAncestors(self, obj, **args))
         return result
 
     def _generateNumberOfChildren(self, obj, **args):
@@ -95,7 +96,7 @@ class SpeechGenerator(speech_generator.SpeechGenerator):
             result.append(messages.itemCount(obj.childCount))
             result.extend(acss)
         else:
-            result.extend(speech_generator.SpeechGenerator.\
+            result.extend(speech_generator.SpeechGenerator.
                           _generateNumberOfChildren(self, obj, **args))
 
         return result
@@ -138,22 +139,22 @@ class SpeechGenerator(speech_generator.SpeechGenerator):
             if nextName == name:
                 position = index
 
-        if (_settingsManager.getSetting('enablePositionSpeaking') \
+        if (_settingsManager.getSetting('enablePositionSpeaking')
             or args.get('forceList', False)) \
            and position >= 0:
             result.append(self._script.formatting.getString(
-                              mode='speech', stringType='groupindex') \
-                              %  {"index" : position, "total" : total})
+                mode='speech', stringType='groupindex')
+                % {"index": position, "total": total})
             result.extend(acss)
         return result
-        
+
     def generateSpeech(self, obj, **args):
         result = []
         if obj.getRole() == pyatspi.ROLE_CHECK_BOX \
            and obj.parent.getRole() == pyatspi.ROLE_MENU:
             oldRole = self._overrideRole(pyatspi.ROLE_CHECK_MENU_ITEM, args)
-            result.extend(speech_generator.SpeechGenerator.\
-                                           generateSpeech(self, obj, **args))
+            result.extend(speech_generator.SpeechGenerator.
+                          generateSpeech(self, obj, **args))
             self._restoreRole(oldRole, args)
 
         if args.get('formatType', 'unfocused') == 'basicWhereAmI' \
@@ -162,6 +163,6 @@ class SpeechGenerator(speech_generator.SpeechGenerator):
                 obj, [pyatspi.ROLE_SPIN_BUTTON], None)
             if spinbox:
                 obj = spinbox
-        result.extend(speech_generator.SpeechGenerator.\
-                                       generateSpeech(self, obj, **args))
+        result.extend(speech_generator.SpeechGenerator.
+                      generateSpeech(self, obj, **args))
         return result

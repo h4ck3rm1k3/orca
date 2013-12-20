@@ -20,4 +20,3 @@
 """Custom script for evince."""
 
 from .script import Script
-

@@ -19,11 +19,11 @@
 
 """Custom script for Empathy."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -32,11 +32,12 @@ import orca.scripts.toolkits.gtk as gtk
 
 from .script_utilities import Utilities
 
-########################################################################
-#                                                                      #
+#
+#
 # The Empathy script class.                                            #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(gtk.Script):
 
@@ -129,8 +130,8 @@ class Script(gtk.Script):
         # events we need to present text added to the chatroom are
         # missing.
         #
-        #allPageTabs = 
-        #TODO duplicate code
+        # allPageTabs =
+        # TODO duplicate code
         self.utilities.descendantsWithRole(
             event.source, pyatspi.ROLE_PAGE_TAB)
 

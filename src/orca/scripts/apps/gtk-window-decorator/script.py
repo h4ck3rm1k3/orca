@@ -19,22 +19,23 @@
 
 """Custom script for gtk-window-decorator."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import orca.messages as messages
 import orca.scripts.default as default
 import orca.speech as speech
 import pyatspi
 
-########################################################################
-#                                                                      #
+#
+#
 # The gtk-window-decorator script class.                               #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(default.Script):
 

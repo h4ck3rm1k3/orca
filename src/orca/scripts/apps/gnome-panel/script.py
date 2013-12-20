@@ -20,22 +20,23 @@
 """ Custom script for gnome-panel
 """
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
 import orca.scripts.default as default
 from .speech_generator import SpeechGenerator
 
-########################################################################
-#                                                                      #
+#
+#
 # The gnome-panel script class.                                        #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(default.Script):
 

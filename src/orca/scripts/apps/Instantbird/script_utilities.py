@@ -23,20 +23,21 @@
    gotten way too large as a result of including these methods."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import orca.script_utilities as script_utilities
 
 import orca.scripts.toolkits.Gecko as Gecko
 
-#############################################################################
-#                                                                           #
+#
+#
 # Utilities                                                                 #
-#                                                                           #
-#############################################################################
+#
+#
+
 
 class Utilities(Gecko.Utilities):
 
@@ -49,11 +50,11 @@ class Utilities(Gecko.Utilities):
 
         Gecko.Utilities.__init__(self, script)
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Utilities for finding, identifying, and comparing accessibles         #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def displayedLabel(self, obj):
         """If there is an object labelling the given object, return the
@@ -87,14 +88,14 @@ class Utilities(Gecko.Utilities):
 
         return script_utilities.Utilities.displayedText(self, obj)
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Utilities for working with the accessible text interface              #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Miscellaneous Utilities                                               #
-    #                                                                       #
-    #########################################################################
+    #
+    #

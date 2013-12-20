@@ -20,4 +20,3 @@
 """Custom script for gdmlogin."""
 
 from .script import Script
-

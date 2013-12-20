@@ -33,30 +33,31 @@ __date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Google Inc."
 __license__ = "LGPL"
 
+
 class ACSS(dict):
 
     """Holds ACSS representation of a voice."""
 
-    FAMILY        = 'family'
-    RATE          = 'rate'
-    GAIN          = 'gain'
+    FAMILY = 'family'
+    RATE = 'rate'
+    GAIN = 'gain'
     AVERAGE_PITCH = 'average-pitch'
-    PITCH_RANGE   = 'pitch-range'
-    STRESS        = 'stress'
-    RICHNESS      = 'richness'
-    PUNCTUATIONS  = 'punctuations'
+    PITCH_RANGE = 'pitch-range'
+    STRESS = 'stress'
+    RICHNESS = 'richness'
+    PUNCTUATIONS = 'punctuations'
 
     # A value of None means use the engine's default value.
     #
     settings = {
-        FAMILY :        None,
-        RATE :          50,
-        GAIN :          10,
-        AVERAGE_PITCH : 5,
-        PITCH_RANGE :   5,
-        STRESS :        5,
-        RICHNESS :      5,
-        PUNCTUATIONS :  'all'
+        FAMILY: None,
+        RATE: 50,
+        GAIN: 10,
+        AVERAGE_PITCH: 5,
+        PITCH_RANGE: 5,
+        STRESS: 5,
+        RICHNESS: 5,
+        PUNCTUATIONS: 'all'
     }
 
     def __init__(self, props=None):
@@ -80,8 +81,7 @@ class ACSS(dict):
         else:
             self['established'] = False
 
-
-    def __setitem__ (self, key, value):
+    def __setitem__(self, key, value):
         """Update name when we change values."""
         dict.__setitem__(self, key, value)
 
@@ -97,7 +97,7 @@ class ACSS(dict):
         names = list(self.keys())
         if names:
             names.sort()
-            for  k in names:
+            for k in names:
                 _name += "%s-%s:" % (k, self[k])
         _name = _name[:-1]
         return _name

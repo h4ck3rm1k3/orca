@@ -19,11 +19,11 @@
 
 """Dictionary of abbreviated rolenames for use with braille."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2012 Igalia, S.L."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 

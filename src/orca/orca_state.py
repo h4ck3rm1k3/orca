@@ -21,12 +21,12 @@
 """Holds state that is shared among many modules.
 """
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc." \
                 "Copyright (c) 2010 Joanmarie Diggs, Mesar Hameed."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 # NOTE: resist the temptation to do any imports here.  They can
 # easily cause circular imports.
@@ -55,7 +55,7 @@ clickCount = 0
 
 # Used to capture keys to redefine key bindings by the user.
 #
-capturingKeys   = False
+capturingKeys = False
 lastCapturedKey = None
 
 # The last non-modifier key event received.

@@ -20,11 +20,11 @@
 # Free Software Foundation, Inc., Franklin Street, Fifth Floor,
 # Boston MA  02110-1301 USA.
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010-2013 Igalia, S.L."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 import time
@@ -34,11 +34,12 @@ import orca.scripts.toolkits.clutter as clutter
 
 from .formatting import Formatting
 
+
 class Script(clutter.Script):
 
     def __init__(self, app):
         clutter.Script.__init__(self, app)
-        self._activeDialog = (None, 0) # (Accessible, Timestamp)
+        self._activeDialog = (None, 0)  # (Accessible, Timestamp)
         self._activeDialogLabels = {}  # key == hash(obj), value == name
 
     def getFormatting(self):

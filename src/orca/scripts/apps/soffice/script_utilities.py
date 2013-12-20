@@ -23,10 +23,10 @@
    gotten way too large as a result of including these methods."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -34,11 +34,12 @@ import orca.debug as debug
 import orca.orca_state as orca_state
 import orca.script_utilities as script_utilities
 
-#############################################################################
-#                                                                           #
+#
+#
 # Utilities                                                                 #
-#                                                                           #
-#############################################################################
+#
+#
+
 
 class Utilities(script_utilities.Utilities):
 
@@ -51,11 +52,11 @@ class Utilities(script_utilities.Utilities):
 
         script_utilities.Utilities.__init__(self, script)
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Utilities for finding, identifying, and comparing accessibles         #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def displayedText(self, obj):
         """Returns the text being displayed for an object. Overridden here
@@ -89,10 +90,10 @@ class Utilities(script_utilities.Utilities):
 
         state = obj.getState()
         readOnly = state.contains(pyatspi.STATE_FOCUSABLE) \
-                   and not state.contains(pyatspi.STATE_EDITABLE)
+            and not state.contains(pyatspi.STATE_EDITABLE)
         details = debug.getAccessibleDetails(debug.LEVEL_ALL, obj)
         debug.println(debug.LEVEL_ALL,
-                      "soffice - isReadOnlyTextArea=%s for %s" % \
+                      "soffice - isReadOnlyTextArea=%s for %s" %
                       (readOnly, details))
 
         return readOnly
@@ -217,7 +218,8 @@ class Utilities(script_utilities.Utilities):
         endIndex = parentTable.nColumns
 
         if self.isSpreadSheetCell(obj):
-            extents = parent.queryComponent().getExtents(pyatspi.DESKTOP_COORDS)
+            extents = parent.queryComponent().getExtents(
+                pyatspi.DESKTOP_COORDS)
             y = extents.y
             leftX = extents.x + 1
             leftCell = \
@@ -255,12 +257,12 @@ class Utilities(script_utilities.Utilities):
         if onlyIfNew:
             getRowHeader = \
                 getRowHeader and objRow != \
-                                           self._script.pointOfReference.get(
-                                               "lastRow")
+                self._script.pointOfReference.get(
+                    "lastRow")
             getColHeader = \
                 getColHeader and objCol != \
-                                           self._script.pointOfReference.get(
-                                               "lastColumn")
+                self._script.pointOfReference.get(
+                    "lastColumn")
 
         parentTable = table.queryTable()
         rowHeader, colHeader = None, None
@@ -464,11 +466,11 @@ class Utilities(script_utilities.Utilities):
 
         return nextObj
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Impress-Specific Utilities                                            #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def drawingView(self, obj=orca_state.locusOfFocus):
         """Attempts to locate the Impress drawing view, which is the
@@ -570,11 +572,11 @@ class Utilities(script_utilities.Utilities):
 
         return title, int(position), int(count)
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Utilities for working with the accessible text interface              #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def isWordMisspelled(self, obj, offset):
         """Identifies if the current word is flagged as misspelled by the
@@ -588,7 +590,7 @@ class Utilities(script_utilities.Utilities):
         Returns True if the word is flagged as misspelled.
         """
 
-        attributes, start, end  = self.textAttributes(obj, offset, True)
+        attributes, start, end = self.textAttributes(obj, offset, True)
         error = attributes.get("text-spelling")
 
         return error == "misspelled"
@@ -650,17 +652,17 @@ class Utilities(script_utilities.Utilities):
         start = min(start, offset)
         if end < 0:
             debug.println(debug.LEVEL_WARNING,
-                "soffice.script.py:getTextAttributes: detected a bogus " +
-                "end offset. Start offset: %s, end offset: %s" % (start, end))
+                          "soffice.script.py:getTextAttributes: detected a bogus " +
+                          "end offset. Start offset: %s, end offset: %s" % (start, end))
             end = offset + 1
 
         return rv, start, end
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Miscellaneous Utilities                                               #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def isAutoTextEvent(self, event):
         """Returns True if event is associated with text being autocompleted

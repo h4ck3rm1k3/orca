@@ -20,11 +20,11 @@
 """Provides getPhoneticName method that maps each letter of the
 alphabet into its localized phonetic equivalent."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2006-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from .orca_i18n import _
 
@@ -64,7 +64,8 @@ __phonnames = {}
 
 for __pair in __phonlist.split(','):
     __w = __pair.split(':')
-    __phonnames [__w[0].strip()] = __w[1].strip()
+    __phonnames[__w[0].strip()] = __w[1].strip()
+
 
 def getPhoneticName(character):
     """Given a character, return its phonetic name, which is typically

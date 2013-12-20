@@ -18,11 +18,11 @@
 # Free Software Foundation, Inc., Franklin Street, Fifth Floor,
 # Boston MA  02110-1301 USA.
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2011. Orca Team."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from gi.repository import GLib
 import pyatspi
@@ -39,6 +39,7 @@ from . import settings
 
 _scriptManager = script_manager.getManager()
 
+
 class EventManager(object):
 
     def __init__(self):
@@ -48,9 +49,9 @@ class EventManager(object):
         self._active = False
         self._enqueueCount = 0
         self._dequeueCount = 0
-        self._eventQueue     = queue.Queue(0)
-        self._gidleId        = 0
-        self._gidleLock      = threading.Lock()
+        self._eventQueue = queue.Queue(0)
+        self._gidleId = 0
+        self._gidleLock = threading.Lock()
         self.noFocusTimestamp = 0.0
         debug.println(debug.LEVEL_FINEST, 'INFO: Event manager initialized')
 
@@ -104,7 +105,7 @@ class EventManager(object):
         if debugging:
             debug.println(debug.LEVEL_ALL, "           ...acquired")
             debug.println(debug.LEVEL_ALL, "           calling queue.put...")
-            debug.println(debug.LEVEL_ALL, "           (full=%s)" \
+            debug.println(debug.LEVEL_ALL, "           (full=%s)"
                           % self._eventQueue.full())
 
         self._eventQueue.put(event)
@@ -129,7 +130,8 @@ class EventManager(object):
             data = "'%s' (%d)" % (e.event_string, e.hw_code)
         elif isinstance(e, input_event.BrailleEvent):
             data = "'%s'" % repr(e.event)
-        elif not debug.eventDebugFilter or debug.eventDebugFilter.match(e.type):
+        elif not debug.eventDebugFilter or debug.eventDebugFilter.match(e.type
+            ):
             data = ""
         else:
             return
@@ -204,19 +206,19 @@ class EventManager(object):
             else:
                 orca_state.currentObjectEvent = event
                 debugging = not debug.eventDebugFilter \
-                            or debug.eventDebugFilter.match(event.type)
+                    or debug.eventDebugFilter.match(event.type)
                 if debugging:
                     startTime = time.time()
                     debug.println(debug.eventDebugLevel,
-                                  "\nvvvvv PROCESS OBJECT EVENT %s vvvvv" \
+                                  "\nvvvvv PROCESS OBJECT EVENT %s vvvvv"
                                   % event.type)
                 self._processObjectEvent(event)
                 if debugging:
                     debug.println(debug.eventDebugLevel,
-                                  "TOTAL PROCESSING TIME: %.4f" \
+                                  "TOTAL PROCESSING TIME: %.4f"
                                   % (time.time() - startTime))
                     debug.println(debug.eventDebugLevel,
-                                  "^^^^^ PROCESS OBJECT EVENT %s ^^^^^\n" \
+                                  "^^^^^ PROCESS OBJECT EVENT %s ^^^^^\n"
                                   % event.type)
                 orca_state.currentObjectEvent = None
 
@@ -228,7 +230,7 @@ class EventManager(object):
             try:
                 noFocus = \
                     not orca_state.activeScript \
-                    or (not orca_state.locusOfFocus and \
+                    or (not orca_state.locusOfFocus and
                         self.noFocusTimestamp != orca_state.noFocusTimestamp)
             except:
                 noFocus = True
@@ -243,13 +245,13 @@ class EventManager(object):
                     defaultScript.presentMessage(fullMessage, '')
                     self.noFocusTimestamp = orca_state.noFocusTimestamp
                 self._gidleId = 0
-                rerun = False # destroy and don't call again
+                rerun = False  # destroy and don't call again
             self._gidleLock.release()
         except queue.Empty:
             debug.println(debug.LEVEL_SEVERE,
                           "event_manager._dequeue: the event queue is empty!")
             self._gidleId = 0
-            rerun = False # destroy and don't call again
+            rerun = False  # destroy and don't call again
         except:
             debug.printException(debug.LEVEL_SEVERE)
 
@@ -268,8 +270,8 @@ class EventManager(object):
         """
 
         debug.println(debug.LEVEL_FINEST,
-                      'INFO: Event manager registering listener for: %s' \
-                       % eventType)
+                      'INFO: Event manager registering listener for: %s'
+                      % eventType)
 
         if eventType in self._scriptListenerCounts:
             self._scriptListenerCounts[eventType] += 1
@@ -285,8 +287,8 @@ class EventManager(object):
         """
 
         debug.println(debug.LEVEL_FINEST,
-                      'INFO: Event manager deregistering listener for: %s' \
-                       % eventType)
+                      'INFO: Event manager deregistering listener for: %s'
+                      % eventType)
 
         if not eventType in self._scriptListenerCounts:
             return
@@ -305,8 +307,8 @@ class EventManager(object):
         """
 
         debug.println(debug.LEVEL_FINEST,
-                      'INFO: Event manager registering listeners for: %s' \
-                       % script)
+                      'INFO: Event manager registering listeners for: %s'
+                      % script)
 
         for eventType in list(script.listeners.keys()):
             self._registerListener(eventType)
@@ -320,8 +322,8 @@ class EventManager(object):
         """
 
         debug.println(debug.LEVEL_FINEST,
-                      'INFO: Event manager deregistering listeners for: %s' \
-                       % script)
+                      'INFO: Event manager deregistering listeners for: %s'
+                      % script)
 
         for eventType in list(script.listeners.keys()):
             self._deregisterListener(eventType)
@@ -343,8 +345,8 @@ class EventManager(object):
 
         debug.println(
             debug.LEVEL_FINEST,
-            'INFO: Event manager registering keystroke listener function: %s' \
-             % function)
+            'INFO: Event manager registering keystroke listener function: %s'
+            % function)
 
         if mask == None:
             mask = list(range(256))
@@ -359,8 +361,8 @@ class EventManager(object):
 
         debug.println(
             debug.LEVEL_FINEST,
-            'INFO: Event manager deregistering keystroke listener function: %s'\
-             % function)
+            'INFO: Event manager deregistering keystroke listener function: %s'
+            % function)
 
         if mask == None:
             mask = list(range(256))
@@ -401,7 +403,7 @@ class EventManager(object):
             debug.printException(debug.LEVEL_WARNING)
             debug.printStack(debug.LEVEL_WARNING)
         debug.println(debug.eventDebugLevel,
-                      "TOTAL PROCESSING TIME: %.4f" \
+                      "TOTAL PROCESSING TIME: %.4f"
                       % (time.time() - startTime))
         debug.println(debug.eventDebugLevel,
                       "^^^^^ PROCESS %s %s ^^^^^\n" % (eType, data))
@@ -589,6 +591,7 @@ class EventManager(object):
             return False
 
 _manager = EventManager()
+
 
 def getManager():
     return _manager

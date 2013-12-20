@@ -20,25 +20,27 @@
 # Free Software Foundation, Inc., Franklin Street, Fifth Floor,
 # Boston MA  02110-1301 USA.
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs" \
                 "Copyright (c) 2011-2012 Igalia, S.L."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
 import orca.object_properties as object_properties
 import orca.braille_generator as braille_generator
 
-########################################################################
-#                                                                      #
+#
+#
 # Custom BrailleGenerator                                              #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class BrailleGenerator(braille_generator.BrailleGenerator):
+
     """Provides a braille generator specific to WebKitGtk."""
 
     def __init__(self, script):

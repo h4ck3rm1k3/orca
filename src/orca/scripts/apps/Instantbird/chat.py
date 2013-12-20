@@ -19,21 +19,22 @@
 
 """Custom chat module for Instantbird."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
 import orca.chat as chat
 
-########################################################################
-#                                                                      #
+#
+#
 # The Instantbird chat class.                                          #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Chat(chat.Chat):
 
@@ -46,11 +47,11 @@ class Chat(chat.Chat):
 
         chat.Chat.__init__(self, script, buddyListAncestries)
 
-    ########################################################################
-    #                                                                      #
+    #
+    #
     # InputEvent handlers and supporting utilities                         #
-    #                                                                      #
-    ########################################################################
+    #
+    #
 
     def getMessageFromEvent(self, event):
         """Get the actual displayed message. This will almost always be the
@@ -108,11 +109,11 @@ class Chat(chat.Chat):
 
         return string
 
-    ########################################################################
-    #                                                                      #
+    #
+    #
     # Convenience methods for identifying, locating different accessibles  #
-    #                                                                      #
-    ########################################################################
+    #
+    #
 
     def isChatRoomMsg(self, obj):
         """Returns True if the given accessible is the text object for

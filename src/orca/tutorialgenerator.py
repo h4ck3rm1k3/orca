@@ -23,11 +23,11 @@ class.  For those wishing to override the generators, however,
 one can create a new instance and replace/extend the tutorial generators
 as they see fit."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2008-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 from . import debug
@@ -35,7 +35,9 @@ from . import settings
 
 from .orca_i18n import _         # for gettext support
 
+
 class TutorialGenerator(object):
+
     """Takes accessible objects and produces a tutorial string to speak
     for those objects.  See the getTutorialString method, which is the
     primary entry point.  Subclasses can feel free to override/extend
@@ -88,15 +90,15 @@ class TutorialGenerator(object):
             self._getTutorialForCheckBox
         self.tutorialGenerators[pyatspi.ROLE_RADIO_BUTTON] = \
             self._getTutorialForRadioButton
-        self.tutorialGenerators[pyatspi.ROLE_MENU]                = \
+        self.tutorialGenerators[pyatspi.ROLE_MENU] = \
             self._getTutorialForMenu
-        self.tutorialGenerators[pyatspi.ROLE_CHECK_MENU_ITEM]     = \
+        self.tutorialGenerators[pyatspi.ROLE_CHECK_MENU_ITEM] = \
             self._getTutorialForCheckBox
-        self.tutorialGenerators[pyatspi.ROLE_MENU_ITEM]           = \
+        self.tutorialGenerators[pyatspi.ROLE_MENU_ITEM] = \
             self._getTutorialForMenuItem
-        self.tutorialGenerators[pyatspi.ROLE_RADIO_MENU_ITEM]     = \
+        self.tutorialGenerators[pyatspi.ROLE_RADIO_MENU_ITEM] = \
             self._getTutorialForCheckBox
-        self.tutorialGenerators[pyatspi.ROLE_SLIDER]              = \
+        self.tutorialGenerators[pyatspi.ROLE_SLIDER] = \
             self._getTutorialForSlider
 
     def _debugGenerator(self, generatorName, obj, alreadyFocused, utterances):
@@ -122,10 +124,10 @@ class TutorialGenerator(object):
                       "           utterances:")
         for text in utterances:
             debug.println(debug.LEVEL_FINER,
-                    "               (%s)" % text)
+                          "               (%s)" % text)
 
     def _getDefaultTutorial(
-        self, obj, alreadyFocused, forceTutorial, role=None):
+            self, obj, alreadyFocused, forceTutorial, role=None):
         """The default tutorial generator returns the empty tutorial string
         because We have no associated tutorial function for the object.
 
@@ -140,7 +142,6 @@ class TutorialGenerator(object):
         """
 
         return []
-
 
     def _getTutorialForCheckBox(self, obj, alreadyFocused, forceTutorial):
         """Get the  tutorial string for a check box.
@@ -182,7 +183,8 @@ class TutorialGenerator(object):
         utterances = []
         # Translators: this is a tip for the user on how to interact
         # with a combobox.
-        msg = _("Press space to expand, and use up and down to select an item.")
+        msg = _(
+            "Press space to expand, and use up and down to select an item.")
 
         if (not alreadyFocused and self.lastTutorial != [msg]) \
            or forceTutorial:
@@ -277,7 +279,7 @@ class TutorialGenerator(object):
 
         # Translators: this gives tips on how to navigate items in a
         # layered pane.
-        msg = _("To move to items, use either " \
+        msg = _("To move to items, use either "
                 "the arrow keys or type ahead searching.")
         utterances.append(msg)
 
@@ -294,7 +296,7 @@ class TutorialGenerator(object):
             utterances.append(desktopMsg)
 
         if (not alreadyFocused and self.lastTutorial != utterances) \
-            or forceTutorial:
+                or forceTutorial:
             pass
         else:
             utterances = []
@@ -357,7 +359,6 @@ class TutorialGenerator(object):
         # 'collapsed' means the children are not showing.
         # this string informs the user how to expand the node.
         collapsedMsg = _("To expand, press shift plus right.")
-
 
         # If already in focus then the tree probably collapsed or expanded
         state = obj.getState()
@@ -466,7 +467,8 @@ class TutorialGenerator(object):
         """
 
         utterances = []
-        # Translators: this is the tutorial string for activating a push button.
+        # Translators: this is the tutorial string for activating a push
+        # button.
         msg = _("To activate press space.")
 
         if (not alreadyFocused and self.lastTutorial != [msg]) \
@@ -495,8 +497,8 @@ class TutorialGenerator(object):
         utterances = []
         # Translators: this is the tutorial string for when landing
         # on a spin button.
-        msg = _("Use up or down arrow to select value." \
-              " Or type in the desired numerical value.")
+        msg = _("Use up or down arrow to select value."
+                " Or type in the desired numerical value.")
 
         if (not alreadyFocused and self.lastTutorial != [msg]) \
            or forceTutorial:
@@ -543,7 +545,7 @@ class TutorialGenerator(object):
         #
         if obj.childCount == 2:
             cellOrder = []
-            hasToggle = [ False, False ]
+            hasToggle = [False, False]
             for i, child in enumerate(obj):
                 try:
                     action = child.queryAction()
@@ -560,9 +562,9 @@ class TutorialGenerator(object):
                             break
 
             if hasToggle[0] and not hasToggle[1]:
-                cellOrder = [ 1, 0 ]
+                cellOrder = [1, 0]
             elif not hasToggle[0] and hasToggle[1]:
-                cellOrder = [ 0, 1 ]
+                cellOrder = [0, 1]
             if cellOrder:
                 for i in cellOrder:
                     # Don't speak the label if just the checkbox state has
@@ -571,9 +573,8 @@ class TutorialGenerator(object):
                     if alreadyFocused and not hasToggle[i]:
                         pass
                     else:
-                        utterances.extend( \
-                            self._getTutorialForTableCell(obj[i],
-                            alreadyFocused, forceTutorial))
+                        utterances.extend(self._getTutorialForTableCell(obj[i
+                            ], alreadyFocused, forceTutorial))
                 return utterances
 
         # [[[TODO: WDW - Attempt to infer the cell type.  There's a
@@ -588,8 +589,8 @@ class TutorialGenerator(object):
         if action:
             for i in range(0, action.nActions):
                 debug.println(debug.LEVEL_FINEST,
-                    "tutorialgenerator._getTutorialForTableCell" \
-                    + "looking at action %d" % i)
+                              "tutorialgenerator._getTutorialForTableCell"
+                              + "looking at action %d" % i)
 
                 # Translators: this is the action name for
                 # the 'toggle' action. It must be the same
@@ -597,7 +598,7 @@ class TutorialGenerator(object):
                 #
                 if action.getName(i) in ["toggle", _("toggle")]:
                     utterances = self._getTutorialForCheckBox(obj,
-                                  alreadyFocused, forceTutorial)
+                        alreadyFocused, forceTutorial)
                     break
 
         state = obj.getState()
@@ -635,7 +636,7 @@ class TutorialGenerator(object):
             except NotImplementedError:
                 parent_table = None
             if settings.readTableCellRow and parent_table \
-                and not self._script.utilities.isLayoutOnly(obj.parent):
+                    and not self._script.utilities.isLayoutOnly(obj.parent):
                 #parent = obj.parent
                 #index = self._script.utilities.cellIndex(obj)
                 #row = parent_table.getRowAtIndex(index)
@@ -647,21 +648,21 @@ class TutorialGenerator(object):
                 # the same row).
                 #
                 #speakAll = True
-                #if "lastRow" in self._script.pointOfReference and \
+                # if "lastRow" in self._script.pointOfReference and \
                 #    "lastColumn" in self._script.pointOfReference:
-                    #pointOfReference = self._script.pointOfReference
-                    #speakAll = (pointOfReference["lastRow"] != row) or \
-                    #    ((row == 0 or row == parent_table.nRows-1) and \
-                    #       pointOfReference["lastColumn"] == column)
+                #pointOfReference = self._script.pointOfReference
+                # speakAll = (pointOfReference["lastRow"] != row) or \
+                #    ((row == 0 or row == parent_table.nRows-1) and \
+                #       pointOfReference["lastColumn"] == column)
 
                 utterances.extend(self._getTutorialForTableCell(obj,
-                                        alreadyFocused, forceTutorial))
+                    alreadyFocused, forceTutorial))
             else:
                 utterances = self._getTutorialForTableCell(obj,
-                  alreadyFocused, forceTutorial)
+                    alreadyFocused, forceTutorial)
         else:
-            utterances = self._getTutorialForTableCell(obj, alreadyFocused, \
-              forceTutorial)
+            utterances = self._getTutorialForTableCell(obj, alreadyFocused,
+                                                       forceTutorial)
 
         self._debugGenerator("_getTutorialForTableCellRow",
                              obj,
@@ -682,7 +683,8 @@ class TutorialGenerator(object):
         """
 
         utterances = []
-        # Translators: this is a tip for the user, how to navigate radiobuttons.
+        # Translators: this is a tip for the user, how to navigate
+        # radiobuttons.
         msg = _("Use arrow keys to change.")
 
         if (not alreadyFocused and self.lastTutorial != [msg]) \
@@ -708,8 +710,8 @@ class TutorialGenerator(object):
 
         utterances = []
         # Translators: this is a tip for the user, how to navigate menues.
-        mainMenuMsg = _("To navigate, press left or right arrow. " \
-                       "To move through items press up or down arrow.")
+        mainMenuMsg = _("To navigate, press left or right arrow. "
+                        "To move through items press up or down arrow.")
 
         # Translators: this is a tip for the user, how to
         # navigate into sub menues.
@@ -745,8 +747,8 @@ class TutorialGenerator(object):
         utterances = []
         # Translators: this is the tutorial string for when landing
         # on a slider.
-        msg = _("To decrease press left arrow, to increase press right arrow." \
-          " To go to minimum press home, and for maximum press end.")
+        msg = _("To decrease press left arrow, to increase press right arrow."
+                " To go to minimum press home, and for maximum press end.")
 
         if (not alreadyFocused and self.lastTutorial != [msg]) \
            or forceTutorial:

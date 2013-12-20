@@ -17,11 +17,11 @@
 # Free Software Foundation, Inc., Franklin Street, Fifth Floor,
 # Boston MA  02110-1301 USA.
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2004-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 
 # If True, it tells Orca to automatically perform a SayAll operation

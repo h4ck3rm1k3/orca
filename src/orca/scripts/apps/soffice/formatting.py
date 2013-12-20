@@ -20,10 +20,10 @@
 """Custom formatting for OpenOffice and StarOffice."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 # pylint: disable-msg=C0301
 
@@ -43,43 +43,43 @@ formatting = {
             'focused': '[]',
             'unfocused': 'newNodeLevel + ' + orca.formatting.TUTORIAL,
             'basicWhereAmI': orca.formatting.TUTORIAL + ' + description',
-            'detailedWhereAmI' : '[]'
-            },
+            'detailedWhereAmI': '[]'
+        },
         pyatspi.ROLE_COMBO_BOX: {
             'focused': 'name + positionInList + availability',
             'unfocused': 'labelAndName + roleName + positionInList + availability'
-            },
+        },
         pyatspi.ROLE_LABEL: {
             'focused': 'expandableState + availability',
             'unfocused': 'name + allTextSelection + expandableState + availability + positionInList',
             'basicWhereAmI': 'roleName + name + positionInList + expandableState + (nodeLevel or nestingLevel)'
-            },
+        },
         pyatspi.ROLE_PUSH_BUTTON: {
             'unfocused': 'labelAndName + roleName + toggleState + availability',
             'focused': 'labelAndName + toggleState'
-            },
+        },
         pyatspi.ROLE_TOGGLE_BUTTON: {
             'unfocused': 'labelAndName + toggleState',
             'focused': 'labelAndName + toggleState'
-            },
+        },
         pyatspi.ROLE_TABLE_CELL: {
             'focused': '(tableCell2ChildLabel + tableCell2ChildToggle) or cellCheckedState + (expandableState and (expandableState + numberOfChildren))',
             'unfocused': 'endOfTableIndicator + tableCellRow',
             'basicWhereAmI': 'parentRoleName + columnHeader + rowHeader + roleName + cellCheckedState + (realActiveDescendantDisplayedText or imageDescription + image) + columnAndRow + expandableState + nodeLevel',
             'detailedWhereAmI': 'parentRoleName + columnHeader + rowHeader + roleName + cellCheckedState + (realActiveDescendantDisplayedText or imageDescription + image) + columnAndRow + tableCellRow + expandableState + nodeLevel'
-            },
+        },
         'ROLE_SPREADSHEET_CELL': {
             # We treat spreadsheet cells differently from other table cells in
             # whereAmI.
             #
             'basicWhereAmI': 'roleName + column + columnHeader + row + rowHeader + (textContent or spreadSheetCell) + anyTextSelection'
-            },
+        },
     },
     'braille': {
         pyatspi.ROLE_LABEL: {
             'unfocused': '[Text(obj,asString((label or name)))]',
             'focused': '[Text(obj,asString((label or name)))]'
-            },
+        },
         pyatspi.ROLE_LIST: {
             'unfocused': '[Component(obj,\
                                      asString(labelOrName + roleName + required))]'
@@ -104,7 +104,9 @@ if orca.settings.useExperimentalSpeechProsody:
     formatting['speech'][pyatspi.ROLE_TABLE_CELL]['detailedWhereAmI'] = \
         'parentRoleName + pause + columnHeader + pause + rowHeader + pause + roleName + pause + cellCheckedState + pause + (realActiveDescendantDisplayedText or imageDescription + image) + pause + columnAndRow + pause + tableCellRow + pause + expandableState + pause + nodeLevel + pause'
 
+
 class Formatting(orca.formatting.Formatting):
+
     def __init__(self, script):
         orca.formatting.Formatting.__init__(self, script)
         self.update(copy.deepcopy(formatting))

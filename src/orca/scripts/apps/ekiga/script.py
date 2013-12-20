@@ -19,21 +19,22 @@
 
 """Custom script for Ekiga."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
 import orca.scripts.default as default
 
-########################################################################
-#                                                                      #
+#
+#
 # The Ekiga script class.                                              #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(default.Script):
 
@@ -89,7 +90,7 @@ class Script(default.Script):
         """
 
         if event.source.getRole() == pyatspi.ROLE_SPLIT_PANE:
-            #textObjects =
+            # textObjects =
             # duplicate code
             self.utilities.descendantsWithRole(
                 event.source, pyatspi.ROLE_TEXT)

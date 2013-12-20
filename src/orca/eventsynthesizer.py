@@ -19,14 +19,15 @@
 
 """Provides support for synthesizing keyboard and mouse events."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 from . import debug
+
 
 def generateMouseEvent(x, y, eventName):
     """Synthesize a mouse event at a specific screen coordinate.
@@ -44,10 +45,11 @@ def generateMouseEvent(x, y, eventName):
     """
 
     debug.println(debug.LEVEL_FINER,
-                  "SYNTHESIZING MOUSE EVENT: (%d, %d) %s"\
+                  "SYNTHESIZING MOUSE EVENT: (%d, %d) %s"
                   % (x, y, eventName))
 
     pyatspi.Registry.generateMouseEvent(x, y, eventName)
+
 
 def routeToCharacter(obj):
     """Moves the mouse pointer to the given character
@@ -67,6 +69,7 @@ def routeToCharacter(obj):
     y = extents[1] + extents[3] / 2
     routeToPoint(x, y, "abs")
 
+
 def routeToObject(obj):
     """Moves the mouse pointer to the given Accessible.
 
@@ -78,6 +81,7 @@ def routeToObject(obj):
     y = extents.y + extents.height / 2
     routeToPoint(x, y, "abs")
 
+
 def routeToPoint(x, y, eventName="abs"):
     """Moves the mouse pointer to the given point.
 
@@ -86,6 +90,7 @@ def routeToPoint(x, y, eventName="abs"):
     - eventName: absolute("abs") or relative("rel")
     """
     generateMouseEvent(x, y, eventName)
+
 
 def clickCharacter(obj, button):
     """Performs a button click on the current character
@@ -106,6 +111,7 @@ def clickCharacter(obj, button):
     y = extents[1] + extents[3] / 2
     generateMouseEvent(x, y, "b%dc" % button)
 
+
 def clickObject(obj, button):
     """Performs a button click on the given Accessible.
 
@@ -114,9 +120,10 @@ def clickObject(obj, button):
     - button: an integer representing the mouse button number
     """
     extents = obj.queryComponent().getExtents(pyatspi.DESKTOP_COORDS)
-    x = extents.x + extents.width/2
-    y = extents.y + extents.height/2
+    x = extents.x + extents.width / 2
+    y = extents.y + extents.height / 2
     generateMouseEvent(x, y, "b%dc" % button)
+
 
 def clickPoint(x, y, button):
     """Performs a button click on the given point.
@@ -128,6 +135,7 @@ def clickPoint(x, y, button):
     """
 
     generateMouseEvent(x, y, "b%dc" % button)
+
 
 def generateKeyboardEvent(keycode, keystring, eventType):
     """Generates a keyboard event.

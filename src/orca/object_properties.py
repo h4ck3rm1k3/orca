@@ -22,12 +22,12 @@
 so that we can present them in the correct language when users change the
 language on the fly without having to reload a bunch of modules."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2004-2009 Sun Microsystems Inc." \
                 "Copyright (c) 2010-2013 The Orca Team"
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from .orca_i18n import _, C_
 
@@ -92,7 +92,7 @@ STATE_HORIZONTAL = _("horizontal")
 
 # Translators: This is a state which applies to the orientation of widgets
 # such as sliders and scroll bars.
-STATE_VERTICAL =  _("vertical")
+STATE_VERTICAL = _("vertical")
 
 # Translators: This is a state which applies to a check box.
 STATE_CHECKED = C_("checkbox", "checked")
@@ -144,7 +144,7 @@ STATE_READ_ONLY_SPEECH = C_("text", "read only")
 # It is assumed that form fields will be editable; if they lack this state,
 # we need to present that information to the user. This string is the braille
 # version. (Because braille displays have limited real estate, we abbreviate.)
-STATE_READ_ONLY_BRAILLE =  C_("text", "rdonly")
+STATE_READ_ONLY_BRAILLE = C_("text", "rdonly")
 
 # Translators: Certain objects (such as form controls on web pages) can have
 # STATE_REQUIRED set to inform the user that this field must be filled out.
@@ -158,10 +158,7 @@ STATE_REQUIRED_BRAILLE = _("required")
 # one item can be selected at a time.
 STATE_MULTISELECT_SPEECH = _("multi-select")
 
-
-
 # TODO: Look at why we're doing this as lists.
-
 CHECK_BOX_INDICATORS_SPEECH = \
     [STATE_NOT_CHECKED, STATE_CHECKED, STATE_PARTIALLY_CHECKED]
 EXPANSION_INDICATORS_SPEECH = \
@@ -171,7 +168,7 @@ RADIO_BUTTON_INDICATORS_SPEECH = \
 TOGGLE_BUTTON_INDICATORS_SPEECH = \
     [STATE_NOT_PRESSED, STATE_PRESSED]
 
-CHECK_BOX_INDICATORS_BRAILLE     = ["< >", "<x>", "<->"]
-EXPANSION_INDICATORS_BRAILLE     = [STATE_COLLAPSED, STATE_EXPANDED]
-RADIO_BUTTON_INDICATORS_BRAILLE  = ["& y", "&=y"]
+CHECK_BOX_INDICATORS_BRAILLE = ["< >", "<x>", "<->"]
+EXPANSION_INDICATORS_BRAILLE = [STATE_COLLAPSED, STATE_EXPANDED]
+RADIO_BUTTON_INDICATORS_BRAILLE = ["& y", "&=y"]
 TOGGLE_BUTTON_INDICATORS_BRAILLE = ["& y", "&=y"]

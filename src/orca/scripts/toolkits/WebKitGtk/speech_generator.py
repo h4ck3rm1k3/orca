@@ -20,12 +20,12 @@
 # Free Software Foundation, Inc., Franklin Street, Fifth Floor,
 # Boston MA  02110-1301 USA.
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs" \
                 "Copyright (c) 2011-2012 Igalia, S.L."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -37,13 +37,15 @@ import orca.speech_generator as speech_generator
 
 _settingsManager = settings_manager.getManager()
 
-########################################################################
-#                                                                      #
+#
+#
 # Custom SpeechGenerator                                               #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class SpeechGenerator(speech_generator.SpeechGenerator):
+
     """Provides a speech generator specific to WebKitGtk widgets."""
 
     def __init__(self, script):
@@ -85,8 +87,8 @@ class SpeechGenerator(speech_generator.SpeechGenerator):
         level = self._script.utilities.headingLevel(obj)
         if level:
             result.append(object_properties.ROLE_HEADING_LEVEL_SPEECH % {
-                    'role': self.getLocalizedRoleName(obj, role),
-                    'level': level})
+                'role': self.getLocalizedRoleName(obj, role),
+                'level': level})
         else:
             result.append(self.getLocalizedRoleName(obj, role))
 
@@ -166,7 +168,7 @@ class SpeechGenerator(speech_generator.SpeechGenerator):
         if _settingsManager.getSetting('onlySpeakDisplayedText'):
             return []
 
-        if not (_settingsManager.getSetting('enableMnemonicSpeaking') \
+        if not (_settingsManager.getSetting('enableMnemonicSpeaking')
                 or args.get('forceMnemonic', False)):
             return []
 

@@ -20,11 +20,11 @@
 """Provides support for defining keybindings and matching them to input
 events."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from gi.repository import Gdk
 
@@ -38,6 +38,7 @@ from .orca_i18n import _
 
 _keysymsCache = {}
 _keycodeCache = {}
+
 
 def getKeycode(keysym):
     """Converts an XKeysym string (e.g., 'KP_Enter') to a keycode that
@@ -91,10 +92,10 @@ def getKeycode(keysym):
                 break
             if _keycodeCache[keysym] == 0:
                 _keycodeCache[keysym] = entries[0].keycode
-
-        #print keysym, keyval, entries, _keycodeCache[keysym]
+        # print keysym, keyval, entries, _keycodeCache[keysym]
 
     return _keycodeCache[keysym]
+
 
 def getModifierNames(mods):
     """Gets the modifier names of a numeric modifier mask as a human
@@ -116,7 +117,7 @@ def getModifierNames(mods):
         # "caps lock" modifier.
         #
         text += _("Caps_Lock") + "+"
-    #if mods & (1 << pyatspi.MODIFIER_NUMLOCK):
+    # if mods & (1 << pyatspi.MODIFIER_NUMLOCK):
     #    text += _("Num_Lock") + "+"
     if mods & 128:
         # Translators: this is presented in a GUI to represent the
@@ -133,7 +134,7 @@ def getModifierNames(mods):
         # "meta 2" modifier.
         #
         text += _("Meta2") + "+"
-    #if mods & (1 << pyatspi.MODIFIER_META):
+    # if mods & (1 << pyatspi.MODIFIER_META):
     #    text += _("Meta") + "+"
     if mods & settings.ALT_MODIFIER_MASK:
         # Translators: this is presented in a GUI to represent the
@@ -151,6 +152,7 @@ def getModifierNames(mods):
         #
         text += _("Shift") + "+"
     return text
+
 
 def getClickCountString(count):
     """Returns a human-consumable string representing the number of
@@ -170,13 +172,15 @@ def getClickCountString(count):
         return _("triple click")
     return ""
 
+
 class KeyBinding(object):
+
     """A single key binding, consisting of a keycode, a modifier mask,
     and the InputEventHandler.
     """
 
     def __init__(self, keysymstring, modifier_mask, modifiers, handler,
-                 click_count = 1):
+                 click_count=1):
         """Creates a new key binding.
 
         Arguments:
@@ -234,7 +238,9 @@ class KeyBinding(object):
 
         return string.strip()
 
+
 class KeyBindings:
+
     """Structure that maintains a set of KeyBinding instances.
     """
 
@@ -252,7 +258,7 @@ class KeyBindings:
                        keyBinding.handler.description)
         result += "]"
         return result
-    
+
     def add(self, keyBinding):
         """Adds the given KeyBinding instance to this set of keybindings.
         """
@@ -276,7 +282,7 @@ class KeyBindings:
                 del self.keyBindings[i - 1]
             i = i - 1
 
-    def hasKeyBinding (self, newKeyBinding, typeOfSearch="strict"):
+    def hasKeyBinding(self, newKeyBinding, typeOfSearch="strict"):
         """Return True if keyBinding is already in self.keyBindings.
 
            The typeOfSearch can be:
@@ -292,37 +298,37 @@ class KeyBindings:
 
         for keyBinding in self.keyBindings:
             if typeOfSearch == "strict":
-                if (keyBinding.handler.description \
+                if (keyBinding.handler.description
                     == newKeyBinding.handler.description) \
-                    and (keyBinding.keysymstring \
+                    and (keyBinding.keysymstring
                          == newKeyBinding.keysymstring) \
-                    and (keyBinding.modifier_mask \
+                    and (keyBinding.modifier_mask
                          == newKeyBinding.modifier_mask) \
-                    and (keyBinding.modifiers \
+                    and (keyBinding.modifiers
                          == newKeyBinding.modifiers) \
-                    and (keyBinding.click_count \
+                    and (keyBinding.click_count
                          == newKeyBinding.click_count):
                     hasIt = True
             elif typeOfSearch == "description":
                 if keyBinding.handler.description \
-                    == newKeyBinding.handler.description:
+                        == newKeyBinding.handler.description:
                     hasIt = True
             elif typeOfSearch == "keys":
-                if (keyBinding.keysymstring \
+                if (keyBinding.keysymstring
                     == newKeyBinding.keysymstring) \
-                    and (keyBinding.modifier_mask \
+                    and (keyBinding.modifier_mask
                          == newKeyBinding.modifier_mask) \
-                    and (keyBinding.modifiers \
+                    and (keyBinding.modifiers
                          == newKeyBinding.modifiers) \
-                    and (keyBinding.click_count \
+                    and (keyBinding.click_count
                          == newKeyBinding.click_count):
                     hasIt = True
             elif typeOfSearch == "keysNoMask":
-                if (keyBinding.keysymstring \
+                if (keyBinding.keysymstring
                     == newKeyBinding.keysymstring) \
-                    and (keyBinding.modifiers \
+                    and (keyBinding.modifiers
                          == newKeyBinding.modifiers) \
-                    and (keyBinding.click_count \
+                    and (keyBinding.click_count
                          == newKeyBinding.click_count):
                     hasIt = True
 
@@ -368,7 +374,7 @@ class KeyBindings:
                     candidates.append(keyBinding)
 
         if keyboardEvent.modifiers & (1 << pyatspi.MODIFIER_NUMLOCK) \
-            and keyboardEvent.keyval_name.startswith("KP"):
+                and keyboardEvent.keyval_name.startswith("KP"):
             return None
 
         # If we're still here, we don't have an exact match. Prefer
@@ -409,7 +415,6 @@ class KeyBindings:
            keybindings, any remaining functions will be unbound.
         """
 
-
         for i in keymap:
             keysymstring = i[0]
             modifierMask = i[1]
@@ -422,10 +427,10 @@ class KeyBindings:
 
             if handler in handlers:
                 # add the keybinding
-                self.add(KeyBinding( \
-                  keysymstring, modifierMask, modifiers, \
+                self.add(KeyBinding(
+                    keysymstring, modifierMask, modifiers,
                     handlers[handler], clickCount))
             else:
-                debug.println(debug.LEVEL_WARNING, \
-                  "WARNING: could not find %s handler to associate " \
-                  "with keybinding." % handler)
+                debug.println(debug.LEVEL_WARNING,
+                              "WARNING: could not find %s handler to associate "
+                              "with keybinding." % handler)

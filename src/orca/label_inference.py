@@ -21,15 +21,16 @@
 
 """Heuristic means to infer the functional/displayed label of a widget."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (C) 2011-2013 Igalia, S.L."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
 from . import debug
+
 
 class LabelInference(object):
 
@@ -290,7 +291,7 @@ class LabelInference(object):
         if not index > 0:
             return obj.parent
 
-        prevObj = obj.parent[index-1]
+        prevObj = obj.parent[index - 1]
         if prevObj and prevObj.childCount:
             prevObj = prevObj[prevObj.childCount - 1]
 
@@ -319,7 +320,7 @@ class LabelInference(object):
         onLeft = contents[0:index]
         for i in range(len(onLeft) - 1, -1, -1):
             if self._isWidget(onLeft[i][0]):
-                onLeft = onLeft[(i+1):]
+                onLeft = onLeft[(i + 1):]
                 break
 
         if not (onLeft and onLeft[0]):
@@ -361,7 +362,7 @@ class LabelInference(object):
         except IndexError:
             index = len(contents)
 
-        onRight = contents[min(len(contents), index+1):]
+        onRight = contents[min(len(contents), index + 1):]
         for i, item in enumerate(onRight):
             if self._isWidget(item[0]):
                 if not self._preferRight(obj):
@@ -545,8 +546,10 @@ class LabelInference(object):
 
         if labelAbove and labelBelow:
             objX, objY, objWidth, objHeight = self._getExtents(obj)
-            aboveX, aboveY, aboveWidth, aboveHeight = self._getExtents(cellAbove)
-            belowX, belowY, belowWidth, belowHeight = self._getExtents(cellBelow)
+            aboveX, aboveY, aboveWidth, aboveHeight = self._getExtents(
+                cellAbove)
+            belowX, belowY, belowWidth, belowHeight = self._getExtents(
+                cellBelow)
             dAbove = objY - (aboveY + aboveHeight)
             dBelow = belowY - (objY + objHeight)
             if dAbove <= dBelow:
@@ -558,16 +561,17 @@ class LabelInference(object):
         if labelBelow:
             return labelBelow
 
-        # None of the cells immediately surrounding this cell seem to be serving
-        # as a functional label. Therefore, see if this table looks like a grid
-        # of widgets with the functional labels in the first row.
+        # None of the cells immediately surrounding this cell seem to be
+        # serving as a functional label. Therefore, see if this table looks
+        # like a grid of widgets with the functional labels in the first row.
         firstRow = [table.getAccessibleAt(0, i) for i in range(table.nColumns)]
         if not firstRow or list(filter(self._isWidget, firstRow)):
             return None
 
         cells = [table.getAccessibleAt(i, col) for i in range(1, table.nRows)]
         cells = [x for x in cells if x != None]
-        if [x for x in cells if x.childCount and x[0].getRole() != obj.getRole()]:
+        if [x for x in cells if x.childCount and x[0].getRole() != obj.getRole
+            ()]:
             return None
 
         label = self._createLabelFromContents(firstRow[col])

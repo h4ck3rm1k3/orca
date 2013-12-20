@@ -20,10 +20,10 @@
 """Custom structural navigation for the StarOffice/OpenOffice."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -32,11 +32,12 @@ import orca.structural_navigation as structural_navigation
 import orca.settings as settings
 import orca.speech as speech
 
-########################################################################
-#                                                                      #
+#
+#
 # Custom Structural Navigation                                         #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class StructuralNavigation(structural_navigation.StructuralNavigation):
 
@@ -64,7 +65,7 @@ class StructuralNavigation(structural_navigation.StructuralNavigation):
         # Check for dynamic row and column headers.
         #
         try:
-            #table = 
+            # table =
             obj.parent.queryTable()
         except:
             return False
@@ -78,7 +79,7 @@ class StructuralNavigation(structural_navigation.StructuralNavigation):
             return False
 
         [row, col] = self.getCellCoordinates(obj)
-        return (row == self._script.dynamicColumnHeaders.get(parent) \
+        return (row == self._script.dynamicColumnHeaders.get(parent)
                 or col == self._script.dynamicRowHeaders.get(parent))
 
     def _tableCellPresentation(self, cell, arg):
@@ -116,8 +117,8 @@ class StructuralNavigation(structural_navigation.StructuralNavigation):
 
         if settings.speakCellCoordinates:
             [row, col] = self.getCellCoordinates(cell)
-            self._script.presentMessage(messages.TABLE_CELL_COORDINATES \
-                                       % {"row" : row + 1, "column" : col + 1})
+            self._script.presentMessage(messages.TABLE_CELL_COORDINATES
+                                        % {"row": row + 1, "column": col + 1})
 
         spanString = self._getCellSpanInfo(cell)
         if spanString and settings.speakCellSpan:

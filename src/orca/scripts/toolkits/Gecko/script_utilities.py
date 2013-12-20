@@ -23,10 +23,10 @@
    gotten way too large as a result of including these methods."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 import re
@@ -35,11 +35,12 @@ import orca.debug as debug
 import orca.orca_state as orca_state
 import orca.script_utilities as script_utilities
 
-#############################################################################
-#                                                                           #
+#
+#
 # Utilities                                                                 #
-#                                                                           #
-#############################################################################
+#
+#
+
 
 class Utilities(script_utilities.Utilities):
 
@@ -52,11 +53,11 @@ class Utilities(script_utilities.Utilities):
 
         script_utilities.Utilities.__init__(self, script)
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Utilities for finding, identifying, and comparing accessibles         #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def cellIndex(self, obj):
         """Returns the index of the cell which should be used with the
@@ -66,12 +67,12 @@ class Utilities(script_utilities.Utilities):
         that have attributes."""
 
         index = -1
-        #parent =
+        # parent =
         self.ancestorWithRole(obj,
-                                       [pyatspi.ROLE_TABLE,
-                                        pyatspi.ROLE_TREE_TABLE,
-                                        pyatspi.ROLE_TREE],
-                                       [pyatspi.ROLE_DOCUMENT_FRAME])
+                              [pyatspi.ROLE_TABLE,
+                               pyatspi.ROLE_TREE_TABLE,
+                               pyatspi.ROLE_TREE],
+                              [pyatspi.ROLE_DOCUMENT_FRAME])
 
         attrs = dict([attr.split(':', 1) for attr in obj.getAttributes()])
         index = attrs.get('table-cell-index')
@@ -95,7 +96,7 @@ class Utilities(script_utilities.Utilities):
 
         displayedText = script_utilities.Utilities.displayedText(self, obj)
         if displayedText \
-           and not (obj.getState().contains(pyatspi.STATE_EDITABLE) \
+           and not (obj.getState().contains(pyatspi.STATE_EDITABLE)
                     or obj.getRole() in [pyatspi.ROLE_ENTRY,
                                          pyatspi.ROLE_PASSWORD_TEXT]):
             displayedText = displayedText.strip()
@@ -175,10 +176,10 @@ class Utilities(script_utilities.Utilities):
                 relationSet = child.getRelationSet()
                 for relation in relationSet:
                     if relation.getRelationType()  \
-                        == pyatspi.RELATION_EMBEDS:
+                            == pyatspi.RELATION_EMBEDS:
                         documentFrame = relation.getTarget(0)
                         if documentFrame.getState().contains(
-                            pyatspi.STATE_SHOWING):
+                                pyatspi.STATE_SHOWING):
                             break
                         else:
                             documentFrame = None
@@ -270,10 +271,10 @@ class Utilities(script_utilities.Utilities):
 
         state = obj.getState()
         readOnly = state.contains(pyatspi.STATE_FOCUSABLE) \
-                   and not state.contains(pyatspi.STATE_EDITABLE)
+            and not state.contains(pyatspi.STATE_EDITABLE)
         details = debug.getAccessibleDetails(debug.LEVEL_ALL, obj)
         debug.println(debug.LEVEL_ALL,
-                      "Gecko - isReadOnlyTextArea=%s for %s" \
+                      "Gecko - isReadOnlyTextArea=%s for %s"
                       % (readOnly, details))
 
         return readOnly
@@ -296,7 +297,7 @@ class Utilities(script_utilities.Utilities):
                 # Yelp (or perhaps the work-in-progress a11y patch)
                 # seems to be guilty of this.
                 #
-                #print "nodeLevel - obj is defunct", obj
+                # print "nodeLevel - obj is defunct", obj
                 debug.println(debug.LEVEL_WARNING,
                               "nodeLevel - obj is defunct")
                 debug.printStack(debug.LEVEL_WARNING)
@@ -433,11 +434,11 @@ class Utilities(script_utilities.Utilities):
             except:
                 return None
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Utilities for working with the accessible text interface              #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def isWordMisspelled(self, obj, offset):
         """Identifies if the current word is flagged as misspelled by the
@@ -451,7 +452,7 @@ class Utilities(script_utilities.Utilities):
         Returns True if the word is flagged as misspelled.
         """
 
-        attributes, start, end  = self.textAttributes(obj, offset, True)
+        attributes, start, end = self.textAttributes(obj, offset, True)
         error = attributes.get("invalid")
 
         return error == "spelling"
@@ -485,15 +486,15 @@ class Utilities(script_utilities.Utilities):
 
         attrs = script_utilities.Utilities.textAttributes(
             self, acc, offset, get_defaults)
-        self._script.currentAttrs[hash(acc)] = {offset:attrs}
+        self._script.currentAttrs[hash(acc)] = {offset: attrs}
 
         return attrs
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Miscellaneous Utilities                                               #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def getObjectsFromEOCs(self, obj, offset=None, boundary=None):
         """Expands the current object replacing EMBEDDED_OBJECT_CHARACTERS

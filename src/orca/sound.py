@@ -19,22 +19,25 @@
 
 """Provides support for playing audio files."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 if False:
     # Don't require this until we actually use gst directly instead
     # of doing an os.system call.
-    # 
+    #
     import pygst
     pygst.require("0.10")
     import gst
 
+
 class Sound(object):
+
     """Class to hold a path to a sound file to play."""
+
     def __init__(self, path):
         self._path = path
 
@@ -48,8 +51,8 @@ class Sound(object):
         elif True:
             import os
             os.system(
-                'gst-launch filesrc location="%s" ! wavparse '\
-                '! autoaudiosink > /dev/null 2>&1 &'\
+                'gst-launch filesrc location="%s" ! wavparse '
+                '! autoaudiosink > /dev/null 2>&1 &'
                 % self._path)
         else:
             # WDW - This has issues with linking up the pipeline. It

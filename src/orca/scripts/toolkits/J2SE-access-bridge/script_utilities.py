@@ -23,20 +23,21 @@
    gotten way too large as a result of including these methods."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
 import orca.script_utilities as script_utilities
 
-#############################################################################
-#                                                                           #
+#
+#
 # Utilities                                                                 #
-#                                                                           #
-#############################################################################
+#
+#
+
 
 class Utilities(script_utilities.Utilities):
 
@@ -49,11 +50,11 @@ class Utilities(script_utilities.Utilities):
 
         script_utilities.Utilities.__init__(self, script)
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Utilities for finding, identifying, and comparing accessibles         #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def isSameObject(self, obj1, obj2):
         """Compares two objects to determine if they are functionally
@@ -154,16 +155,16 @@ class Utilities(script_utilities.Utilities):
 
         return None
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Utilities for working with the accessible text interface              #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
 
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Miscellaneous Utilities                                               #
-    #                                                                       #
-    #########################################################################
+    #
+    #

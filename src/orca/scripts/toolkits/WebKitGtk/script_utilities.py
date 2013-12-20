@@ -21,11 +21,11 @@
 # Boston MA  02110-1301 USA.
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs." \
                 "Copyright (c) 2011-2012 Igalia, S.L."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 import re
@@ -33,11 +33,12 @@ import re
 import orca.script_utilities as script_utilities
 import orca.settings as settings
 
-#############################################################################
-#                                                                           #
+#
+#
 # Utilities                                                                 #
-#                                                                           #
-#############################################################################
+#
+#
+
 
 class Utilities(script_utilities.Utilities):
 
@@ -87,7 +88,7 @@ class Utilities(script_utilities.Utilities):
 
         state = obj.getState()
         readOnly = state.contains(pyatspi.STATE_FOCUSABLE) \
-                   and not state.contains(pyatspi.STATE_EDITABLE)
+            and not state.contains(pyatspi.STATE_EDITABLE)
 
         return readOnly
 

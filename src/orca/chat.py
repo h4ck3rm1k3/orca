@@ -20,10 +20,10 @@
 """Implements generic chat support."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010-2011 The Orca Team"
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -39,16 +39,17 @@ from . import speech
 
 _settingsManager = settings_manager.getManager()
 
-#############################################################################
-#                                                                           #
+#
+#
 # Ring List. A fixed size circular list by Flavio Catalani                  #
 # http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/435902            #
-#                                                                           #
+#
 # Included here to keep track of conversation histories.                    #
-#                                                                           #
-#############################################################################
+#
+#
 
 class RingList(object):
+
     def __init__(self, length):
         self.__data__ = []
         self.__full__ = 0
@@ -57,7 +58,7 @@ class RingList(object):
 
     def append(self, x):
         if self.__full__ == 1:
-            for i in range (0, self.__cur__ - 1):
+            for i in range(0, self.__cur__ - 1):
                 self.__data__[i] = self.__data__[i + 1]
             self.__data__[self.__cur__ - 1] = x
         else:
@@ -83,11 +84,11 @@ class RingList(object):
     def __str__(self):
         return ''.join(self.__data__)
 
-#############################################################################
-#                                                                           #
+#
+#
 # Conversation                                                              #
-#                                                                           #
-#############################################################################
+#
+#
 
 class Conversation(object):
 
@@ -96,7 +97,6 @@ class Conversation(object):
     MESSAGE_LIST_LENGTH = 9
 
     def __init__(self, name, accHistory, inputArea=None):
-
         """Creates a new instance of the Conversation class.
 
         Arguments:
@@ -160,16 +160,15 @@ class Conversation(object):
 
         self._typingStatus = status
 
-#############################################################################
-#                                                                           #
+#
+#
 # ConversationList                                                          #
-#                                                                           #
-#############################################################################
+#
+#
 
 class ConversationList(object):
 
     def __init__(self, messageListLength):
-
         """Creates a new instance of the ConversationList class.
 
         Arguments:
@@ -273,13 +272,14 @@ class ConversationList(object):
         else:
             return True
 
-#############################################################################
-#                                                                           #
+#
+#
 # Chat                                                                      #
-#                                                                           #
-#############################################################################
+#
+#
 
 class Chat:
+
     """This class implements the chat functionality which is available to
     scripts.
     """
@@ -499,14 +499,13 @@ class Chat:
         if value and option:
             _settingsManager.setSetting('chatMessageVerbosity', value)
             prefs.writelines("\n")
-            prefs.writelines("%s.chatMessageVerbosity = %s\n" % \
+            prefs.writelines("%s.chatMessageVerbosity = %s\n" %
                             (prefix, option))
-
-    ########################################################################
-    #                                                                      #
+    #
+    #
     # InputEvent handlers and supporting utilities                         #
-    #                                                                      #
-    ########################################################################
+    #
+    #
 
     def togglePrefix(self, script, inputEvent):
         """ Toggle whether we prefix chat room messages with the name of
@@ -743,12 +742,11 @@ class Chat:
 
         conversation.addMessage(message)
         self._conversationList.addMessage(message, conversation)
-
-    ########################################################################
-    #                                                                      #
+    #
+    #
     # Convenience methods for identifying, locating different accessibles  #
-    #                                                                      #
-    ########################################################################
+    #
+    #
 
     def isGenericTextObject(self, obj):
         """Returns True if the given accessible seems to be something
@@ -923,7 +921,7 @@ class Chat:
                 if text.lower().strip() != self._script.name.lower().strip():
                     name = text
             except:
-                pass     
+                pass
 
         return name
 

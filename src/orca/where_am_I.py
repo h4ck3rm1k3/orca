@@ -19,11 +19,11 @@
 
 """Speaks information about the current object of interest."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 from . import debug
@@ -50,7 +50,7 @@ class WhereAmI(object):
         # [[[TODO: WDW - we purposely omit ROLE_ENTRY here because
         # there is a bug in realActiveDescendant: it doesn't dive
         # deep enough into the hierarchy (see comment #12 of bug
-        # #542714).  So, we won't treat entries inside cells as cells
+        # 542714).  So, we won't treat entries inside cells as cells
         # until we're more comfortable with mucking around with
         # realActiveDescendant.]]]
         #
@@ -99,9 +99,9 @@ class WhereAmI(object):
         else:
             formatType = 'detailedWhereAmI'
         return self._script.speechGenerator.generateSpeech(
-                   self._adjustObject(obj),
-                   alreadyFocused=True,
-                   formatType=formatType,
-                   forceMnemonic=True,
-                   forceList=True,
-                   forceTutorial=True)
+            self._adjustObject(obj),
+            alreadyFocused=True,
+            formatType=formatType,
+            forceMnemonic=True,
+            forceList=True,
+            forceTutorial=True)

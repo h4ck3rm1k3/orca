@@ -20,4 +20,3 @@
 """Custom script for Ekiga."""
 
 from .script import Script
-

@@ -24,11 +24,11 @@ implementation in Gecko:
 http://developer.mozilla.org/en/docs/Accessibility/ATSPI_Support
 """
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Orca Team."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -39,13 +39,15 @@ import orca.speech_generator as speech_generator
 
 _settingsManager = settings_manager.getManager()
 
-########################################################################
-#                                                                      #
+#
+#
 # Custom SpeechGenerator                                               #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class SpeechGenerator(speech_generator.SpeechGenerator):
+
     """Provides a speech generator specific to Gecko.
     """
 
@@ -95,7 +97,7 @@ class SpeechGenerator(speech_generator.SpeechGenerator):
 
         else:
             result.extend(speech_generator.SpeechGenerator._generateName(
-                              self, obj, **args))
+                self, obj, **args))
         if not result and role == pyatspi.ROLE_LIST_ITEM:
             result.append(self._script.utilities.expandEOCs(obj))
 
@@ -129,7 +131,7 @@ class SpeechGenerator(speech_generator.SpeechGenerator):
             result.append(messages.IMAGE_MAP_LINK)
         else:
             result = speech_generator.SpeechGenerator.\
-                           _generateDescription(self, obj, **args)
+                _generateDescription(self, obj, **args)
         return result
 
     def _generateLabel(self, obj, **args):
@@ -368,7 +370,7 @@ class SpeechGenerator(speech_generator.SpeechGenerator):
             if parentText:
                 unicodeText = parentText.getText(0, -1)
                 if self._script.EMBEDDED_OBJECT_CHARACTER in unicodeText \
-                   and (len(unicodeText) == 1 \
+                   and (len(unicodeText) == 1
                         or role == pyatspi.ROLE_TABLE_CELL):
                     parent = parent.parent
                     continue
@@ -380,7 +382,7 @@ class SpeechGenerator(speech_generator.SpeechGenerator):
             newResult = []
             acss = self.voice(speech_generator.DEFAULT)
             if text and (text != label) and len(text.strip()) \
-                and (not text.startswith("chrome://")):
+                    and (not text.startswith("chrome://")):
                 newResult.extend(acss)
                 newResult.append(text)
             if label and len(label.strip()):
@@ -432,14 +434,14 @@ class SpeechGenerator(speech_generator.SpeechGenerator):
             return []
 
         return speech_generator.SpeechGenerator.\
-                     _generateDefaultButton(self, obj, **args)
+            _generateDefaultButton(self, obj, **args)
 
     def _generateLiveRegionDescription(self, obj, **args):
         """Returns an array of strings (and possibly voice and audio
         specifications) that represent the live region.
         """
         return self._script.liveMngr.\
-                    generateLiveRegionDescription(obj, **args)
+            generateLiveRegionDescription(obj, **args)
 
     def _generatePageSummary(self, obj, **args):
         """Returns an array of strings (and possibly voice and audio
@@ -475,20 +477,20 @@ class SpeechGenerator(speech_generator.SpeechGenerator):
         if args.get('formatType', 'unfocused') == 'detailedWhereAmI' \
            and self._script.inDocumentContent(obj):
             oldRole = self._overrideRole('default', args)
-            result.extend(speech_generator.SpeechGenerator.\
-                                           generateSpeech(self, obj, **args))
+            result.extend(speech_generator.SpeechGenerator.
+                          generateSpeech(self, obj, **args))
             self._restoreRole(oldRole, args)
         elif self._script.utilities.isEntry(obj):
             oldRole = self._overrideRole(pyatspi.ROLE_ENTRY, args)
-            result.extend(speech_generator.SpeechGenerator.\
-                                           generateSpeech(self, obj, **args))
+            result.extend(speech_generator.SpeechGenerator.
+                          generateSpeech(self, obj, **args))
             self._restoreRole(oldRole, args)
         # ARIA widgets get treated like regular default widgets.
         #
         else:
             args['useDefaultFormatting'] = self._script.isAriaWidget(obj)
-            result.extend(speech_generator.SpeechGenerator.\
-                                           generateSpeech(self, obj, **args))
+            result.extend(speech_generator.SpeechGenerator.
+                          generateSpeech(self, obj, **args))
             del args['useDefaultFormatting']
         return result
 
@@ -510,14 +512,14 @@ class SpeechGenerator(speech_generator.SpeechGenerator):
             position = int(position)
             total = int(total)
             result = []
-            if (_settingsManager.getSetting('enablePositionSpeaking') \
+            if (_settingsManager.getSetting('enablePositionSpeaking')
                 or args.get('forceList', False)) \
-                and position >= 0:
+                    and position >= 0:
                 result.append(self._script.formatting.getString(
                     mode='speech',
-                    stringType='groupindex') \
-                    % {"index" : position,
-                    "total" : total})
+                    stringType='groupindex')
+                    % {"index": position,
+                       "total": total})
                 result.extend(self.voice(speech_generator.SYSTEM))
             return result
         else:

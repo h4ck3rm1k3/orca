@@ -17,21 +17,23 @@
 # Free Software Foundation, Inc., Franklin Street, Fifth Floor,
 # Boston MA  02110-1301 USA.
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2004-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import orca.speech_generator as speech_generator
 
-########################################################################
-#                                                                      #
+#
+#
 # Custom SpeechGenerator                                               #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class SpeechGenerator(speech_generator.SpeechGenerator):
+
     """Overrides _generateExpandableState so that we can provide access
     to the expanded/collapsed state and node count for the buddy list.
     """

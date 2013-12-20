@@ -9,11 +9,11 @@ from . import orca_state
 from . import speech
 
 # define 'live' property types
-LIVE_OFF       = -1
-LIVE_NONE      = 0
-LIVE_POLITE    = 1
+LIVE_OFF = -1
+LIVE_NONE = 0
+LIVE_POLITE = 1
 LIVE_ASSERTIVE = 2
-LIVE_RUDE      = 3
+LIVE_RUDE = 3
 
 # Seconds a message is held in the queue before it is discarded
 MSG_KEEPALIVE_TIME = 45  # in seconds
@@ -22,13 +22,16 @@ MSG_KEEPALIVE_TIME = 45  # in seconds
 # LiveRegionManager.reviewLiveAnnouncement.
 CACHE_SIZE = 9  # corresponds to one of nine key bindings
 
+
 class PriorityQueue(object):
+
     """ This class represents a thread **UNSAFE** priority queue where priority
     is determined by the given integer priority.  The entries are also
     maintained in chronological order.
 
     TODO: experiment with Queue.Queue to make thread safe
     """
+
     def __init__(self):
         self.queue = []
 
@@ -67,11 +70,11 @@ class PriorityQueue(object):
             newqueue = []
             newqueue.append(self.queue[0])
             targetlabels = newqueue[0][2]['labels']
-            #TODO: NOT USED: targetcontent = newqueue[0][2]['content']
+            # TODO: NOT USED: targetcontent = newqueue[0][2]['content']
             for i in range(1, len(self.queue)):
                 if self.queue[i][2]['labels'] == targetlabels:
-                    newqueue[0][2]['content'].extend \
-                                   (self.queue[i][2]['content'])
+                    newqueue[0][2]['content'].extend(self.queue[i][2][
+                        'content'])
                 else:
                     newqueue.append(self.queue[i])
 
@@ -88,7 +91,7 @@ class PriorityQueue(object):
                 found = False
                 for j in range(len(newcontent)):
                     if oldcontent[i].find(newcontent[j]) != -1 \
-                        or newcontent[j].find(oldcontent[i]) != -1:
+                            or newcontent[j].find(oldcontent[i]) != -1:
                         if len(oldcontent[i]) > len(newcontent[j]):
                             newcontent[j] = oldcontent[i]
                         found = True
@@ -105,6 +108,7 @@ class PriorityQueue(object):
 
 
 class LiveRegionManager(object):
+
     def __init__(self, script):
         self._script = script
         # message priority queue
@@ -150,15 +154,16 @@ class LiveRegionManager(object):
     def bookmarkSaveHandler(self):
         """Bookmark save callback"""
         self._script.bookmarks.saveBookmarksToDisk(self._politenessOverrides,
-                                                    filename='politeness')
+                                                   filename='politeness')
 
     def bookmarkLoadHandler(self):
         """Bookmark load callback"""
         # readBookmarksFromDisk() returns None on error. Just initialize to an
         # empty dictionary if this is the case.
         self._politenessOverrides = \
-        self._script.bookmarks.readBookmarksFromDisk(filename='politeness') \
-        or {}
+            self._script.bookmarks.readBookmarksFromDisk(
+                filename='politeness') \
+            or {}
 
     def handleEvent(self, event):
         """Main live region event handler"""
@@ -174,7 +179,7 @@ class LiveRegionManager(object):
         elif politeness == LIVE_POLITE:
             # Nothing to do for now
             pass
-        elif politeness ==  LIVE_ASSERTIVE:
+        elif politeness == LIVE_ASSERTIVE:
             self.msg_queue.purgeByPriority(LIVE_POLITE)
         elif politeness == LIVE_RUDE:
             self.msg_queue.purgeByPriority(LIVE_ASSERTIVE)
@@ -198,9 +203,9 @@ class LiveRegionManager(object):
         # a message length (in secs) could be used but don't forget many
         # parameters such as rate,expanded text and others must be considered.
         if len(self.msg_queue) > 0 \
-                  and not speech.isSpeaking() \
-                  and orca_state.lastInputEvent \
-                  and time.time() - orca_state.lastInputEvent.time > 1:
+            and not speech.isSpeaking() \
+            and orca_state.lastInputEvent \
+                and time.time() - orca_state.lastInputEvent.time > 1:
             # House cleaning on the message queue.
             # First we will purge the queue of old messages
             self.msg_queue.purgeByKeepAlive()
@@ -279,7 +284,7 @@ class LiveRegionManager(object):
         contents of that object"""
         if self.lastliveobj:
             self._script.setCaretPosition(self.lastliveobj, 0)
-            self._script.speakContents(self._script.getObjectContentsAtOffset(\
+            self._script.speakContents(self._script.getObjectContentsAtOffset(
                                        self.lastliveobj, 0))
 
     def reviewLiveAnnouncement(self, msgnum):
@@ -313,7 +318,9 @@ class LiveRegionManager(object):
             # look through all the objects on the page and set/add to
             # politeness overrides.  This only adds live regions with good
             # markup.
-            matches = pyatspi.findAllDescendants(docframe, self.matchLiveRegion)
+            matches = pyatspi.findAllDescendants(
+                docframe,
+                self.matchLiveRegion)
             for match in matches:
                 objectid = self._getObjectId(match)
                 self._politenessOverrides[(uri, objectid)] = LIVE_OFF
@@ -405,7 +412,7 @@ class LiveRegionManager(object):
             else:
                 return None
 
-        else: #object:text-changed:insert
+        else:  # object:text-changed:insert
             # Get a handle to the Text interface for the source.
             # Serious problems if this fails.
             #
@@ -428,9 +435,11 @@ class LiveRegionManager(object):
                 if attrs['container-atomic'] == 'true':
                     newcontent = txt
                 else:
-                    newcontent = txt[event.detail1:event.detail1+event.detail2]
+                    newcontent = txt[
+                        event.detail1:event.detail1 +
+                        event.detail2]
             except KeyError:
-                newcontent = txt[event.detail1:event.detail1+event.detail2]
+                newcontent = txt[event.detail1:event.detail1 + event.detail2]
 
             # add our content to the returned message or return None if no
             # content
@@ -446,13 +455,13 @@ class LiveRegionManager(object):
         if 'channel' in attrs and attrs['channel'] == 'notify':
             utts = labels + content
             speech.stop()
-            # Note: we would like to use a different ACSS for alerts.  This work
-            # should be done as part of bug #412656. For now, however, we will
-            # also present the message in braille.
+            # Note: we would like to use a different ACSS for alerts.  This
+            # work should be done as part of bug #412656. For now, however, we
+            # will also present the message in braille.
             self._script.presentMessage(utts)
             return None
         else:
-            return {'content':content, 'labels':labels}
+            return {'content': content, 'labels': labels}
 
     def flushMessages(self):
         self.msg_queue.clear()
@@ -471,7 +480,7 @@ class LiveRegionManager(object):
             return [uttstring.strip()]
         # often we see a table cell.  I'll implement my own label getter
         elif obj.getRole() == pyatspi.ROLE_TABLE_CELL \
-                           and obj.parent.childCount > 1:
+                and obj.parent.childCount > 1:
             # We will try the table interface first for it's parent
             try:
                 itable = obj.parent.queryTable()
@@ -493,8 +502,8 @@ class LiveRegionManager(object):
             # element.
             parentattrs = self._getAttrDictionary(obj.parent)
             if 'tag' in parentattrs and parentattrs['tag'] == 'TR':
-                return [self._script.utilities.expandEOCs( \
-                                  obj.parent.getChildAtIndex(0)).strip()]
+                return [self._script.utilities.expandEOCs(
+                    obj.parent.getChildAtIndex(0)).strip()]
 
         # Sorry, no valid labels found
         return []
@@ -539,7 +548,8 @@ class LiveRegionManager(object):
                 return LIVE_ASSERTIVE
             elif attrs['container-live'] == 'rude':
                 return LIVE_RUDE
-            else: return LIVE_NONE
+            else:
+                return LIVE_NONE
         except KeyError:
             return LIVE_NONE
 
@@ -555,7 +565,8 @@ class LiveRegionManager(object):
             return 'rude'
         elif politeness == LIVE_NONE:
             return 'none'
-        else: return 'unknown'
+        else:
+            return 'unknown'
 
     def _getAttrDictionary(self, obj):
         try:

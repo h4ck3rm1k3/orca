@@ -19,18 +19,20 @@
 
 """Displays a GUI for the user to quit Orca."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import gettext
 from gi.repository import Gtk
 
 from .orca_i18n import _
 
+
 class GtkBuilderWrapper(object):
+
     """
     Superclass for GtkBuilder based applications. Just derive from this
     and your subclass should create methods whose names correspond to
@@ -53,7 +55,7 @@ class GtkBuilderWrapper(object):
         # bug. See bgo bug 589362.
         #
         for obj in self.builder.get_objects():
-            #success = 
+            # success =
             self.localize_widget(obj)
 
         # Set default application icon.

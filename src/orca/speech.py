@@ -20,11 +20,11 @@
 """Manages the default speech server for orca.  A script can use this
 as its speech server, or it can feel free to create one of its own."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import importlib
 
@@ -54,6 +54,7 @@ multiCaseReg1 = re.compile("([a-z]+)([A-Z])")
 multiCaseReg2 = re.compile("([A-Z][A-Z]+)([A-Z][a-z]+)")
 multiCaseReg3 = re.compile("([A-Z])([A-Z][a-z]+)")
 
+
 def getSpeechServerFactories():
     """Imports all known SpeechServer factory modules.  Returns a list
     of modules that implement the getSpeechServers method, which
@@ -71,6 +72,7 @@ def getSpeechServerFactories():
             debug.printException(debug.LEVEL_CONFIGURATION)
 
     return factories
+
 
 def _initSpeechServer(moduleName, speechServerInfo):
 
@@ -106,6 +108,7 @@ def _initSpeechServer(moduleName, speechServerInfo):
     if not _speechserver:
         raise Exception("No speech server for factory: %s" % moduleName)
 
+
 def init():
 
     if _speechserver:
@@ -132,12 +135,14 @@ def init():
     else:
         debug.println(debug.LEVEL_CONFIGURATION, "Speech not available.")
 
+
 def __resolveACSS(acss=None):
     if acss:
         return acss
     else:
         voices = settings.voices
         return ACSS(voices[settings.DEFAULT_VOICE])
+
 
 def sayAll(utteranceIterator, progressCallback):
     if settings.silenceSpeech:
@@ -149,6 +154,7 @@ def sayAll(utteranceIterator, progressCallback):
             logLine = "SPEECH OUTPUT: '" + context.utterance + "'"
             debug.println(debug.LEVEL_INFO, logLine)
             log.info(logLine)
+
 
 def _speak(text, acss, interrupt):
     """Speaks the individual string using the given ACSS."""
@@ -179,6 +185,7 @@ def _speak(text, acss, interrupt):
         except:
             pass
         _speechserver.speak(text, __resolveACSS(voice), interrupt)
+
 
 def speak(content, acss=None, interrupt=True):
     """Speaks the given content.  The content can be either a simple
@@ -246,6 +253,7 @@ def speak(content, acss=None, interrupt=True):
         string = " ".join(toSpeak)
         _speak(string, activeVoice, interrupt)
 
+
 def speakKeyEvent(event):
     """Speaks a key event immediately.
 
@@ -266,6 +274,7 @@ def speakKeyEvent(event):
     logLine = "SPEECH OUTPUT: '%s'" % msg
     debug.println(debug.LEVEL_INFO, logLine)
     log.info(logLine)
+
 
 def speakCharacter(character, acss=None):
     """Speaks a single character immediately.
@@ -288,12 +297,14 @@ def speakCharacter(character, acss=None):
     if _speechserver:
         _speechserver.speakCharacter(character, acss=acss)
 
+
 def isSpeaking():
     """Returns True if the system is currently speaking."""
     if _speechserver:
         return _speechserver.isSpeaking()
     else:
         return False
+
 
 def getInfo():
     info = None
@@ -302,15 +313,18 @@ def getInfo():
 
     return info
 
+
 def stop():
     if _speechserver:
         _speechserver.stop()
+
 
 def updateCapitalizationStyle(script=None, inputEvent=None):
     if _speechserver:
         _speechserver.updateCapitalizationStyle()
 
     return True
+
 
 def updatePunctuationLevel(script=None, inputEvent=None):
     """ Punctuation level changed, inform this speechServer. """
@@ -320,11 +334,13 @@ def updatePunctuationLevel(script=None, inputEvent=None):
 
     return True
 
+
 def increaseSpeechRate(script=None, inputEvent=None):
     if _speechserver:
         _speechserver.increaseSpeechRate()
 
     return True
+
 
 def decreaseSpeechRate(script=None, inputEvent=None):
     if _speechserver:
@@ -336,11 +352,13 @@ def decreaseSpeechRate(script=None, inputEvent=None):
 
     return True
 
+
 def increaseSpeechPitch(script=None, inputEvent=None):
     if _speechserver:
         _speechserver.increaseSpeechPitch()
 
     return True
+
 
 def decreaseSpeechPitch(script=None, inputEvent=None):
     if _speechserver:
@@ -348,25 +366,29 @@ def decreaseSpeechPitch(script=None, inputEvent=None):
 
     return True
 
+
 def shutdown():
     global _speechserver
     if _speechserver:
         _speechserver.shutdownActiveServers()
         _speechserver = None
 
+
 def reset(text=None, acss=None):
     if _speechserver:
         _speechserver.reset(text, acss)
 
+
 def testNoSettingsInit():
     init()
     speak("testing")
-    speak("this is higher", ACSS({'average-pitch' : 7}))
-    speak("this is slower", ACSS({'rate' : 3}))
-    speak("this is faster", ACSS({'rate' : 80}))
-    speak("this is quiet",  ACSS({'gain' : 2}))
-    speak("this is loud",   ACSS({'gain' : 10}))
+    speak("this is higher", ACSS({'average-pitch': 7}))
+    speak("this is slower", ACSS({'rate': 3}))
+    speak("this is faster", ACSS({'rate': 80}))
+    speak("this is quiet", ACSS({'gain': 2}))
+    speak("this is loud", ACSS({'gain': 10}))
     speak("this is normal")
+
 
 def test():
     from . import speechserver
@@ -380,12 +402,13 @@ def test():
                 for family in server.getVoiceFamilies():
                     name = family[speechserver.VoiceFamily.NAME]
                     print("      ", name)
-                    acss = ACSS({ACSS.FAMILY : family})
+                    acss = ACSS({ACSS.FAMILY: family})
                     server.speak(name, acss)
                     server.speak("testing")
                 server.shutdown()
             except:
                 debug.printException(debug.LEVEL_OFF)
+
 
 def _processMultiCaseString(string):
     """Helper function, applies the regexes to split multiCaseStrings

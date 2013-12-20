@@ -19,11 +19,11 @@
 
 """ Custom script for The notification daemon."""
 
-__id__        = ""
-__version__   = ""
-__date__      = ""
+__id__ = ""
+__version__ = ""
+__date__ = ""
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -32,18 +32,19 @@ import orca.scripts.default as default
 import orca.speech as speech
 
 
-########################################################################
-#                                                                      #
+#
+#
 # The notification-daemon script class.                                #
-#                                                                      #
-########################################################################
+#
+#
 
 class Script(default.Script):
 
     def onWindowCreated(self, event):
         """Callback for window:create accessibility events."""
 
-        a = self.utilities.descendantsWithRole(event.source, pyatspi.ROLE_LABEL)
+        a = self.utilities.descendantsWithRole(
+            event.source, pyatspi.ROLE_LABEL)
         texts = [self.utilities.displayedText(acc) for acc in a]
         text = '%s %s' % (messages.NOTIFICATION, ' '.join(texts))
         speech.speak(text, None, True)

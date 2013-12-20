@@ -19,11 +19,11 @@
 
 """Custom script for StarOffice and OpenOffice."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -32,6 +32,7 @@ import orca.braille_generator as braille_generator
 import orca.settings_manager as settings_manager
 
 _settingsManager = settings_manager.getManager()
+
 
 class BrailleGenerator(braille_generator.BrailleGenerator):
 
@@ -117,7 +118,7 @@ class BrailleGenerator(braille_generator.BrailleGenerator):
             # and call this method again.
             #
             if obj.childCount <= 1:
-                result.extend(braille_generator.BrailleGenerator.\
+                result.extend(braille_generator.BrailleGenerator.
                               _generateRealTableCell(self, obj, **args))
             else:
                 for child in obj:
@@ -159,20 +160,20 @@ class BrailleGenerator(braille_generator.BrailleGenerator):
                 #
                 presentAll = True
                 if "lastRow" in self._script.pointOfReference and \
-                    "lastColumn" in self._script.pointOfReference:
+                        "lastColumn" in self._script.pointOfReference:
                     pointOfReference = self._script.pointOfReference
                     presentAll = \
                         (self._mode == 'braille') \
-                        or ((pointOfReference["lastRow"] != row) \
-                            or ((row == 0 or row == parentTable.nRows-1) \
+                        or ((pointOfReference["lastRow"] != row)
+                            or ((row == 0 or row == parentTable.nRows - 1)
                                 and pointOfReference["lastColumn"] == column))
                 if presentAll:
                     [startIndex, endIndex] = \
                         self._script.utilities.getTableRowRange(obj)
                     for i in range(startIndex, endIndex):
                         cell = parentTable.getAccessibleAt(row, i)
-                        showing = cell.getState().contains( \
-                                      pyatspi.STATE_SHOWING)
+                        showing = cell.getState().contains(
+                            pyatspi.STATE_SHOWING)
                         if showing:
                             cellResult = self._generateRealTableCell(cell,
                                                                      **args)
@@ -197,11 +198,11 @@ class BrailleGenerator(braille_generator.BrailleGenerator):
         current page tab. See bug #538056 for more details.
         """
         result = []
-        rolesList = [pyatspi.ROLE_SCROLL_PANE, \
-                     pyatspi.ROLE_PANEL, \
-                     pyatspi.ROLE_PANEL, \
-                     pyatspi.ROLE_ROOT_PANE, \
-                     pyatspi.ROLE_FRAME, \
+        rolesList = [pyatspi.ROLE_SCROLL_PANE,
+                     pyatspi.ROLE_PANEL,
+                     pyatspi.ROLE_PANEL,
+                     pyatspi.ROLE_ROOT_PANE,
+                     pyatspi.ROLE_FRAME,
                      pyatspi.ROLE_APPLICATION]
         if self._script.utilities.hasMatchingHierarchy(obj, rolesList):
             for child in obj.parent:
@@ -216,9 +217,9 @@ class BrailleGenerator(braille_generator.BrailleGenerator):
     def generateBraille(self, obj, **args):
         result = []
         args['useDefaultFormatting'] = \
-            ((obj.getRole() == pyatspi.ROLE_LIST) \
+            ((obj.getRole() == pyatspi.ROLE_LIST)
                 and (not obj.getState().contains(pyatspi.STATE_FOCUSABLE)))
-        result.extend(braille_generator.BrailleGenerator.\
-                          generateBraille(self, obj, **args))
+        result.extend(braille_generator.BrailleGenerator.
+                      generateBraille(self, obj, **args))
         del args['useDefaultFormatting']
         return result

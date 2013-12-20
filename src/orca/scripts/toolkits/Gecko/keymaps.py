@@ -23,10 +23,10 @@
 """
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs, Mesar Hameed."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import orca.settings as settings
 
@@ -45,7 +45,7 @@ arrowKeymap = (
     ("Right", defaultModifierMask, NO_MODIFIER_MASK, "goNextCharacterHandler"),
 
     ("Left", defaultModifierMask, NO_MODIFIER_MASK,
-    "goPreviousCharacterHandler"),
+     "goPreviousCharacterHandler"),
 
     ("Right", defaultModifierMask, CTRL_MODIFIER_MASK, "goNextWordHandler"),
     ("Left", defaultModifierMask, CTRL_MODIFIER_MASK, "goPreviousWordHandler"),
@@ -54,7 +54,8 @@ arrowKeymap = (
     ("Down", defaultModifierMask, ALT_MODIFIER_MASK, "expandComboBoxHandler"),
     ("Home", defaultModifierMask, CTRL_MODIFIER_MASK, "goTopOfFileHandler"),
     ("End", defaultModifierMask, CTRL_MODIFIER_MASK, "goBottomOfFileHandler"),
-    ("Home", defaultModifierMask, NO_MODIFIER_MASK, "goBeginningOfLineHandler"),
+    ("Home", defaultModifierMask,
+     NO_MODIFIER_MASK, "goBeginningOfLineHandler"),
     ("End", defaultModifierMask, NO_MODIFIER_MASK, "goEndOfLineHandler"),
 )
 
@@ -74,27 +75,27 @@ commonKeymap = (
     # misc
 
     ("backslash", defaultModifierMask, SHIFT_MODIFIER_MASK,
-    "setLivePolitenessOff"),
+     "setLivePolitenessOff"),
 
     ("backslash", defaultModifierMask, ORCA_SHIFT_MODIFIER_MASK,
-    "monitorLiveRegions"),
+     "monitorLiveRegions"),
 
     ("backslash", defaultModifierMask, NO_MODIFIER_MASK,
-    "advanceLivePoliteness"),
+     "advanceLivePoliteness"),
 
     ("F12", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "toggleCaretNavigationHandler"),
+     "toggleCaretNavigationHandler"),
 
     ("Right", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "goNextObjectInOrderHandler"),
+     "goNextObjectInOrderHandler"),
 
     ("Left", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "goPreviousObjectInOrderHandler"),
+     "goPreviousObjectInOrderHandler"),
 )
 
 desktopKeymap = (
     ("KP_Multiply", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "moveToMouseOverHandler"),
+     "moveToMouseOverHandler"),
 )
 
 laptopKeymap = (

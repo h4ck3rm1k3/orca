@@ -19,22 +19,23 @@
 
 """Custom script for Gajim."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
 import orca.chat as chat
 import orca.scripts.default as default
 
-########################################################################
-#                                                                      #
+#
+#
 # The Empathy script class.                                            #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(default.Script):
 
@@ -104,7 +105,7 @@ class Script(default.Script):
         # events we need to present text added to the chatroom are
         # missing.
         # TODO duplicate:
-        #allPageTabs = 
+        # allPageTabs =
         self.utilities.descendantsWithRole(
             event.source, pyatspi.ROLE_PAGE_TAB)
 

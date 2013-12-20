@@ -19,11 +19,11 @@
 
 """Displays a GUI for the user to set Orca application-specific preferences."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2007-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from gi.repository import Gtk
 import locale
@@ -51,9 +51,10 @@ _settingsManager = settings_manager.getManager()
 applicationName = None
 appScript = None
 
+
 class OrcaSetupGUI(orca_gui_prefs.OrcaSetupGUI):
 
-    def __init__(self, fileName, windowName, prefsDict = None):
+    def __init__(self, fileName, windowName, prefsDict=None):
         """Initialize the application specific Orca configuration GUI.
 
         Arguments:
@@ -75,7 +76,7 @@ class OrcaSetupGUI(orca_gui_prefs.OrcaSetupGUI):
 
     def _getGeneralSettings(self, prefsDict):
         if prefsDict is None:
-            return orca_gui_prefs.OrcaSetupGUI.\
+            return orca_gui_prefs.OrcaSetupGUI. \
                 _getGeneralSettings(self, prefsDict)
 
         return prefsDict
@@ -120,8 +121,8 @@ class OrcaSetupGUI(orca_gui_prefs.OrcaSetupGUI):
           pronunciation from.
         """
 
-        orca_gui_prefs.OrcaSetupGUI._createPronunciationTreeView( \
-                              self, appScript.app_pronunciation_dict)
+        orca_gui_prefs.OrcaSetupGUI._createPronunciationTreeView(
+            self, appScript.app_pronunciation_dict)
 
     def showGUI(self):
         """Show the app-specific Orca configuration GUI window. This
@@ -171,9 +172,9 @@ class OrcaSetupGUI(orca_gui_prefs.OrcaSetupGUI):
             treeModel = self.keyBindingsModel
 
             myiter = treeModel.get_iter_first()
-            while myiter != None:
+            while myiter is not None:
                 iterChild = treeModel.iter_children(myiter)
-                while iterChild != None:
+                while iterChild is not None:
                     descrip = treeModel.get_value(iterChild,
                                                   orca_gui_prefs.DESCRIP)
                     keyBind.handler = input_event.InputEventHandler(None,
@@ -201,8 +202,8 @@ class OrcaSetupGUI(orca_gui_prefs.OrcaSetupGUI):
         # Get the key bindings for the application script.
         #
         self.appKeyBindings = appScript.getKeyBindings()
-        self.appKeyBindings = appScript.overrideAppKeyBindings(appScript,
-                                                     self.appKeyBindings)
+        self.appKeyBindings = appScript.overrideAppKeyBindings(appScript, self
+            .appKeyBindings)
 
         # Get the key bindings for the default script.
         #
@@ -263,6 +264,7 @@ class OrcaSetupGUI(orca_gui_prefs.OrcaSetupGUI):
 
         orca_state.appOS = None
 
+
 def showPreferencesUI():
     global applicationName, appScript
 
@@ -300,6 +302,7 @@ def showPreferencesUI():
         if not orca_state.orcaWD:
             orca_state.orcaWD = orca_gui_prefs.WarningDialogGUI()
         orca_state.orcaWD.showGUI()
+
 
 def main():
     locale.setlocale(locale.LC_ALL, '')

@@ -21,14 +21,15 @@
 """Custom script for rhythmbox."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."  \
                 "Copyright (c) 2010 Joanmarie Diggs"
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import orca.scripts.toolkits.gtk as gtk
 from .formatting import Formatting
+
 
 class Script(gtk.Script):
 

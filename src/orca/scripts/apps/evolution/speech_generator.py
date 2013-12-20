@@ -19,11 +19,11 @@
 
 """Custom script for Evolution."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -34,7 +34,9 @@ from orca.orca_i18n import _
 
 _settingsManager = settings_manager.getManager()
 
+
 class SpeechGenerator(WebKitGtk.SpeechGenerator):
+
     """Overrides _generateSpeechForTableCell so that, if this is an
        expanded table cell, we can strip off the "0 items".
     """
@@ -50,8 +52,8 @@ class SpeechGenerator(WebKitGtk.SpeechGenerator):
         # dont speak the number of items.
         # See bug #432308 for more details.
         #
-        rolesList = [pyatspi.ROLE_TABLE_CELL, \
-                     pyatspi.ROLE_TREE_TABLE, \
+        rolesList = [pyatspi.ROLE_TABLE_CELL,
+                     pyatspi.ROLE_TREE_TABLE,
                      pyatspi.ROLE_UNKNOWN]
         if self._script.utilities.hasMatchingHierarchy(obj, rolesList):
             state = obj.getState()
@@ -148,4 +150,3 @@ class SpeechGenerator(WebKitGtk.SpeechGenerator):
                 args['role'] = pyatspi.ROLE_DIALOG
 
         return speech_generator.SpeechGenerator.generateSpeech(self, obj, **args)
-

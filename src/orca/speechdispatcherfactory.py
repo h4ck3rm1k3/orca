@@ -17,18 +17,17 @@
 # Free Software Foundation, Inc., Franklin Street, Fifth Floor,
 # Boston MA  02110-1301 USA.
 
-# # [[[TODO: richb - Pylint is giving us a bunch of warnings along these
+# [[[TODO: richb - Pylint is giving us a bunch of warnings along these
 # lines throughout this file:
-
 
 """Provides an Orca speech server for Speech Dispatcher backend."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
-__author__    = "Tomas Cerha <cerha@brailcom.org>"
+__version__ = "$Revision$"
+__date__ = "$Date$"
+__author__ = "Tomas Cerha <cerha@brailcom.org>"
 __copyright__ = "Copyright (c) 2006-2008 Brailcom, o.p.s."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from gi.repository import GLib
 import re
@@ -59,6 +58,7 @@ else:
 PUNCTUATION = re.compile(r'[^\w\s]', re.UNICODE)
 ELLIPSIS = re.compile(r'(\342\200\246|\.\.\.\s*)')
 
+
 class SpeechServer(speechserver.SpeechServer):
     # See the parent class for documentation.
 
@@ -68,11 +68,11 @@ class SpeechServer(speechserver.SpeechServer):
     _SERVER_NAMES = {DEFAULT_SERVER_ID: guilabels.DEFAULT_SYNTHESIZER}
 
     KEY_NAMES = {
-        '_':     'underscore',
-        ' ':     'space',
+        '_': 'underscore',
+        ' ': 'space',
         'space': 'space',
-        '"':     'double-quote',
-        }
+        '"': 'double-quote',
+    }
 
     def getFactoryName():
         return guilabels.SPEECH_DISPATCHER
@@ -114,7 +114,6 @@ class SpeechServer(speechserver.SpeechServer):
         for server in list(SpeechServer._active_servers.values()):
             server.shutdown()
     shutdownActiveServers = staticmethod(shutdownActiveServers)
-
     # *** Instance methods ***
 
     def __init__(self, serverId):
@@ -127,29 +126,28 @@ class SpeechServer(speechserver.SpeechServer):
             (ACSS.AVERAGE_PITCH, self._set_pitch),
             (ACSS.GAIN, self._set_volume),
             (ACSS.FAMILY, self._set_family),
-            )
+        )
         if not _speechd_available:
             debug.println(debug.LEVEL_WARNING,
                           "Speech Dispatcher interface not installed.")
             return
         if not _speechd_version_ok:
             debug.println(debug.LEVEL_WARNING,
-                        "Speech Dispatcher version 0.6.2 or later is required.")
+                "Speech Dispatcher version 0.6.2 or later is required.")
             return
         # The following constants must be initialized in runtime since they
         # depend on the speechd module being available.
         self._PUNCTUATION_MODE_MAP = {
-            settings.PUNCTUATION_STYLE_ALL:  speechd.PunctuationMode.ALL,
+            settings.PUNCTUATION_STYLE_ALL: speechd.PunctuationMode.ALL,
             settings.PUNCTUATION_STYLE_MOST: speechd.PunctuationMode.SOME,
             settings.PUNCTUATION_STYLE_SOME: speechd.PunctuationMode.SOME,
             settings.PUNCTUATION_STYLE_NONE: speechd.PunctuationMode.NONE,
-            }
-        self._CALLBACK_TYPE_MAP = {
-            speechd.CallbackType.BEGIN: speechserver.SayAllContext.PROGRESS,
-            speechd.CallbackType.CANCEL: speechserver.SayAllContext.INTERRUPTED,
-            speechd.CallbackType.END: speechserver.SayAllContext.COMPLETED,
-           #speechd.CallbackType.INDEX_MARK:speechserver.SayAllContext.PROGRESS,
-            }
+        }
+        self._CALLBACK_TYPE_MAP = { speechd.CallbackType.BEGIN: speechserver.
+            SayAllContext.PROGRESS, speechd.CallbackType.CANCEL: speechserver.
+            SayAllContext.INTERRUPTED, speechd.CallbackType.END: speechserver.
+            SayAllContext.COMPLETED, }
+            # SS,
 
         self._default_voice_name = guilabels.SPEECH_DEFAULT_VOICE % serverId
 
@@ -279,7 +277,8 @@ class SpeechServer(speechserver.SpeechServer):
             newText = re.sub(symbol, charName, newText)
 
         if orca_state.activeScript:
-            newText = orca_state.activeScript.utilities.adjustForDigits(newText)
+            newText = orca_state.activeScript.utilities.adjustForDigits(
+                newText)
 
         return newText
 
@@ -288,7 +287,7 @@ class SpeechServer(speechserver.SpeechServer):
             text = ''
         text = self.__addVerbalizedPunctuation(text)
         if orca_state.activeScript and orca_state.usePronunciationDictionary:
-            text = orca_state.activeScript.\
+            text = orca_state.activeScript. \
                 utilities.adjustForPronunciation(text)
 
         # Replace no break space characters with plain spaces since some
@@ -332,7 +331,7 @@ class SpeechServer(speechserver.SpeechServer):
                     GLib.idle_add(self._say_all, iterator, orca_callback)
             self._speak(context.utterance, acss, callback=callback,
                         event_types=list(self._CALLBACK_TYPE_MAP.keys()))
-        return False # to indicate, that we don't want to be called again.
+        return False  # to indicate, that we don't want to be called again.
 
     def _cancel(self):
         self._send_command(self._client.cancel)
@@ -348,7 +347,7 @@ class SpeechServer(speechserver.SpeechServer):
         debug.println(debug.LEVEL_CONFIGURATION,
                       "Speech rate is now %d" % rate)
 
-        self.speak(decrease and messages.SPEECH_SLOWER \
+        self.speak(decrease and messages.SPEECH_SLOWER
                    or messages.SPEECH_FASTER, acss=acss)
 
     def _change_default_speech_pitch(self, decrease=False):
@@ -362,7 +361,7 @@ class SpeechServer(speechserver.SpeechServer):
         debug.println(debug.LEVEL_CONFIGURATION,
                       "Speech pitch is now %d" % pitch)
 
-        self.speak(decrease and messages.SPEECH_LOWER \
+        self.speak(decrease and messages.SPEECH_LOWER
                    or messages.SPEECH_HIGHER, acss=acss)
 
     def getInfo(self):
@@ -378,7 +377,7 @@ class SpeechServer(speechserver.SpeechServer):
             dialect = None
         else:
             lang, dialect = locale.split('_')
-        voices = ((self._default_voice_name, lang, None),)
+        voices = ((self._default_voice_name, lang, None), )
         try:
             # This command is not available with older SD versions.
             list_synthesis_voices = self._client.list_synthesis_voices
@@ -386,16 +385,16 @@ class SpeechServer(speechserver.SpeechServer):
             pass
         else:
             voices += self._send_command(list_synthesis_voices)
-        families = [speechserver.VoiceFamily({ \
-              speechserver.VoiceFamily.NAME: name,
-              #speechserver.VoiceFamily.GENDER: speechserver.VoiceFamily.MALE,
-              speechserver.VoiceFamily.DIALECT: _dialect,
-              speechserver.VoiceFamily.LOCALE: _lang})
-                    for name, _lang, _dialect in voices]
+        families = [speechserver.VoiceFamily({
+            speechserver.VoiceFamily.NAME: name,
+            # speechserver.VoiceFamily.GENDER: speechserver.VoiceFamily.MALE,
+            speechserver.VoiceFamily.DIALECT: _dialect,
+            speechserver.VoiceFamily.LOCALE: _lang})
+            for name, _lang, _dialect in voices]
         return families
 
     def speak(self, text=None, acss=None, interrupt=True):
-        #if interrupt:
+        # if interrupt:
         #    self._cancel()
 
         if text:
@@ -406,7 +405,7 @@ class SpeechServer(speechserver.SpeechServer):
             self._speak(text, acss)
 
     def speakUtterances(self, utteranceList, acss=None, interrupt=True):
-        #if interrupt:
+        # if interrupt:
         #    self._cancel()
         for utterance in utteranceList:
             if utterance:
@@ -427,7 +426,7 @@ class SpeechServer(speechserver.SpeechServer):
             return
 
         if orca_state.activeScript and orca_state.usePronunciationDictionary:
-            name = orca_state.activeScript.\
+            name = orca_state.activeScript. \
                 utilities.adjustForPronunciation(name)
         self.speak(name, acss)
 
@@ -485,4 +484,3 @@ class SpeechServer(speechserver.SpeechServer):
             return ()
         except speechd.SSIPCommandError:
             return ()
-

@@ -21,11 +21,11 @@
 
 """Displays the Save Profile As dialog."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Consorcio Fernando de los Rios."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import locale
 import sys
@@ -36,6 +36,7 @@ from . import orca_state
 
 OS = None
 newProfile = None
+
 
 class OrcaProfileGUI(Gtk.Dialog):
 
@@ -98,7 +99,8 @@ class OrcaProfileGUI(Gtk.Dialog):
     def onResponse(self, widget, response):
         """Signal handler for the responses emitted by the dialog."""
 
-        if response in [Gtk.ResponseType.CANCEL, Gtk.ResponseType.DELETE_EVENT]:
+        if response in [Gtk.ResponseType.CANCEL, Gtk.ResponseType.DELETE_EVENT
+            ]:
             self.hide()
             return
 
@@ -118,6 +120,7 @@ class OrcaProfileGUI(Gtk.Dialog):
 
         OS = None
 
+
 def showProfileUI(prefsDialog=None):
     global OS
     global newProfile
@@ -129,6 +132,7 @@ def showProfileUI(prefsDialog=None):
         OS.init()
 
     OS.showGUI(prefsDialog)
+
 
 def main():
     locale.setlocale(locale.LC_ALL, '')

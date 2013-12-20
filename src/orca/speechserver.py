@@ -24,11 +24,11 @@ machine to speak.  Each speech server provides a set of known
 voices (identified by name) which can be combined with various
 attributes to create aural style sheets."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import logging
 from . import settings
@@ -40,21 +40,23 @@ from . import debug
 
 from .acss import ACSS
 
+
 class VoiceFamily(dict):
+
     """Holds the family description for a voice."""
 
-    NAME   = "name"
+    NAME = "name"
     GENDER = "gender"
     LOCALE = "locale"
     DIALECT = "dialect"
 
-    MALE   = "male"
+    MALE = "male"
     FEMALE = "female"
 
     settings = {
-        NAME   : None,
-        GENDER : None,
-        LOCALE : None,
+        NAME: None,
+        GENDER: None,
+        LOCALE: None,
         DIALECT: None,
     }
 
@@ -66,11 +68,12 @@ class VoiceFamily(dict):
         if props:
             self.update(props)
 
+
 class SayAllContext(object):
 
-    PROGRESS    = 0
+    PROGRESS = 0
     INTERRUPTED = 1
-    COMPLETED   = 2
+    COMPLETED = 2
 
     def __init__(self, obj, utterance, startOffset=-1, endOffset=-1):
         """Creates a new SayAllContext that will be passed to the
@@ -87,11 +90,11 @@ class SayAllContext(object):
         -startOffset: the start offset of the Accessible's text
         -endOffset:   the end offset of the Accessible's text
         """
-        self.obj           = obj
-        self.utterance     = utterance
-        self.startOffset   = startOffset
+        self.obj = obj
+        self.utterance = utterance
+        self.startOffset = startOffset
         self.currentOffset = startOffset
-        self.endOffset     = endOffset
+        self.endOffset = endOffset
 
 
 class SpeechServer(object):
@@ -196,13 +199,13 @@ class SpeechServer(object):
 
         event_string = event.getKeyName()
         if orca_state.activeScript and orca_state.usePronunciationDictionary:
-            event_string = orca_state.activeScript.\
+            event_string = orca_state.activeScript. \
                 utilities.adjustForPronunciation(event_string)
 
         lockingStateString = event.getLockingStateString()
         event_string = "%s %s" % (event_string, lockingStateString)
 
-        logLine = "SPEECH OUTPUT: '" + event_string +"'"
+        logLine = "SPEECH OUTPUT: '" + event_string + "'"
         debug.println(debug.LEVEL_INFO, logLine)
         log.info(logLine)
 

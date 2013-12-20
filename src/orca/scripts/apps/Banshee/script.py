@@ -3,6 +3,7 @@ import orca.orca_state as orca_state
 
 from .script_utilities import Utilities
 
+
 class Script(default.Script):
 
     def __init__(self, app):
@@ -23,7 +24,7 @@ class Script(default.Script):
         obj = event.source
         if self.utilities.isSeekSlider(obj):
             value = obj.queryValue()
-            current_value = int(value.currentValue)/1000
+            current_value = int(value.currentValue) / 1000
             if current_value in \
                     range(self._last_seek_value, self._last_seek_value + 4):
                 if self.utilities.isSameObject(obj, orca_state.locusOfFocus):

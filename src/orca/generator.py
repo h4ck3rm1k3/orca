@@ -19,11 +19,11 @@
 
 """Superclass of classes used to generate presentations for objects."""
 
-__id__        = "$Id:$"
-__version__   = "$Revision:$"
-__date__      = "$Date:$"
+__id__ = "$Id:$"
+__version__ = "$Revision:$"
+__date__ = "$Date:$"
 __copyright__ = "Copyright (c) 2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import sys
 import time
@@ -38,6 +38,7 @@ from . import settings
 
 from .orca_i18n import _         # for gettext support
 import collections
+
 
 def _formatExceptionInfo(maxTBlevel=5):
     cla, exc, trbk = sys.exc_info()
@@ -58,15 +59,15 @@ def _formatExceptionInfo(maxTBlevel=5):
 #
 METHOD_PREFIX = "_generate"
 
+
 class Generator(object):
+
     """Takes accessible objects and generates a presentation for those
     objects.  See the generate method, which is the primary entry
     point."""
-
     # pylint: disable-msg=W0142
 
     def __init__(self, script, mode):
-
         # pylint: disable-msg=W0108
 
         self._mode = mode
@@ -75,12 +76,12 @@ class Generator(object):
         for method in \
             [z for z in [getattr(self, y).__get__(
                 self, self.__class__) for y in [
-                    x for x in dir(self) 
-                    if x.startswith(METHOD_PREFIX)]
-                     ] if isinstance(
-                         z, 
-                         collections.Callable)
-            ]:
+                x for x in dir(self)
+                if x.startswith(METHOD_PREFIX)]
+            ] if isinstance(
+                z,
+                collections.Callable)
+                ]:
             name = method.__name__[len(METHOD_PREFIX):]
             name = name[0].lower() + name[1:]
             self._methodsDict[name] = method
@@ -138,7 +139,7 @@ class Generator(object):
                             debug.printException(debug.LEVEL_SEVERE)
                             debug.println(
                                 debug.LEVEL_SEVERE,
-                                "While processing '%s' '%s' '%s' '%s'" \
+                                "While processing '%s' '%s' '%s' '%s'"
                                 % (roleKey, key, evalString, globalsDict))
                             break
 
@@ -227,16 +228,15 @@ class Generator(object):
                     formatting = '%s + %s + %s' % (prefix, formatting, suffix)
                 args['recursing'] = True
                 #firstTimeCalled = True
-            #else:
+            # else:
                 #firstTimeCalled = False
-
 
             details = debug.getAccessibleDetails(debug.LEVEL_ALL, obj)
             duration = "%.4f" % (time.time() - startTime)
             debug.println(debug.LEVEL_ALL, "\nPREPARATION TIME: %s" % duration)
             debug.println(
                 debug.LEVEL_ALL,
-                "generate %s for %s %s (args=%s) using '%s'" \
+                "generate %s for %s %s (args=%s) using '%s'"
                 % (self._mode,
                    args['formatType'],
                    details,
@@ -264,7 +264,7 @@ class Generator(object):
                     globalsDict[arg] = self._methodsDict[arg](obj, **args)
                     duration = "%.4f" % (time.time() - currentTime)
                     debug.println(debug.LEVEL_ALL,
-                                  "GENERATION  TIME: %s  ---->  %s=%s" \
+                                  "GENERATION  TIME: %s  ---->  %s=%s"
                                   % (duration, arg, repr(globalsDict[arg])))
         except:
             debug.printException(debug.LEVEL_SEVERE)
@@ -277,12 +277,11 @@ class Generator(object):
             debug.println(debug.LEVEL_ALL, "  %s" % element)
 
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Name, role, and label information                                 #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateRoleName(self, obj, **args):
         """Returns the role name for the object in an array of strings, with
@@ -320,7 +319,7 @@ class Generator(object):
                 result.append(description)
         # To make the unlabeled icons in gnome-panel more accessible.
         try:
-            #role =
+            # role =
             args.get('role', obj.getRole())
         except (LookupError, RuntimeError):
             return result
@@ -394,14 +393,13 @@ class Generator(object):
         if label:
             result.append(label)
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Image information                                                 #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
-    def _generateImageDescription(self, obj, **args ):
+    def _generateImageDescription(self, obj, **args):
         """Returns an array of strings for use by speech and braille that
         represent the description of the image on the object, if it
         exists.  Otherwise, an empty array is returned.
@@ -416,12 +414,11 @@ class Generator(object):
             if description and len(description):
                 result.append(description)
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # State information                                                 #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateAvailability(self, obj, **args):
         """Returns an array of strings for use by speech and braille that
@@ -449,7 +446,7 @@ class Generator(object):
             args['mode'] = self._mode
         args['stringType'] = 'required'
         if obj.getState().contains(pyatspi.STATE_REQUIRED) \
-           or (obj.getRole() == pyatspi.ROLE_RADIO_BUTTON \
+           or (obj.getRole() == pyatspi.ROLE_RADIO_BUTTON
                and obj.parent.getState().contains(pyatspi.STATE_REQUIRED)):
             result.append(self._script.formatting.getString(**args))
         return result
@@ -487,7 +484,7 @@ class Generator(object):
                 #
                 if action.getName(i) in ["toggle", _("toggle")]:
                     oldRole = self._overrideRole(pyatspi.ROLE_CHECK_BOX,
-                                            args)
+                                                 args)
                     result.extend(self.generate(obj, **args))
                     self._restoreRole(oldRole, args)
         return result
@@ -600,12 +597,11 @@ class Generator(object):
             else:
                 result.append(indicators[0])
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Table interface information                                       #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateRowHeader(self, obj, **args):
         """Returns an array of strings to be used in speech and braille that
@@ -656,7 +652,7 @@ class Generator(object):
                         if settings.speechVerbosityLevel \
                            == settings.VERBOSITY_LEVEL_VERBOSE \
                            and not args.get('formatType', None) \
-                                   in ['basicWhereAmI', 'detailedWhereAmI']:
+                           in ['basicWhereAmI', 'detailedWhereAmI']:
                             text = desc + " " + self.getLocalizedRoleName(
                                 obj, pyatspi.ROLE_ROW_HEADER)
                     elif args['mode'] == 'braille':
@@ -713,7 +709,7 @@ class Generator(object):
                         if settings.speechVerbosityLevel \
                            == settings.VERBOSITY_LEVEL_VERBOSE \
                            and not args.get('formatType', None) \
-                                   in ['basicWhereAmI', 'detailedWhereAmI']:
+                           in ['basicWhereAmI', 'detailedWhereAmI']:
                             text = desc + " " + self.getLocalizedRoleName(
                                 obj, pyatspi.ROLE_COLUMN_HEADER)
                     elif args['mode'] == 'braille':
@@ -755,9 +751,9 @@ class Generator(object):
                             hasToggle[i] = True
                             break
             if hasToggle[0] and not hasToggle[1]:
-                cellOrder = [ 1, 0 ]
+                cellOrder = [1, 0]
             elif not hasToggle[0] and hasToggle[1]:
-                cellOrder = [ 0, 1 ]
+                cellOrder = [0, 1]
             if cellOrder:
                 for i in cellOrder:
                     if not hasToggle[i]:
@@ -798,9 +794,9 @@ class Generator(object):
                             break
 
             if hasToggle[0] and not hasToggle[1]:
-                cellOrder = [ 1, 0 ]
+                cellOrder = [1, 0]
             elif not hasToggle[0] and hasToggle[1]:
-                cellOrder = [ 0, 1 ]
+                cellOrder = [0, 1]
             if cellOrder:
                 for i in cellOrder:
                     if hasToggle[i]:
@@ -826,11 +822,11 @@ class Generator(object):
         try:
             action = obj.queryAction()
             label = self._script.utilities.displayedText(
-                        self._script.utilities.realActiveDescendant(obj))
+                self._script.utilities.realActiveDescendant(obj))
         except NotImplementedError:
             action = None
             label = None
-        if action and (label == None or len(label) == 0):
+        if action and (label is None or len(label) == 0):
             index = self._script.utilities.cellIndex(obj)
             column = parentTable.getColumnAtIndex(index)
             for j in range(0, action.nActions):
@@ -902,21 +898,21 @@ class Generator(object):
                 if parentTable.nColumns <= 1:
                     return result
             elif "lastRow" in self._script.pointOfReference \
-               and "lastColumn" in self._script.pointOfReference:
+                    and "lastColumn" in self._script.pointOfReference:
                 pointOfReference = self._script.pointOfReference
                 presentAll = \
                     (self._mode == 'braille') \
                     or \
-                    ((pointOfReference["lastRow"] != row) \
-                     or ((row == 0 or row == parentTable.nRows-1) \
+                    ((pointOfReference["lastRow"] != row)
+                     or ((row == 0 or row == parentTable.nRows - 1)
                          and pointOfReference["lastColumn"] == column))
             if presentAll:
                 args['readingRow'] = True
                 if self._script.utilities.isTableRow(obj):
                     cells = [x for x in obj]
                 else:
-                    cells = [parentTable.getAccessibleAt(row, i) \
-                                 for i in range(parentTable.nColumns)]
+                    cells = [parentTable.getAccessibleAt(row, i)
+                             for i in range(parentTable.nColumns)]
 
                 for cell in cells:
                     if not cell:
@@ -927,21 +923,20 @@ class Generator(object):
                         cellResult = self._generateRealTableCell(cell, **args)
                         if cellResult and result and self._mode == 'braille':
                             result.append(braille.Region(
-                                    settings.brailleTableCellDelimiter))
+                                settings.brailleTableCellDelimiter))
                         result.extend(cellResult)
             else:
                 result.extend(self._generateRealTableCell(obj, **args))
         else:
             result.extend(self._generateRealTableCell(obj, **args))
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Text interface information                                        #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
-    def _generateCurrentLineText(self, obj, **args ):
+    def _generateCurrentLineText(self, obj, **args):
         """Returns an array of strings for use by speech and braille
         that represents the current line of text, if
         this is a text object.  [[[WDW - consider returning an empty
@@ -950,7 +945,7 @@ class Generator(object):
         [text, caretOffset, startOffset] = self._script.getTextLineAtCaret(obj)
         return [text]
 
-    def _generateDisplayedText(self, obj, **args ):
+    def _generateDisplayedText(self, obj, **args):
         """Returns an array of strings for use by speech and braille that
         represents all the text being displayed by the object.
         """
@@ -959,12 +954,11 @@ class Generator(object):
             return []
 
         return [displayedText]
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Tree interface information                                        #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateNodeLevel(self, obj, **args):
         """Returns an array of strings for use by speech and braille that
@@ -977,15 +971,14 @@ class Generator(object):
         args['stringType'] = 'nodelevel'
         level = self._script.utilities.nodeLevel(obj)
         if level >= 0:
-            result.append(self._script.formatting.getString(**args)\
+            result.append(self._script.formatting.getString(**args)
                           % (level + 1))
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Value interface information                                       #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateValue(self, obj, **args):
         """Returns an array of strings for use by speech and braille that
@@ -995,12 +988,11 @@ class Generator(object):
         consider returning an empty array if there is no value.
         """
         return [self._script.utilities.textForValue(obj)]
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Hierarchy and related dialog information                          #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateApplicationName(self, obj, **args):
         """Returns an array of strings for use by speech and braille that
@@ -1023,7 +1015,7 @@ class Generator(object):
         args['stringType'] = 'nestinglevel'
         nestingLevel = self._script.utilities.nestingLevel(obj)
         if nestingLevel:
-            result.append(self._script.formatting.getString(**args)\
+            result.append(self._script.formatting.getString(**args)
                           % nestingLevel)
         return result
 
@@ -1042,13 +1034,13 @@ class Generator(object):
             relations = obj.getRelationSet()
             for relation in relations:
                 if (not radioGroupLabel) \
-                    and (relation.getRelationType() \
+                    and (relation.getRelationType()
                          == pyatspi.RELATION_LABELLED_BY):
                     radioGroupLabel = relation.getTarget(0)
                     break
             if radioGroupLabel:
-                result.append(self._script.utilities.\
-                                  displayedText(radioGroupLabel))
+                result.append(self._script.utilities.
+                              displayedText(radioGroupLabel))
             else:
                 parent = obj.parent
                 while parent and (parent.parent != parent):
@@ -1061,7 +1053,7 @@ class Generator(object):
                     parent = parent.parent
         return result
 
-    def _generateRealActiveDescendantDisplayedText(self, obj, **args ):
+    def _generateRealActiveDescendantDisplayedText(self, obj, **args):
         """Objects, such as tables and trees, can represent individual cells
         via a complicated nested hierarchy.  This method returns an
         array of strings for use by speech and braille that represents
@@ -1075,7 +1067,7 @@ class Generator(object):
             result = [text]
         return result
 
-    def _generateRealActiveDescendantRoleName(self, obj, **args ):
+    def _generateRealActiveDescendantRoleName(self, obj, **args):
         """Objects, such as tables and trees, can represent individual cells
         via a complicated nested hierarchy.  This method returns an
         array of strings for use by speech and braille that represents

@@ -20,4 +20,3 @@
 """Custom script for Mozilla."""
 
 from .script import Script
-

@@ -29,8 +29,11 @@ from . import settings_manager
 
 _settingsManager = settings_manager.getManager()
 
+
 class Bookmarks(object):
+
     """Represents a default bookmark handler."""
+
     def __init__(self, script):
         self._script = script
         self._bookmarks = {}
@@ -53,8 +56,8 @@ class Bookmarks(object):
         try:
             context = self._script.getFlatReviewContext()
             context_info = self._bookmarks[index]
-            context.setCurrent(context_info['line'], context_info['zone'], \
-                                context_info['word'], context_info['char'])
+            context.setCurrent(context_info['line'], context_info['zone'],
+                               context_info['word'], context_info['char'])
             self._bookmarks[index] = context_info
         except KeyError:
             self._script.systemBeep()
@@ -81,8 +84,8 @@ class Bookmarks(object):
         """ Report "Where am I" information for this bookmark relative to the
         current pointer location."""
         try:
-            context = self._bookmarkToContext( \
-                          self._bookmarks[inputEvent.hw_code])
+            context = self._bookmarkToContext(
+                self._bookmarks[inputEvent.hw_code])
         except KeyError:
             self._script.systemBeep()
             return
@@ -111,7 +114,7 @@ class Bookmarks(object):
         while p:
             if bookmark_ancestors.count(p) > 0:
                 msg = messages.BOOKMARK_SHARED_ANCESTOR % \
-                      p.getLocalizedRoleName()
+                    p.getLocalizedRoleName()
                 self._script.presentMessage(msg)
                 return
             p = p.parent
@@ -150,7 +153,7 @@ class Bookmarks(object):
         # Go to next one if possible
         try:
             index = hwkeys.index(self._currentbookmarkindex)
-            self.goToBookmark(None, index=hwkeys[index+1])
+            self.goToBookmark(None, index=hwkeys[index + 1])
         except (ValueError, KeyError, IndexError):
             self.goToBookmark(None, index=hwkeys[0])
 
@@ -171,7 +174,7 @@ class Bookmarks(object):
         # Go to previous one if possible
         try:
             index = hwkeys.index(self._currentbookmarkindex)
-            self.goToBookmark(None, index=hwkeys[index-1])
+            self.goToBookmark(None, index=hwkeys[index - 1])
         except (ValueError, KeyError, IndexError):
             self.goToBookmark(None, index=hwkeys[0])
 
@@ -193,8 +196,8 @@ class Bookmarks(object):
 
         orcaBookmarksDir = os.path.join(orcaDir, "bookmarks")
         try:
-            inputFile = open( os.path.join( orcaBookmarksDir, \
-                        '%s.pkl' %filename), "r")
+            inputFile = open(os.path.join(orcaBookmarksDir,
+                                          '%s.pkl' % filename), "r")
             bookmarks = pickle.load(inputFile.buffer)
             inputFile.close()
             return bookmarks
@@ -212,8 +215,8 @@ class Bookmarks(object):
             os.stat(orcaBookmarksDir)
         except OSError:
             os.mkdir(orcaBookmarksDir)
-        output = open( os.path.join( orcaBookmarksDir, \
-                    '%s.pkl' %filename), "w", os.O_CREAT)
+        output = open(os.path.join(orcaBookmarksDir,
+                                   '%s.pkl' % filename), "w", os.O_CREAT)
         pickle.dump(bookmarksObj, output.buffer)
         output.close()
 
@@ -229,6 +232,6 @@ class Bookmarks(object):
     def _bookmarkToContext(self, bookmark):
         """Converts a bookmark into a flat_review.Context object."""
         context = self._script.getFlatReviewContext()
-        context.setCurrent(bookmark['line'], bookmark['zone'], \
+        context.setCurrent(bookmark['line'], bookmark['zone'],
                            bookmark['word'], bookmark['char'])
         return context

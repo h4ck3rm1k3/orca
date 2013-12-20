@@ -20,10 +20,10 @@
 """Custom formatting for rhythmbox."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import copy
 
@@ -42,11 +42,13 @@ formatting = {
         #
         pyatspi.ROLE_UNKNOWN: {
             'focused': 'labelAndName'
-            },
+        },
     }
 }
 
+
 class Formatting(orca.formatting.Formatting):
+
     def __init__(self, script):
         orca.formatting.Formatting.__init__(self, script)
         self.update(copy.deepcopy(formatting))

@@ -19,27 +19,29 @@
 # Boston MA  02110-1301 USA.
 
 """Custom script for Eclipse."""
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Informal Informatica LTDA."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import orca.scripts.toolkits.GAIL as GAIL
 import pyatspi
 
-########################################################################
-#                                                                      #
+#
+#
 # The Eclipse script class.                                            #
-#                                                                      #
-########################################################################
+#
+#
+
+
 class Script(GAIL.Script):
 
     def __init__(self, app):
         """Creates a new script for the given application."""
         GAIL.Script.__init__(self, app)
         self.movementKeys = ["Up", "Down", "Left", "Right", "Page_Up",
-                   "Page_Down", "Home", "End"]
+                             "Page_Down", "Home", "End"]
 
     def _presentTextAtNewCaretPosition(self, event, otherObj=None):
         """Updates braille and outputs speech for the event.source or the
@@ -62,7 +64,7 @@ class Script(GAIL.Script):
 
         # if Tab key is pressed and there is text selected, we must announce
         # the text selected because probably we are in a parameter list
-        # and we are jumping between the parameters with the tab key. 
+        # and we are jumping between the parameters with the tab key.
         hasSelection = False
         if lastKey in ["Tab", "ISO_Left_Tab"]:
             [text, startOffset, endOffset] = self.utilities.selectedText(obj)
@@ -126,4 +128,3 @@ class Script(GAIL.Script):
             if obj.getRole() != pyatspi.ROLE_MENU_BAR:
                 return
         GAIL.Script.onSelectionChanged(self, event)
-

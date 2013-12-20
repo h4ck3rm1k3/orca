@@ -23,25 +23,27 @@ implementation in Gecko:
 http://developer.mozilla.org/en/docs/Accessibility/ATSPI_Support
 """
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
 import orca.braille_generator as braille_generator
 
-from orca.orca_i18n import _ # for gettext support
+from orca.orca_i18n import _  # for gettext support
 
-########################################################################
-#                                                                      #
+#
+#
 # Custom BrailleGenerator                                              #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class BrailleGenerator(braille_generator.BrailleGenerator):
+
     """Provides a braille generator specific to Gecko.
     """
 
@@ -66,7 +68,7 @@ class BrailleGenerator(braille_generator.BrailleGenerator):
     def _generateRoleName(self, obj, **args):
         """Prevents some roles from being spoken."""
         result = []
-        #TOD USED role = args.get('role', obj.getRole())
+        # TOD USED role = args.get('role', obj.getRole())
         if not obj.getRole() in [pyatspi.ROLE_SECTION,
                                  pyatspi.ROLE_FORM,
                                  pyatspi.ROLE_UNKNOWN]:
@@ -111,7 +113,7 @@ class BrailleGenerator(braille_generator.BrailleGenerator):
                     result.append(child.name)
         else:
             result.extend(braille_generator.BrailleGenerator._generateName(
-                              self, obj, **args))
+                self, obj, **args))
         if not result and role == pyatspi.ROLE_LIST_ITEM:
             result.append(self._script.utilities.expandEOCs(obj))
 
@@ -149,7 +151,7 @@ class BrailleGenerator(braille_generator.BrailleGenerator):
             result.append(_("image map link"))
         else:
             result = braille_generator.BrailleGenerator.\
-                           _generateDescription(self, obj, **args)
+                _generateDescription(self, obj, **args)
         return result
 
     def _generateLabel(self, obj, **args):
@@ -224,7 +226,7 @@ class BrailleGenerator(braille_generator.BrailleGenerator):
         args['includeContext'] = not self._script.inDocumentContent(obj)
         args['useDefaultFormatting'] = \
             self._script.isAriaWidget(obj) \
-            or ((obj.getRole() == pyatspi.ROLE_LIST) \
+            or ((obj.getRole() == pyatspi.ROLE_LIST)
                 and (not obj.getState().contains(pyatspi.STATE_FOCUSABLE)))
 
         oldRole = None
@@ -241,8 +243,8 @@ class BrailleGenerator(braille_generator.BrailleGenerator):
             if comboBox \
                and not comboBox.getState().contains(pyatspi.STATE_EXPANDED):
                 obj = comboBox
-        result.extend(braille_generator.BrailleGenerator.\
-                          generateBraille(self, obj, **args))
+        result.extend(braille_generator.BrailleGenerator.
+                      generateBraille(self, obj, **args))
         del args['includeContext']
         del args['useDefaultFormatting']
         if oldRole:

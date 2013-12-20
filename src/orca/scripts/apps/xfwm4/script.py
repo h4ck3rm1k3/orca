@@ -19,20 +19,21 @@
 
 """Custom script for xfwm4."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2011 The Orca Team."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import orca.scripts.default as default
 import pyatspi
 
-########################################################################
-#                                                                      #
+#
+#
 # The xfwm4 script class.                                              #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(default.Script):
 

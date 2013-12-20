@@ -20,10 +20,10 @@
 """Custom formatting for Thunderbird."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 # pylint: disable-msg=C0301
 
@@ -39,11 +39,13 @@ formatting = {
             'unfocused': 'name + roleName + currentLineText',
             'basicWhereAmI': 'label + readOnly + textRole + textContent + anyTextSelection + ' + orca.formatting.MNEMONIC,
             'detailedWhereAmI': 'label + readOnly + textRole + textContentWithAttributes + anyTextSelection + ' + orca.formatting.MNEMONIC + ' + ' + orca.formatting.TUTORIAL
-            },
-        }
+        },
     }
+}
+
 
 class Formatting(GeckoFormatting.Formatting):
+
     def __init__(self, script):
         GeckoFormatting.Formatting.__init__(self, script)
         self.update(copy.deepcopy(formatting))

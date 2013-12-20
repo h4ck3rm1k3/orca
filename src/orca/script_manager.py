@@ -18,17 +18,18 @@
 # Free Software Foundation, Inc., Franklin Street, Fifth Floor,
 # Boston MA  02110-1301 USA.
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2011. Orca Team."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import importlib
 
 from . import debug
 from . import orca_state
 from .scripts import apps, toolkits
+
 
 class ScriptManager(object):
 
@@ -45,22 +46,22 @@ class ScriptManager(object):
              "orca.scripts.apps",
              "orca.scripts.toolkits"]
         self._appNames = \
-            {'Bon Echo':         'Mozilla',
-             'Deer Park':        'Mozilla',
-             'Firefox':          'Mozilla',
-             'Minefield':        'Mozilla',
-             'Namoroka':         'Mozilla',
-             'Shiretoko':        'Mozilla',
-             'Lanikai':          'Thunderbird',
-             'Mail/News':        'Thunderbird',
-             'Miramar':          'Thunderbird',
-             'Shredder':         'Thunderbird',
-             'Earlybird':        'Thunderbird',
-             'gaim':             'pidgin',
-             'empathy-chat':     'empathy',
+            {'Bon Echo': 'Mozilla',
+             'Deer Park': 'Mozilla',
+             'Firefox': 'Mozilla',
+             'Minefield': 'Mozilla',
+             'Namoroka': 'Mozilla',
+             'Shiretoko': 'Mozilla',
+             'Lanikai': 'Thunderbird',
+             'Mail/News': 'Thunderbird',
+             'Miramar': 'Thunderbird',
+             'Shredder': 'Thunderbird',
+             'Earlybird': 'Thunderbird',
+             'gaim': 'pidgin',
+             'empathy-chat': 'empathy',
              'gnome-calculator': 'gcalctool',
-             'Nereid':           'Banshee',
-             'vte':              'gnome-terminal',
+             'Nereid': 'Banshee',
+             'vte': 'gnome-terminal',
              'gnome-terminal-server': 'gnome-terminal'}
 
         self.setActiveScript(None, "__init__")
@@ -272,8 +273,8 @@ class ScriptManager(object):
             return
 
         newScript.activate()
-        debug.println(debug.LEVEL_FINE, "ACTIVE SCRIPT: %s (reason=%s)" \
-                          % (newScript.name, reason))
+        debug.println(debug.LEVEL_FINE, "ACTIVE SCRIPT: %s (reason=%s)"
+                      % (newScript.name, reason))
 
     def reclaimScripts(self):
         """Compares the list of known scripts to the list of known apps,
@@ -305,6 +306,7 @@ class ScriptManager(object):
             del app
 
 _manager = ScriptManager()
+
 
 def getManager():
     return _manager

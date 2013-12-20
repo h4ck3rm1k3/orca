@@ -19,11 +19,11 @@
 
 """Displays a GUI for the Orca Find window"""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import os
 import sys
@@ -37,6 +37,7 @@ from . import orca_state
 from . import orca_platform
 
 OS = None
+
 
 class OrcaFindGUI(orca_gtkbuilder.GtkBuilderWrapper):
 
@@ -93,13 +94,13 @@ class OrcaFindGUI(orca_gtkbuilder.GtkBuilderWrapper):
             searchForEntry.select_region(0, len(searchForEntry.get_text()))
             if orca_state.searchQuery.startAtTop:
                 self.get_widget("topRadioButton").set_active(True)
-            self.get_widget("matchCaseCheckbox").set_active(\
+            self.get_widget("matchCaseCheckbox").set_active(
                 orca_state.searchQuery.caseSensitive)
-            self.get_widget("matchEntireWordCheckbox").set_active(\
+            self.get_widget("matchEntireWordCheckbox").set_active(
                 orca_state.searchQuery.matchEntireWord)
-            self.get_widget("wrapAroundCheckbox").set_active(\
+            self.get_widget("wrapAroundCheckbox").set_active(
                 orca_state.searchQuery.windowWrap)
-            self.get_widget("searchBackwardsCheckbox").set_active(\
+            self.get_widget("searchBackwardsCheckbox").set_active(
                 orca_state.searchQuery.searchBackwards)
         except:
             pass
@@ -215,7 +216,6 @@ class OrcaFindGUI(orca_gtkbuilder.GtkBuilderWrapper):
         # the original window has fully regained focus.
         self.get_widget("findDialog").destroy()
 
-
     def findDialogDestroyed(self, widget):
         """Signal handler for the "destroyed" signal for the findDialog
            GtkWindow widget. Reset OS to None.
@@ -227,6 +227,7 @@ class OrcaFindGUI(orca_gtkbuilder.GtkBuilderWrapper):
         global OS
 
         OS = None
+
 
 def showFindUI():
     global OS
@@ -241,6 +242,7 @@ def showFindUI():
         OS.init()
 
     OS.showGUI()
+
 
 def main():
     locale.setlocale(locale.LC_ALL, '')

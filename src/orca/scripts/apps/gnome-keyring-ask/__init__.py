@@ -20,4 +20,3 @@
 """Custom script for gnome-keyring-ask"""
 
 from .script import Script
-

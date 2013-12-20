@@ -20,11 +20,11 @@
 
 """Custom script for pidgin."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -36,11 +36,12 @@ from .chat import Chat
 from .script_utilities import Utilities
 from .speech_generator import SpeechGenerator
 
-########################################################################
-#                                                                      #
+#
+#
 # The Pidgin script class.                                             #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(default.Script):
 
@@ -195,7 +196,7 @@ class Script(default.Script):
         # events we need to present text added to the chatroom are
         # missing.
         #
-        #allPageTabs = 
+        # allPageTabs =
         self.utilities.descendantsWithRole(
             event.source, pyatspi.ROLE_PAGE_TAB)
 
@@ -209,7 +210,8 @@ class Script(default.Script):
         if self.chat.isInBuddyList(obj):
             obj = obj.parent[obj.getIndexInParent() + 1]
             self.updateBraille(obj)
-            speech.speak(self.speechGenerator.generateSpeech(obj, alreadyFocused=True))
+            speech.speak(
+                self.speechGenerator.generateSpeech(obj, alreadyFocused=True))
             return
-            
+
         default.Script.onExpandedChanged(self, event)

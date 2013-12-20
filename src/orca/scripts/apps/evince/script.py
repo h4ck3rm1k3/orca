@@ -19,11 +19,11 @@
 
 """Custom script for evince."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2013 The Orca Team."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -34,11 +34,12 @@ import orca.settings as settings
 from orca.structural_navigation import StructuralNavigation
 from .script_utilities import Utilities
 
-########################################################################
-#                                                                      #
+#
+#
 # The evince script class.                                             #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(gtk.Script):
 

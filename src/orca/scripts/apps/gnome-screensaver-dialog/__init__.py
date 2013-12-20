@@ -19,4 +19,3 @@
 """Custom script for gnome-screensaver-dialog."""
 
 from .script import Script
-

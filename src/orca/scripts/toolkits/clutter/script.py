@@ -20,11 +20,11 @@
 # Free Software Foundation, Inc., Franklin Street, Fifth Floor,
 # Boston MA  02110-1301 USA.
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010-2013 Igalia, S.L."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from gi.repository import Gdk
 
@@ -34,6 +34,7 @@ import orca.debug as debug
 # Set with non printable unicode categories. Full table:
 # http://www.fileformat.info/info/unicode/category/index.htm
 non_printable_set = ('Cc', 'Cf', 'Cn', 'Co', 'Cs')
+
 
 def _unicharIsPrint(unichar):
     """ Checks if the unichar is printable
@@ -45,7 +46,7 @@ def _unicharIsPrint(unichar):
     """
     try:
         import unicodedata
-        category = unicodedata.category (unichar)
+        category = unicodedata.category(unichar)
         result = category not in non_printable_set
     except:
         # Normally a exception is because there are a string
@@ -53,6 +54,7 @@ def _unicharIsPrint(unichar):
         result = False
 
     return result
+
 
 def _computeIsText(string):
     """Decides if the string representation of a keyboard event is
@@ -72,6 +74,7 @@ def _computeIsText(string):
             is_text = False
 
     return is_text
+
 
 class Script(default.Script):
 
@@ -118,9 +121,9 @@ class Script(default.Script):
                 group = entries[0].group
                 modifiers = Gdk.ModifierType(keyboardEvent.modifiers)
                 success, keyval, egroup, level, consumed = \
-                    keymap.translate_keyboard_state (keyboardEvent.hw_code,
-                                                     modifiers,
-                                                     group)
+                    keymap.translate_keyboard_state(keyboardEvent.hw_code,
+                                                    modifiers,
+                                                    group)
         except:
             debug.println(debug.LEVEL_FINE,
                           "Could not compute keyval with modifiers")
@@ -138,13 +141,13 @@ class Script(default.Script):
         # guess-code here I will maintain that in this way
         #
         if (keyboardEvent.event_string == ""):
-            debug.println (debug.LEVEL_FINE, "Computing event_string")
+            debug.println(debug.LEVEL_FINE, "Computing event_string")
             try:
                 keyboardEvent.event_string = Gdk.keyval_name(keyboardEvent.id)
             except:
                 debug.println(debug.LEVEL_FINE,
-                              "Could not obtain keyval_name for id: %d" \
-                                  % keyboardEvent.id)
+                              "Could not obtain keyval_name for id: %d"
+                              % keyboardEvent.id)
 
             # at-spi uses event_string to compute is_text, so if it is
             # NULL we should compute again with the proper

@@ -21,12 +21,12 @@
 
 """Provides a graphical braille display, mainly for development tasks."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc." \
                 "Copyright (c) 2011 The Orca Team."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import brlapi
 from gi.repository import Gtk
@@ -36,16 +36,18 @@ from .input_event import BrailleEvent
 
 # Attribute/Selection mask strings:
 #
-DOT_7 =   '\x40' # 01000000
-DOT_8 =   '\x80' # 10000000
-DOTS_78 = '\xc0' # 11000000
+DOT_7 = '\x40'  # 01000000
+DOT_8 = '\x80'  # 10000000
+DOTS_78 = '\xc0'  # 11000000
+
 
 class BrlDot(Gtk.Alignment):
+
     """A single braille dot."""
 
-    MARKUP_NORMAL  = '<tt><small>%s</small></tt>'
-    SYMBOL_LOWERED = '\u25CB' # '○'
-    SYMBOL_RAISED  = '\u25CF' # '●'
+    MARKUP_NORMAL = '<tt><small>%s</small></tt>'
+    SYMBOL_LOWERED = '\u25CB'  # '○'
+    SYMBOL_RAISED = '\u25CF'  # '●'
 
     def __init__(self, dotNumber, isRaised=False):
         """Create a new BrlDot.
@@ -78,10 +80,12 @@ class BrlDot(Gtk.Alignment):
         self.set(0.5, 0.5, 0, 0)
         self.label.set_markup(self.MARKUP_NORMAL % self.SYMBOL_LOWERED)
 
+
 class BrlCell(Gtk.Grid):
+
     """A single graphical braille cell with cursor routing capability."""
 
-    MARKUP_NORMAL      = '<tt><big>%s</big></tt>'
+    MARKUP_NORMAL = '<tt><big>%s</big></tt>'
     MARKUP_CURSOR_CELL = '<b><u>%s</u></b>'
 
     def __init__(self, position):
@@ -165,7 +169,9 @@ class BrlCell(Gtk.Grid):
         if mask in [DOT_8, DOTS_78]:
             self.dot8.raiseDot()
 
+
 class BrlMon(Gtk.Window):
+
     """Displays a GUI braille monitor that mirrors what would be displayed
     by Orca on a connected, configured, and enabled braille display. Cursor
     routing functionality is emulated by each cell being a push button.

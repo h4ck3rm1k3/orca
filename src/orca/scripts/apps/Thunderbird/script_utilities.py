@@ -23,10 +23,10 @@
    gotten way too large as a result of including these methods."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -34,11 +34,12 @@ import orca.orca_state as orca_state
 
 import orca.scripts.toolkits.Gecko as Gecko
 
-#############################################################################
-#                                                                           #
+#
+#
 # Utilities                                                                 #
-#                                                                           #
-#############################################################################
+#
+#
+
 
 class Utilities(Gecko.Utilities):
 
@@ -51,11 +52,11 @@ class Utilities(Gecko.Utilities):
 
         Gecko.Utilities.__init__(self, script)
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Utilities for finding, identifying, and comparing accessibles         #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def documentFrame(self):
         """Returns the document frame that holds the content being shown.
@@ -88,14 +89,14 @@ class Utilities(Gecko.Utilities):
 
         return obj and obj.getRole() == pyatspi.ROLE_PASSWORD_TEXT
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Utilities for working with the accessible text interface              #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Miscellaneous Utilities                                               #
-    #                                                                       #
-    #########################################################################
+    #
+    #

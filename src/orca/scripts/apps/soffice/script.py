@@ -20,12 +20,12 @@
 
 """Custom script for LibreOffice."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc." \
                 "Copyright (c) 2010-2013 The Orca Team."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from gi.repository import Gtk
 import pyatspi
@@ -51,6 +51,7 @@ from .script_utilities import Utilities
 from . import script_settings
 
 _settingsManager = settings_manager.getManager()
+
 
 class Script(default.Script):
 
@@ -113,7 +114,8 @@ class Script(default.Script):
             _settingsManager.getSetting('enabledBrailledTextAttributes')
         attributes.replace("strikethrough:false;", "strikethrough:none;")
         attributes.replace("indent:0;", "indent:0mm;")
-        _settingsManager.setSetting('enabledBrailledTextAttributes', attributes)
+        _settingsManager.setSetting(
+            'enabledBrailledTextAttributes', attributes)
 
         attributes = _settingsManager.getSetting('enabledSpokenTextAttributes')
         attributes.replace("strikethrough:false;", "strikethrough:none;")
@@ -207,13 +209,13 @@ class Script(default.Script):
             input_event.InputEventHandler(
                 Script.panBrailleLeft,
                 cmdnames.PAN_BRAILLE_LEFT,
-                False) # Do not enable learn mode for this action
+                False)  # Do not enable learn mode for this action
 
         self.inputEventHandlers["panBrailleRightHandler"] = \
             input_event.InputEventHandler(
                 Script.panBrailleRight,
                 cmdnames.PAN_BRAILLE_RIGHT,
-                False) # Do not enable learn mode for this action
+                False)  # Do not enable learn mode for this action
 
     def getAppKeyBindings(self):
         """Returns the application-specific keybindings for this script."""
@@ -338,7 +340,7 @@ class Script(default.Script):
 
         script_settings.speakSpreadsheetCoordinates = \
             self.speakSpreadsheetCoordinatesCheckButton.get_active()
-        prefs.writelines("%s.speakSpreadsheetCoordinates = %s\n" % \
+        prefs.writelines("%s.speakSpreadsheetCoordinates = %s\n" %
                         (prefix, script_settings.speakSpreadsheetCoordinates))
 
         value = self.speakCellCoordinatesCheckButton.get_active()
@@ -490,7 +492,7 @@ class Script(default.Script):
         row, column, table = self.utilities.getRowColumnAndTable(cell)
         if table:
             self.dynamicColumnHeaders[hash(table)] = row
-            self.presentMessage(messages.DYNAMIC_COLUMN_HEADER_SET % (row+1))
+            self.presentMessage(messages.DYNAMIC_COLUMN_HEADER_SET % (row + 1))
 
         return True
 
@@ -527,12 +529,12 @@ class Script(default.Script):
         base26 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
         if column <= len(base26):
-            return base26[column-1]
+            return base26[column - 1]
 
         res = ""
         while column > 0:
             digit = column % len(base26)
-            res = " " + base26[digit-1] + res
+            res = " " + base26[digit - 1] + res
             column /= len(base26)
 
         return res
@@ -558,7 +560,7 @@ class Script(default.Script):
         if table:
             self.dynamicRowHeaders[hash(table)] = column
             self.presentMessage(
-                messages.DYNAMIC_ROW_HEADER_SET % self.columnConvert(column+1))
+                messages.DYNAMIC_ROW_HEADER_SET % self.columnConvert(column + 1))
 
         return True
 
@@ -659,8 +661,8 @@ class Script(default.Script):
         # then we ignore it.
         #
         debug.println(debug.LEVEL_INFO,
-            "StarOffice.readMisspeltWord: type=%s  word=%s(%d,%d)  len=%d" % \
-            (event.type, badWord, startOff, endOff, textLength))
+                      "StarOffice.readMisspeltWord: type=%s  word=%s(%d,%d)  len=%d" %
+                      (event.type, badWord, startOff, endOff, textLength))
 
         if (textLength == self.lastTextLength) and \
            (badWord == self.lastBadWord) and \
@@ -728,9 +730,9 @@ class Script(default.Script):
         # TODO - JD: This is a hack that needs to be done better. For now it
         # fixes the broken echo previous word on Return.
         elif newLocusOfFocus and oldLocusOfFocus \
-           and newLocusOfFocus.getRole() == pyatspi.ROLE_PARAGRAPH \
-           and oldLocusOfFocus.getRole() == pyatspi.ROLE_PARAGRAPH \
-           and newLocusOfFocus != oldLocusOfFocus:
+            and newLocusOfFocus.getRole() == pyatspi.ROLE_PARAGRAPH \
+            and oldLocusOfFocus.getRole() == pyatspi.ROLE_PARAGRAPH \
+                and newLocusOfFocus != oldLocusOfFocus:
             lastKey, mods = self.utilities.lastKeyAndModifiers()
             if lastKey == "Return" and _settingsManager.getSetting('enableEchoByWord'):
                 self.echoPreviousWord(oldLocusOfFocus)
@@ -751,10 +753,12 @@ class Script(default.Script):
                     except:
                         pass
                     else:
-                        self._saveLastCursorPosition(newLocusOfFocus, text.caretOffset)
+                        self._saveLastCursorPosition(
+                            newLocusOfFocus, text.caretOffset)
                     return
 
-        # Pass the event onto the parent class to be handled in the default way.
+        # Pass the event onto the parent class to be handled in the default
+        # way.
         default.Script.locusOfFocusChanged(self, event,
                                            oldLocusOfFocus, newLocusOfFocus)
 
@@ -800,8 +804,8 @@ class Script(default.Script):
         # spelling mistake, in which case, speak/braille the current
         # misspelt word plus its context.
         #
-        rolesList = [pyatspi.ROLE_OPTION_PANE, \
-                     pyatspi.ROLE_DIALOG, \
+        rolesList = [pyatspi.ROLE_OPTION_PANE,
+                     pyatspi.ROLE_DIALOG,
                      pyatspi.ROLE_APPLICATION]
         if self.utilities.hasMatchingHierarchy(event.source, rolesList) \
            and self.utilities.isSameObject(
@@ -818,7 +822,7 @@ class Script(default.Script):
                 title += "."
 
             msg = messages.PRESENTATION_SLIDE_POSITION % \
-                    {"position" : position, "count" : count}
+                {"position": position, "count": count}
             msg = self.utilities.appendString(title, msg)
             self.presentMessage(msg)
 
@@ -831,7 +835,7 @@ class Script(default.Script):
         # See comment #18 of bug #354463.
         if self.findCommandRun:
             return
- 
+
         default.Script.onActiveChanged(self, event)
 
     def onActiveDescendantChanged(self, event):
@@ -884,7 +888,7 @@ class Script(default.Script):
                     fullMessage = messages.TABLE_ROW_DELETED_FROM_END
                     briefMessage = messages.TABLE_ROW_DELETED
                 else:
-                    fullMessage =  messages.TABLE_ROW_INSERTED_AT_END
+                    fullMessage = messages.TABLE_ROW_INSERTED_AT_END
                     briefMessage = messages.TABLE_ROW_INSERTED
                 if fullMessage:
                     self.presentMessage(fullMessage, briefMessage, voice)
@@ -951,7 +955,7 @@ class Script(default.Script):
         if not role in [pyatspi.ROLE_TOGGLE_BUTTON, pyatspi.ROLE_PUSH_BUTTON]:
             default.Script.onCheckedChanged(self, event)
             return
- 
+
         # Announce when the toolbar buttons are toggled if we just toggled
         # them; not if we navigated to some text.
         weToggledIt = False

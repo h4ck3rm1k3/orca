@@ -20,11 +20,12 @@
 """Exposes a dictionary, pronunciation_dict, that maps words to what
 they sound like."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2006-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
+
 
 def getPronunciation(word, pronunciations=None):
     """Given a word, return a string that represents what this word
@@ -49,6 +50,7 @@ def getPronunciation(word, pronunciations=None):
 
     return entry[1]
 
+
 def setPronunciation(word, replacementString, pronunciations=None):
     """Given an actual word, and a replacement string, set a key/value
     pair in a pronunciation dictionary.
@@ -62,9 +64,9 @@ def setPronunciation(word, replacementString, pronunciations=None):
 
     key = word.lower()
     if pronunciations != None:
-        pronunciations[key] = [ word, replacementString ]
+        pronunciations[key] = [word, replacementString]
     else:
-        pronunciation_dict[key] = [ word, replacementString ]
+        pronunciation_dict[key] = [word, replacementString]
 
 # pronunciation_dict is a dictionary where the keys are words and the
 # values represent word the pronunciation of that word (in other words,

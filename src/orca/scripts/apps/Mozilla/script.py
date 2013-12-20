@@ -19,15 +19,17 @@
 
 """Custom script for Mozilla."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import orca.scripts.toolkits.Gecko as Gecko
 
+
 class Script(Gecko.Script):
+
     def __init__(self, app):
         Gecko.Script.__init__(self, app)
 

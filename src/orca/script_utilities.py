@@ -23,10 +23,10 @@
    gotten way too large as a result of including these methods."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import functools
 import math
@@ -42,11 +42,11 @@ from . import mouse_review
 from . import orca_state
 from . import settings
 
-#############################################################################
-#                                                                           #
+#
+#
 # Utilities                                                                 #
-#                                                                           #
-#############################################################################
+#
+#
 
 class Utilities(object):
 
@@ -80,12 +80,11 @@ class Utilities(object):
         """
 
         self._script = script
-
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Utilities for finding, identifying, and comparing accessibles         #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     @staticmethod
     def __hasLabelForRelation(label):
@@ -187,7 +186,8 @@ class Utilities(object):
                 objlist.append(child)
                 if not state.contains(pyatspi.STATE_MANAGES_DESCENDANTS) \
                    and child.childCount > 0:
-                    objlist.extend(Utilities.allDescendants(child, onlyShowing))
+                    objlist.extend(
+                        Utilities.allDescendants(child, onlyShowing))
 
         return objlist
 
@@ -289,12 +289,12 @@ class Utilities(object):
         # soon as the node level of a candidate is equal or less
         # than our current level.
         #
-        for i in range(row+1, table.nRows):
+        for i in range(row + 1, table.nRows):
             cell = table.getAccessibleAt(i, col)
             relations = cell.getRelationSet()
             for relation in relations:
                 if relation.getRelationType() \
-                       == pyatspi.RELATION_NODE_CHILD_OF:
+                        == pyatspi.RELATION_NODE_CHILD_OF:
                     nodeOf = relation.getTarget(0)
                     if self.isSameObject(obj, nodeOf):
                         nodes.append(cell)
@@ -384,7 +384,7 @@ class Utilities(object):
                 return None
             else:
                 inner_container = container
-            container =  ci.getAccessibleAtPoint(x, y, pyatspi.DESKTOP_COORDS)
+            container = ci.getAccessibleAtPoint(x, y, pyatspi.DESKTOP_COORDS)
             if not container or container.queryComponent() == ci:
                 break
             if inner_container.getRole() == pyatspi.ROLE_PAGE_TAB_LIST:
@@ -418,7 +418,7 @@ class Utilities(object):
         #
         for i in range(obj.childCount - 1, -1, -1):
             if obj[i].getRole() == pyatspi.ROLE_PUSH_BUTTON \
-                and obj[i].getState().contains(pyatspi.STATE_IS_DEFAULT):
+                    and obj[i].getState().contains(pyatspi.STATE_IS_DEFAULT):
                 defaultButton = obj[i]
             elif not obj[i].getRole() in skipRoles:
                 defaultButton = self.defaultButton(obj[i])
@@ -472,7 +472,6 @@ class Utilities(object):
         return self._script.generatorCache[self.DISPLAYED_LABEL][obj]
 
     def _displayedTextInComboBox(self, combo):
-
         """Returns the text being displayed in a combo box.  If nothing is
         displayed, then None is returned.
 
@@ -508,7 +507,7 @@ class Utilities(object):
         if textObj:
             [displayedText, caretOffset, startOffset] = \
                 self._script.getTextLineAtCaret(textObj)
-            #print "TEXTOBJ", displayedText
+            # print "TEXTOBJ", displayedText
         else:
             try:
                 comboSelection = combo.querySelection()
@@ -518,7 +517,7 @@ class Utilities(object):
 
             if selectedItem:
                 displayedText = self.displayedText(selectedItem)
-                #print "SELECTEDITEM", displayedText
+                # print "SELECTEDITEM", displayedText
                 if displayedText:
                     return displayedText
             if combo.name and len(combo.name):
@@ -528,13 +527,13 @@ class Utilities(object):
                 # the gaim "Join Chat" window.
                 #
                 displayedText = combo.name
-                #print "NAME", displayedText
+                # print "NAME", displayedText
             else:
                 [displayedText, caretOffset, startOffset] = \
                     self._script.getTextLineAtCaret(combo)
                 # Set to None instead of empty string.
                 displayedText = displayedText or None
-                #print "TEXT", displayedText
+                # print "TEXT", displayedText
 
         return displayedText
 
@@ -574,7 +573,8 @@ class Utilities(object):
         except NotImplementedError:
             pass
         else:
-            displayedText = text.getText(0, self._script.getTextEndOffset(text))
+            displayedText = text.getText(
+                0, self._script.getTextEndOffset(text))
 
             # [[[WDW - HACK to account for things such as Gecko that want
             # to use the EMBEDDED_OBJECT_CHARACTER on a label to hold the
@@ -795,7 +795,7 @@ class Utilities(object):
 
         if layoutOnly:
             debug.println(debug.LEVEL_FINEST,
-                          "Object deemed to be for layout purposes only: %s" \
+                          "Object deemed to be for layout purposes only: %s"
                           % obj)
 
         return layoutOnly
@@ -836,10 +836,10 @@ class Utilities(object):
 
         state = obj.getState()
         readOnly = state.contains(pyatspi.STATE_FOCUSABLE) \
-                   and not state.contains(pyatspi.STATE_EDITABLE)
+            and not state.contains(pyatspi.STATE_EDITABLE)
         details = debug.getAccessibleDetails(debug.LEVEL_ALL, obj)
         debug.println(debug.LEVEL_ALL,
-                      "isReadOnlyTextArea=%s for %s" \
+                      "isReadOnlyTextArea=%s for %s"
                       % (readOnly, details))
 
         return readOnly
@@ -862,8 +862,9 @@ class Utilities(object):
                 extents2 = \
                     obj2.queryComponent().getExtents(pyatspi.DESKTOP_COORDS)
 
-                # Objects which claim to be different and which are in different
-                # locations are almost certainly not recreated objects.
+                # Objects which claim to be different and which are in
+                # different locations are almost certainly not recreated
+                # objects.
                 if extents1 != extents2:
                     return False
 
@@ -932,7 +933,7 @@ class Utilities(object):
         allTargets = []
         for relation in relations:
             if relation.getRelationType() \
-                   == pyatspi.RELATION_LABELLED_BY:
+                    == pyatspi.RELATION_LABELLED_BY:
 
                 # The object can be labelled by more than one thing, so we just
                 # get all the labels (from unique objects) and append them
@@ -987,22 +988,22 @@ class Utilities(object):
                     if child.getRole() == pyatspi.ROLE_LABEL:
                         useLabel = True
                         potentialLabels.append(child)
-            elif ((obj.getRole() == pyatspi.ROLE_FILLER) \
+            elif ((obj.getRole() == pyatspi.ROLE_FILLER)
                     or (obj.getRole() == pyatspi.ROLE_PANEL)) \
-                and (obj.childCount == 2):
+                    and (obj.childCount == 2):
                 child0, child1 = obj
                 child0_role = child0.getRole()
                 child1_role = child1.getRole()
                 if child0_role == pyatspi.ROLE_LABEL \
                     and not self.__hasLabelForRelation(child0) \
-                    and child1_role in [pyatspi.ROLE_FILLER, \
-                                             pyatspi.ROLE_PANEL]:
+                    and child1_role in [pyatspi.ROLE_FILLER,
+                                        pyatspi.ROLE_PANEL]:
                     useLabel = True
                     potentialLabels.append(child0)
                 elif child1_role == pyatspi.ROLE_LABEL \
                     and not self.__hasLabelForRelation(child1) \
-                    and child0_role in [pyatspi.ROLE_FILLER, \
-                                             pyatspi.ROLE_PANEL]:
+                    and child0_role in [pyatspi.ROLE_FILLER,
+                                        pyatspi.ROLE_PANEL]:
                     useLabel = True
                     potentialLabels.append(child1)
             else:
@@ -1048,7 +1049,7 @@ class Utilities(object):
                 expression = uri.split(',')
                 if len(expression) > 1:
                     for item in expression:
-                        if item.find('://') >=0:
+                        if item.find('://') >= 0:
                             if not item[0].isalnum():
                                 item = item[1:-1]
                             if not item[-1].isalnum():
@@ -1175,7 +1176,7 @@ class Utilities(object):
             node = None
             for relation in relations:
                 if relation.getRelationType() \
-                       == pyatspi.RELATION_NODE_CHILD_OF:
+                        == pyatspi.RELATION_NODE_CHILD_OF:
                     node = relation.getTarget(0)
                     break
 
@@ -1276,10 +1277,10 @@ class Utilities(object):
         """
 
         try:
-            return self._script.\
+            return self._script. \
                 generatorCache[self.REAL_ACTIVE_DESCENDANT][obj]
         except:
-            if self.REAL_ACTIVE_DESCENDANT not in self._script.\
+            if self.REAL_ACTIVE_DESCENDANT not in self._script. \
                     generatorCache:
                 self._script.generatorCache[self.REAL_ACTIVE_DESCENDANT] = {}
             activeDescendant = None
@@ -1302,7 +1303,8 @@ class Utilities(object):
                     except NotImplementedError:
                         continue
                     else:
-                        if text.getText(0, self._script.getTextEndOffset(text)):
+                        if text.getText(0, self._script.getTextEndOffset(text)
+                            ):
                             activeDescendant = child
 
         self._script.generatorCache[self.REAL_ACTIVE_DESCENDANT][obj] = \
@@ -1398,8 +1400,8 @@ class Utilities(object):
                         newX = currentX + gridSize
                 else:
                     debug.println(debug.LEVEL_FINEST,
-                            "script_utilities.showingDescendants failed. " \
-                            "Last valid child at index %d" % index)
+                                  "script_utilities.showingDescendants failed. "
+                                  "Last valid child at index %d" % index)
                     break
                 if newX <= currentX:
                     currentX += gridSize
@@ -1453,7 +1455,7 @@ class Utilities(object):
         """
 
         while obj and obj.parent and (obj != obj.parent) \
-              and (obj.parent.getRole() != pyatspi.ROLE_APPLICATION):
+                and (obj.parent.getRole() != pyatspi.ROLE_APPLICATION):
             obj = obj.parent
 
         if obj and obj.parent and \
@@ -1530,13 +1532,14 @@ class Utilities(object):
             onlyShowing)
         try:
             labels = [x for x in allLabels if not x.getRelationSet()]
-            labels = [x for x in labels if x.parent and x.name != x.parent.name]
+            labels = [
+                x for x in labels if x.parent and x.name != x.parent.name]
             if onlyShowing:
                 labels = [
                     x for x
                     in labels
                     if x.getState().contains(
-                            pyatspi.STATE_SHOWING)
+                        pyatspi.STATE_SHOWING)
                 ]
         except:
             return []
@@ -1599,12 +1602,11 @@ class Utilities(object):
             return None
 
         return obj.parent
-
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Utilities for working with the accessible text interface              #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     @staticmethod
     def adjustTextSelection(obj, offset):
@@ -1668,8 +1670,8 @@ class Utilities(object):
                         current = prevObj
                         morePossibleSelections = True
                     else:
-                        displayedText = prevObjText.getText(0,
-                            self._script.getTextEndOffset(prevObjText))
+                        displayedText = prevObjText.getText(0, self._script.
+                            getTextEndOffset(prevObjText))
                         if len(displayedText) == 0:
                             current = prevObj
                             morePossibleSelections = True
@@ -1690,8 +1692,8 @@ class Utilities(object):
                         current = nextObj
                         morePossibleSelections = True
                     else:
-                        displayedText = nextObjText.getText(0,
-                            self._script.getTextEndOffset(nextObjText))
+                        displayedText = nextObjText.getText(0, self._script.
+                            getTextEndOffset(nextObjText))
                         if len(displayedText) == 0:
                             current = nextObj
                             morePossibleSelections = True
@@ -1839,7 +1841,8 @@ class Utilities(object):
         else:
             otherSelected = False
             text = obj.queryText()
-            displayedText = text.getText(0, self._script.getTextEndOffset(text))
+            displayedText = text.getText(
+                0, self._script.getTextEndOffset(text))
             if (text.caretOffset == 0) or len(displayedText) == 0:
                 current = obj
                 morePossibleSelections = True
@@ -1847,14 +1850,14 @@ class Utilities(object):
                     morePossibleSelections = False
                     for relation in current.getRelationSet():
                         if relation.getRelationType() == \
-                               pyatspi.RELATION_FLOWS_FROM:
+                                pyatspi.RELATION_FLOWS_FROM:
                             prevObj = relation.getTarget(0)
                             prevObjText = prevObj.queryText()
                             if prevObjText.getNSelections() > 0:
                                 otherSelected = True
                             else:
-                                displayedText = prevObjText.getText(0,
-                                    self._script.getTextEndOffset(prevObjText))
+                                displayedText = prevObjText.getText(0, self.
+                                    _script.getTextEndOffset(prevObjText))
                                 if len(displayedText) == 0:
                                     current = prevObj
                                     morePossibleSelections = True
@@ -1866,14 +1869,14 @@ class Utilities(object):
                     morePossibleSelections = False
                     for relation in current.getRelationSet():
                         if relation.getRelationType() == \
-                               pyatspi.RELATION_FLOWS_TO:
+                                pyatspi.RELATION_FLOWS_TO:
                             nextObj = relation.getTarget(0)
                             nextObjText = nextObj.queryText()
                             if nextObjText.getNSelections() > 0:
                                 otherSelected = True
                             else:
-                                displayedText = nextObjText.getText(0,
-                                    self._script.getTextEndOffset(nextObjText))
+                                displayedText = nextObjText.getText(0, self.
+                                    _script.getTextEndOffset(nextObjText))
                                 if len(displayedText) == 0:
                                     current = nextObj
                                     morePossibleSelections = True
@@ -2038,12 +2041,12 @@ class Utilities(object):
             [startOffset, endOffset] = textObj.getSelection(i)
 
             debug.println(debug.LEVEL_FINEST,
-                "getSelectedText: selection start=%d, end=%d" % \
-                (startOffset, endOffset))
+                          "getSelectedText: selection start=%d, end=%d" %
+                          (startOffset, endOffset))
 
             selectedText = textObj.getText(startOffset, endOffset)
             debug.println(debug.LEVEL_FINEST,
-                "getSelectedText: selected text=<%s>" % selectedText)
+                          "getSelectedText: selected text=<%s>" % selectedText)
 
             if i > 0:
                 textContents += " "
@@ -2119,7 +2122,6 @@ class Utilities(object):
         """Returns the unicode text for an object or None if the object
         doesn't implement the accessible text specialization.
         """
-
         # TODO: eliminate calls to this now-redundant method
 
         text = self.queryNonEmptyText(obj)
@@ -2143,15 +2145,15 @@ class Utilities(object):
         # modifiers are pressed.  If that's the case, then character
         # echo will kick in for us."
         #
-        return (self.isTextArea(orca_state.locusOfFocus)\
-                     or orca_state.locusOfFocus.getRole() \
-                        == pyatspi.ROLE_ENTRY) \
-                and (orca_state.locusOfFocus.getRole() \
-                     == pyatspi.ROLE_TERMINAL \
-                     or (not self.isReadOnlyTextArea(orca_state.locusOfFocus) \
-                         and (orca_state.locusOfFocus.getState().contains( \
-                                  pyatspi.STATE_FOCUSABLE)))) \
-                and not (event.modifiers & settings.ORCA_CTRL_MODIFIER_MASK)
+        return (self.isTextArea(orca_state.locusOfFocus)
+                or orca_state.locusOfFocus.getRole()
+                == pyatspi.ROLE_ENTRY) \
+            and (orca_state.locusOfFocus.getRole()
+                 == pyatspi.ROLE_TERMINAL
+                 or (not self.isReadOnlyTextArea(orca_state.locusOfFocus)
+                     and (orca_state.locusOfFocus.getState().contains(
+                         pyatspi.STATE_FOCUSABLE)))) \
+            and not (event.modifiers & settings.ORCA_CTRL_MODIFIER_MASK)
 
     def wordAtCoords(self, acc, x, y):
         """Get the word at the given coords in the accessible.
@@ -2199,19 +2201,19 @@ class Utilities(object):
                     start_offset = end_offset + 1
                 for a, b in word_offsets:
                     bx, by, bw, bh = \
-                        ti.getRangeExtents(start+a, start+b,
+                        ti.getRangeExtents(start + a, start + b,
                                            pyatspi.DESKTOP_COORDS)
                     bb = mouse_review.BoundingBox(bx, by, bw, bh)
                     if bb.isInBox(x, y):
-                        return text_contents[start+a:start+b], start+a, start+b
+                        return (text_contents[start + a:start + b], start + a,
+                            start + b)
 
         return '', 0, 0
-
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Debugging and Reporting Utilities                                     #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def _isInterestingObj(self, obj):
         import inspect
@@ -2259,7 +2261,6 @@ class Utilities(object):
 
     def _detectCycle(self, obj, visitedObjs, indent=""):
         """Attempts to discover a cycle in object references."""
-
         # [[[TODO: WDW - not sure this really works.]]]
 
         import gc
@@ -2294,7 +2295,7 @@ class Utilities(object):
                 print(line)
                 if child.parent != app:
                     debug.println(debug.LEVEL_OFF,
-                                  "      WARNING: child's parent is not app!!!")
+                        "      WARNING: child's parent is not app!!!")
 
         return True
 
@@ -2327,12 +2328,11 @@ class Utilities(object):
             self._script.displayBrailleMessage(infoString)
 
         return True
-
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Miscellaneous Utilities                                               #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def _addRepeatSegment(self, segment, line, respectPunctuation=True):
         """Add in the latest line segment, adjusting for repeat characters
@@ -2440,7 +2440,7 @@ class Utilities(object):
             nextChar = ""
             if index < len(line):
                 nextChar = adjustedLine[index]
-            if not (nextChar in self._script.whitespace \
+            if not (nextChar in self._script.whitespace
                     or punctuation_settings.getPunctuationInfo(nextChar)):
                 linkString += " "
             adjustedLine[index:index] = linkString
@@ -2591,7 +2591,7 @@ class Utilities(object):
             return True
 
         return currentChar in self._script.whitespace \
-               and previousChar in '!.?:;'
+            and previousChar in '!.?:;'
 
     def isWordDelimiter(self, character):
         """Returns True if the given character is a word delimiter.
@@ -2623,7 +2623,7 @@ class Utilities(object):
         elif aheight == 0:
             if awidth == 0:
                 return lowestTop == highestBottom \
-                       and leftMostRightEdge == rightMostLeftEdge
+                    and leftMostRightEdge == rightMostLeftEdge
             else:
                 return leftMostRightEdge <= rightMostLeftEdge
         elif awidth == 0:
@@ -2707,27 +2707,27 @@ class Utilities(object):
             return self._script.generatorCache[self.KEY_BINDING][obj]
 
         if len(bindingStrings) == 3:
-            mnemonic       = bindingStrings[0]
-            fullShortcut   = bindingStrings[1]
-            accelerator    = bindingStrings[2]
+            mnemonic = bindingStrings[0]
+            fullShortcut = bindingStrings[1]
+            accelerator = bindingStrings[2]
         elif len(bindingStrings) > 0:
-            mnemonic       = ""
-            fullShortcut   = bindingStrings[0]
+            mnemonic = ""
+            fullShortcut = bindingStrings[0]
             try:
                 accelerator = bindingStrings[1]
             except:
                 accelerator = ""
         else:
-            mnemonic       = ""
-            fullShortcut   = ""
-            accelerator    = ""
+            mnemonic = ""
+            fullShortcut = ""
+            accelerator = ""
 
         fullShortcut = fullShortcut.replace(":", " ").strip()
         fullShortcut = self.labelFromKeySequence(fullShortcut)
         mnemonic = self.labelFromKeySequence(mnemonic)
         accelerator = self.labelFromKeySequence(accelerator)
 
-        debug.println(debug.LEVEL_FINEST, "script_utilities.getKeyBinding: " \
+        debug.println(debug.LEVEL_FINEST, "script_utilities.getKeyBinding: "
                       + repr([mnemonic, fullShortcut, accelerator]))
 
         if self.KEY_BINDING not in self._script.generatorCache:
@@ -2794,27 +2794,27 @@ class Utilities(object):
             maxValue = value.maximumValue
         except (LookupError, RuntimeError):
             maxValue = 0.0
-            debug.println(debug.LEVEL_FINEST, "VALUE WARNING: " \
+            debug.println(debug.LEVEL_FINEST, "VALUE WARNING: "
                           "Error accessing maximumValue for %s" % obj)
         try:
             minValue = value.minimumValue
         except (LookupError, RuntimeError):
             minValue = 0.0
-            debug.println(debug.LEVEL_FINEST, "VALUE WARNING: " \
+            debug.println(debug.LEVEL_FINEST, "VALUE WARNING: "
                           "Error accessing minimumValue for %s" % obj)
         try:
             minIncrement = value.minimumIncrement
         except (LookupError, RuntimeError):
             minIncrement = (maxValue - minValue) / 100.0
-            debug.println(debug.LEVEL_FINEST, "VALUE WARNING: " \
+            debug.println(debug.LEVEL_FINEST, "VALUE WARNING: "
                           "Error accessing minimumIncrement for %s" % obj)
 
         if minIncrement != 0.0:
             try:
                 decimalPlaces = math.ceil(max(0, -math.log10(minIncrement)))
             except ValueError:
-                debug.println(debug.LEVEL_FINEST, "VALUE WARNING: " \
-                    "Error calculating decimal places for %s" % obj)
+                debug.println(debug.LEVEL_FINEST, "VALUE WARNING: "
+                              "Error calculating decimal places for %s" % obj)
                 return ""
         elif abs(currentValue) < 1:
             decimalPlaces = 1
@@ -2851,7 +2851,6 @@ class Utilities(object):
 
         Returns a list of (obj, startOffset, endOffset, string) tuples.
         """
-
         # For now, each script should implement this functionality itself.
 
         return []
@@ -2881,5 +2880,6 @@ class Utilities(object):
         return children
 
     def focusedChild(self, obj):
-        isFocused = lambda x: x and x.getState().contains(pyatspi.STATE_FOCUSED)
+        isFocused = lambda x: x and x.getState().contains(
+            pyatspi.STATE_FOCUSED)
         return pyatspi.findDescendant(obj, isFocused)

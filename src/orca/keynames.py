@@ -20,11 +20,11 @@
 """Exposes a dictionary, keynames, that maps key events
 into localized words."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2006-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from . import chnames
 
@@ -39,91 +39,91 @@ __keynames = {}
 
 # Translators: this is how someone would speak the name of the shift key
 #
-__keynames["Shift"]        = C_("keyboard", "Shift")
+__keynames["Shift"] = C_("keyboard", "Shift")
 
 # Translators: this is how someone would speak the name of the alt key
 #
-__keynames["Alt"]          = C_("keyboard", "Alt")
+__keynames["Alt"] = C_("keyboard", "Alt")
 
 # Translators: this is how someone would speak the name of the control key
 #
-__keynames["Control"]      = C_("keyboard", "Control")
+__keynames["Control"] = C_("keyboard", "Control")
 
 # Translators: this is how someone would speak the name of the left shift key
 #
-__keynames["Shift_L"]      = _("left shift")
+__keynames["Shift_L"] = _("left shift")
 
 # Translators: this is how someone would speak the name of the left alt key
 #
-__keynames["Alt_L"]        = _("left alt")
+__keynames["Alt_L"] = _("left alt")
 
 # Translators: this is how someone would speak the name of the left ctrl key
 #
-__keynames["Control_L"]    = _("left control")
+__keynames["Control_L"] = _("left control")
 
 # Translators: this is how someone would speak the name of the right shift key
 #
-__keynames["Shift_R"]      = _("right shift")
+__keynames["Shift_R"] = _("right shift")
 
 # Translators: this is how someone would speak the name of the right alt key
 #
-__keynames["Alt_R"]        = _("right alt")
+__keynames["Alt_R"] = _("right alt")
 
 # Translators: this is how someone would speak the name of the right ctrl key
 #
-__keynames["Control_R"]    = _("right control")
+__keynames["Control_R"] = _("right control")
 
 # Translators: this is how someone would speak the name of the left meta key
 #
-__keynames["Meta_L"]       = _("left meta")
+__keynames["Meta_L"] = _("left meta")
 
 # Translators: this is how someone would speak the name of the right meta key
 #
-__keynames["Meta_R"]       = _("right meta")
+__keynames["Meta_R"] = _("right meta")
 
 # Translators: this is how someone would speak the name of the num lock key
 #
-__keynames["Num_Lock"]     = _("num lock")
+__keynames["Num_Lock"] = _("num lock")
 
 # Translators: this is how someone would speak the name of the caps lock key
 #
-__keynames["Caps_Lock"]    = _("caps lock")
+__keynames["Caps_Lock"] = _("caps lock")
 
 # Translators: this is how someone would speak the name of the scroll lock key
 #
-__keynames["Scroll_Lock"]  = _("scroll lock")
+__keynames["Scroll_Lock"] = _("scroll lock")
 
 # Translators: this is how someone would speak the name of the page up key
 #
-__keynames["Page_Up"]      = _("page up")
+__keynames["Page_Up"] = _("page up")
 
 # Translators: this is how someone would speak the name of the page up key
 #
-__keynames["KP_Page_Up"]      = _("page up")
+__keynames["KP_Page_Up"] = _("page up")
 
 # Translators: this is how someone would speak the name of the page up key
 #
-__keynames["Prior"]      = _("page up")
+__keynames["Prior"] = _("page up")
 
 # Translators: this is how someone would speak the name of the page up key
 #
-__keynames["KP_Prior"]      = _("page up")
+__keynames["KP_Prior"] = _("page up")
 
 # Translators: this is how someone would speak the name of the page down key
 #
-__keynames["Page_Down"]    = _("page down")
+__keynames["Page_Down"] = _("page down")
 
 # Translators: this is how someone would speak the name of the page down key
 #
-__keynames["KP_Page_Down"]    = _("page down")
+__keynames["KP_Page_Down"] = _("page down")
 
 # Translators: this is how someone would speak the name of the page down key
 #
-__keynames["Next"]    = _("page down")
+__keynames["Next"] = _("page down")
 
 # Translators: this is how someone would speak the name of the page down key
 #
-__keynames["KP_Next"]    = _("page down")
+__keynames["KP_Next"] = _("page down")
 
 # Translators: this is how someone would speak the name of the tab key
 #
@@ -291,11 +291,11 @@ __keynames["dead_stroke"] = _("stroke")
 
 # Translators: this is how someone would speak the name of the minus key
 #
-__keynames["minus"]      = _("minus")
+__keynames["minus"] = _("minus")
 
 # Translators: this is how someone would speak the name of the plus key
 #
-__keynames["plus"]      = _("plus")
+__keynames["plus"] = _("plus")
 
 
 def getKeyName(key):
@@ -309,6 +309,7 @@ def getKeyName(key):
     """
 
     return __keynames.get(key, chnames.getCharacterName(key))
+
 
 def localizeKeySequence(keys):
     """Given a sequence of keys, such as 'Shift Control A', localize the

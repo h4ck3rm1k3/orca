@@ -19,11 +19,11 @@
 
 """ Custom script for The notify-osd"""
 
-__id__        = ""
-__version__   = ""
-__date__      = ""
+__id__ = ""
+__version__ = ""
+__date__ = ""
 __copyright__ = "Copyright (c) 2009 Eitan Isaacson"
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import orca.messages as messages
 import orca.scripts.default as default
@@ -31,13 +31,15 @@ import orca.settings as settings
 import orca.speech as speech
 import orca.notification_messages as notification_messages
 
-########################################################################
-#                                                                      #
+#
+#
 # The notify-osd script class.                                         #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(default.Script):
+
     def onValueChanged(self, event):
         try:
             ivalue = event.source.queryValue()
@@ -58,7 +60,7 @@ class Script(default.Script):
             value = ivalue.currentValue
         except NotImplementedError:
             value = -1
-            
+
         utterances = []
         message = ""
         if value < 0:
@@ -76,5 +78,6 @@ class Script(default.Script):
             utterances.append(self.voices.get(settings.SYSTEM_VOICE))
 
         speech.speak(utterances, None, True)
-        self.displayBrailleMessage(message, flashTime=settings.brailleFlashTime)
+        self.displayBrailleMessage(
+            message, flashTime=settings.brailleFlashTime)
         notification_messages.saveMessage(message)

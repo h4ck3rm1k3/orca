@@ -20,23 +20,24 @@
 # Free Software Foundation, Inc., Franklin Street, Fifth Floor,
 # Boston MA  02110-1301 USA.
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs" \
                 "Copyright (c) 2011-2012 Igalia, S.L."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
 import orca.orca as orca
 import orca.structural_navigation as structural_navigation
 
-########################################################################
-#                                                                      #
+#
+#
 # Custom Structural Navigation                                         #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class StructuralNavigation(structural_navigation.StructuralNavigation):
 

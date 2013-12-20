@@ -19,11 +19,11 @@
 
 """Custom script for gnome-documents."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2013 The Orca Team"
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -31,6 +31,7 @@ import orca.scripts.toolkits.gtk as gtk
 import orca.orca_state as orca_state
 from .speech_generator import SpeechGenerator
 from .script_utilities import Utilities
+
 
 class Script(gtk.Script):
 

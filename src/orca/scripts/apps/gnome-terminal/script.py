@@ -21,11 +21,11 @@
 of manipulating text - both the user and the system put text into the
 system and we try to determine which was which and why."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -37,11 +37,12 @@ import orca.speech as speech
 
 _settingsManager = settings_manager.getManager()
 
-########################################################################
-#                                                                      #
+#
+#
 # The GnomeTerminal script class.                                      #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(gtk.Script):
 
@@ -54,7 +55,7 @@ class Script(gtk.Script):
 
         gtk.Script.__init__(self, app)
 
-        # By default, don't present if gnome-terminal is not the active 
+        # By default, don't present if gnome-terminal is not the active
         # application.
         #
         self.presentIfInactive = False
@@ -86,7 +87,7 @@ class Script(gtk.Script):
                 speech.speak(utterances)
 
         gtk.Script.locusOfFocusChanged(self, event,
-                                           oldLocusOfFocus, newLocusOfFocus)
+                                       oldLocusOfFocus, newLocusOfFocus)
 
     def onTextDeleted(self, event):
         """Called whenever text is deleted from an object.
@@ -101,7 +102,7 @@ class Script(gtk.Script):
         # in terminals.
         #
         if (event.source.getRole() != pyatspi.ROLE_TERMINAL) \
-            or (event_string != "BackSpace"):
+                or (event_string != "BackSpace"):
             gtk.Script.onTextDeleted(self, event)
             return
 
@@ -110,7 +111,7 @@ class Script(gtk.Script):
         # text was deleted.
         #
         if (event.source != orca_state.locusOfFocus) \
-            and (event.source.parent != orca_state.locusOfFocus):
+                and (event.source.parent != orca_state.locusOfFocus):
             return
 
         self.updateBraille(event.source)
@@ -140,7 +141,7 @@ class Script(gtk.Script):
         where the caret is.
         """
         string, caretOffset, lineOffset = \
-                gtk.Script.getTextLineAtCaret(self, acc)
+            gtk.Script.getTextLineAtCaret(self, acc)
 
         # Sometimes, gnome-terminal will give us very odd values when
         # the user is editing using 'vi' and has positioned the caret
@@ -153,11 +154,11 @@ class Script(gtk.Script):
             lineOffset = 0
             texti = acc.queryText()
             string, startOffset, endOffset = \
-                    texti.getTextAtOffset(0,
-                                          pyatspi.TEXT_BOUNDARY_LINE_START)
+                texti.getTextAtOffset(0,
+                                      pyatspi.TEXT_BOUNDARY_LINE_START)
 
         return string, caretOffset, lineOffset
-        
+
     def getTextEndOffset(self, textInterface):
         """Returns the offset which should be used as the end offset.
         By default, this is -1. However, this value triggers an assertion

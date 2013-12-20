@@ -23,20 +23,21 @@
    gotten way too large as a result of including these methods."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import orca.script_utilities as script_utilities
 
 import orca.scripts.toolkits.gtk as gtk
 
-#############################################################################
-#                                                                           #
+#
+#
 # Utilities                                                                 #
-#                                                                           #
-#############################################################################
+#
+#
+
 
 class Utilities(gtk.Utilities):
 
@@ -49,11 +50,11 @@ class Utilities(gtk.Utilities):
 
         gtk.Utilities.__init__(self, script)
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Utilities for finding, identifying, and comparing accessibles         #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def childNodes(self, obj):
         """Gets all of the children that have RELATION_NODE_CHILD_OF pointing

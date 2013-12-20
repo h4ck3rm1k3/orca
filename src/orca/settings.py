@@ -21,11 +21,11 @@
 fallback to local settings if the user settings doesn't exist (e.g., in the
 case of gdm) or doesn't have the specified attribute."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2004-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -133,8 +133,8 @@ profile = ['Default', 'default']
 # has specified a desktop or a laptop keyboard layout.
 #
 DESKTOP_MODIFIER_KEYS = ["Insert", "KP_Insert"]
-LAPTOP_MODIFIER_KEYS  = ["Caps_Lock"]
-orcaModifierKeys      = DESKTOP_MODIFIER_KEYS
+LAPTOP_MODIFIER_KEYS = ["Caps_Lock"]
+orcaModifierKeys = DESKTOP_MODIFIER_KEYS
 
 # A new modifier to use (set by the press of any key in the
 # orcaModifierKeys list) to represent the Orca modifier.
@@ -145,16 +145,16 @@ MODIFIER_ORCA = 8
 # setSpeechVerbosityLevel).  These will have an impact on the various
 # individual verbosity levels for rolenames, accelerators, etc.
 #
-VERBOSITY_LEVEL_BRIEF   = 0
+VERBOSITY_LEVEL_BRIEF = 0
 VERBOSITY_LEVEL_VERBOSE = 1
-speechVerbosityLevel    = VERBOSITY_LEVEL_VERBOSE
-brailleVerbosityLevel   = VERBOSITY_LEVEL_VERBOSE
-flashVerbosityLevel     = VERBOSITY_LEVEL_VERBOSE
-messageVerbosityLevel   = VERBOSITY_LEVEL_VERBOSE
+speechVerbosityLevel = VERBOSITY_LEVEL_VERBOSE
+brailleVerbosityLevel = VERBOSITY_LEVEL_VERBOSE
+flashVerbosityLevel = VERBOSITY_LEVEL_VERBOSE
+messageVerbosityLevel = VERBOSITY_LEVEL_VERBOSE
 
-BRAILLE_ROLENAME_STYLE_SHORT = 0 # three letter abbreviations
-BRAILLE_ROLENAME_STYLE_LONG  = 1 # full rolename
-brailleRolenameStyle    = BRAILLE_ROLENAME_STYLE_LONG
+BRAILLE_ROLENAME_STYLE_SHORT = 0  # three letter abbreviations
+BRAILLE_ROLENAME_STYLE_LONG = 1  # full rolename
+brailleRolenameStyle = BRAILLE_ROLENAME_STYLE_LONG
 
 # Roles to force to be displayed even when the verbosity level
 # is not verbose.
@@ -167,20 +167,20 @@ brailleForceRoles = [pyatspi.ROLE_COMBO_BOX,
 # The values represent the character to be used in the attrOr
 # field of brlAPI's writeStruct.
 #
-BRAILLE_SEL_NONE = 0x00 # 00000000
-BRAILLE_SEL_7    = 0x40 # 01000000
-BRAILLE_SEL_8    = 0x80 # 10000000
-BRAILLE_SEL_BOTH = 0xc0 # 11000000
+BRAILLE_SEL_NONE = 0x00  # 00000000
+BRAILLE_SEL_7 = 0x40  # 01000000
+BRAILLE_SEL_8 = 0x80  # 10000000
+BRAILLE_SEL_BOTH = 0xc0  # 11000000
 brailleSelectorIndicator = BRAILLE_SEL_BOTH
 
 # Braille Link Indicator (see brailleLinkIndicator).
 # The values represent the character to be used in the attrOr
 # field of brlAPI's writeStruct.
 #
-BRAILLE_LINK_NONE = 0x00 # 00000000
-BRAILLE_LINK_7    = 0x40 # 01000000
-BRAILLE_LINK_8    = 0x80 # 10000000
-BRAILLE_LINK_BOTH = 0xc0 # 11000000
+BRAILLE_LINK_NONE = 0x00  # 00000000
+BRAILLE_LINK_7 = 0x40  # 01000000
+BRAILLE_LINK_8 = 0x80  # 10000000
+BRAILLE_LINK_BOTH = 0xc0  # 11000000
 brailleLinkIndicator = BRAILLE_LINK_BOTH
 
 # Braille alignment styles.  These say how to align text on the
@@ -189,54 +189,53 @@ brailleLinkIndicator = BRAILLE_LINK_BOTH
 # cell can get.  The brailleMaximumJump says how far we can jump
 # the display when aligning by word.
 #
-ALIGN_BRAILLE_BY_EDGE   = 0
+ALIGN_BRAILLE_BY_EDGE = 0
 ALIGN_BRAILLE_BY_MARGIN = 1
-ALIGN_BRAILLE_BY_WORD   = 2
-brailleAlignmentMargin  = 3
-brailleMaximumJump      = 8
-brailleAlignmentStyle   = ALIGN_BRAILLE_BY_EDGE
+ALIGN_BRAILLE_BY_WORD = 2
+brailleAlignmentMargin = 3
+brailleMaximumJump = 8
+brailleAlignmentStyle = ALIGN_BRAILLE_BY_EDGE
 
 # Speech punctuation levels (see verbalizePunctuationStyle).
 #
 PUNCTUATION_STYLE_NONE = 3
 PUNCTUATION_STYLE_SOME = 2
 PUNCTUATION_STYLE_MOST = 1
-PUNCTUATION_STYLE_ALL  = 0
+PUNCTUATION_STYLE_ALL = 0
 verbalizePunctuationStyle = PUNCTUATION_STYLE_MOST
 
 # Say All styles (see sayAllStyle).
 #
-SAYALL_STYLE_LINE     = 0
+SAYALL_STYLE_LINE = 0
 SAYALL_STYLE_SENTENCE = 1
 sayAllStyle = SAYALL_STYLE_SENTENCE
 
 # Speech Dispatcher capitalization styles.
-CAPITALIZATION_STYLE_NONE  = "none"
+CAPITALIZATION_STYLE_NONE = "none"
 CAPITALIZATION_STYLE_SPELL = "spell"
 CAPITALIZATION_STYLE_ICON = "icon"
 capitalizationStyle = CAPITALIZATION_STYLE_NONE
-
 
 # The absolue amount to change the speech rate when
 # increasing or decreasing speech.  This is a numerical
 # value that represents an ACSS rate value.
 #
-speechRateDelta         = 5
+speechRateDelta = 5
 
 # The absolue amount to change the speech pitch when
 # increasing or decreasing pitch.  This is a numerical
 # value that represents an ACSS pitch value.
 #
-speechPitchDelta        = 0.5
+speechPitchDelta = 0.5
 
 # If True, enable speech.
 #
-enableSpeech            = True
-enableSpeechCallbacks   = True
+enableSpeech = True
+enableSpeechCallbacks = True
 
 # If True, speech has been temporarily silenced.
 #
-silenceSpeech           = False
+silenceSpeech = False
 
 # If True, only text which is displayed on screen will be spoken
 # (roles, states, etc. will not be).
@@ -246,26 +245,25 @@ onlySpeakDisplayedText = False
 # Settings that apply to the particular speech engine to
 # use as well details on the default voices to use.
 #
-speechFactoryModules    = ["speechdispatcherfactory"]
-speechServerFactory     = "speechdispatcherfactory"
-speechServerInfo        = None # None means let the factory decide.
+speechFactoryModules = ["speechdispatcherfactory"]
+speechServerFactory = "speechdispatcherfactory"
+speechServerInfo = None  # None means let the factory decide.
 
-DEFAULT_VOICE           = "default"
-UPPERCASE_VOICE         = "uppercase"
-HYPERLINK_VOICE         = "hyperlink"
-SYSTEM_VOICE            = "system"
+DEFAULT_VOICE = "default"
+UPPERCASE_VOICE = "uppercase"
+HYPERLINK_VOICE = "hyperlink"
+SYSTEM_VOICE = "system"
 
 voicesKeys = {
-"DEFAULT_VOICE"     : "default",
-"UPPERCASE_VOICE"   : "uppercase",
-"HYPERLINK_VOICE"   : "hyperlink",
-"SYSTEM_VOICE"      : "system"
+    "DEFAULT_VOICE": "default",
+    "UPPERCASE_VOICE": "uppercase",
+    "HYPERLINK_VOICE": "hyperlink",
+    "SYSTEM_VOICE": "system"
 }
-
 
 voices = {
     DEFAULT_VOICE: ACSS({}),
-    UPPERCASE_VOICE: ACSS({ACSS.AVERAGE_PITCH : 7.0}),
+    UPPERCASE_VOICE: ACSS({ACSS.AVERAGE_PITCH: 7.0}),
     HYPERLINK_VOICE: ACSS({}),
     SYSTEM_VOICE: ACSS({}),
 }
@@ -276,85 +274,85 @@ enableSpeechIndentation = False
 
 # If True, enable braille.
 #
-enableBraille           = True
+enableBraille = True
 
 # If True, add the hierarchical context of an object to the braille
 # line.  People with very large braille displays may want to set this
 # to False.
 #
-enableBrailleContext    = True
+enableBrailleContext = True
 
 # If True, enable the grouping of children on the braille display.
 # This is for things like displaying all items of a menu, tab list,
 # menu bar, etc., on a single line of the braille display.
 #
-enableBrailleGrouping   = False
+enableBrailleGrouping = False
 
 # If True, enable braille flash messages. Note that braille or braille
 # monitor will also need to be enabled for this setting to work.
 #
-enableFlashMessages     = True
+enableFlashMessages = True
 
 # The timeout (in milliseconds) to use for messages flashed in braille.
 #
-brailleFlashTime        = 5000
+brailleFlashTime = 5000
 
 # If True, flash messages should continue to be displayed until some
 # other message comes along, or the user presses a key.
 #
-flashIsPersistent       = False
+flashIsPersistent = False
 
 # If True, enable braille monitor.
 #
-enableBrailleMonitor    = False
+enableBrailleMonitor = False
 
 # if True, enable character echo.
 # Note that it is allowable for both enableEchoByCharacter and enableKeyEcho
 # to be True
 #
-enableEchoByCharacter   = False
+enableEchoByCharacter = False
 
 # if True, enable word echo.
 # Note that it is allowable for both enableEchoByWord and enableKeyEcho
 # to be True
 #
-enableEchoByWord        = False
+enableEchoByWord = False
 
 # if True, enable Sentence echo.
 # Note that it is allowable for both enableEchoByWord and enableEchoBySentence
 # to be True.
 #
-enableEchoBySentence    = False
+enableEchoBySentence = False
 
 # If True, enable key echo.
 # Note that it is allowable for both enableEchoByWord and enableKeyEcho
 # to be True
 #
-enableKeyEcho           = True
+enableKeyEcho = True
 
 # If True and key echo is enabled, echo Alphanumeric and punctuation keys.
 #
-enablePrintableKeys     = True
+enablePrintableKeys = True
 
 # If True and key echo is enabled, echo Modifier keys.
 #
-enableModifierKeys      = True
+enableModifierKeys = True
 
 # If True and key echo is enabled, echo Function keys.
 #
-enableFunctionKeys      = True
+enableFunctionKeys = True
 
 # If True and key echo is enabled, echo Action keys.
 #
-enableActionKeys        = True
+enableActionKeys = True
 
 # If True and key echo is enabled, echo Navigation keys.
 #
-enableNavigationKeys    = False
+enableNavigationKeys = False
 
 # If True and key echo is enabled, echo Diacritical keys.
 #
-enableDiacriticalKeys   = False
+enableDiacriticalKeys = False
 
 # If True, tutorial strings defined will be spoken.
 #
@@ -386,12 +384,12 @@ presentToolTips = False
 # Keyboard layout options (see keyboardLayout).
 #
 GENERAL_KEYBOARD_LAYOUT_DESKTOP = 1
-GENERAL_KEYBOARD_LAYOUT_LAPTOP  = 2
-keyboardLayout                  = GENERAL_KEYBOARD_LAYOUT_DESKTOP
+GENERAL_KEYBOARD_LAYOUT_LAPTOP = 2
+keyboardLayout = GENERAL_KEYBOARD_LAYOUT_DESKTOP
 
 # If True, speak blank lines.
 #
-speakBlankLines         = True
+speakBlankLines = True
 
 # if True, process multi case strings as words.
 #
@@ -400,7 +398,7 @@ speakMultiCaseStringsAsWords = False
 # If True, reads all the table cells in the current row rather than just
 # the current one.
 #
-readTableCellRow    = True
+readTableCellRow = True
 
 # If True, enable speaking of progress bar updates.
 #
@@ -440,7 +438,6 @@ allTextAttributes = \
     "text-decoration:none; text-rotation:0; text-shadow:none; " \
     "text-spelling:none; underline:none; variant:; " \
     "vertical-align:baseline; weight:400; wrap-mode:; writing-mode:lr-tb;"
-
 # The default set of text attributes to speak to the user. Specific
 # application scripts (or individual users can override these values if
 # so desired. Each of these text attributes is of the form <key>:<value>;
@@ -453,7 +450,6 @@ enabledSpokenTextAttributes = \
     "size:; family-name:; weight:400; indent:0; underline:none; " \
     "strikethrough:false; justification:left; style:normal; " \
     "paragraph-style:; text-spelling:none;"
-
 # The default set of text attributes to be brailled for the user. Specific
 # application scripts (or individual users can override these values if
 # so desired. Each of these text attributes is of the form <key>:<value>;
@@ -471,10 +467,10 @@ enabledBrailledTextAttributes = \
 # The values represent the character to be used in the attrOr
 # field of brlAPI's writeStruct.
 #
-TEXT_ATTR_BRAILLE_NONE = 0x00 # 00000000
-TEXT_ATTR_BRAILLE_7    = 0x40 # 01000000
-TEXT_ATTR_BRAILLE_8    = 0x80 # 10000000
-TEXT_ATTR_BRAILLE_BOTH = 0xc0 # 11000000
+TEXT_ATTR_BRAILLE_NONE = 0x00  # 00000000
+TEXT_ATTR_BRAILLE_7 = 0x40  # 01000000
+TEXT_ATTR_BRAILLE_8 = 0x80  # 10000000
+TEXT_ATTR_BRAILLE_BOTH = 0xc0  # 11000000
 textAttributesBrailleIndicator = TEXT_ATTR_BRAILLE_NONE
 
 # The limit to enable a repeat character count to be spoken.
@@ -514,29 +510,29 @@ ariaLandmarks = [
 # will be used.  Helps determine difference between custom
 # scripts and the default script behavior.
 #
-enableCustomScripts     = True
+enableCustomScripts = True
 
 # Latent support to allow the user to override/define keybindings
 # and braille bindings.  Unsupported and undocumented for now.
 # Use at your own risk.
 #
-keyBindingsMap          = {}
-brailleBindingsMap      = {}
+keyBindingsMap = {}
+brailleBindingsMap = {}
 
 # Script developer feature.  If False, no AT-SPI object values
 # will be cached locally.  Helps determine if there might be a
 # problem related to the cache being out of sync with the real
 # objects.
 #
-cacheValues             = True
-cacheDescriptions       = True
+cacheValues = True
+cacheDescriptions = True
 
 # Script developer feature.  If False, no AT-SPI objects
 # will be cached locally.  Helps determine if there might be a
 # problem related to the cache being out of sync with the real
 # objects.
 #
-cacheAccessibles        = True
+cacheAccessibles = True
 
 # If non-zero, we use time.sleep() in various places to attempt to
 # free up the global interpreter lock.  Take a look at the following
@@ -547,34 +543,34 @@ cacheAccessibles        = True
 # http://www.pyzine.com/Issue001/Section_Articles/ \
 #                                 article_ThreadingGlobalInterpreter.html
 #
-gilSleepTime            = 0.00001
+gilSleepTime = 0.00001
 
 # The value of the 'gil' parameter in the call to pyatspi.Registry.start
 # See http://bugzilla.gnome.org/show_bug.cgi?id=576954.
 #
-useGILIdleHandler       = False
+useGILIdleHandler = False
 
 # If True, use the gidle __blockPreventor() code in atspi.py.
 #
-useBlockPreventor       = False
+useBlockPreventor = False
 
 # If True, we handle events asynchronously - our normal mode of
 # queueing events and processing them later on the gidle thread.
 # If False, we handle events immediately - helpful for testing.
 #
-asyncMode               = True
+asyncMode = True
 
 # A list of toolkits whose events we need to process synchronously.
 # This was originally added for the Java toolkit (see bug #531869), but
 # we put this here to allow more toolkits to be more easily added.
 #
-synchronousToolkits     = ['VCL']
+synchronousToolkits = ['VCL']
 
 # If True, we output debug information for the event queue.  We
 # use this in addition to log level to prevent debug logic from
 # bogging down event handling.
 #
-debugEventQueue         = False
+debugEventQueue = False
 
 # The timeout value (in seconds) and callback used to determine if
 # Orca has hung or not.  The only setting one should muck with here is
@@ -582,8 +578,8 @@ debugEventQueue         = False
 # for the timeout.  See braille.py, atspi.py, and orca.py:init for how
 # these are used.
 #
-timeoutTime             = 10   # a value of 0 means don't do hang checking
-timeoutCallback         = None # Set by orca.py:init to orca.timeout
+timeoutTime = 10   # a value of 0 means don't do hang checking
+timeoutCallback = None  # Set by orca.py:init to orca.timeout
 
 # Keyboard double-click period. If the same key is pressed within
 # this time period, it's considered to be a double-click and might
@@ -594,8 +590,8 @@ doubleClickTimeout = 0.5
 
 # Available options indicating which chat messages Orca should speak.
 #
-CHAT_SPEAK_ALL             = 0
-CHAT_SPEAK_ALL_IF_FOCUSED  = 1
+CHAT_SPEAK_ALL = 0
+CHAT_SPEAK_ALL_IF_FOCUSED = 1
 CHAT_SPEAK_FOCUSED_CHANNEL = 2
 
 chatMessageVerbosity = CHAT_SPEAK_ALL
@@ -614,6 +610,7 @@ chatRoomHistories = False
 
 # Allow for the customization of key bindings.
 #
+
 def overrideKeyBindings(script, keyBindings):
     from . import settings_manager
     _settingsManager = settings_manager.getManager()
@@ -621,6 +618,7 @@ def overrideKeyBindings(script, keyBindings):
 
 # Allow for user customization of pronunciations.
 #
+
 def overridePronunciations(script, pronunciations):
     return pronunciations
 
@@ -685,34 +683,34 @@ mouseDwellMaxDrift = 3
 
 # The different modifiers/modifier masks associated with keybindings
 #
-NO_MODIFIER_MASK              =  0
-ALT_MODIFIER_MASK             =  1 << pyatspi.MODIFIER_ALT
-CTRL_MODIFIER_MASK            =  1 << pyatspi.MODIFIER_CONTROL
-ORCA_MODIFIER_MASK            =  1 << MODIFIER_ORCA
-ORCA_ALT_MODIFIER_MASK        = (1 << MODIFIER_ORCA |
-                                 1 << pyatspi.MODIFIER_ALT)
-ORCA_CTRL_MODIFIER_MASK       = (1 << MODIFIER_ORCA |
-                                 1 << pyatspi.MODIFIER_CONTROL)
-ORCA_CTRL_ALT_MODIFIER_MASK   = (1 << MODIFIER_ORCA |
-                                 1 << pyatspi.MODIFIER_CONTROL |
-                                 1 << pyatspi.MODIFIER_ALT)
-ORCA_SHIFT_MODIFIER_MASK      = (1 << MODIFIER_ORCA |
-                                 1 << pyatspi.MODIFIER_SHIFT)
-SHIFT_MODIFIER_MASK           =  1 << pyatspi.MODIFIER_SHIFT
-SHIFT_ALT_MODIFIER_MASK       = (1 << pyatspi.MODIFIER_SHIFT |
-                                 1 << pyatspi.MODIFIER_ALT)
-CTRL_ALT_MODIFIER_MASK        = (1 << pyatspi.MODIFIER_CONTROL |
-                                 1 << pyatspi.MODIFIER_ALT)
-COMMAND_MODIFIER_MASK         = (1 << pyatspi.MODIFIER_ALT |
-                                 1 << pyatspi.MODIFIER_CONTROL |
-                                 1 << pyatspi.MODIFIER_META2 |
-                                 1 << pyatspi.MODIFIER_META3)
-NON_LOCKING_MODIFIER_MASK     = (1 << pyatspi.MODIFIER_SHIFT |
-                                 1 << pyatspi.MODIFIER_ALT |
-                                 1 << pyatspi.MODIFIER_CONTROL |
-                                 1 << pyatspi.MODIFIER_META2 |
-                                 1 << pyatspi.MODIFIER_META3 |
-                                 1 << MODIFIER_ORCA)
+NO_MODIFIER_MASK = 0
+ALT_MODIFIER_MASK = 1 << pyatspi.MODIFIER_ALT
+CTRL_MODIFIER_MASK = 1 << pyatspi.MODIFIER_CONTROL
+ORCA_MODIFIER_MASK = 1 << MODIFIER_ORCA
+ORCA_ALT_MODIFIER_MASK = (1 << MODIFIER_ORCA |
+                          1 << pyatspi.MODIFIER_ALT)
+ORCA_CTRL_MODIFIER_MASK = (1 << MODIFIER_ORCA |
+                           1 << pyatspi.MODIFIER_CONTROL)
+ORCA_CTRL_ALT_MODIFIER_MASK = (1 << MODIFIER_ORCA |
+                               1 << pyatspi.MODIFIER_CONTROL |
+                               1 << pyatspi.MODIFIER_ALT)
+ORCA_SHIFT_MODIFIER_MASK = (1 << MODIFIER_ORCA |
+                            1 << pyatspi.MODIFIER_SHIFT)
+SHIFT_MODIFIER_MASK = 1 << pyatspi.MODIFIER_SHIFT
+SHIFT_ALT_MODIFIER_MASK = (1 << pyatspi.MODIFIER_SHIFT |
+                           1 << pyatspi.MODIFIER_ALT)
+CTRL_ALT_MODIFIER_MASK = (1 << pyatspi.MODIFIER_CONTROL |
+                          1 << pyatspi.MODIFIER_ALT)
+COMMAND_MODIFIER_MASK = (1 << pyatspi.MODIFIER_ALT |
+                         1 << pyatspi.MODIFIER_CONTROL |
+                         1 << pyatspi.MODIFIER_META2 |
+                         1 << pyatspi.MODIFIER_META3)
+NON_LOCKING_MODIFIER_MASK = (1 << pyatspi.MODIFIER_SHIFT |
+                             1 << pyatspi.MODIFIER_ALT |
+                             1 << pyatspi.MODIFIER_CONTROL |
+                             1 << pyatspi.MODIFIER_META2 |
+                             1 << pyatspi.MODIFIER_META3 |
+                             1 << MODIFIER_ORCA)
 ALL_BUT_NUMLOCK_MODIFIER_MASK = (1 << MODIFIER_ORCA |
                                  1 << pyatspi.MODIFIER_SHIFT |
                                  1 << pyatspi.MODIFIER_SHIFTLOCK |
@@ -734,20 +732,15 @@ defaultModifierMask = NON_LOCKING_MODIFIER_MASK
 #
 presentRequiredState = False
 
-
-
 # A dictionary where the keys are rolenames and the values are
 # filenames containing audio snippets.
 #
 sounds = {}
 
-
-
 # string to indicate end of printed line for braille displays:
 #
 disableBrailleEOL = False
 brailleEOLIndicator = " $l"
-
 
 # String for delimiters between table cells
 #
@@ -777,14 +770,14 @@ TIME_FORMAT_LOCALE = "%X"
 TIME_FORMAT_24_HMS = "%H:%M:%S"
 # Translators: Orca has a feature to speak the time
 # when the user presses a shortcut key.
-# This is one of the alternative formats that the 
+# This is one of the alternative formats that the
 # user may wish to be presented with.
 #
 TIME_FORMAT_24_HMS_WITH_WORDS = _("%H hours, %M minutes and %S seconds.")
 TIME_FORMAT_24_HM = "%H:%M"
 # Translators: Orca has a feature to speak the time
 # when the user presses a shortcut key.
-# This is one of the alternative formats that the 
+# This is one of the alternative formats that the
 # user may wish to be presented with.
 #
 TIME_FORMAT_24_HM_WITH_WORDS = _("%H hours and %M minutes.")

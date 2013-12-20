@@ -19,11 +19,11 @@
 
 """Provides the default implementation for flat review for Orca."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 import re
@@ -48,7 +48,9 @@ whitespace_re = re.compile(r'(\s+)', re.DOTALL | re.IGNORECASE | re.M)
 
 EMBEDDED_OBJECT_CHARACTER = '\ufffc'
 
+
 class Char(object):
+
     """
     Represents a single char of an Accessibility_Text object.
     """
@@ -75,7 +77,9 @@ class Char(object):
         self.width = width
         self.height = height
 
+
 class Word(object):
+
     """Represents a single word of an Accessibility_Text object, or
     the entire name of an Image or Component if the associated object
     does not implement the Accessibility_Text interface.  As a rule of
@@ -108,6 +112,7 @@ class Word(object):
         self.width = width
         self.height = height
         self.chars = None
+
     def __getattr__(self, attr):
         """Used for lazily determining the chars of a word.  We do
         this to reduce the total number of round trip calls to the app,
@@ -123,7 +128,6 @@ class Word(object):
         if attr == "chars":
             if isinstance(self.zone, TextZone):
                 text = self.zone.accessible.queryText()
-
                 # Pylint is confused and flags this warning:
                 #
                 # W0201:132:Word.__getattr__: Attribute 'chars' defined
@@ -143,7 +147,7 @@ class Word(object):
                     # Sometimes we get more than a character's worth. See
                     # Bug #495303. We can try to correct this.
                     #
-                    #if len(char):
+                    # if len(char):
                     #    char[0]
                     [x, y, width, height] = text.getRangeExtents(
                         startOffset,
@@ -162,7 +166,9 @@ class Word(object):
         else:
             return self.__dict__[attr]
 
+
 class Zone(object):
+
     """Represents text that is a portion of a single horizontal line."""
 
     def __init__(self,
@@ -199,7 +205,6 @@ class Zone(object):
         """
 
         if attr == "words":
-
             # Pylint is confused and flags this warning:
             #
             # W0201:203:Zone.__getattr__: Attribute 'words' defined
@@ -222,7 +227,7 @@ class Zone(object):
         the given zone."""
 
         highestBottom = min(self.y + self.height, zone.y + zone.height)
-        lowestTop     = max(self.y,               zone.y)
+        lowestTop = max(self.y, zone.y)
 
         # If we do overlap, lets see how much.  We'll require a 25% overlap
         # for now...
@@ -247,7 +252,9 @@ class Zone(object):
 
         return [wordAtOffset, offset]
 
+
 class TextZone(Zone):
+
     """Represents Accessibility_Text that is a portion of a single
     horizontal line."""
 
@@ -284,7 +291,6 @@ class TextZone(Zone):
 
         if attr == "words":
             text = self.accessible.queryText()
-
             # Pylint is confused and flags this warning:
             #
             # W0201:288:TextZone.__getattr__: Attribute 'words' defined
@@ -323,6 +329,7 @@ class TextZone(Zone):
 
 
 class StateZone(Zone):
+
     """Represents a Zone for an accessible that shows a state using
     a graphical indicator, such as a checkbox or radio button."""
 
@@ -372,7 +379,7 @@ class StateZone(Zone):
                     speechState = object_properties.STATE_SELECTED_RADIO_BUTTON
                 else:
                     speechState = \
-                    object_properties.STATE_UNSELECTED_RADIO_BUTTON
+                        object_properties.STATE_UNSELECTED_RADIO_BUTTON
                 brailleState = \
                     object_properties.RADIO_BUTTON_INDICATORS_BRAILLE[
                         stateCount]
@@ -386,7 +393,9 @@ class StateZone(Zone):
         else:
             return Zone.__getattr__(self, attr)
 
+
 class ValueZone(Zone):
+
     """Represents a Zone for an accessible that shows a value using
     a graphical indicator, such as a progress bar or slider."""
 
@@ -436,8 +445,8 @@ class ValueZone(Zone):
             rolename = BrailleGenerator.getLocalizedRoleName(self.accessible)
             if orientation:
                 brailleValue = "%s %s %d%%" % (orientation,
-                    rolename,
-                    percentValue)
+                                               rolename,
+                                               percentValue)
             else:
                 brailleValue = "%s %d%%" % (rolename, percentValue)
             if attr == "string":
@@ -451,6 +460,7 @@ class ValueZone(Zone):
 
 
 class Line(object):
+
     """A Line is a single line across a window and is composed of Zones."""
 
     def __init__(self,
@@ -519,19 +529,19 @@ class Line(object):
                 # The 'isinstance(zone, TextZone)' test is a sanity check
                 # to handle problems with Java text. See Bug 435553.
                 if isinstance(zone, TextZone) and \
-                   ((zone.accessible.getRole() in \
-                         (pyatspi.ROLE_TEXT,
-                          pyatspi.ROLE_PASSWORD_TEXT,
-                          pyatspi.ROLE_TERMINAL)) or \
+                   ((zone.accessible.getRole() in
+                     (pyatspi.ROLE_TEXT,
+                      pyatspi.ROLE_PASSWORD_TEXT,
+                      pyatspi.ROLE_TERMINAL)) or
                     # [[[TODO: Eitan - HACK:
                     # This is just to get FF3 cursor key routing support.
                     # We really should not be determining all this stuff here,
                     # it should be in the scripts.
                     # Same applies to roles above.]]]
-                    (zone.accessible.getRole() in \
-                         (pyatspi.ROLE_PARAGRAPH,
-                          pyatspi.ROLE_HEADING,
-                          pyatspi.ROLE_LINK))):
+                    (zone.accessible.getRole() in
+                     (pyatspi.ROLE_PARAGRAPH,
+                      pyatspi.ROLE_HEADING,
+                      pyatspi.ROLE_LINK))):
                     region = braille.ReviewText(zone.accessible,
                                                 zone.string,
                                                 zone.startOffset,
@@ -570,30 +580,32 @@ class Line(object):
 
         return self.brailleRegions
 
+
 class Context(object):
+
     """Information regarding where a user happens to be exploring
     right now.
     """
 
-    ZONE   = 0
-    CHAR   = 1
-    WORD   = 2
-    LINE   = 3 # includes all zones on same line
+    ZONE = 0
+    CHAR = 1
+    WORD = 2
+    LINE = 3  # includes all zones on same line
     WINDOW = 4
 
-    WRAP_NONE       = 0
-    WRAP_LINE       = 1 << 0
+    WRAP_NONE = 0
+    WRAP_LINE = 1 << 0
     WRAP_TOP_BOTTOM = 1 << 1
-    WRAP_ALL        = (WRAP_LINE | WRAP_TOP_BOTTOM)
+    WRAP_ALL = (WRAP_LINE | WRAP_TOP_BOTTOM)
 
     def __init__(self, script):
         """Create a new Context that will be used for handling flat
         review mode.
         """
-        self.script    = script
+        self.script = script
 
         if (not orca_state.locusOfFocus) \
-            or (orca_state.locusOfFocus.getApplication() \
+            or (orca_state.locusOfFocus.getApplication()
                 != self.script.app):
             self.lines = []
         else:
@@ -601,9 +613,9 @@ class Context(object):
             #
             obj = orca_state.locusOfFocus
             while obj \
-                      and obj.parent \
-                      and (obj.parent.getRole() != pyatspi.ROLE_APPLICATION) \
-                      and (obj != obj.parent):
+                and obj.parent \
+                and (obj.parent.getRole() != pyatspi.ROLE_APPLICATION) \
+                    and (obj != obj.parent):
                 obj = obj.parent
             if obj:
                 self.lines = self.clusterZonesByLine(self.getShowingZones(obj))
@@ -621,7 +633,7 @@ class Context(object):
             role = None
 
         if role == pyatspi.ROLE_TABLE_CELL:
-            searchZone = orca_state.activeScript.\
+            searchZone = orca_state.activeScript. \
                 utilities.realActiveDescendant(orca_state.locusOfFocus)
         else:
             searchZone = orca_state.locusOfFocus
@@ -652,9 +664,9 @@ class Context(object):
             # If we're on an accessible text object, try to set the
             # review cursor to the caret position of that object.
             #
-            accessible  = zone.accessible
-            lineIndex   = currentLineIndex
-            zoneIndex   = currentZoneIndex
+            accessible = zone.accessible
+            lineIndex = currentLineIndex
+            zoneIndex = currentZoneIndex
             try:
                 caretOffset = zone.accessible.queryText().caretOffset
             except NotImplementedError:
@@ -667,11 +679,11 @@ class Context(object):
                     zone = line.zones[zoneIndex]
                     if zone.accessible == accessible:
                         if (caretOffset >= zone.startOffset):
-                            if (caretOffset \
+                            if (caretOffset
                                     < (zone.startOffset + zone.length)):
                                 foundZoneWithCaret = True
                                 break
-                            elif (caretOffset \
+                            elif (caretOffset
                                     == (zone.startOffset + zone.length)):
                                 checkForEOF = True
                                 lineToCheck = lineIndex
@@ -704,7 +716,7 @@ class Context(object):
                 if caretOffset and zone.words:
                     currentWordIndex = len(zone.words) - 1
                     currentCharIndex = \
-                          zone.words[currentWordIndex].length - 1
+                        zone.words[currentWordIndex].length - 1
 
         self.lineIndex = currentLineIndex
         self.zoneIndex = currentZoneIndex
@@ -764,21 +776,21 @@ class Context(object):
         zones = []
         text = accessible.queryText()
         substringStartOffset = startOffset
-        substringEndOffset   = startOffset
-        unicodeStartOffset   = 0
+        substringEndOffset = startOffset
+        unicodeStartOffset = 0
         unicodeString = string
-        #print "LOOKING AT '%s'" % unicodeString
+        # print "LOOKING AT '%s'" % unicodeString
         for i in range(0, len(unicodeString) + 1):
             if (i != len(unicodeString)) \
                and (unicodeString[i] != EMBEDDED_OBJECT_CHARACTER):
                 substringEndOffset += 1
             elif (substringEndOffset == substringStartOffset):
                 substringStartOffset += 1
-                substringEndOffset   = substringStartOffset
-                unicodeStartOffset   = i + 1
+                substringEndOffset = substringStartOffset
+                unicodeStartOffset = i + 1
             else:
                 [x, y, width, height] = text.getRangeExtents(
-                        substringStartOffset, substringEndOffset, 0)
+                    substringStartOffset, substringEndOffset, 0)
                 if self.script.utilities.isVisibleRegion(
                         x, y, width, height,
                         cliprect.x, cliprect.y,
@@ -789,13 +801,12 @@ class Context(object):
                     clipping = self.clip(x, y, width, height,
                                          cliprect.x, cliprect.y,
                                          cliprect.width, cliprect.height)
-
                     # [[[TODO: WDW - HACK it would be nice to clip the
                     # the text by what is really showing on the screen,
                     # but this seems to hang Orca and the client. Logged
                     # as bugzilla bug 319770.]]]
                     #
-                    #ranges = text.getBoundedRanges(\
+                    # ranges = text.getBoundedRanges(\
                     #    clipping[0],
                     #    clipping[1],
                     #    clipping[2],
@@ -804,15 +815,15 @@ class Context(object):
                     #    pyatspi.TEXT_CLIP_BOTH,
                     #    pyatspi.TEXT_CLIP_BOTH)
                     #
-                    #print
-                    #print "HERE!"
-                    #for range in ranges:
+                    # print
+                    # print "HERE!"
+                    # for range in ranges:
                     #    print range.startOffset
                     #    print range.endOffset
                     #    print range.content
 
                     substring = unicodeString[unicodeStartOffset:i]
-                    #print " SUBSTRING '%s'" % substring
+                    # print " SUBSTRING '%s'" % substring
                     zones.append(TextZone(accessible,
                                           substringStartOffset,
                                           substring,
@@ -821,8 +832,8 @@ class Context(object):
                                           clipping[2],
                                           clipping[3]))
                     substringStartOffset = substringEndOffset + 1
-                    substringEndOffset   = substringStartOffset
-                    unicodeStartOffset   = i + 1
+                    substringEndOffset = substringStartOffset
+                    unicodeStartOffset = i + 1
 
         if anyVisible:
             return zones
@@ -861,9 +872,9 @@ class Context(object):
         while oldMid != upperMid:
             oldMid = upperMid
             [x, y, width, height] = text.getRangeExtents(upperMid,
-                                                         upperMid+1,
+                                                         upperMid + 1,
                                                          0)
-            #TODO : not used upperY = y
+            # TODO : not used upperY = y
             if y > cliprect.y:
                 upperMax = upperMid
             else:
@@ -872,13 +883,13 @@ class Context(object):
 
         # performing binary search to locate last line inside clipped area
         oldMid = 0
-        limit = cliprect.y+cliprect.height
+        limit = cliprect.y + cliprect.height
         while oldMid != lowerMid:
             oldMid = lowerMid
             [x, y, width, height] = text.getRangeExtents(lowerMid,
-                                                         lowerMid+1,
+                                                         lowerMid + 1,
                                                          0)
-            #TODO: not used lowerY = y
+            # TODO: not used lowerY = y
             if y > limit:
                 lowerMax = lowerMid
             else:
@@ -895,7 +906,7 @@ class Context(object):
                 pyatspi.TEXT_BOUNDARY_LINE_START)
 
             debug.println(debug.LEVEL_FINEST,
-                          "    line at %d is (start=%d end=%d): '%s'" \
+                          "    line at %d is (start=%d end=%d): '%s'"
                           % (offset, startOffset, endOffset, string))
 
             # [[[WDW - HACK: well...gnome-terminal sometimes wants to
@@ -910,10 +921,10 @@ class Context(object):
                or (startOffset > endOffset) \
                or (abs(endOffset - startOffset) > 666e3):
                 debug.println(debug.LEVEL_WARNING,
-                              "flat_review:getZonesFromText detected "\
-                              "garbage from getTextAtOffset for accessible "\
-                              "name='%s' role'='%s': offset used=%d, "\
-                              "start/end offset returned=(%d,%d), string='%s'"\
+                              "flat_review:getZonesFromText detected "
+                              "garbage from getTextAtOffset for accessible "
+                              "name='%s' role'='%s': offset used=%d, "
+                              "start/end offset returned=(%d,%d), string='%s'"
                               % (accessible.name, accessible.getRoleName(),
                                  offset, startOffset, endOffset, string))
                 break
@@ -1014,7 +1025,7 @@ class Context(object):
                 pass
             else:
                 [x, y, width, height] = \
-                    text.getRangeExtents( \
+                    text.getRangeExtents(
                         0, text.characterCount, 0)
                 textToLeftEdge = x - extents.x
                 textToRightEdge = (extents.x + extents.width) - (x + width)
@@ -1028,7 +1039,7 @@ class Context(object):
             zone = StateZone(accessible,
                              stateX, stateY, stateWidth, stateHeight)
 
-        elif role ==  pyatspi.ROLE_TOGGLE_BUTTON:
+        elif role == pyatspi.ROLE_TOGGLE_BUTTON:
             # [[[TODO: WDW - This is a major hack.  We make up an
             # indicator for a toggle button to let the user know
             # whether a toggle button is pressed or not.]]]
@@ -1089,7 +1100,7 @@ class Context(object):
 
         debug.println(
             debug.LEVEL_FINEST,
-            "flat_review.getZonesFromAccessible (name=%s role=%s)" \
+            "flat_review.getZonesFromAccessible (name=%s role=%s)"
             % (accessible.name, accessible.getRoleName()))
 
         # Now see if there is any accessible text.  If so, find new zones,
@@ -1123,7 +1134,7 @@ class Context(object):
             elif accessible.description and len(accessible.description):
                 imageName = accessible.description
             elif iimage.imageDescription and \
-                     len(iimage.imageDescription):
+                    len(iimage.imageDescription):
                 imageName = iimage.imageDescription
 
             [x, y] = iimage.getImagePosition(0)
@@ -1178,7 +1189,7 @@ class Context(object):
             and (role != pyatspi.ROLE_LABEL) \
             and (role != pyatspi.ROLE_MENU) \
             and (role != pyatspi.ROLE_PAGE_TAB) \
-            and accessible.childCount > 0:
+                and accessible.childCount > 0:
             pass
         elif len(zones) == 0:
             string = ""
@@ -1201,7 +1212,7 @@ class Context(object):
                 string = self.script.utilities.displayedText(accessible)
 
             if (string == "") \
-                and (role != pyatspi.ROLE_TABLE_CELL):
+                    and (role != pyatspi.ROLE_TABLE_CELL):
                 string = accessible.getRoleName()
 
             if len(string) and ((clipping[2] != 0) or (clipping[3] != 0)):
@@ -1244,10 +1255,10 @@ class Context(object):
         # If we're at a leaf node, then we've got a good one on our hands.
         #
         try:
-            #childCount =
+            # childCount =
             root.childCount
         except (LookupError, RuntimeError) as exp:
-           #TODO: not used  childCount = -1
+        # TODO: not used  childCount = -1
             debug.println(debug.LEVEL_FINE,
                           'Error has occured %s' % exp)
             pass
@@ -1419,8 +1430,7 @@ class Context(object):
         self.wordIndex = wordIndex
         self.charIndex = charIndex
         self.targetCharInfo = self.getCurrent(Context.CHAR)
-
-        #print "Current line=%d zone=%d word=%d char=%d" \
+        # print "Current line=%d zone=%d word=%d char=%d" \
         #      % (lineIndex, zoneIndex, wordIndex, charIndex)
 
     def routeToCurrent(self):
@@ -1579,7 +1589,8 @@ class Context(object):
         Returns True if the locus of interest actually changed.
         """
 
-        if (flatReviewType == Context.LINE) or (flatReviewType == Context.ZONE):
+        if (flatReviewType == Context.LINE) or (flatReviewType == Context.ZONE
+            ):
             lineIndex = self.lineIndex
         elif flatReviewType == Context.WINDOW:
             lineIndex = 0
@@ -1595,10 +1606,10 @@ class Context(object):
         charIndex = 0
 
         moved = (self.lineIndex != lineIndex) \
-                or (self.zoneIndex != zoneIndex) \
-                or (self.wordIndex != wordIndex) \
-                or (self.charIndex != charIndex) \
-
+            or (self.zoneIndex != zoneIndex) \
+            or (self.wordIndex != wordIndex) \
+            or (self.charIndex != charIndex) \
+        
         if moved:
             self.lineIndex = lineIndex
             self.zoneIndex = zoneIndex
@@ -1618,10 +1629,11 @@ class Context(object):
         Returns True if the locus of interest actually changed.
         """
 
-        if (flatReviewType == Context.LINE) or (flatReviewType == Context.ZONE):
+        if (flatReviewType == Context.LINE) or (flatReviewType == Context.ZONE
+            ):
             lineIndex = self.lineIndex
         elif flatReviewType == Context.WINDOW:
-            lineIndex  = len(self.lines) - 1
+            lineIndex = len(self.lines) - 1
         else:
             raise Exception("Invalid type: %d" % flatReviewType)
 
@@ -1643,10 +1655,10 @@ class Context(object):
             charIndex = 0
 
         moved = (self.lineIndex != lineIndex) \
-                or (self.zoneIndex != zoneIndex) \
-                or (self.wordIndex != wordIndex) \
-                or (self.charIndex != charIndex) \
-
+            or (self.zoneIndex != zoneIndex) \
+            or (self.wordIndex != wordIndex) \
+            or (self.charIndex != charIndex) \
+        
         if moved:
             self.lineIndex = lineIndex
             self.zoneIndex = zoneIndex
@@ -1670,7 +1682,8 @@ class Context(object):
         """
 
         if not self.lines:
-            debug.println(debug.LEVEL_FINE, 'goPrevious(): no lines in context')
+            debug.println(debug.LEVEL_FINE,
+                          'goPrevious(): no lines in context')
             return False
 
         moved = False
@@ -1731,8 +1744,8 @@ class Context(object):
             zone = self.lines[self.lineIndex].zones[self.zoneIndex]
             if omitWhitespace \
                and moved \
-               and ((len(zone.string) == 0) \
-                    or (len(zone.words) \
+               and ((len(zone.string) == 0)
+                    or (len(zone.words)
                         and zone.words[self.wordIndex].string.isspace())):
 
                 hasMoreText = False
@@ -1756,7 +1769,7 @@ class Context(object):
                     while wordIndex >= 0:
                         if (not zone.words[wordIndex].string) \
                             or not len(zone.words[wordIndex].string) \
-                            or zone.words[wordIndex].string.isspace():
+                                or zone.words[wordIndex].string.isspace():
                             wordIndex -= 1
                         else:
                             break
@@ -1778,7 +1791,7 @@ class Context(object):
                     self.charIndex = 0
                     moved = True
                 elif (wrap & Context.WRAP_TOP_BOTTOM) \
-                     and (len(self.lines) != 1):
+                        and (len(self.lines) != 1):
                     self.lineIndex = len(self.lines) - 1
                     self.zoneIndex = 0
                     self.wordIndex = 0
@@ -1817,13 +1830,13 @@ class Context(object):
             elif wrap & Context.WRAP_LINE:
                 if self.lineIndex < (len(self.lines) - 1):
                     self.lineIndex += 1
-                    self.zoneIndex  = 0
+                    self.zoneIndex = 0
                     self.wordIndex = 0
                     self.charIndex = 0
                     moved = True
                 elif wrap & Context.WRAP_TOP_BOTTOM:
-                    self.lineIndex  = 0
-                    self.zoneIndex  = 0
+                    self.lineIndex = 0
+                    self.zoneIndex = 0
                     self.wordIndex = 0
                     self.charIndex = 0
                     moved = True
@@ -1865,8 +1878,8 @@ class Context(object):
             zone = self.lines[self.lineIndex].zones[self.zoneIndex]
             if omitWhitespace \
                and moved \
-               and ((len(zone.string) == 0) \
-                    or (len(zone.words) \
+               and ((len(zone.string) == 0)
+                    or (len(zone.words)
                         and zone.words[self.wordIndex].string.isspace())):
 
                 # If we're on whitespace in the same zone, then let's
@@ -1884,7 +1897,7 @@ class Context(object):
                     while wordIndex < len(zone.words):
                         if (not zone.words[wordIndex].string) \
                             or not len(zone.words[wordIndex].string) \
-                            or zone.words[wordIndex].string.isspace():
+                                or zone.words[wordIndex].string.isspace():
                             wordIndex += 1
                         else:
                             break
@@ -1906,7 +1919,7 @@ class Context(object):
                     self.charIndex = 0
                     moved = True
                 elif (wrap & Context.WRAP_TOP_BOTTOM) \
-                     and (self.lineIndex != 0):
+                        and (self.lineIndex != 0):
                     self.lineIndex = 0
                     self.zoneIndex = 0
                     self.wordIndex = 0
@@ -1950,7 +1963,7 @@ class Context(object):
             if moved:
                 while True:
                     [string, bx, by, bwidth, bheight] = \
-                             self.getCurrent(Context.CHAR)
+                        self.getCurrent(Context.CHAR)
                     if (bx + width) >= middleTargetX:
                         break
                     elif not self.goNext(Context.CHAR, Context.WRAP_NONE):
@@ -1997,7 +2010,7 @@ class Context(object):
             if moved:
                 while True:
                     [string, bx, by, bwidth, bheight] = \
-                             self.getCurrent(Context.CHAR)
+                        self.getCurrent(Context.CHAR)
                     if (bx + width) >= middleTargetX:
                         break
                     elif not self.goNext(Context.CHAR, Context.WRAP_NONE):

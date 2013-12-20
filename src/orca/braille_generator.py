@@ -19,11 +19,11 @@
 
 """Utilities for obtaining braille presentations for objects."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 from gi.repository import Atspi, Atk
@@ -39,15 +39,20 @@ from .braille_rolenames import shortRoleNames
 
 _settingsManager = settings_manager.getManager()
 
+
 class Space(object):
+
     """A dummy class to indicate we want to insert a space into an
     utterance, but only if there is text prior to the space."""
+
     def __init__(self, delimiter=" "):
         self.delimiter = delimiter
 
 SPACE = [Space()]
 
+
 class BrailleGenerator(generator.Generator):
+
     """Takes accessible objects and produces a list of braille Regions
     for those objects.  See the generateBraille method, which is the
     primary entry point.  Subclasses can feel free to override/extend
@@ -106,23 +111,22 @@ class BrailleGenerator(generator.Generator):
                 focusedRegion = region
                 break
             elif isinstance(region, braille.Text) \
-                 and role == pyatspi.ROLE_COMBO_BOX \
-                 and region.accessible.parent == obj:
+                and role == pyatspi.ROLE_COMBO_BOX \
+                    and region.accessible.parent == obj:
                 focusedRegion = region
                 break
             elif isinstance(region, braille.Component) \
-                 and role == pyatspi.ROLE_TABLE_CELL \
-                 and region.accessible.parent == obj:
+                and role == pyatspi.ROLE_TABLE_CELL \
+                    and region.accessible.parent == obj:
                 focusedRegion = region
                 break
 
         return [result, focusedRegion]
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Name, role, and label information                                 #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateRoleName(self, obj, **args):
         """Returns the role name for the object in an array of strings, with
@@ -143,9 +147,9 @@ class BrailleGenerator(generator.Generator):
         if verbosityLevel == settings.VERBOSITY_LEVEL_BRIEF:
             doNotPresent.extend([pyatspi.ROLE_ICON, pyatspi.ROLE_CANVAS])
 
-        if (role in _settingsManager.getSetting('brailleForceRoles'))\
-           or (verbosityLevel == settings.VERBOSITY_LEVEL_VERBOSE\
-               and not args.get('readingRow', False)\
+        if (role in _settingsManager.getSetting('brailleForceRoles')) \
+           or (verbosityLevel == settings.VERBOSITY_LEVEL_VERBOSE
+               and not args.get('readingRow', False)
                and role not in doNotPresent):
             result.append(self.getLocalizedRoleName(obj, role))
         return result
@@ -189,12 +193,11 @@ class BrailleGenerator(generator.Generator):
             result.extend(name)
 
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Keyboard shortcut information                                     #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateAccelerator(self, obj, **args):
         """Returns an array of strings (and possibly voice and audio
@@ -207,14 +210,13 @@ class BrailleGenerator(generator.Generator):
         if accelerator:
             result.append("(" + accelerator + ")")
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Hierarchy and related dialog information                          #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
-    def _generateAlertAndDialogCount(self, obj,  **args):
+    def _generateAlertAndDialogCount(self, obj, **args):
         """Returns an array of strings that says how many alerts and dialogs
         are associated with the application for this object.  [[[WDW -
         I wonder if this string should be moved to settings.py.]]]
@@ -274,7 +276,7 @@ class BrailleGenerator(generator.Generator):
                 and role != pyatspi.ROLE_SECTION \
                 and role != pyatspi.ROLE_SPLIT_PANE \
                 and role != pyatspi.ROLE_DESKTOP_FRAME \
-                and not self._script.utilities.isLayoutOnly(parent):
+                    and not self._script.utilities.isLayoutOnly(parent):
                 args['role'] = role
                 parentResult = self.generate(parent, **args)
             # [[[TODO: HACK - we've discovered oddness in hierarchies
@@ -322,12 +324,11 @@ class BrailleGenerator(generator.Generator):
             result.extend(item)
 
         return result
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Unfortunate hacks.                                                #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateAsPageTabOrScrollPane(self, obj, **args):
         """If this scroll pane is labelled by a page tab, then return the page
@@ -341,7 +342,7 @@ class BrailleGenerator(generator.Generator):
         except:
             relations = []
         for relation in relations:
-            if relation.getRelationType() ==  pyatspi.RELATION_LABELLED_BY:
+            if relation.getRelationType() == pyatspi.RELATION_LABELLED_BY:
                 labelledBy = relation.getTarget(0)
                 result.extend(self.generate(labelledBy, **args))
                 break
@@ -389,7 +390,7 @@ class BrailleGenerator(generator.Generator):
             text = obj.queryText()
         except NotImplementedError:
             text = None
-        if text and (self._script.utilities.isTextArea(obj) \
+        if text and (self._script.utilities.isTextArea(obj)
                      or (obj.getRole() in [pyatspi.ROLE_LABEL])):
             try:
                 [lineString, startOffset, endOffset] = text.getTextAtOffset(
@@ -402,15 +403,14 @@ class BrailleGenerator(generator.Generator):
                 for relation in obj.getRelationSet():
                     if relation.getRelationType() \
                             == pyatspi.RELATION_FLOWS_FROM:
-                        include = not self._script.utilities.\
+                        include = not self._script.utilities. \
                             isTextArea(relation.getTarget(0))
         return include
-
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Other things for spacing                                          #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _generateEol(self, obj, **args):
         result = []

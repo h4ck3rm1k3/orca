@@ -19,19 +19,21 @@
 
 """Custom script for planner."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2006-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
 import orca.braille_generator as braille_generator
 
-from orca.orca_i18n import _ # for gettext support
+from orca.orca_i18n import _  # for gettext support
+
 
 class BrailleGenerator(braille_generator.BrailleGenerator):
+
     """We make this to appropiately present ribbon's toggle button in
     a toolbar used to display in a menu those options that doesn't
     fill in toolbar when the application is resized. Also for each one
@@ -40,7 +42,7 @@ class BrailleGenerator(braille_generator.BrailleGenerator):
     def __init__(self, script):
         braille_generator.BrailleGenerator.__init__(self, script)
 
-    def _generateDisplayedText(self, obj, **args ):
+    def _generateDisplayedText(self, obj, **args):
         """Returns an array of strings for use by braille that represents all
         the text being displayed by the object. [[[WDW - consider
         returning an empty array if this is not a text object.]]]

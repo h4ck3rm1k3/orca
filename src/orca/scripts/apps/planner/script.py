@@ -19,22 +19,23 @@
 
 """Custom script for planner."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2006-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import orca.scripts.default as default
 
 from .braille_generator import BrailleGenerator
 from .speech_generator import SpeechGenerator
 
-########################################################################
-#                                                                      #
+#
+#
 # The planner script class.                                            #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(default.Script):
 

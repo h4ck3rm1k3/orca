@@ -20,21 +20,22 @@
 """Custom structural navigation for the Gecko toolkit."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
 import orca.structural_navigation as structural_navigation
 import orca.settings as settings
 
-########################################################################
-#                                                                      #
+#
+#
 # Custom Structural Navigation                                         #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class GeckoStructuralNavigation(structural_navigation.StructuralNavigation):
 
@@ -46,11 +47,11 @@ class GeckoStructuralNavigation(structural_navigation.StructuralNavigation):
                                                             enabledTypes,
                                                             enabled)
 
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Methods for finding and moving to objects                         #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def getCurrentObject(self):
         """Returns the current object -- normally, the locusOfFocus. But
@@ -140,11 +141,11 @@ class GeckoStructuralNavigation(structural_navigation.StructuralNavigation):
 
         return self._script.isUselessObject(obj)
 
-    #####################################################################
-    #                                                                   #
+    #
+    #
     # Methods for presenting objects                                    #
-    #                                                                   #
-    #####################################################################
+    #
+    #
 
     def _presentLine(self, obj, offset):
         """Presents the first line of the object to the user."""
@@ -164,17 +165,17 @@ class GeckoStructuralNavigation(structural_navigation.StructuralNavigation):
         contents = self._script.getObjectContentsAtOffset(obj, offset)
         self._script.speakContents(contents)
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Objects                                                               #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
-    ########################
-    #                      #
+    #
+    #
     # Chunks/Large Objects #
-    #                      #
-    ########################
+    #
+    #
 
     def _chunkPredicate(self, obj, arg=None):
         """The predicate to be used for verifying that the object
@@ -231,18 +232,18 @@ class GeckoStructuralNavigation(structural_navigation.StructuralNavigation):
                and text.characterCount > settings.largeObjectTextLength:
                 string = text.getText(0, -1)
                 eocs = float(string.count(embeddedObjectChar))
-                if eocs/text.characterCount < 0.05:
+                if eocs / text.characterCount < 0.05:
                     return True
                 else:
                     string = string[0:settings.largeObjectTextLength]
                     eocs = float(string.count(embeddedObjectChar))
-                    return eocs/len(string) < 0.005
+                    return eocs / len(string) < 0.005
 
-    ########################
-    #                      #
+    #
+    #
     # Entries              #
-    #                      #
-    ########################
+    #
+    #
 
     def _entryPredicate(self, obj, arg=None):
         """The predicate to be used for verifying that the object
@@ -259,16 +260,16 @@ class GeckoStructuralNavigation(structural_navigation.StructuralNavigation):
            or self._script.utilities.isPasswordText(obj):
             state = obj.getState()
             isMatch = state.contains(pyatspi.STATE_FOCUSABLE) \
-                  and state.contains(pyatspi.STATE_SENSITIVE) \
-                  and state.contains(pyatspi.STATE_EDITABLE)
+                and state.contains(pyatspi.STATE_SENSITIVE) \
+                and state.contains(pyatspi.STATE_EDITABLE)
 
         return isMatch
 
-    ########################
-    #                      #
+    #
+    #
     # Form Fields          #
-    #                      #
-    ########################
+    #
+    #
 
     def _formFieldPredicate(self, obj, arg=None):
         """The predicate to be used for verifying that the object
@@ -284,7 +285,7 @@ class GeckoStructuralNavigation(structural_navigation.StructuralNavigation):
         if obj and obj.getRole() in self.FORM_ROLES:
             state = obj.getState()
             isMatch = state.contains(pyatspi.STATE_FOCUSABLE) \
-                  and state.contains(pyatspi.STATE_SENSITIVE)
+                and state.contains(pyatspi.STATE_SENSITIVE)
 
             if obj.getRole() == pyatspi.ROLE_DOCUMENT_FRAME:
                 isMatch = isMatch and state.contains(pyatspi.STATE_EDITABLE)

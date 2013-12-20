@@ -20,12 +20,12 @@
 # Free Software Foundation, Inc., Franklin Street, Fifth Floor,
 # Boston MA  02110-1301 USA.
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (C) 2010-2011 The Orca Team" \
                 "Copyright (C) 2011-2012 Igalia, S.L."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 import pyatspi.utils as utils
@@ -51,11 +51,12 @@ from .script_utilities import Utilities
 
 _settingsManager = settings_manager.getManager()
 
-########################################################################
-#                                                                      #
+#
+#
 # The WebKitGtk script class.                                          #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(default.Script):
 
@@ -91,13 +92,13 @@ class Script(default.Script):
             input_event.InputEventHandler(
                 Script.panBrailleLeft,
                 cmdnames.PAN_BRAILLE_LEFT,
-                False) # Do not enable learn mode for this action
+                False)  # Do not enable learn mode for this action
 
         self.inputEventHandlers["panBrailleRightHandler"] = \
             input_event.InputEventHandler(
                 Script.panBrailleRight,
                 cmdnames.PAN_BRAILLE_RIGHT,
-                False) # Do not enable learn mode for this action
+                False)  # Do not enable learn mode for this action
 
     def getToolkitKeyBindings(self):
         """Returns the toolkit-specific keybindings for this script."""
@@ -392,7 +393,8 @@ class Script(default.Script):
             phrase = self.utilities.adjustForRepeats(phrase)
             links = [x for x in obj if x.getRole() == pyatspi.ROLE_LINK]
             if links:
-                phrase = self.utilities.adjustForLinks(obj, phrase, startOffset)
+                phrase = self.utilities.adjustForLinks(
+                    obj, phrase, startOffset)
             speech.speak(phrase, voice)
         else:
             # Speak blank line if appropriate.
@@ -686,7 +688,7 @@ class Script(default.Script):
             return
 
         if not self.utilities.isWebKitGtk(obj) \
-           or (not self.utilities.isInlineContainer(obj) \
+           or (not self.utilities.isInlineContainer(obj)
                and not self.utilities.isTextListItem(obj)):
             default.Script.updateBraille(self, obj, extraRegion)
             return

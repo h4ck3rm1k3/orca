@@ -18,10 +18,10 @@
 # Boston MA  02110-1301 USA.
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2013 Igalia, S.L."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import copy
 import pyatspi
@@ -35,23 +35,27 @@ formatting = {
             'focused': 'expandableState',
             'unfocused': 'labelAndName + unrelatedLabels + menuItemCheckedState + expandableState + availability + ' + orca.formatting.MNEMONIC + ' + accelerator + positionInList',
             'basicWhereAmI': 'ancestors + labelAndName + unrelatedLabels + accelerator + positionInList + ' + orca.formatting.MNEMONIC
-            },
+        },
     },
     'braille': {
         pyatspi.ROLE_MENU_ITEM: {
             'unfocused': '[Component(obj,\
                                      asString(label + (displayedText or unrelatedLabels) + expandableState + availability) + asString(accelerator),\
                                      indicator=asString(menuItemCheckedState))]'
-            },
+        },
     }
 }
 
 if orca.settings.useExperimentalSpeechProsody:
-    formatting['speech'][pyatspi.ROLE_MENU_ITEM]['unfocused'] = 'labelAndName + pause + unrelatedLabels + pause + menuItemCheckedState + expandableState + availability + ' + orca.formatting.MNEMONIC + ' + accelerator + pause + positionInList'
+    formatting['speech'][pyatspi.ROLE_MENU_ITEM]['unfocused'] = 'labelAndName + pause + unrelatedLabels + pause + menuItemCheckedState + expandableState + availability + ' + \
+        orca.formatting.MNEMONIC + ' + accelerator + pause + positionInList'
     formatting['speech'][pyatspi.ROLE_MENU_ITEM]['basicWhereAmI'] = \
-        'ancestors + pause + labelAndName + pause + unrelatedLabels + pause + accelerator + pause + positionInList + ' + orca.formatting.MNEMONIC
+        'ancestors + pause + labelAndName + pause + unrelatedLabels + pause + accelerator + pause + positionInList + ' + \
+        orca.formatting.MNEMONIC
+
 
 class Formatting(orca.formatting.Formatting):
+
     def __init__(self, script):
         orca.formatting.Formatting.__init__(self, script)
         self.update(copy.deepcopy(formatting))

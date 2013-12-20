@@ -19,11 +19,11 @@
 
 """Custom script for Instantbird."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -40,11 +40,12 @@ from .script_utilities import Utilities
 
 _settingsManager = settings_manager.getManager()
 
-########################################################################
-#                                                                      #
+#
+#
 # The Instantbird script class.                                        #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(Gecko.Script):
 
@@ -211,7 +212,7 @@ class Script(Gecko.Script):
         # events we need to present text added to the chatroom are
         # missing.
         #
-        #allPageTabs = 
+        # allPageTabs =
         self.utilities.descendantsWithRole(
             event.source, pyatspi.ROLE_PAGE_TAB)
 

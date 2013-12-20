@@ -33,11 +33,11 @@ created in their own module.  The module defining the Script subclass
 is also required to have a 'getScript(app)' method that returns an
 instance of the Script subclass.  See default.py for an example."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import imp
 import importlib
@@ -65,7 +65,9 @@ _eventManager = event_manager.getManager()
 _scriptManager = script_manager.getManager()
 _settingsManager = settings_manager.getManager()
 
+
 class Script(object):
+
     """The specific focus tracking scripts for applications.
     """
 
@@ -360,14 +362,13 @@ class Script(object):
                         pass
 
         return scriptSettings
-
     # [[[WDW - There is a circular reference going on somewhere (see
     # bug 333168).  In the presence of this reference, the existence
     # of a __del__ method prevents the garbage collector from
     # collecting this object. So, we will not define a __del__ method
     # until we understand where the circular reference is coming from.
     #
-    #def __del__(self):
+    # def __del__(self):
     #    debug.println(debug.LEVEL_FINE, "DELETE SCRIPT: %s" % self.name)
 
     def processObjectEvent(self, event):
@@ -392,7 +393,7 @@ class Script(object):
 
         # Check to see if we really want to process this event.
         #
-        processEvent = (orca_state.activeScript == self \
+        processEvent = (orca_state.activeScript == self
                         or self.presentIfInactive)
         if role == pyatspi.ROLE_PROGRESS_BAR \
            and not processEvent \
@@ -437,9 +438,9 @@ class Script(object):
         if not cachedEvent or cachedEvent == event:
             return False
 
-        focus    = ["object:state-changed:focused"]
-        typing   = ["object:text-changed:insert",
-                    "object:text-changed:delete"]
+        focus = ["object:state-changed:focused"]
+        typing = ["object:text-changed:insert",
+                  "object:text-changed:delete"]
         arrowing = ["object:text-caret-moved",
                     "object:text-selection-changed",
                     "object:selection-changed",
@@ -451,14 +452,14 @@ class Script(object):
             skip = True
             reason = "more recent event of the same type in the same object"
         elif event.type in focus and event.source != cachedEvent.source \
-             and event.type == cachedEvent.type \
-             and event.detail1 == cachedEvent.detail1:
+            and event.type == cachedEvent.type \
+                and event.detail1 == cachedEvent.detail1:
             skip = True
             reason = "more recent event of the same type in a different object"
 
         if skip:
             debug.println(debug.LEVEL_FINE,
-                          "script.skipObjectEvent: skipped due to %s" \
+                          "script.skipObjectEvent: skipped due to %s"
                           % reason)
 
         return skip
@@ -481,7 +482,7 @@ class Script(object):
             keyboardEvent.keyval_name = Gdk.keyval_name(keyboardEvent.id)
         except:
             debug.println(debug.LEVEL_FINE,
-                          "Could not obtain keyval_name for id: %d" \
+                          "Could not obtain keyval_name for id: %d"
                           % keyboardEvent.id)
 
     def consumesKeyboardEvent(self, keyboardEvent):
@@ -503,15 +504,15 @@ class Script(object):
         consumes = False
         if user_bindings:
             handler = user_bindings.getInputHandler(keyboardEvent)
-            if handler \
-                 and handler.function in self.structuralNavigation.functions:
+            if (handler and handler.function in self.structuralNavigation.
+                functions):
                 return self.useStructuralNavigationModel()
             else:
                 consumes = handler != None
         if not consumes:
             handler = self.keyBindings.getInputHandler(keyboardEvent)
-            if handler \
-                 and handler.function in self.structuralNavigation.functions:
+            if (handler and handler.function in self.structuralNavigation.
+                functions):
                 return self.useStructuralNavigationModel()
             else:
                 consumes = handler != None

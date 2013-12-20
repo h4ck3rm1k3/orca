@@ -1,7 +1,9 @@
 """Custom script for gdm-simple-greeter"""
 import orca.scripts.default as default
 
+
 class Script(default.Script):
+
     def __init__(self, app):
         """Creates a new script for the given application
 

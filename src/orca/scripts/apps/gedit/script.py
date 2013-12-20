@@ -19,11 +19,11 @@
 
 """Custom script for gedit."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -34,6 +34,7 @@ import orca.settings as settings
 import orca.speech as speech
 
 from orca.orca_i18n import _
+
 
 class Script(gtk.Script):
 
@@ -107,14 +108,14 @@ class Script(gtk.Script):
         # them against the values saved from the last time this routine
         # was called. If they are the same then we ignore it.
 
-        if self.textArea != None:
+        if self.textArea is not None:
             allText = self.utilities.descendantsWithRole(
                 self.textArea, pyatspi.ROLE_TEXT)
             caretPosition = allText[0].queryText().caretOffset
 
-            debug.println(self.debugLevel, \
-                "gedit.readMisspeltWord: type=%s  word=%s caret position=%d" \
-                % (event.type, badWord, caretPosition))
+            debug.println(self.debugLevel,
+                          "gedit.readMisspeltWord: type=%s  word=%s caret position=%d"
+                          % (event.type, badWord, caretPosition))
 
             if (caretPosition == self.lastCaretPosition) and \
                (badWord == self.lastBadWord) and \
@@ -184,9 +185,9 @@ class Script(gtk.Script):
         # we're forced to do so in this case.
         #
         tmp = obj.parent.parent
-        if (self.utilities.hasMatchingHierarchy(obj, rolesList1) \
+        if (self.utilities.hasMatchingHierarchy(obj, rolesList1)
             and obj.name == _("Find")) \
-            or (self.utilities.hasMatchingHierarchy(obj, rolesList2) \
+            or (self.utilities.hasMatchingHierarchy(obj, rolesList2)
                 and tmp.parent.parent.parent.name == _("Find")):
             return True
         else:
@@ -258,7 +259,7 @@ class Script(gtk.Script):
             #
             if frame.name.startswith(_("Check Spelling")):
                 debug.println(self.debugLevel,
-                        "gedit.locusOfFocusChanged - check spelling dialog.")
+                              "gedit.locusOfFocusChanged - check spelling dialog.")
 
                 self.readMisspeltWord(event, event.source.parent.parent)
                 # Fall-thru to process the event with the default handler.
@@ -267,7 +268,7 @@ class Script(gtk.Script):
         # to be handled in the default way.
 
         gtk.Script.locusOfFocusChanged(self, event,
-                                           oldLocusOfFocus, newLocusOfFocus)
+                                       oldLocusOfFocus, newLocusOfFocus)
 
         # If we are doing a Print Preview and we are focused on the
         # page number text area, also speak the "of n" labels to the
@@ -331,7 +332,7 @@ class Script(gtk.Script):
             #
             if frame.name.startswith(_("Check Spelling")):
                 debug.println(self.debugLevel,
-                      "gedit.onNameChanged - check spelling dialog.")
+                              "gedit.onNameChanged - check spelling dialog.")
 
                 self.readMisspeltWord(event, event.source.parent)
                 # Fall-thru to process the event with the default handler.
@@ -363,7 +364,8 @@ class Script(gtk.Script):
                           "gedit.onNameChanged - phrase not found.")
             speech.speak(event.source.name)
 
-        # Pass the event onto the parent class to be handled in the default way.
+        # Pass the event onto the parent class to be handled in the default
+        # way.
         gtk.Script.onNameChanged(self, event)
 
     # This method tries to detect and handle the following cases:

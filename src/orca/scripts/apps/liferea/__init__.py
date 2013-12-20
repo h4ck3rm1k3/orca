@@ -20,4 +20,3 @@
 """Custom script for liferea."""
 
 from .script import Script
-

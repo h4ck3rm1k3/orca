@@ -21,15 +21,16 @@
 
 """Displays a GUI to present Orca commands."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2013 Igalia, S.L."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from gi.repository import GObject, Gdk, Gtk
 from . import guilabels
 from . import orca_state
+
 
 class OrcaCommandListGUI(object):
 
@@ -81,7 +82,8 @@ class OrcaCommandListGUI(object):
         btn = dialog.add_button(guilabels.BTN_CANCEL, Gtk.ResponseType.CANCEL)
         btn.connect('clicked', self._onCancelClicked)
 
-        self._okButton = dialog.add_button(guilabels.BTN_OK, Gtk.ResponseType.OK)
+        self._okButton = dialog.add_button(
+            guilabels.BTN_OK, Gtk.ResponseType.OK)
         self._okButton.grab_default()
         self._okButton.connect('clicked', self._onOKClicked)
 
@@ -126,6 +128,7 @@ class OrcaCommandListGUI(object):
             return None
 
         return model.get_value(model.get_iter(paths[0]), 0)
+
 
 def showUI(title='', columnHeaders=[], rows=[()], canPerformCommands=True):
     gui = OrcaCommandListGUI(title, columnHeaders, rows, canPerformCommands)

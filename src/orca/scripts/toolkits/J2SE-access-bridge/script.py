@@ -18,12 +18,12 @@
 # Free Software Foundation, Inc., Franklin Street, Fifth Floor,
 # Boston MA  02110-1301 USA.
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc., "  \
                 "Copyright (c) 2010 Joanmarie Diggs"
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -36,11 +36,12 @@ from .script_utilities import Utilities
 from .speech_generator import SpeechGenerator
 from .formatting import Formatting
 
-########################################################################
-#                                                                      #
+#
+#
 # The Java script class.                                               #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(default.Script):
 
@@ -58,7 +59,7 @@ class Script(default.Script):
         # double-speak some items and/or set the locusOfFocus to a
         # parent it shouldn't. See bgo#616582. [[[TODO - JD: remove
         # this hack if and when we get a fix for that bug]]]
-        # 
+        #
         self.lastDescendantChangedSource = None
 
     def getSpeechGenerator(self):
@@ -158,7 +159,7 @@ class Script(default.Script):
         if (event.source.getRole() in [pyatspi.ROLE_LIST,
                                        pyatspi.ROLE_PAGE_TAB_LIST,
                                        pyatspi.ROLE_TREE]) \
-            and event.source.getState().contains(pyatspi.STATE_FOCUSED):
+                and event.source.getState().contains(pyatspi.STATE_FOCUSED):
             newFocus = event.source
             if event.source.childCount:
                 selection = event.source.querySelection()

@@ -19,11 +19,11 @@
 
 """Custom script for StarOffice and OpenOffice."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -35,7 +35,9 @@ from . import script_settings
 
 _settingsManager = settings_manager.getManager()
 
+
 class SpeechGenerator(speech_generator.SpeechGenerator):
+
     def __init__(self, script):
         speech_generator.SpeechGenerator.__init__(self, script)
 
@@ -46,9 +48,9 @@ class SpeechGenerator(speech_generator.SpeechGenerator):
         role = args.get('role', obj.getRole())
         override = \
             role == "text frame" \
-            or (role == pyatspi.ROLE_PARAGRAPH \
+            or (role == pyatspi.ROLE_PARAGRAPH
                 and self._script.utilities.ancestorWithRole(
-                      obj, [pyatspi.ROLE_DIALOG], [pyatspi.ROLE_APPLICATION]))
+                    obj, [pyatspi.ROLE_DIALOG], [pyatspi.ROLE_APPLICATION]))
         return override
 
     def _generateRoleName(self, obj, **args):
@@ -162,8 +164,8 @@ class SpeechGenerator(speech_generator.SpeechGenerator):
 
         result = []
         if not self._script.utilities.isSpreadSheetCell(obj, startFromTable=True):
-            result.extend(speech_generator.SpeechGenerator.\
-                _generateAvailability(self, obj, **args))
+            result.extend(speech_generator.SpeechGenerator.
+                          _generateAvailability(self, obj, **args))
 
         return result
 
@@ -472,11 +474,11 @@ class SpeechGenerator(speech_generator.SpeechGenerator):
             # we can use to guess the coordinates.
             #
             args['guessCoordinates'] = obj.getRole() == pyatspi.ROLE_PARAGRAPH
-            result.extend(speech_generator.SpeechGenerator.\
-                                           generateSpeech(self, obj, **args))
+            result.extend(speech_generator.SpeechGenerator.
+                          generateSpeech(self, obj, **args))
             del args['guessCoordinates']
             self._restoreRole(oldRole, args)
         else:
-            result.extend(speech_generator.SpeechGenerator.\
-                                           generateSpeech(self, obj, **args))
+            result.extend(speech_generator.SpeechGenerator.
+                          generateSpeech(self, obj, **args))
         return result

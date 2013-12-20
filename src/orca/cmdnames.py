@@ -23,12 +23,12 @@ have been put in their own module so that we can present them in
 the correct language when users change the synthesizer language
 on the fly without having to reload a bunch of modules."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2004-2009 Sun Microsystems Inc." \
                 "Copyright (c) 2010-2013 The Orca Team"
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from .orca_i18n import _
 
@@ -50,25 +50,26 @@ LEFT_CLICK_REVIEW_ITEM = _("Performs left click on current flat review item.")
 # sequence of words in a sequence of lines.  The flat review feature allows
 # the user to explore this text by the {previous,next} {line,word,character}.
 # Right click means to generate a right mouse button click on the current item.
-RIGHT_CLICK_REVIEW_ITEM = _("Performs right click on current flat review item.")
+RIGHT_CLICK_REVIEW_ITEM = _(
+    "Performs right click on current flat review item.")
 
-# Translators: the Orca "SayAll" command allows the user to press a key and have
-# the entire document in a window be automatically spoken to the user. If the
-# user presses any key during a SayAll operation, the speech will be interrupted
-# and the cursor will be positioned at the point where the
-# speech was interrupted.
+# Translators: the Orca "SayAll" command allows the user to press a key and
+# have the entire document in a window be automatically spoken to the user. If
+# the user presses any key during a SayAll operation, the speech will be
+# interrupted and the cursor will be positioned at the point where the speech
+# was interrupted.
 SAY_ALL = _("Speaks entire document.")
 
-# Translators: the "Where am I" feature of Orca allows a user to press a key and
-# then have information about their current context spoken and brailled to them.
-# For example, the information may include the name of the current pushbutton
-# with focus as well as its mnemonic.
+# Translators: the "Where am I" feature of Orca allows a user to press a key
+# and then have information about their current context spoken and brailled to
+# them. For example, the information may include the name of the current
+# pushbutton with focus as well as its mnemonic.
 WHERE_AM_I_BASIC = _("Performs the basic where am I operation.")
 
-# Translators: the "Where am I" feature of Orca allows a user to press a key and
-# then have information about their current context spoken and brailled to them.
-# For example, the information may include the name of the current pushbutton
-# with focus as well as its mnemonic.
+# Translators: the "Where am I" feature of Orca allows a user to press a key
+# and then have information about their current context spoken and brailled to
+# them. For example, the information may include the name of the current
+# pushbutton with focus as well as its mnemonic.
 WHERE_AM_I_DETAILED = _("Performs the detailed where am I operation.")
 
 # Translators: This command will cause the window's status bar contents to be
@@ -251,11 +252,11 @@ REVIEW_PREVIOUS_CHARACTER = _("Moves flat review to the previous character.")
 REVIEW_CURRENT_CHARACTER = _("Speaks the current flat review character.")
 
 # Translators: the 'flat review' feature of Orca allows the blind user to
-# explore the text in a window in a 2D fashion.  That is, Orca treats all
-# the text from all objects in a window (e.g., buttons, labels, etc.) as a
-# sequence of words in a sequence of lines.  The flat review feature allows
-# the user to explore this text by the {previous,next} {line,word,character}.
-# This particular command will cause Orca to present the character phonetically,
+# explore the text in a window in a 2D fashion.  That is, Orca treats all the
+# text from all objects in a window (e.g., buttons, labels, etc.) as a sequence
+# of words in a sequence of lines.  The flat review feature allows the user to
+# explore this text by the {previous,next} {line,word,character}. This
+# particular command will cause Orca to present the character phonetically,
 # saying "Alpha" for "a", "Bravo" for "b" and so on.
 REVIEW_SPELL_CURRENT_CHARACTER = \
     _("Phonetically speaks the current flat review character.")
@@ -325,18 +326,18 @@ TOGGLE_TABLE_CELL_READ_MODE = \
 READ_CHAR_ATTRIBUTES = \
     _("Reads the attributes associated with the current text character.")
 
-# Translators: a refreshable braille display is an external hardware device that
-# presents braille characters to the user. There are a limited number of cells
-# on the display (typically 40 cells).  Orca provides the feature to build up a
-# longer logical line and allow the user to press buttons on the braille display
-# so they can pan left and right over this line.
+# Translators: a refreshable braille display is an external hardware device
+# that presents braille characters to the user. There are a limited number of
+# cells on the display (typically 40 cells).  Orca provides the feature to
+# build up a longer logical line and allow the user to press buttons on the
+# braille display so they can pan left and right over this line.
 PAN_BRAILLE_LEFT = _("Pans the braille display to the left.")
 
-# Translators: a refreshable braille display is an external hardware device that
-# presents braille characters to the user. There are a limited number of cells
-# on the display (typically 40 cells).  Orca provides the feature to build up a
-# longer logical line and allow the user to press buttons on the braille display
-# so they can pan left and right over this line.
+# Translators: a refreshable braille display is an external hardware device
+# that presents braille characters to the user. There are a limited number of
+# cells on the display (typically 40 cells).  Orca provides the feature to
+# build up a longer logical line and allow the user to press buttons on the
+# braille display so they can pan left and right over this line.
 PAN_BRAILLE_RIGHT = _("Pans the braille display to the right.")
 
 # Translators: the 'flat review' feature of Orca allows the blind user to
@@ -369,8 +370,8 @@ PROCESS_BRAILLE_CUT_LINE = _("Marks the end of a text selection.")
 # Translators: Orca has a "Learn Mode" that will allow the user to type any key
 # on the keyboard and hear what the effects of that key would be. The effects
 # might be what Orca would do if it had a handler for the particular key
-# combination, or they might just be to echo the name of the key if Orca doesn't
-# have a handler.
+# combination, or they might just be to echo the name of the key if Orca
+# doesn't have a handler.
 ENTER_LEARN_MODE = _("Enters learn mode.  Press escape to exit learn mode.")
 
 # Translators: the speech rate is how fast the speech synthesis engine will
@@ -413,46 +414,45 @@ TOGGLE_SPOKEN_INDENTATION_AND_JUSTIFICATION = \
 
 # Translators: Orca allows users to cycle through punctuation levels. None,
 # some, most, or all, punctuation will be spoken.
-CYCLE_PUNCTUATION_LEVEL = _("Cycles to the next speaking of punctuation level.")
+CYCLE_PUNCTUATION_LEVEL = _(
+    "Cycles to the next speaking of punctuation level.")
 
-# Translators: Orca has a feature whereby users can set up different "profiles,"
-# which are collection of settings which apply to a given task, such as a
-# "Spanish" profile which would use Spanish text-to-speech and Spanish braille
-# and selected when reading Spanish content. This string to be translated refers
-# to an Orca command which makes it possible for users to quickly cycle amongst
-# their saved profiles without having to get into a GUI.
+# Translators: Orca has a feature whereby users can set up different
+# "profiles," which are collection of settings which apply to a given task,
+# such as a "Spanish" profile which would use Spanish text-to-speech and
+# Spanish braille and selected when reading Spanish content. This string to be
+# translated refers to an Orca command which makes it possible for users to
+# quickly cycle amongst their saved profiles without having to get into a GUI.
 CYCLE_SETTINGS_PROFILE = _("Cycles to the next settings profile.")
 
-# Translators: Orca uses Speech Dispatcher to present content to users via text-
-# to-speech. Speech Dispatcher has a feature to control how capital letters are
-# presented: Do nothing at all, say the word 'capital' prior to presenting a
-# capital letter, or play a tone which Speech Dispatcher refers to as a sound
-# 'icon'. This string to be translated refers to an Orca command which makes it
-# possible for users to quickly cycle amongst these alternatives without having
-# to get into a GUI.
+# Translators: Orca uses Speech Dispatcher to present content to users via
+# text- to-speech. Speech Dispatcher has a feature to control how capital
+# letters are presented: Do nothing at all, say the word 'capital' prior to
+# presenting a capital letter, or play a tone which Speech Dispatcher refers to
+# as a sound 'icon'. This string to be translated refers to an Orca command
+# which makes it possible for users to quickly cycle amongst these alternatives
+# without having to get into a GUI.
 CYCLE_CAPITALIZATION_STYLE = _("Cycles to the next capitalization style.")
 
 # Translators: Orca has an "echo" setting which allows the user to configure
 # what is spoken in response to a key press. Given a user who typed "Hello
-# world.":
-# - key echo: "H e l l o space w o r l d period"
-# - word echo: "Hello" spoken when the space is pressed; "world" spoken when
-#   the period is pressed.
-# - sentence echo: "Hello world" spoken when the period is pressed.
-# A user can choose to have no echo, one type of echo, or multiple types of
-# echo. The following string refers to a command that allows the user to quickly
-# choose which type of echo is being used.
+# world.": - key echo: "H e l l o space w o r l d period" - word echo: "Hello"
+# spoken when the space is pressed; "world" spoken when the period is pressed.
+# - sentence echo: "Hello world" spoken when the period is pressed. A user can
+# choose to have no echo, one type of echo, or multiple types of echo. The
+# following string refers to a command that allows the user to quickly choose
+# which type of echo is being used.
 CYCLE_KEY_ECHO = _("Cycles to the next key echo level.")
 
-# Translators: this is a debug message that Orca users will not normally see. It
-# describes a debug routine that allows the user to adjust the level of debug
-# information that Orca generates at run time.
+# Translators: this is a debug message that Orca users will not normally see.
+# It describes a debug routine that allows the user to adjust the level of
+# debug information that Orca generates at run time.
 CYCLE_DEBUG_LEVEL = _("Cycles the debug level at run time.")
 
 # Translators: this command announces information regarding the relationship of
 # the given bookmark to the current position. Note that in this context, the
-# "bookmark" is storing the location of an accessible object, typically on a web
-# page.
+# "bookmark" is storing the location of an accessible object, typically on a
+# web page.
 BOOKMARK_CURRENT_WHERE_AM_I = \
     _("Bookmark where am I with respect to current position.")
 
@@ -470,12 +470,12 @@ BOOKMARK_GO_TO = _("Go to bookmark.")
 
 # Translators: this event handler cycles through the registered bookmarks and
 # takes the user to the next bookmark location. Note that in this context, the
-# "bookmark" is storing the location of an accessible object, typically on a web
-# page.
+# "bookmark" is storing the location of an accessible object, typically on a
+# web page.
 BOOKMARK_GO_TO_NEXT = _("Go to next bookmark location.")
 
-# Translators: this event handler binds an in-page accessible object location to
-# the given input key command.
+# Translators: this event handler binds an in-page accessible object location
+# to the given input key command.
 BOOKMARK_ADD = _("Add bookmark.")
 
 # Translators: this event handler saves all bookmarks for
@@ -483,8 +483,8 @@ BOOKMARK_ADD = _("Add bookmark.")
 # to disk.
 BOOKMARK_SAVE = _("Save bookmarks.")
 
-# Translators: Orca allows the item under the pointer to be spoken. This toggles
-# the feature without the need to get into a GUI.
+# Translators: Orca allows the item under the pointer to be spoken. This
+# toggles the feature without the need to get into a GUI.
 MOUSE_REVIEW_TOGGLE = _("Toggle mouse review mode.")
 
 # Translators: Orca has a command to present the current time in speech and in
@@ -508,10 +508,11 @@ BYPASS_NEXT_COMMAND = \
 CHAT_PREVIOUS_MESSAGE = _("Speak and braille a previous chat room message.")
 
 # Translators: In chat applications, it is often possible to see that a "buddy"
-# is typing currently (e.g. via a keyboard icon or status text). Some users like
-# to have this typing status announced by Orca; others find that announcment
-# unpleasant. Therefore, it is a setting in Orca. This string to be translated
-# is associated with the command to toggle typing status presentation on or off.
+# is typing currently (e.g. via a keyboard icon or status text). Some users
+# like to have this typing status announced by Orca; others find that
+# announcment unpleasant. Therefore, it is a setting in Orca. This string to be
+# translated is associated with the command to toggle typing status
+# presentation on or off.
 CHAT_TOGGLE_BUDDY_TYPING = \
     _("Toggle whether we announce when our buddies are typing.")
 
@@ -523,18 +524,18 @@ CHAT_TOGGLE_BUDDY_TYPING = \
 # translated is associated with the command to toggle specific room history on
 # or off.
 CHAT_TOGGLE_MESSAGE_HISTORIES = \
-    _("Toggle whether we provide chat room specific message " \
+    _("Toggle whether we provide chat room specific message "
       "histories.")
 
 # Translators: In chat applcations, Orca automatically presents incoming
 # messages in speech and braille. If a user is in multiple conversations or
-# channels at the same time, it can be confusing to know what room or channel
-# a given message came from just from hearing/reading it. For this reason, Orca
+# channels at the same time, it can be confusing to know what room or channel a
+# given message came from just from hearing/reading it. For this reason, Orca
 # has an option to present the name of the room first ("#a11y <joanie> hello!"
-# instead of "<joanie> hello!"). This string to be translated is associated with
-# the command to toggle room name presentation on or off.
+# instead of "<joanie> hello!"). This string to be translated is associated
+# with the command to toggle room name presentation on or off.
 CHAT_TOGGLE_ROOM_NAME_PREFIX = \
-    _("Toggle whether we prefix chat room messages with " \
+    _("Toggle whether we prefix chat room messages with "
       "the name of the chat room.")
 
 # Translators: this is a command for a button on a refreshable braille display
@@ -580,7 +581,7 @@ BRAILLE_HOME = _("Cursor Position")
 # Translators: this is a command for a button on a refreshable braille display
 # (an external hardware device used by people who are blind). When pressing the
 # button, the display toggles between six-dot braille and eight-dot braille.
-BRAILLE_SIX_DOTS  = _("Six Dots")
+BRAILLE_SIX_DOTS = _("Six Dots")
 
 # Translators: this is a command for a button on a refreshable braille display
 # (an external hardware device used by people who are blind). This command
@@ -591,16 +592,18 @@ BRAILLE_ROUTE_CURSOR = _("Cursor Routing")
 
 # Translators: this is a command for a button on a refreshable braille display
 # (an external hardware device used by people who are blind). This command
-# represents the start of a selection operation. It is called "Cut Begin" to map
-# to what BrlTTY users are used to: in character cell mode operation on virtual
-# consoles, the act of copying text is erroneously called a "cut" operation.
+# represents the start of a selection operation. It is called "Cut Begin" to
+# map to what BrlTTY users are used to: in character cell mode operation on
+# virtual consoles, the act of copying text is erroneously called a "cut"
+# operation.
 BRAILLE_CUT_BEGIN = _("Cut Begin")
 
 # Translators: this is a command for a button on a refreshable braille display
 # (an external hardware device used by people who are blind). This command
-# represents marking the endpoint of a selection. It is called "Cut Line" to map
-# to what BrlTTY users are used to: in character cell mode operation on virtual
-# consoles, the act of copying text is erroneously called a "cut" operation.
+# represents marking the endpoint of a selection. It is called "Cut Line" to
+# map to what BrlTTY users are used to: in character cell mode operation on
+# virtual consoles, the act of copying text is erroneously called a "cut"
+# operation.
 BRAILLE_CUT_LINE = _("Cut Line")
 
 # Translators: this is a command which causes Orca to present the last received
@@ -664,39 +667,40 @@ CARET_NAVIGATION_TOGGLE = \
     _("Switches between native and screen-reader caret navigation.")
 
 # Translators: A live region is an area of a web page that is periodically
-# updated, e.g. stock ticker. http://www.w3.org/TR/wai-aria/terms#def_liveregion
-# The "politeness" level is an indication of when the user wishes to be notified
-# about a change to live region content. Examples include: never ("off"), when
-# idle ("polite"), and when there is a change ("assertive"). Orca has several
-# features to facilitate accessing live regions. This string refers to a command
-# to cycle through the different "politeness" levels.
+# updated, e.g. stock ticker. http://www.w3.org/TR/wai-
+# aria/terms#def_liveregion The "politeness" level is an indication of when the
+# user wishes to be notified about a change to live region content. Examples
+# include: never ("off"), when idle ("polite"), and when there is a change
+# ("assertive"). Orca has several features to facilitate accessing live
+# regions. This string refers to a command to cycle through the different
+# "politeness" levels.
 LIVE_REGIONS_ADVANCE_POLITENESS = _("Advance live region politeness setting.")
 
 # Translators: A live region is an area of a web page that is periodically
-# updated, e.g. stock ticker. http://www.w3.org/TR/wai-aria/terms#def_liveregion
-# The "politeness" level is an indication of when the user wishes to be notified
-# about a change to live region content. Examples include: never ("off"), when
-# idle ("polite"), and when there is a change ("assertive"). Orca has several
-# features to facilitate accessing live regions. This string refers to a command
-# to turn off live regions by default.
+# updated, e.g. stock ticker. http://www.w3.org/TR/wai-
+# aria/terms#def_liveregion The "politeness" level is an indication of when the
+# user wishes to be notified about a change to live region content. Examples
+# include: never ("off"), when idle ("polite"), and when there is a change
+# ("assertive"). Orca has several features to facilitate accessing live
+# regions. This string refers to a command to turn off live regions by default.
 LIVE_REGIONS_SET_POLITENESS_OFF = \
     _("Set default live region politeness level to off.")
 
 # Translators: A live region is an area of a web page that is periodically
-# updated, e.g. stock ticker. http://www.w3.org/TR/wai-aria/terms#def_liveregion
-# This string refers to a command for reviewing up to nine stored previous live
-# messages.
+# updated, e.g. stock ticker. http://www.w3.org/TR/wai-
+# aria/terms#def_liveregion This string refers to a command for reviewing up to
+# nine stored previous live messages.
 LIVE_REGIONS_REVIEW = _("Review live region announcement.")
 
 # Translators: A live region is an area of a web page that is periodically
-# updated, e.g. stock ticker. http://www.w3.org/TR/wai-aria/terms#def_liveregion
-# This string refers to an Orca command which allows the user to toggle whether
-# or not Orca pays attention to changes in live regions. Note that turning off
-# monitoring of live events is NOT the same as turning the politeness level
-# to "off". The user can opt to have no notifications presented (politeness
-# level of "off") and still manually review recent updates to live regions via
-# Orca commands for doing so -- as long as the monitoring of live regions is
-# enabled.
+# updated, e.g. stock ticker. http://www.w3.org/TR/wai-
+# aria/terms#def_liveregion This string refers to an Orca command which allows
+# the user to toggle whether or not Orca pays attention to changes in live
+# regions. Note that turning off monitoring of live events is NOT the same as
+# turning the politeness level to "off". The user can opt to have no
+# notifications presented (politeness level of "off") and still manually review
+# recent updates to live regions via Orca commands for doing so -- as long as
+# the monitoring of live regions is enabled.
 LIVE_REGIONS_MONITOR = _("Monitor live regions.")
 
 # Translators: hovering the mouse over certain objects on a web page causes a
@@ -707,13 +711,13 @@ LIVE_REGIONS_MONITOR = _("Monitor live regions.")
 MOUSE_OVER_MOVE = _("Moves focus into and away from the current mouse over.")
 
 # Translators: Orca allows you to dynamically define which row of a spreadsheet
-# or table should be treated as containing column headers. This string refers to
-# the command to set the row.
+# or table should be treated as containing column headers. This string refers
+# to the command to set the row.
 DYNAMIC_COLUMN_HEADER_SET = _("Set the row to use as dynamic column headers.")
 
 # Translators: Orca allows you to dynamically define which row of a spreadsheet
-# or table should be treated as containing column headers. This string refers to
-# the command to unset the row so it is no longer treated as if it contained
+# or table should be treated as containing column headers. This string refers
+# to the command to unset the row so it is no longer treated as if it contained
 # column headers.
 DYNAMIC_COLUMN_HEADER_CLEAR = _("Clears the dynamic column headers.")
 
@@ -735,8 +739,8 @@ PRESENT_INPUT_LINE = _("Presents the contents of the input line.")
 # Translators: the structural navigation keys are designed to move the caret
 # around the document content by object type. Thus H moves you to the next
 # heading, Shift H to the previous heading, T to the next table, and so on.
-# This feature needs to be toggle-able so that it does not interfere with normal
-# writing functions.
+# This feature needs to be toggle-able so that it does not interfere with
+# normal writing functions.
 STRUCTURAL_NAVIGATION_TOGGLE = _("Toggles structural navigation keys.")
 
 # Translators: this is for navigating among anchors in a document. An anchor is
@@ -886,7 +890,8 @@ LIVE_REGION_NEXT = _("Goes to next live region.")
 # Translators: this is for navigating among live regions in a document. A live
 # region is an area of a web page that is periodically updated, e.g. a stock
 # ticker. http://www.w3.org/TR/wai-aria/terms#def_liveregion
-LIVE_REGION_LAST = _("Goes to the last live region which made an announcement.")
+LIVE_REGION_LAST = _(
+    "Goes to the last live region which made an announcement.")
 
 # Translators: this is for navigating among paragraphs in a document.
 PARAGRAPH_PREV = _("Goes to previous paragraph.")

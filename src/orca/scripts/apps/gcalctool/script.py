@@ -19,22 +19,23 @@
 
 """Provides a custom script for gcalctool."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
 import orca.scripts.toolkits.gtk as gtk
 import orca.messages as messages
 
-########################################################################
-#                                                                      #
+#
+#
 # The GCalcTool script class.                                          #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(gtk.Script):
 
@@ -75,7 +76,7 @@ class Script(gtk.Script):
             self.presentMessage(messages.CALCULATOR_DISPLAY_NOT_FOUND)
 
         isStatusLine = lambda x: x and x.getRole() == pyatspi.ROLE_TEXT \
-                       and not x.getState().contains(pyatspi.STATE_EDITABLE)
+            and not x.getState().contains(pyatspi.STATE_EDITABLE)
         self._statusLine = pyatspi.findDescendant(obj, isStatusLine)
 
         gtk.Script.onWindowActivated(self, event)

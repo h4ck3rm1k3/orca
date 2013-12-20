@@ -21,11 +21,11 @@
 """Custom formatting for Java Swing."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc., "  \
                 "Copyright (c) 2010 Joanmarie Diggs"
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import copy
 
@@ -44,16 +44,18 @@ formatting = {
             'unfocused': '(displayedText or roleName) + expandableState + numberOfChildren',
             'focused': 'expandableState + numberOfChildren',
             'basicWhereAmI': '(displayedText or roleName) + expandableState + numberOfChildren + nodeLevel',
-            },
+        },
     },
     'braille': {
         pyatspi.ROLE_LABEL: {
             'unfocused': '[Component(obj, asString(displayedText + expandableState))]'
-            },
+        },
     }
 }
 
+
 class Formatting(orca.formatting.Formatting):
+
     def __init__(self, script):
         orca.formatting.Formatting.__init__(self, script)
         self.update(copy.deepcopy(formatting))

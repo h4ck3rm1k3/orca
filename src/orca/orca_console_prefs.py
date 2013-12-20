@@ -20,11 +20,11 @@
 """Uses speech prompts and a command line interface to set Orca
 user preferences."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import re
 import sys
@@ -35,13 +35,14 @@ from . import settings
 from . import speech
 from . import speechserver
 
-workingFactories   = []
+workingFactories = []
 speechServerChoice = None
-speechVoiceChoice  = None
+speechVoiceChoice = None
 YESEXPR = re.compile(messages.CONSOLE_SETUP_YESEXPR)
 NOEXPR = re.compile(messages.CONSOLE_SETUP_NOEXPR)
 
-def checkYes(value) :
+
+def checkYes(value):
     """Checks if a string represents a yes, no.
     Arguments:
     - value: a string read from the console
@@ -54,6 +55,7 @@ def checkYes(value) :
         return False
     else:
         raise ValueError
+
 
 def sayAndPrint(text,
                 stop=False,
@@ -88,6 +90,7 @@ def sayAndPrint(text,
         return input(text)
     else:
         print(text)
+
 
 def setupSpeech(prefsDict):
     """Sets up speech support.  If speech setup is successful and the
@@ -136,7 +139,7 @@ def setupSpeech(prefsDict):
         i = 1
         for workingFactory in workingFactories:
             choices[i] = workingFactory
-            sayAndPrint("%d. %s" \
+            sayAndPrint("%d. %s"
                         % (i, workingFactory[0].SpeechServer.getFactoryName()))
             i += 1
         while True:
@@ -188,18 +191,18 @@ def setupSpeech(prefsDict):
     if len(families) > 1:
 
         sayAndPrint(messages.CONSOLE_SETUP_SELECT_VOICE,
-                    True,               # stop
-                    False,              # getInput
-                    speechServerChoice) # server
+                    True, # stop
+                    False, # getInput
+                    speechServerChoice)  # server
         i = 1
         choices = {}
         for family in families:
             name = family[speechserver.VoiceFamily.NAME] \
-                + " (%s)" %  family[speechserver.VoiceFamily.LOCALE]
-            voice = acss.ACSS({acss.ACSS.FAMILY : family})
+                + " (%s)" % family[speechserver.VoiceFamily.LOCALE]
+            voice = acss.ACSS({acss.ACSS.FAMILY: family})
             sayAndPrint("%d. %s" % (i, name),
-                        False,              # stop
-                        False,              # getInput
+                        False, # stop
+                        False, # getInput
                         speechServerChoice, # speech server
                         voice)              # voice
             choices[i] = voice
@@ -208,9 +211,9 @@ def setupSpeech(prefsDict):
         while True:
             try:
                 choice = int(sayAndPrint(messages.CONSOLE_SETUP_ENTER_CHOICE,
-                                         False,               # stop
-                                         True,                # getInput
-                                         speechServerChoice)) # speech server
+                                         False, # stop
+                                         True, # getInput
+                                         speechServerChoice))  # speech server
                 break
             except:
                 sayAndPrint(messages.CONSOLE_SETUP_ENTER_VALID_NUMBER)
@@ -219,7 +222,7 @@ def setupSpeech(prefsDict):
             return False
         defaultACSS = choices[choice]
     else:
-        defaultACSS = acss.ACSS({acss.ACSS.FAMILY : families[0]})
+        defaultACSS = acss.ACSS({acss.ACSS.FAMILY: families[0]})
 
     speechVoiceChoice = defaultACSS
 
@@ -232,15 +235,15 @@ def setupSpeech(prefsDict):
     defaultACSS[acss.ACSS.RATE] = 50
     defaultACSS[acss.ACSS.GAIN] = 100
     defaultACSS[acss.ACSS.AVERAGE_PITCH] = 5
-    uppercaseACSS = acss.ACSS({acss.ACSS.AVERAGE_PITCH : 7})
+    uppercaseACSS = acss.ACSS({acss.ACSS.AVERAGE_PITCH: 7})
     hyperlinkACSS = acss.ACSS({})
     systemACSS = acss.ACSS({})
 
     voices = {
-        settings.DEFAULT_VOICE   : defaultACSS,
-        settings.UPPERCASE_VOICE : uppercaseACSS,
-        settings.HYPERLINK_VOICE : hyperlinkACSS,
-        settings.SYSTEM_VOICE    : systemACSS
+        settings.DEFAULT_VOICE: defaultACSS,
+        settings.UPPERCASE_VOICE: uppercaseACSS,
+        settings.HYPERLINK_VOICE: hyperlinkACSS,
+        settings.SYSTEM_VOICE: systemACSS
     }
 
     prefsDict["enableSpeech"] = True
@@ -268,7 +271,7 @@ def setupSpeech(prefsDict):
                              stop,
                              True,
                              speechServerChoice,
-                         speechVoiceChoice)
+                             speechVoiceChoice)
         try:
             prefsDict["enableKeyEcho"] = checkYes(answer)
             break
@@ -278,11 +281,11 @@ def setupSpeech(prefsDict):
 
     keyEcho = prefsDict["enableKeyEcho"]
     if not keyEcho:
-        prefsDict["enableKeyEcho"]       = False
+        prefsDict["enableKeyEcho"] = False
         prefsDict["enablePrintableKeys"] = False
-        prefsDict["enableModifierKeys"]  = False
-        prefsDict["enableFunctionKeys"]  = False
-        prefsDict["enableActionKeys"]    = False
+        prefsDict["enableModifierKeys"] = False
+        prefsDict["enableFunctionKeys"] = False
+        prefsDict["enableActionKeys"] = False
 
     stop = True
     while keyEcho and True:
@@ -376,17 +379,18 @@ def setupSpeech(prefsDict):
 
     return True
 
+
 def showPreferencesUI(commandLineSettings):
     """Uses the console to query the user for Orca preferences."""
 
     prefsDict = {}
 
-    if ("enableSpeech" in commandLineSettings and \
+    if ("enableSpeech" in commandLineSettings and
         not commandLineSettings["enableSpeech"]) or \
        (not setupSpeech(prefsDict)):
-        prefsDict["enableSpeech"]     = False
+        prefsDict["enableSpeech"] = False
         prefsDict["enableEchoByWord"] = False
-        prefsDict["enableKeyEcho"]    = False
+        prefsDict["enableKeyEcho"] = False
 
     stop = True
     while True:
@@ -416,6 +420,7 @@ def showPreferencesUI(commandLineSettings):
 
     for [factory, servers] in workingFactories:
         factory.SpeechServer.shutdownActiveServers()
+
 
 def main():
     showPreferencesUI(sys.argv[1:])

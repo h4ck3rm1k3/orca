@@ -19,12 +19,11 @@
 
 """Provides support for a flat review find."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
-
+__license__ = "LGPL"
 
 import copy
 import re
@@ -34,7 +33,9 @@ from . import flat_review
 from . import messages
 from . import orca_state
 
+
 class SearchQuery(object):
+
     """Represents a search that the user wants to perform."""
 
     def __init__(self):
@@ -64,23 +65,23 @@ class SearchQuery(object):
 
     def debugContext(self, context, string):
         """Prints out the context and the string to find to debug.out"""
-        debug.println(self.debugLevel, \
+        debug.println(self.debugLevel,
             "------------------------------------------------------------")
-        debug.println(self.debugLevel, \
-                      "findQuery: %s line=%d zone=%d word=%d char=%d" \
-                      % (string, context.lineIndex, context.zoneIndex, \
-                                 context.wordIndex, context.charIndex))
+        debug.println(self.debugLevel,
+                      "findQuery: %s line=%d zone=%d word=%d char=%d"
+                      % (string, context.lineIndex, context.zoneIndex,
+                         context.wordIndex, context.charIndex))
 
-        debug.println(self.debugLevel, \
+        debug.println(self.debugLevel,
                       "Number of lines: %d" % len(context.lines))
-        debug.println(self.debugLevel, \
-                      "Number of zones in current line: %d" % \
+        debug.println(self.debugLevel,
+                      "Number of zones in current line: %d" %
                       len(context.lines[context.lineIndex].zones))
-        debug.println(self.debugLevel, \
-                      "Number of words in current zone: %d" % \
-           len(context.lines[context.lineIndex].zones[context.zoneIndex].words))
+        debug.println(self.debugLevel, "Number of words in current zone: %d" %
+            len(context.lines[context.lineIndex].zones[context.zoneIndex].
+            words))
 
-        debug.println(self.debugLevel, \
+        debug.println(self.debugLevel,
             "==========================================================\n\n")
 
     def dumpContext(self, context):
@@ -91,9 +92,9 @@ class SearchQuery(object):
             for j in range(0, len(context.lines[i].zones)):
                 print("    Zone: %d" % j)
                 for k in range(0, len(context.lines[i].zones[j].words)):
-                    print("      Word %d = `%s` len(word): %d" % \
-                        (k, context.lines[i].zones[j].words[k].string, \
-                         len(context.lines[i].zones[j].words[k].string)))
+                    print("      Word %d = `%s` len(word): %d" %
+                          (k, context.lines[i].zones[j].words[k].string,
+                           len(context.lines[i].zones[j].words[k].string)))
 
     def findQuery(self, context, justEnteredFlatReview):
         """Performs a search on the string specified in searchQuery.
@@ -114,10 +115,10 @@ class SearchQuery(object):
         originalWordIndex = context.wordIndex
         originalCharIndex = context.charIndex
 
-        debug.println(self.debugLevel, \
-            "findQuery: original context line=%d zone=%d word=%d char=%d" \
-                % (originalLineIndex, originalZoneIndex, \
-                   originalWordIndex, originalCharIndex))
+        debug.println(self.debugLevel,
+                      "findQuery: original context line=%d zone=%d word=%d char=%d"
+                      % (originalLineIndex, originalZoneIndex,
+                         originalWordIndex, originalCharIndex))
         # self.dumpContext(context)
 
         flags = re.LOCALE
@@ -129,9 +130,9 @@ class SearchQuery(object):
             regexp = self.searchString
         pattern = re.compile(regexp, flags)
 
-        debug.println(self.debugLevel, \
-            "findQuery: startAtTop: %d  regexp: `%s`" \
-                % (self.startAtTop, regexp))
+        debug.println(self.debugLevel,
+                      "findQuery: startAtTop: %d  regexp: `%s`"
+                      % (self.startAtTop, regexp))
 
         if self.startAtTop:
             context.goBegin(flat_review.Context.WINDOW)
@@ -146,22 +147,22 @@ class SearchQuery(object):
             # Check the current line for the string.
             #
             [currentLine, x, y, width, height] = \
-                 context.getCurrent(flat_review.Context.LINE)
-            debug.println(self.debugLevel, \
-                "findQuery: current line=`%s` x=%d y=%d width=%d height=%d" \
-                    % (currentLine, x, y, width, height))
+                context.getCurrent(flat_review.Context.LINE)
+            debug.println(self.debugLevel,
+                          "findQuery: current line=`%s` x=%d y=%d width=%d height=%d"
+                          % (currentLine, x, y, width, height))
 
             if re.search(pattern, currentLine) and not doneWithLine:
                 # It's on this line. Check the current zone for the string.
                 #
                 while not found:
                     [currentZone, x, y, width, height] = \
-                         context.getCurrent(flat_review.Context.ZONE)
-                    debug.println(self.debugLevel, \
-                        "findQuery: current zone=`%s` x=%d y=%d " % \
-                        (currentZone, x, y))
-                    debug.println(self.debugLevel, \
-                        "width=%d height=%d" % (width, height))
+                        context.getCurrent(flat_review.Context.ZONE)
+                    debug.println(self.debugLevel,
+                                  "findQuery: current zone=`%s` x=%d y=%d " %
+                                  (currentZone, x, y))
+                    debug.println(self.debugLevel,
+                                  "width=%d height=%d" % (width, height))
 
                     if re.search(pattern, currentZone):
                         # It's in this zone at least once.
@@ -169,8 +170,8 @@ class SearchQuery(object):
                         theZone = context.lines[context.lineIndex] \
                                          .zones[context.zoneIndex]
                         startedInThisZone = \
-                              (originalLineIndex == context.lineIndex) and \
-                              (originalZoneIndex == context.zoneIndex)
+                            (originalLineIndex == context.lineIndex) and \
+                            (originalZoneIndex == context.zoneIndex)
                         try:
                             theZone.accessible.queryText()
                         except:
@@ -189,19 +190,19 @@ class SearchQuery(object):
                             i = 0
                             while not found and (i < len(offsets)):
                                 [nextInstance, offset] = \
-                                   theZone.getWordAtOffset(offsets[i])
+                                    theZone.getWordAtOffset(offsets[i])
                                 if nextInstance:
                                     offsetDiff = \
                                         nextInstance.index - context.wordIndex
                                     if self.searchBackwards \
                                        and (offsetDiff < 0) \
-                                       or (not self.searchBackwards \
+                                       or (not self.searchBackwards
                                            and offsetDiff > 0):
                                         context.wordIndex = nextInstance.index
                                         context.charIndex = 0
                                         found = True
                                     elif not offsetDiff and \
-                                        (not startedInThisZone or \
+                                        (not startedInThisZone or
                                          justEnteredFlatReview):
                                         # We landed on a match by happenstance.
                                         # This can occur when the nextInstance
@@ -216,16 +217,16 @@ class SearchQuery(object):
                         # Locate the next zone to try again.
                         #
                         if self.searchBackwards:
-                            moved = context.goPrevious( \
-                                        flat_review.Context.ZONE, \
-                                        flat_review.Context.WRAP_LINE)
+                            moved = context.goPrevious(
+                                flat_review.Context.ZONE,
+                                flat_review.Context.WRAP_LINE)
                             self.debugContext(context, "[1] go previous")
                             context.goEnd(flat_review.Context.ZONE)
                             self.debugContext(context, "[1] go end")
                         else:
-                            moved = context.goNext( \
-                                        flat_review.Context.ZONE, \
-                                        flat_review.Context.WRAP_LINE)
+                            moved = context.goNext(
+                                flat_review.Context.ZONE,
+                                flat_review.Context.WRAP_LINE)
                             self.debugContext(context, "[1] go next")
                         if not moved:
                             doneWithLine = True
@@ -234,11 +235,11 @@ class SearchQuery(object):
                 # Locate the next line to try again.
                 #
                 if self.searchBackwards:
-                    moved = context.goPrevious(flat_review.Context.LINE, \
+                    moved = context.goPrevious(flat_review.Context.LINE,
                                                flat_review.Context.WRAP_LINE)
                     self.debugContext(context, "[2] go previous")
                 else:
-                    moved = context.goNext(flat_review.Context.LINE, \
+                    moved = context.goNext(flat_review.Context.LINE,
                                            flat_review.Context.WRAP_LINE)
                     self.debugContext(context, "[2] go next")
                 if moved:
@@ -254,18 +255,18 @@ class SearchQuery(object):
                         wrappedYet = True
                         if self.searchBackwards:
                             script.presentMessage(messages.WRAPPING_TO_BOTTOM)
-                            moved = context.goPrevious( \
-                                    flat_review.Context.LINE, \
-                                    flat_review.Context.WRAP_ALL)
+                            moved = context.goPrevious(
+                                flat_review.Context.LINE,
+                                flat_review.Context.WRAP_ALL)
                             self.debugContext(context, "[3] go previous")
                         else:
                             script.presentMessage(messages.WRAPPING_TO_TOP)
-                            moved = context.goNext( \
-                                    flat_review.Context.LINE, \
-                                    flat_review.Context.WRAP_ALL)
+                            moved = context.goNext(
+                                flat_review.Context.LINE,
+                                flat_review.Context.WRAP_ALL)
                             self.debugContext(context, "[3] go next")
                         if not moved:
-                            debug.println(self.debugLevel, \
+                            debug.println(self.debugLevel,
                                           "findQuery: cannot wrap")
                             break
                     else:
@@ -274,17 +275,18 @@ class SearchQuery(object):
             location = copy.copy(context)
 
         self.debugContext(context, "before setting original")
-        context.setCurrent(originalLineIndex, originalZoneIndex, \
+        context.setCurrent(originalLineIndex, originalZoneIndex,
                            originalWordIndex, originalCharIndex)
         self.debugContext(context, "after setting original")
 
         if location:
-            debug.println(self.debugLevel, \
-                "findQuery: returning line=%d zone=%d word=%d char=%d" \
-                    % (location.lineIndex, location.zoneIndex, \
-                       location.wordIndex, location.charIndex))
+            debug.println(self.debugLevel,
+                          "findQuery: returning line=%d zone=%d word=%d char=%d"
+                          % (location.lineIndex, location.zoneIndex,
+                             location.wordIndex, location.charIndex))
 
         return location
+
 
 def getLastQuery():
     """Grabs the last search query performed from orca_state.

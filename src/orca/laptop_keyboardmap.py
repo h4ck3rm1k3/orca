@@ -23,10 +23,10 @@
 """
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs, Mesar Hameed."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from . import settings
 
@@ -40,7 +40,7 @@ ORCA_CTRL_MODIFIER_MASK = settings.ORCA_CTRL_MODIFIER_MASK
 keymap = (
 
     ("9", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "routePointerToItemHandler"),
+     "routePointerToItemHandler"),
 
     # We want the user to be able to combine modifiers with the
     # mouse click (e.g. to Shift+Click and select), therefore we
@@ -49,99 +49,99 @@ keymap = (
     #
 
     ("7", ORCA_MODIFIER_MASK, ORCA_MODIFIER_MASK,
-    "leftClickReviewItemHandler"),
+     "leftClickReviewItemHandler"),
 
     ("8", ORCA_MODIFIER_MASK, ORCA_MODIFIER_MASK,
-    "rightClickReviewItemHandler"),
+     "rightClickReviewItemHandler"),
 
     ("p", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "toggleFlatReviewModeHandler"),
+     "toggleFlatReviewModeHandler"),
 
     ("semicolon", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "sayAllHandler"),
+     "sayAllHandler"),
 
     ("Return", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "whereAmIBasicHandler", 1),
+     "whereAmIBasicHandler", 1),
 
     ("Return", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "whereAmIDetailedHandler", 2),
+     "whereAmIDetailedHandler", 2),
 
     ("slash", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "getTitleHandler", 1),
+     "getTitleHandler", 1),
 
     ("slash", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "getStatusBarHandler", 2),
+     "getStatusBarHandler", 2),
 
     ("bracketleft", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "findHandler"),
+     "findHandler"),
 
     ("bracketright", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "findNextHandler"),
+     "findNextHandler"),
 
     ("bracketright", defaultModifierMask, ORCA_CTRL_MODIFIER_MASK,
-    "findPreviousHandler"),
+     "findPreviousHandler"),
 
     ("u", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "reviewPreviousLineHandler"),
+     "reviewPreviousLineHandler"),
 
     ("u", defaultModifierMask, ORCA_CTRL_MODIFIER_MASK,
-    "reviewHomeHandler"),
+     "reviewHomeHandler"),
 
     ("i", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "reviewCurrentLineHandler", 1),
+     "reviewCurrentLineHandler", 1),
 
     ("i", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "reviewSpellCurrentLineHandler", 2),
+     "reviewSpellCurrentLineHandler", 2),
 
     ("i", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "reviewPhoneticCurrentLineHandler", 3),
+     "reviewPhoneticCurrentLineHandler", 3),
 
     ("o", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "reviewNextLineHandler"),
+     "reviewNextLineHandler"),
 
     ("o", defaultModifierMask, ORCA_CTRL_MODIFIER_MASK,
-    "reviewEndHandler"),
+     "reviewEndHandler"),
 
     ("j", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "reviewPreviousItemHandler"),
+     "reviewPreviousItemHandler"),
 
     ("j", defaultModifierMask, ORCA_CTRL_MODIFIER_MASK,
-    "reviewAboveHandler"),
+     "reviewAboveHandler"),
 
     ("k", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "reviewCurrentItemHandler", 1),
+     "reviewCurrentItemHandler", 1),
 
     ("k", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "reviewSpellCurrentItemHandler", 2),
+     "reviewSpellCurrentItemHandler", 2),
 
     ("k", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "reviewPhoneticCurrentItemHandler", 3),
+     "reviewPhoneticCurrentItemHandler", 3),
 
     ("k", defaultModifierMask, ORCA_CTRL_MODIFIER_MASK,
-    "reviewCurrentAccessibleHandler"),
+     "reviewCurrentAccessibleHandler"),
 
     ("l", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "reviewNextItemHandler"),
+     "reviewNextItemHandler"),
 
     ("l", defaultModifierMask, ORCA_CTRL_MODIFIER_MASK,
-    "reviewBelowHandler"),
+     "reviewBelowHandler"),
 
     ("m", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "reviewPreviousCharacterHandler"),
+     "reviewPreviousCharacterHandler"),
 
     ("m", defaultModifierMask, ORCA_CTRL_MODIFIER_MASK,
-    "reviewEndOfLineHandler"),
+     "reviewEndOfLineHandler"),
 
     ("comma", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "reviewCurrentCharacterHandler", 1),
+     "reviewCurrentCharacterHandler", 1),
 
     ("comma", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "reviewSpellCurrentCharacterHandler", 2),
+     "reviewSpellCurrentCharacterHandler", 2),
 
     ("comma", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "reviewUnicodeCurrentCharacterHandler", 3),
+     "reviewUnicodeCurrentCharacterHandler", 3),
 
     ("period", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "reviewNextCharacterHandler"),
+     "reviewNextCharacterHandler"),
 
 )

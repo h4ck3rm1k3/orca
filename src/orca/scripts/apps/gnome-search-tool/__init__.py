@@ -20,4 +20,3 @@
 """Custom script for gnome-search-tool"""
 
 from .script import Script
-

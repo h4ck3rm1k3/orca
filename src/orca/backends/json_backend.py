@@ -21,15 +21,16 @@
 
 """JSON backend for Orca settings"""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010-2011 Consorcio Fernando de los Rios."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from json import load, dump
 import os
 from orca import settings, acss
+
 
 class Backend(object):
 
@@ -45,11 +46,11 @@ class Backend(object):
     def saveDefaultSettings(self, general, pronunciations, keybindings):
         """ Save default settings for all the properties from
             orca.settings. """
-        defaultProfiles = {'default': { 'profile':  settings.profile,
-                                                    'pronunciations': {},
-                                                    'keybindings': {}
-                                      }
-                          }
+        defaultProfiles = {'default': {'profile': settings.profile,
+                                       'pronunciations': {},
+                                       'keybindings': {}
+                                       }
+                           }
         prefs = {'general': general,
                  'profiles': defaultProfiles,
                  'pronunciations': pronunciations,
@@ -65,7 +66,7 @@ class Backend(object):
         settingsFile.close()
 
     def saveProfileSettings(self, profile, general,
-                                  pronunciations, keybindings):
+                            pronunciations, keybindings):
         """ Save minimal subset defined in the profile against current
             defaults. """
         if profile is None:

@@ -20,4 +20,3 @@
 """Custom script for gtk-window-decorator."""
 
 from .script import Script
-

@@ -20,4 +20,3 @@
 """ Custom script for gnome-panel"""
 
 from .script import Script
-

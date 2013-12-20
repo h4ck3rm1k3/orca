@@ -21,14 +21,13 @@
 into its localized equivalent."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from .orca_i18n import C_
 from . import orca_state
-
 # Translators: this is a structure to assist in the generation of
 # localized strings for the various text attributes.
 #
@@ -68,7 +67,8 @@ _textAttributeTable["bg-color"] = C_("textattr", "background color")
 # See:
 # http://library.gnome.org/devel/atk/1.22/AtkText.html#AtkTextAttribute
 #
-_textAttributeTable["bg-full-height"] = C_("textattr", "background full height")
+_textAttributeTable[
+    "bg-full-height"] = C_("textattr", "background full height")
 
 # Translators: this attribute specifies whether a GdkBitmap is set for
 # stippling the background color. It will be a "true" or "false" value.
@@ -185,14 +185,16 @@ _textAttributeTable["paragraph-style"] = C_("textattr", "paragraph style")
 # See:
 # http://library.gnome.org/devel/atk/1.22/AtkText.html#AtkTextAttribute
 #
-_textAttributeTable["pixels-above-lines"] = C_("textattr", "pixels above lines")
+_textAttributeTable[
+    "pixels-above-lines"] = C_("textattr", "pixels above lines")
 
 # Translators: this attribute specifies the pixels of blank space to
 # leave below each newline-terminated line.
 # See:
 # http://library.gnome.org/devel/atk/1.22/AtkText.html#AtkTextAttribute
 #
-_textAttributeTable["pixels-below-lines"] = C_("textattr", "pixels below lines")
+_textAttributeTable[
+    "pixels-below-lines"] = C_("textattr", "pixels below lines")
 
 # Translators: this attribute specifies the pixels of blank space to
 # leave between wrapped lines inside the same newline-terminated line
@@ -200,7 +202,8 @@ _textAttributeTable["pixels-below-lines"] = C_("textattr", "pixels below lines")
 # See:
 # http://library.gnome.org/devel/atk/1.22/AtkText.html#AtkTextAttribute
 #
-_textAttributeTable["pixels-inside-wrap"] = C_("textattr", "pixels inside wrap")
+_textAttributeTable[
+    "pixels-inside-wrap"] = C_("textattr", "pixels inside wrap")
 
 # Translators: this attribute specifies the pixel width of the right margin.
 # See:
@@ -289,11 +292,9 @@ _textAttributeTable["underline"] = C_("textattr", "underline")
 #
 _textAttributeTable["variant"] = C_("textattr", "variant")
 
-# Translators: this attributes specifies what vertical alignment property
-# has been applied to the text.
-# See:
-#http://www.w3.org/TR/1998/REC-CSS2-19980512/visudet.html#propdef-vertical-align
-#
+# Translators: this attributes specifies what vertical alignment property has
+# been applied to the text. See: http://www.w3.org/TR/1998/REC-
+# CSS2-19980512/visudet.html#propdef-vertical-align
 _textAttributeTable["vertical-align"] = C_("textattr", "vertical align")
 
 # Translators: this attribute specifies the weight of the text.
@@ -318,7 +319,6 @@ _textAttributeTable["wrap-mode"] = C_("textattr", "wrap mode")
 # http://wiki.services.openoffice.org/wiki/Accessibility/TextAttributes
 #
 _textAttributeTable["writing-mode"] = C_("textattr", "writing mode")
-
 
 # The following are the known values of some of these text attributes.
 # These values were found in the Atk documentation at:
@@ -599,69 +599,52 @@ _textAttributeTable["Text body"] = C_("textattr", "Text body")
 #
 _textAttributeTable["Heading"] = C_("textattr", "Heading")
 
-# Translators: this is one of the text attribute values for the following
-# text attributes: "vertical-align".
-# See:
-#http://www.w3.org/TR/1998/REC-CSS2-19980512/visudet.html#propdef-vertical-align
+# Translators: this is one of the text attribute values for the following text
+# attributes: "vertical-align". See: http://www.w3.org/TR/1998/REC-
+# CSS2-19980512/visudet.html#propdef-vertical-align
 # http://wiki.services.openoffice.org/wiki/Accessibility/TextAttributes
-#
 _textAttributeTable["baseline"] = C_("textattr", "baseline")
 
-# Translators: this is one of the text attribute values for the following
-# text attributes: "vertical-align".
-# See:
-#http://www.w3.org/TR/1998/REC-CSS2-19980512/visudet.html#propdef-vertical-align
-#
+# Translators: this is one of the text attribute values for the following text
+# attributes: "vertical-align". See: http://www.w3.org/TR/1998/REC-
+# CSS2-19980512/visudet.html#propdef-vertical-align
 _textAttributeTable["sub"] = C_("textattr", "sub")
 
-# Translators: this is one of the text attribute values for the following
-# text attributes: "vertical-align".
-# See:
-#http://www.w3.org/TR/1998/REC-CSS2-19980512/visudet.html#propdef-vertical-align
-#
+# Translators: this is one of the text attribute values for the following text
+# attributes: "vertical-align". See: http://www.w3.org/TR/1998/REC-
+# CSS2-19980512/visudet.html#propdef-vertical-align
 _textAttributeTable["super"] = C_("textattr", "super")
 
-# Translators: this is one of the text attribute values for the following
-# text attributes: "vertical-align".
-# See:
-#http://www.w3.org/TR/1998/REC-CSS2-19980512/visudet.html#propdef-vertical-align
-#
+# Translators: this is one of the text attribute values for the following text
+# attributes: "vertical-align". See: http://www.w3.org/TR/1998/REC-
+# CSS2-19980512/visudet.html#propdef-vertical-align
 _textAttributeTable["top"] = C_("textattr", "top")
 
-# Translators: this is one of the text attribute values for the following
-# text attributes: "vertical-align".
-# See:
-#http://www.w3.org/TR/1998/REC-CSS2-19980512/visudet.html#propdef-vertical-align
-#
+# Translators: this is one of the text attribute values for the following text
+# attributes: "vertical-align". See: http://www.w3.org/TR/1998/REC-
+# CSS2-19980512/visudet.html#propdef-vertical-align
 _textAttributeTable["text-top"] = C_("textattr", "text-top")
 
-# Translators: this is one of the text attribute values for the following
-# text attributes: "vertical-align".
-# See:
-#http://www.w3.org/TR/1998/REC-CSS2-19980512/visudet.html#propdef-vertical-align
-#
+# Translators: this is one of the text attribute values for the following text
+# attributes: "vertical-align". See: http://www.w3.org/TR/1998/REC-
+# CSS2-19980512/visudet.html#propdef-vertical-align
 _textAttributeTable["middle"] = C_("textattr", "middle")
 
-# Translators: this is one of the text attribute values for the following
-# text attributes: "vertical-align".
-# See:
-#http://www.w3.org/TR/1998/REC-CSS2-19980512/visudet.html#propdef-vertical-align
-#
+# Translators: this is one of the text attribute values for the following text
+# attributes: "vertical-align". See: http://www.w3.org/TR/1998/REC-
+# CSS2-19980512/visudet.html#propdef-vertical-align
 _textAttributeTable["bottom"] = C_("textattr", "bottom")
 
-# Translators: this is one of the text attribute values for the following
-# text attributes: "vertical-align".
-# See:
-#http://www.w3.org/TR/1998/REC-CSS2-19980512/visudet.html#propdef-vertical-align
-#
+# Translators: this is one of the text attribute values for the following text
+# attributes: "vertical-align". See: http://www.w3.org/TR/1998/REC-
+# CSS2-19980512/visudet.html#propdef-vertical-align
 _textAttributeTable["text-bottom"] = C_("textattr", "text-bottom")
 
-# Translators: this is one of the text attribute values for the following
-# text attributes: "vertical-align" and "writing-mode".
-# See:
-#http://www.w3.org/TR/1998/REC-CSS2-19980512/visudet.html#propdef-vertical-align
-# http://www.w3.org/TR/2001/WD-css3-text-20010517/#PrimaryTextAdvanceDirection
-#
+# Translators: this is one of the text attribute values for the following text
+# attributes: "vertical-align" and "writing-mode". See:
+# http://www.w3.org/TR/1998/REC-CSS2-19980512/visudet.html#propdef-vertical-
+# align http://www.w3.org/TR/2001/WD-
+# css3-text-20010517/#PrimaryTextAdvanceDirection
 _textAttributeTable["inherit"] = C_("textattr", "inherit")
 
 # Translators: this is one of the text attribute values for the following
@@ -744,6 +727,7 @@ _textAttributeTable["spelling"] = C_("textattr", "spelling")
 #
 _textAttributeTable["text-spelling"] = C_("textattr", "spelling")
 
+
 def getTextAttributeKey(localizedTextAttr):
     """Given a localized text attribute, return the original text
     attribute, (i.e. the key value).
@@ -760,6 +744,7 @@ def getTextAttributeKey(localizedTextAttr):
             return key
 
     return localizedTextAttr
+
 
 def getTextAttributeName(textAttr):
     """Given a text attribute, returns its localized equivalent.

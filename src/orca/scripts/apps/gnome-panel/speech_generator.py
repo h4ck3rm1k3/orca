@@ -19,11 +19,11 @@
 
 """Custom speech generator for gnome-panel."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -31,6 +31,7 @@ import orca.settings_manager as settings_manager
 import orca.speech_generator as speech_generator
 
 _settingsManager = settings_manager.getManager()
+
 
 class SpeechGenerator(speech_generator.SpeechGenerator):
 

@@ -19,17 +19,18 @@
 
 """Custom script for planner."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2006-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
 import orca.speech_generator as speech_generator
 
 from orca.orca_i18n import _         # for gettext support
+
 
 class SpeechGenerator(speech_generator.SpeechGenerator):
 

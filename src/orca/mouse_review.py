@@ -19,11 +19,11 @@
 
 """Mouse review mode."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2008 Eitan Isaacson"
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from . import debug
 
@@ -31,7 +31,7 @@ try:
     from gi.repository import Wnck
     _mouseReviewCapable = True
 except:
-    debug.println(debug.LEVEL_WARNING, \
+    debug.println(debug.LEVEL_WARNING,
                   "Python module wnck not found, mouse review not available.")
     _mouseReviewCapable = False
 
@@ -48,7 +48,9 @@ from . import settings
 _eventManager = event_manager.getManager()
 _scriptManager = script_manager.getManager()
 
+
 class BoundingBox(object):
+
     """A bounding box, currently it is used to test if a given point is
     inside the bounds of the box.
     """
@@ -76,10 +78,13 @@ class BoundingBox(object):
         return (self.x <= x <= self.x + self.width) and \
             (self.y <= y <= self.y + self.height)
 
+
 class _WordContext(object):
+
     """A word on which the mouse id hovering above. This class should have
     enough info to make it unique, so we know when we have left the word.
     """
+
     def __init__(self, word, acc, start, end):
         """Initialize a word context.
 
@@ -103,11 +108,14 @@ class _WordContext(object):
         return int(not(self.word == other.word and self.acc == other.acc and
                        self.start == other.start and self.end == other.end))
 
+
 class _ItemContext(object):
+
     """An _ItemContext holds all the information of the item we are currently
     hovering above. If the accessible supports word speaking, we also store
     a word context here.
     """
+
     def __init__(self, x=0, y=0, acc=None, frame=None, app=None, script=None):
         """Initialize an _ItemContext with all the information we have.
 
@@ -140,9 +148,12 @@ class _ItemContext(object):
         word, start, end = self.script.utilities.wordAtCoords(self.acc, x, y)
         return _WordContext(word, self.acc, start, end)
 
+
 class MouseReviewer(object):
+
     """Main class for the mouse-review feature.
     """
+
     def __init__(self):
         """Initalize a mouse reviewer class.
         """
@@ -170,10 +181,10 @@ class MouseReviewer(object):
             on = not self.active
         if on and not self.active:
             _eventManager.registerModuleListeners(
-                {"mouse:abs":self._onMouseMoved})
+                {"mouse:abs": self._onMouseMoved})
         elif not on and self.active:
             _eventManager.deregisterModuleListeners(
-                {"mouse:abs":self._onMouseMoved})
+                {"mouse:abs": self._onMouseMoved})
         self.active = on
 
     def _onMouseMoved(self, event):
@@ -201,7 +212,7 @@ class MouseReviewer(object):
         - prev_y: Previous Y coordinate of mouse pointer.
         """
         display = Gdk.Display.get_default()
-        screen, x, y, flags =  display.get_pointer()
+        screen, x, y, flags = display.get_pointer()
         if abs(prev_x - x) <= settings.mouseDwellMaxDrift \
            and abs(prev_y - y) <= settings.mouseDwellMaxDrift \
            and not (x, y) == self._lastReportedCoord:
@@ -238,8 +249,8 @@ class MouseReviewer(object):
             output_obj.append(self._currentMouseOver.frame)
 
         if self._currentMouseOver.acc != self._oldMouseOver.acc \
-                or (settings.mouseDwellDelay > 0 and \
-                        not self._currentMouseOver.word_ctx):
+                or (settings.mouseDwellDelay > 0 and
+                    not self._currentMouseOver.word_ctx):
             output_obj.append(self._currentMouseOver.acc)
 
         if self._currentMouseOver.word_ctx:
@@ -270,8 +281,8 @@ class MouseReviewer(object):
                 braille.displayMessage(obj)
             else:
                 speech.speak(
-                    self._currentMouseOver.script.speechGenerator.\
-                        generateSpeech(obj))
+                    self._currentMouseOver.script.speechGenerator.
+                    generateSpeech(obj))
                 self._currentMouseOver.script.updateBraille(obj)
 
     def _getZOrder(self, frame_name):
@@ -338,6 +349,7 @@ if Gdk.Display.get_default():
     mouse_reviewer = MouseReviewer()
 else:
     raise RuntimeError('Cannot initialize mouse review, no display')
+
 
 def toggle(script=None, event=None):
     """

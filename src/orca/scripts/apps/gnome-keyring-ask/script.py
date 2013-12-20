@@ -19,19 +19,20 @@
 
 """Custom script for gnome-keyring-ask"""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import orca.scripts.default as default
 
-########################################################################
-#                                                                      #
+#
+#
 # The gnome-keyring-ask script class.                                  #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(default.Script):
 

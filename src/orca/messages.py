@@ -23,12 +23,12 @@ have been put in their own module so that we can present them in
 the correct language when users change the synthesizer language
 on the fly without having to reload a bunch of modules."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2004-2009 Sun Microsystems Inc." \
                 "Copyright (c) 2010-2013 The Orca Team"
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from .orca_i18n import _, C_, ngettext
 from .orca_platform import version
@@ -215,30 +215,31 @@ CLI_LOAD_PROFILE = _("Load profile")
 # provided profile name.
 CLI_LOAD_PROFILE_ERROR = _("Profile could not be loaded: %s")
 
-# Translators: This message is presented to the user who attempts to launch Orca
-# from some other environment than the graphical desktop.
-CLI_NO_DESKTOP_ERROR = \
-    _("Cannot start the screen reader because it cannot connect to the Desktop.")
+# Translators: This message is presented to the user who attempts to launch
+# Orca from some other environment than the graphical desktop.
+CLI_NO_DESKTOP_ERROR = _(
+    "Cannot start the screen reader because it cannot connect to the Desktop."
+    )
 
-# Translators: This message is presented to the user who attempts to launch Orca
-# but the launch fails due to an error related to the settings manager.
+# Translators: This message is presented to the user who attempts to launch
+# Orca but the launch fails due to an error related to the settings manager.
 CLI_SETTINGS_MANAGER_ERROR = \
     _("Could not activate the settings manager. Exiting.")
 
-# Translators: This message is presented to the user when he/she tries to launch
-# Orca, but Orca is already running.
+# Translators: This message is presented to the user when he/she tries to
+# launch Orca, but Orca is already running.
 CLI_OTHER_ORCAS_ERROR = \
-    _('Another screen reader process is already running for this ' \
-      'session.\nRun "orca --replace" to replace that ' \
+    _('Another screen reader process is already running for this '
+      'session.\nRun "orca --replace" to replace that '
       'process with a new one.')
 
 # Translators: This string indicates to the user what should be provided when
 # using the '-p, --profile' command line option.
 CLI_PROFILE_NAME = _("NAME")
 
-# Translators: This is the description of command line option '-u, --user-prefs'
-# that allows you to specify an alternate location from which to load the user
-# preferences.
+# Translators: This is the description of command line option '-u, --user-
+# prefs' that allows you to specify an alternate location from which to load
+# the user preferences.
 CLI_LOAD_PREFS = _("Use alternate directory for user preferences")
 
 # Translators: This string indicates to the user what should be provided when
@@ -250,26 +251,27 @@ CLI_PREFS_DIR = _("DIR")
 CLI_REPLACE = _("Replace a currently running instance of this screen reader")
 
 # Translators: This is the description of command line option '--debug' which
-# causes debugging output for Orca to be sent to a file. The YYYY-MM-DD-HH:MM:SS
-# portion of the string indicates the file name will be formed from the current
-# date and time with 'debug' in front and '.out' at the end. The 'debug' and
-# '.out' portions of this string should not be translated (i.e. it should always
-# start with 'debug' and end with '.out', regardless of the locale.).
+# causes debugging output for Orca to be sent to a file. The YYYY-MM-DD-
+# HH:MM:SS portion of the string indicates the file name will be formed from
+# the current date and time with 'debug' in front and '.out' at the end. The
+# 'debug' and '.out' portions of this string should not be translated (i.e. it
+# should always start with 'debug' and end with '.out', regardless of the
+# locale.).
 CLI_ENABLE_DEBUG = _("Send debug output to debug-YYYY-MM-DD-HH:MM:SS.out")
 
 # Translators: This is the description of command line option '--debug-file'
-# which allows the user to override the default date-based name of the debugging
-# output file.
+# which allows the user to override the default date-based name of the
+# debugging output file.
 CLI_DEBUG_FILE = _("Send debug output to the specified file")
 
 # Translators: This string indicates to the user what should be provided when
 # using the '--debug-file' command line option.
 CLI_DEBUG_FILE_NAME = _("FILE")
 
-# Translators: This is the description of command line option '-t, --text-setup'
-# that will initially display a list of questions in text form, that the user
-# will need to answer, before Orca will startup. For this to happen properly,
-# Orca will need to be run from a terminal window.
+# Translators: This is the description of command line option '-t, --text-
+# setup' that will initially display a list of questions in text form, that the
+# user will need to answer, before Orca will startup. For this to happen
+# properly, Orca will need to be run from a terminal window.
 CLI_SETUP = _("Set up user preferences (text version)")
 
 # Translators: This text is the description displayed when Orca is launched
@@ -277,17 +279,17 @@ CLI_SETUP = _("Set up user preferences (text version)")
 CLI_EPILOG = _("Report bugs to orca-list@gnome.org.")
 
 # Translators: In chat applications, it is often possible to see that a "buddy"
-# is typing currently (e.g. via a keyboard icon or status text). Some users like
-# to have this typing status announced by Orca; others find that announcment
-# unpleasant. Therefore, it is a setting in Orca. This string to be translated
-# is presented when the value of the setting is toggled.
+# is typing currently (e.g. via a keyboard icon or status text). Some users
+# like to have this typing status announced by Orca; others find that
+# announcment unpleasant. Therefore, it is a setting in Orca. This string to be
+# translated is presented when the value of the setting is toggled.
 CHAT_BUDDY_TYPING_OFF = _("Do not announce when your buddies are typing.")
 
 # Translators: In chat applications, it is often possible to see that a "buddy"
-# is typing currently (e.g. via a keyboard icon or status text). Some users like
-# to have this typing status announced by Orca; others find that announcment
-# unpleasant. Therefore, it is a setting in Orca. This string to be translated
-# is presented when the value of the setting is toggled.
+# is typing currently (e.g. via a keyboard icon or status text). Some users
+# like to have this typing status announced by Orca; others find that
+# announcment unpleasant. Therefore, it is a setting in Orca. This string to be
+# translated is presented when the value of the setting is toggled.
 CHAT_BUDDY_TYPING_ON = _("announce when your buddies are typing.")
 
 # Translators: In chat applcations, Orca automatically presents incoming
@@ -373,9 +375,9 @@ CONSOLE_SETUP_YESEXPR = _("^[Yy1]")
 # translation of the "Enter y or n:" strings for this file.
 CONSOLE_SETUP_NOEXPR = _("^[Nn0]")
 
-# Translators: This is prompting for whether the user wants to use a refreshable
-# braille display (an external hardware device) or not. It is part of Orca's
-# console-based setup.
+# Translators: This is prompting for whether the user wants to use a
+# refreshable braille display (an external hardware device) or not. It is part
+# of Orca's console-based setup.
 CONSOLE_SETUP_ENABLE_BRAILLE = _("Enable Braille?  Enter y or n: ")
 
 # Translators: If key echo is enabled, Orca will speak the name of a key as the
@@ -396,13 +398,14 @@ CONSOLE_SETUP_ENABLE_ECHO_MODIFIER_KEYS = \
 
 # Translators: This is in reference to key echo for function keys (F1-F12).
 # It is part of Orca's console-based setup.
-CONSOLE_SETUP_ENABLE_ECHO_FUNCTION_KEYS =  \
+CONSOLE_SETUP_ENABLE_ECHO_FUNCTION_KEYS = \
     _("Enable function keys?  Enter y or n: ")
 
 # Translators: This is in reference to key echo for keys that perform actions
 # such as enter, escape, tab, backspace, delete, arrow keys, page up/down, etc.
 # It is part of Orca's console-based setup.
-CONSOLE_SETUP_ENABLE_ECHO_ACTION_KEYS = _("Enable action keys?  Enter y or n: ")
+CONSOLE_SETUP_ENABLE_ECHO_ACTION_KEYS = _(
+    "Enable action keys?  Enter y or n: ")
 
 # Translators: The word echo feature of Orca will speak the word prior to the
 # caret when the user types a word delimiter. This message is presented during
@@ -442,15 +445,15 @@ CONSOLE_SETUP_KEYBOARD_LAYOUT_LAPTOP = _("2. Laptop")
 # available speech synthesis engines. It is part of Orca's console-based setup.
 CONSOLE_SETUP_SELECT_SPEECH_SERVER = _("Select desired speech server.")
 
-# Translators: The speech system represents what general speech wrapper is going
-# to be used. Speech-dispatcher is an example of a speech system. It provides
-# wrappers around specific speech servers (engines). This message is part of
-# Orca's console-based setup.
+# Translators: The speech system represents what general speech wrapper is
+# going to be used. Speech-dispatcher is an example of a speech system. It
+# provides wrappers around specific speech servers (engines). This message is
+# part of Orca's console-based setup.
 CONSOLE_SETUP_SELECT_SPEECH_SYSTEM = _("Select desired speech system:")
 
-# Translators: This is prompting for a numerical value from a list of choices of
-# speech synthesis voices (e.g., male, female, child). This message is part of
-# Orca's console-based setup.
+# Translators: This is prompting for a numerical value from a list of choices
+# of speech synthesis voices (e.g., male, female, child). This message is part
+# of Orca's console-based setup.
 CONSOLE_SETUP_SELECT_VOICE = _("Select desired voice:")
 
 # Translators: This message indicates that no working speech servers (speech
@@ -482,13 +485,13 @@ DEFAULT_BUTTON_IS = _("Default button is %s")
 # one or several consequtive subscripted characters. For example, 'X' followed
 # by 'subscript 2' followed by 'subscript 3' should be presented to the user as
 # 'X subscript 23'.
-DIGITS_SUBSCRIPT =  _(" subscript %s")
+DIGITS_SUBSCRIPT = _(" subscript %s")
 
 # Translators: This string is part of the presentation of an item that includes
-# one or several consequtive superscripted characters. For example, 'X' followed
-# by 'superscript 2' followed by 'superscript 3' should be presented to the user
-# as 'X superscript 23'.
-DIGITS_SUPERSCRIPT =  _(" superscript %s")
+# one or several consequtive superscripted characters. For example, 'X'
+# followed by 'superscript 2' followed by 'superscript 3' should be presented
+# to the user as 'X superscript 23'.
+DIGITS_SUPERSCRIPT = _(" superscript %s")
 
 # Translators: when the user selects (highlights) or unselects text in a
 # document, Orca will speak information about what they have selected or
@@ -601,15 +604,15 @@ HAS_FORMULA = _("has formula")
 
 # Translators: The following string is spoken to let the user know that he/she
 # is on a link within an image map. An image map is an image/graphic which has
-# been divided into regions. Each region can be clicked on and has an associated
-# link. Please see http://en.wikipedia.org/wiki/Imagemap for more information
-# and examples.
+# been divided into regions. Each region can be clicked on and has an
+# associated link. Please see http://en.wikipedia.org/wiki/Imagemap for more
+# information and examples.
 IMAGE_MAP_LINK = _("image map link")
 
 # Translators: This is a spoken and/or brailled message letting the user know
-# that the key combination (e.g., Ctrl+Alt+f) they just entered has already been
-# bound to another command and is thus unavailable. The string substituted in is
-# the name of the command which already has the binding.
+# that the key combination (e.g., Ctrl+Alt+f) they just entered has already
+# been bound to another command and is thus unavailable. The string substituted
+# in is the name of the command which already has the binding.
 KB_ALREADY_BOUND = _("The key entered is already bound to %s")
 
 # Translators: This is a spoken and/or brailled message letting the user know
@@ -632,9 +635,9 @@ KB_DELETED = _("Key binding deleted. Press enter to confirm.")
 # their input.
 KB_DELETED_CONFIRMATION = _("The keybinding has been removed.")
 
-# Translators: This is a spoken and/or brailled message asking the user to press
-# a new key combination (e.g., Alt+Ctrl+g) to create a new key binding for an
-# Orca command.
+# Translators: This is a spoken and/or brailled message asking the user to
+# press a new key combination (e.g., Alt+Ctrl+g) to create a new key binding
+# for an Orca command.
 KB_ENTER_NEW_KEY = _("enter new key")
 
 # Translators: Orca has an "echo" setting which allows the user to configure
@@ -794,8 +797,8 @@ KEY_ECHO_WORD_AND_SENTENCE_BRIEF = C_("key echo", "word and sentence")
 KEY_ECHO_WORD_AND_SENTENCE_FULL = _("Key echo set to word and sentence.")
 
 # Translators: Inaccessible means that the application cannot be read by Orca.
-# This usually means the application is not friendly to the assistive technology
-# infrastructure.
+# This usually means the application is not friendly to the assistive
+# technology infrastructure.
 INACCESSIBLE = _("inaccessible")
 
 # Translators: This brief message indicates that indentation and
@@ -821,24 +824,24 @@ INDENTATION_JUSTIFICATION_ON_FULL = \
 # Translators: Orca has a "Learn Mode" that will allow the user to type any key
 # on the keyboard and hear what the effects of that key would be.  The effects
 # might be what Orca would do if it had a handler for the particular key
-# combination, or they might just be to echo the name of the key if Orca doesn't
-# have a handler. This message is what is presented on the braille display when
-# entering Learn Mode.
+# combination, or they might just be to echo the name of the key if Orca
+# doesn't have a handler. This message is what is presented on the braille
+# display when entering Learn Mode.
 LEARN_MODE_START_BRAILLE = _("Learn mode.  Press escape to exit.")
 
 # Translators: Orca has a "Learn Mode" that will allow the user to type any key
 # on the keyboard and hear what the effects of that key would be.  The effects
 # might be what Orca would do if it had a handler for the particular key
-# combination, or they might just be to echo the name of the key if Orca doesn't
-# have a handler. This message is what is spoken to the user when entering Learn
-# Mode.
+# combination, or they might just be to echo the name of the key if Orca
+# doesn't have a handler. This message is what is spoken to the user when
+# entering Learn Mode.
 LEARN_MODE_START_SPEECH = \
-    _("Entering learn mode.  Press any key to hear its function.  " \
-      "To view the screen reader's documentation, press F1. " \
-      "To get a list of the screen reader's default shortcuts, press F2. " \
-      "To get a list of the screen reader's" \
-      " shortcuts for the current application, " \
-      "press F3. " \
+    _("Entering learn mode.  Press any key to hear its function.  "
+      "To view the screen reader's documentation, press F1. "
+      "To get a list of the screen reader's default shortcuts, press F2. "
+      "To get a list of the screen reader's"
+      " shortcuts for the current application, "
+      "press F3. "
       "To exit learn mode, press the escape key.")
 
 # Translators: when the user selects (highlights) or unselects text in a
@@ -870,9 +873,9 @@ LINE_UNSELECTED_UP = _("line unselected up from cursor position")
 # Translators: Orca has a "Learn Mode" that will allow the user to type any key
 # on the keyboard and hear what the effects of that key would be.  The effects
 # might be what Orca would do if it had a handler for the particular key
-# combination, or they might just be to echo the name of the key if Orca doesn't
-# have a handler. This message is what is presented in speech and braille when
-# exiting Learn Mode.
+# combination, or they might just be to echo the name of the key if Orca
+# doesn't have a handler. This message is what is presented in speech and
+# braille when exiting Learn Mode.
 LEARN_MODE_STOP = _("Exiting learn mode.")
 
 # Translators: when the user selects (highlights) or unselects text in a
@@ -917,118 +920,122 @@ LIST_NAVIGATION = \
     _("Use Up and Down Arrow to navigate the list. Press Escape to exit.")
 
 # Translators: A live region is an area of a web page that is periodically
-# updated, e.g. stock ticker. http://www.w3.org/TR/wai-aria/terms#def_liveregion
-# The "politeness" level is an indication of when the user wishes to be notified
-# about a change to live region content. Examples include: never ("off"), when
-# idle ("polite"), and when there is a change ("assertive"). Orca has several
-# features to facilitate accessing live regions. This message is presented to
-# inform the user that Orca's live region's "politeness" level has changed to
-# "off" for all of the live regions.
+# updated, e.g. stock ticker. http://www.w3.org/TR/wai-
+# aria/terms#def_liveregion The "politeness" level is an indication of when the
+# user wishes to be notified about a change to live region content. Examples
+# include: never ("off"), when idle ("polite"), and when there is a change
+# ("assertive"). Orca has several features to facilitate accessing live
+# regions. This message is presented to inform the user that Orca's live
+# region's "politeness" level has changed to "off" for all of the live regions.
 LIVE_REGIONS_ALL_OFF = _("All live regions set to off")
 
 # Translators: A live region is an area of a web page that is periodically
-# updated, e.g. stock ticker. http://www.w3.org/TR/wai-aria/terms#def_liveregion
-# The "politeness" level is an indication of when the user wishes to be notified
-# about a change to live region content. Examples include: never ("off"), when
-# idle ("polite"), and when there is a change ("assertive"). Orca has several
-# features to facilitate accessing live regions. This message is presented to
-# inform the user that Orca's live region's "politeness" level for all live
-# regions has been restored to their original values.
+# updated, e.g. stock ticker. http://www.w3.org/TR/wai-
+# aria/terms#def_liveregion The "politeness" level is an indication of when the
+# user wishes to be notified about a change to live region content. Examples
+# include: never ("off"), when idle ("polite"), and when there is a change
+# ("assertive"). Orca has several features to facilitate accessing live
+# regions. This message is presented to inform the user that Orca's live
+# region's "politeness" level for all live regions has been restored to their
+# original values.
 LIVE_REGIONS_ALL_RESTORED = _("live regions politeness levels restored")
 
 # Translators: A live region is an area of a web page that is periodically
-# updated, e.g. stock ticker. http://www.w3.org/TR/wai-aria/terms#def_liveregion
-# The "politeness" level is an indication of when the user wishes to be notified
-# about a change to live region content. Examples include: never ("off"), when
-# idle ("polite"), and when there is a change ("assertive"). Orca has several
-# features to facilitate accessing live regions. This message is presented to
-# inform the user of the "politeness" level for the current live region.
+# updated, e.g. stock ticker. http://www.w3.org/TR/wai-
+# aria/terms#def_liveregion The "politeness" level is an indication of when the
+# user wishes to be notified about a change to live region content. Examples
+# include: never ("off"), when idle ("polite"), and when there is a change
+# ("assertive"). Orca has several features to facilitate accessing live
+# regions. This message is presented to inform the user of the "politeness"
+# level for the current live region.
 LIVE_REGIONS_LEVEL = _("politeness level %s")
 
 # Translators: A live region is an area of a web page that is periodically
-# updated, e.g. stock ticker. http://www.w3.org/TR/wai-aria/terms#def_liveregion
-# The "politeness" level is an indication of when the user wishes to be notified
-# about a change to live region content. Examples include: never ("off"), when
-# idle ("polite"), and when there is a change ("assertive"). Orca has several
-# features to facilitate accessing live regions. This message is presented to
-# inform the user that Orca's live region's "politeness" level has changed for
-# the current live region.
+# updated, e.g. stock ticker. http://www.w3.org/TR/wai-
+# aria/terms#def_liveregion The "politeness" level is an indication of when the
+# user wishes to be notified about a change to live region content. Examples
+# include: never ("off"), when idle ("polite"), and when there is a change
+# ("assertive"). Orca has several features to facilitate accessing live
+# regions. This message is presented to inform the user that Orca's live
+# region's "politeness" level has changed for the current live region.
 LIVE_REGIONS_LEVEL_ASSERTIVE = _("setting live region to assertive")
 
 # Translators: A live region is an area of a web page that is periodically
-# updated, e.g. stock ticker. http://www.w3.org/TR/wai-aria/terms#def_liveregion
-# The "politeness" level is an indication of when the user wishes to be notified
-# about a change to live region content. Examples include: never ("off"), when
-# idle ("polite"), and when there is a change ("assertive"). Orca has several
-# features to facilitate accessing live regions. This message is presented to
-# inform the user that Orca's live region's "politeness" level has changed for
-# the current live region.
+# updated, e.g. stock ticker. http://www.w3.org/TR/wai-
+# aria/terms#def_liveregion The "politeness" level is an indication of when the
+# user wishes to be notified about a change to live region content. Examples
+# include: never ("off"), when idle ("polite"), and when there is a change
+# ("assertive"). Orca has several features to facilitate accessing live
+# regions. This message is presented to inform the user that Orca's live
+# region's "politeness" level has changed for the current live region.
 LIVE_REGIONS_LEVEL_OFF = _("setting live region to off")
 
 # Translators: A live region is an area of a web page that is periodically
-# updated, e.g. stock ticker. http://www.w3.org/TR/wai-aria/terms#def_liveregion
-# The "politeness" level is an indication of when the user wishes to be notified
-# about a change to live region content. Examples include: never ("off"), when
-# idle ("polite"), and when there is a change ("assertive"). Orca has several
-# features to facilitate accessing live regions. This message is presented to
-# inform the user that Orca's live region's "politeness" level has changed for
-# the current live region.
+# updated, e.g. stock ticker. http://www.w3.org/TR/wai-
+# aria/terms#def_liveregion The "politeness" level is an indication of when the
+# user wishes to be notified about a change to live region content. Examples
+# include: never ("off"), when idle ("polite"), and when there is a change
+# ("assertive"). Orca has several features to facilitate accessing live
+# regions. This message is presented to inform the user that Orca's live
+# region's "politeness" level has changed for the current live region.
 LIVE_REGIONS_LEVEL_POLITE = _("setting live region to polite")
 
 # Translators: A live region is an area of a web page that is periodically
-# updated, e.g. stock ticker. http://www.w3.org/TR/wai-aria/terms#def_liveregion
-# The "politeness" level is an indication of when the user wishes to be notified
-# about a change to live region content. Examples include: never ("off"), when
-# idle ("polite"), and when there is a change ("assertive"). Orca has several
-# features to facilitate accessing live regions. This message is presented to
-# inform the user that Orca's live region's "politeness" level has changed for
-# the current live region.
+# updated, e.g. stock ticker. http://www.w3.org/TR/wai-
+# aria/terms#def_liveregion The "politeness" level is an indication of when the
+# user wishes to be notified about a change to live region content. Examples
+# include: never ("off"), when idle ("polite"), and when there is a change
+# ("assertive"). Orca has several features to facilitate accessing live
+# regions. This message is presented to inform the user that Orca's live
+# region's "politeness" level has changed for the current live region.
 LIVE_REGIONS_LEVEL_RUDE = _("setting live region to rude")
 
 # Translators: A live region is an area of a web page that is periodically
-# updated, e.g. stock ticker. http://www.w3.org/TR/wai-aria/terms#def_liveregion
-# Orca has several features to facilitate accessing live regions. This message
-# is presented in response to a command that toggles whether or not Orca pays
-# attention to changes in live regions. Note that turning off monitoring of live
-# events is NOT the same as turning the politeness level to "off". The user can
-# opt to have no notifications presented (politeness level of "off") and still
-# manually review recent updates to live regions via Orca commands for doing so
-# -- as long as the monitoring of live regions is enabled.
+# updated, e.g. stock ticker. http://www.w3.org/TR/wai-
+# aria/terms#def_liveregion Orca has several features to facilitate accessing
+# live regions. This message is presented in response to a command that toggles
+# whether or not Orca pays attention to changes in live regions. Note that
+# turning off monitoring of live events is NOT the same as turning the
+# politeness level to "off". The user can opt to have no notifications
+# presented (politeness level of "off") and still manually review recent
+# updates to live regions via Orca commands for doing so -- as long as the
+# monitoring of live regions is enabled.
 LIVE_REGIONS_MONITORING_OFF = _("Live regions monitoring off")
 
 # Translators: A live region is an area of a web page that is periodically
-# updated, e.g. stock ticker. http://www.w3.org/TR/wai-aria/terms#def_liveregion
-# Orca has several features to facilitate accessing live regions. This message
-# is presented in response to a command that toggles whether or not Orca pays
-# attention to changes in live regions. Note that turning off monitoring of live
-# events is NOT the same as turning the politeness level to "off". The user can
-# opt to have no notifications presented (politeness level of "off") and still
-# manually review recent updates to live regions via Orca commands for doing so
-# -- as long as the monitoring of live regions is enabled.
+# updated, e.g. stock ticker. http://www.w3.org/TR/wai-
+# aria/terms#def_liveregion Orca has several features to facilitate accessing
+# live regions. This message is presented in response to a command that toggles
+# whether or not Orca pays attention to changes in live regions. Note that
+# turning off monitoring of live events is NOT the same as turning the
+# politeness level to "off". The user can opt to have no notifications
+# presented (politeness level of "off") and still manually review recent
+# updates to live regions via Orca commands for doing so -- as long as the
+# monitoring of live regions is enabled.
 LIVE_REGIONS_MONITORING_ON = _("Live regions monitoring on")
 
 # Translators: A live region is an area of a web page that is periodically
-# updated, e.g. stock ticker. http://www.w3.org/TR/wai-aria/terms#def_liveregion
-# Orca has several features to facilitate accessing live regions. This message
-# is presented to inform the user that a cached message is not available for the
-# the current live region.
+# updated, e.g. stock ticker. http://www.w3.org/TR/wai-
+# aria/terms#def_liveregion Orca has several features to facilitate accessing
+# live regions. This message is presented to inform the user that a cached
+# message is not available for the the current live region.
 LIVE_REGIONS_NO_MESSAGE = _("no live message saved")
 
 # Translators: A live region is an area of a web page that is periodically
-# updated, e.g. stock ticker. http://www.w3.org/TR/wai-aria/terms#def_liveregion
-# Orca has several features to facilitate accessing live regions. This message
-# is presented to inform the user that Orca's live region features have been
-# turned off.
+# updated, e.g. stock ticker. http://www.w3.org/TR/wai-
+# aria/terms#def_liveregion Orca has several features to facilitate accessing
+# live regions. This message is presented to inform the user that Orca's live
+# region features have been turned off.
 LIVE_REGIONS_OFF = _("Live region support is off")
 
-# Translators: Orca has a command that allows the user to move the mouse pointer
-# to the current object. This is a brief message which will be presented if for
-# some reason Orca cannot identify/find the current location.
+# Translators: Orca has a command that allows the user to move the mouse
+# pointer to the current object. This is a brief message which will be
+# presented if for some reason Orca cannot identify/find the current location.
 LOCATION_NOT_FOUND_BRIEF = C_("location", "Not found")
 
-# Translators: Orca has a command that allows the user to move the mouse pointer
-# to the current object. This is a detailed message which will be presented if
-# for some reason Orca cannot identify/find the current location.
+# Translators: Orca has a command that allows the user to move the mouse
+# pointer to the current object. This is a detailed message which will be
+# presented if for some reason Orca cannot identify/find the current location.
 LOCATION_NOT_FOUND_FULL = _("Could not find current location.")
 
 # Translators: This string is used to present the state of a locking key, such
@@ -1068,8 +1075,8 @@ MOUSE_OVER_NOT_FOUND = _("Mouse over object not found.")
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
 # could with native keyboard navigation. This is a message that will be
-# presented to the user when an error (such as the operation timing out) kept us
-# from getting these objects.
+# presented to the user when an error (such as the operation timing out) kept
+# us from getting these objects.
 NAVIGATION_DIALOG_ERROR = _("Error: Could not create list of objects.")
 
 # Translators: This message describes a list item in a document. Nesting level
@@ -1082,22 +1089,22 @@ NESTING_LEVEL = _("Nesting level %d")
 # such as a pop-up menu, we want to present that fact.
 NEW_ITEM_ADDED = _("New item has been added")
 
-# Translators: This is intended to be a short phrase to present the fact that no
-# no accessible component has keyboard focus.
-NO_FOCUS =  _("No focus")
+# Translators: This is intended to be a short phrase to present the fact that
+# no no accessible component has keyboard focus.
+NO_FOCUS = _("No focus")
 
-# Translators: This message presents the fact that no accessible application has
-# has keyboard focus.
-NO_FOCUSED_APPLICATION =  _("No application has focus.")
+# Translators: This message presents the fact that no accessible application
+# has has keyboard focus.
+NO_FOCUSED_APPLICATION = _("No application has focus.")
 
 # Translators: This is for navigating document content by moving from anchor to
 # anchor. (An anchor is a named spot that one can jump to.) This is a detailed
 # message which will be presented to the user if no more anchors can be found.
 NO_MORE_ANCHORS = _("No more anchors.")
 
-# Translators: This is for navigating document content by moving from blockquote
-# to blockquote. This is a detailed message which will be presented to the user
-# if no more blockquotes can be found.
+# Translators: This is for navigating document content by moving from
+# blockquote to blockquote. This is a detailed message which will be presented
+# to the user if no more blockquotes can be found.
 NO_MORE_BLOCKQUOTES = _("No more blockquotes.")
 
 # Translators: This is for navigating document content by moving from button
@@ -1154,8 +1161,8 @@ NO_LANDMARK_FOUND = _("No landmark found.")
 NO_MORE_LINKS = _("No more links.")
 
 # Translators: This is for navigating document content by moving from bulleted/
-# numbered list to bulleted/numbered list. This is a detailed message which will
-# be presented to the user if no more lists can be found.
+# numbered list to bulleted/numbered list. This is a detailed message which
+# will be presented to the user if no more lists can be found.
 NO_MORE_LISTS = _("No more lists.")
 
 # Translators: This is for navigating document content by moving from bulleted/
@@ -1212,8 +1219,8 @@ NOTIFICATION_LIST_BOTTOM = C_("notification", "Bottom")
 # notifications mode is being exited.
 NOTIFICATION_LIST_EXIT = _("Exiting list notification messages mode.")
 
-# Translators: This is a brief message presented to the user when the top of the
-# list of notifications is reached.
+# Translators: This is a brief message presented to the user when the top of
+# the list of notifications is reached.
 NOTIFICATION_LIST_TOP = C_("notification", "Top")
 
 # Translators: This is a tutorial message for the notification list mode.
@@ -1221,14 +1228,14 @@ NOTIFICATION_LIST_HELP = _("Press h for help.\n")
 
 # Translators: The following string instructs the user how to navigate within
 # the list notifications mode.
-NOTIFICATION_LIST_TUTORIAL =  \
-            _("Use Up, Down, Home or End to navigate in the list.\n"\
-              "Press Escape to exit.\n"\
-              "Press Space to repeat the last message read.\n"\
-              "Press one digit to read a specific message.\n")
+NOTIFICATION_LIST_TUTORIAL = \
+    _("Use Up, Down, Home or End to navigate in the list.\n"
+      "Press Escape to exit.\n"
+      "Press Space to repeat the last message read.\n"
+      "Press one digit to read a specific message.\n")
 
-# Translators: This message is presented to the user when the notifications list
-# is empty.
+# Translators: This message is presented to the user when the notifications
+# list is empty.
 NOTIFICATION_NO_MESSAGES = _("No notification messages")
 
 # Translators: This brief message is presented to indicate the state of widgets
@@ -1308,7 +1315,7 @@ PARAGRAPH_UNSELECTED_UP = _("paragraph unselected up from cursor position")
 # the command to get into Orca's preferences dialog when the preferences dialog
 # is already open.
 PREFERENCES_WARNING_DIALOG = \
-    _('You already have an instance of an Orca preferences dialog ' \
+    _('You already have an instance of an Orca preferences dialog '
       'open.\nPlease close it before opening a new one.')
 
 # Translators: This message is an indication of the position of the focused
@@ -1316,10 +1323,11 @@ PREFERENCES_WARNING_DIALOG = \
 PRESENTATION_SLIDE_POSITION = _("slide %(position)d of %(count)d")
 
 # Translators: This is a detailed message which will be presented as the user
-# cycles amongst his/her saved profiles. A "profile" is a collection of settings
-# which apply to a given task, such as a "Spanish" profile which would use
-# Spanish text-to-speech and Spanish braille and selected when reading Spanish
-# content. The string representing the profile name is created by the user.
+# cycles amongst his/her saved profiles. A "profile" is a collection of
+# settings which apply to a given task, such as a "Spanish" profile which would
+# use Spanish text-to-speech and Spanish braille and selected when reading
+# Spanish content. The string representing the profile name is created by the
+# user.
 PROFILE_CHANGED = _("Profile set to %s.")
 
 # Translators: This is an error message presented when the user attempts to
@@ -1412,7 +1420,7 @@ SPEECH_SLOWER = _("slower.")
 SPEECH_HIGHER = _("higher.")
 
 # Translators: This string announces speech pitch change.
-SPEECH_LOWER  = _("lower.")
+SPEECH_LOWER = _("lower.")
 
 # Translators: We replace the ellipses (both manual and UTF-8) with a spoken
 # string. The extra space you see at the beginning is because we need the
@@ -1470,14 +1478,16 @@ TABLE_END = _("End of table")
 # table and then navigates out of it.
 TABLE_LEAVING = _("leaving table.")
 
-# Translators: When users are navigating a table, they sometimes want the entire
-# row of a table read; other times they want just the current cell presented.
-# This string is a message presented to the user when this setting is toggled.
+# Translators: When users are navigating a table, they sometimes want the
+# entire row of a table read; other times they want just the current cell
+# presented. This string is a message presented to the user when this setting
+# is toggled.
 TABLE_MODE_CELL = _("Speak cell")
 
-# Translators: When users are navigating a table, they sometimes want the entire
-# row of a table read; other times they want just the current cell presented.
-# This string is a message presented to the user when this setting is toggled.
+# Translators: When users are navigating a table, they sometimes want the
+# entire row of a table read; other times they want just the current cell
+# presented. This string is a message presented to the user when this setting
+# is toggled.
 TABLE_MODE_ROW = _("Speak row")
 
 # Translators: a uniform table is one in which each table cell occupies one row
@@ -1485,9 +1495,9 @@ TABLE_MODE_ROW = _("Speak row")
 # in which at least one table cell occupies more than one row and/or column.
 TABLE_NON_UNIFORM = _("Non-uniform")
 
-# Translators: This is for navigating document content by moving from table cell
-# to table cell. If the user gives a table navigation command but is not in a
-# table, presents this message.
+# Translators: This is for navigating document content by moving from table
+# cell to table cell. If the user gives a table navigation command but is not
+# in a table, presents this message.
 TABLE_NOT_IN_A = _("Not in a table.")
 
 # Translators: This is a message presented to users when the columns in a table
@@ -1503,17 +1513,18 @@ TABLE_REORDERED_ROWS = _("Rows reordered")
 TABLE_COLUMN = _("column %d")
 
 # Translators: this is in reference to a column in a table. If the user is in
-# the first column of a table with five columns, the position is "column 1 of 5"
+# the first column of a table with five columns, the position is "column 1
+# of 5"
 TABLE_COLUMN_DETAILED = _("column %(index)d of %(total)d")
 
-# Translators: This is for navigating document content by moving from table cell
-# to table cell. This is the message presented when the user attempts to move to
-# the cell below the current cell and is already in the last row.
+# Translators: This is for navigating document content by moving from table
+# cell to table cell. This is the message presented when the user attempts to
+# move to the cell below the current cell and is already in the last row.
 TABLE_COLUMN_BOTTOM = _("Bottom of column.")
 
-# Translators: This is for navigating document content by moving from table cell
-# to table cell. This is the message presented when the user attempts to move to
-# the cell above the current cell and is already in the first row.
+# Translators: This is for navigating document content by moving from table
+# cell to table cell. This is the message presented when the user attempts to
+# move to the cell above the current cell and is already in the first row.
 TABLE_COLUMN_TOP = _("Top of column.")
 
 # Translators: this is in reference to a row in a table. The substitution is
@@ -1524,31 +1535,31 @@ TABLE_ROW = _("row %d")
 # the first row of a table with five rows, the position is "row 1 of 5"
 TABLE_ROW_DETAILED = _("row %(index)d of %(total)d")
 
-# Translators: This is for navigating document content by moving from table cell
-# to table cell. This is the message presented when the user attempts to move to
-# the left of the current cell and is already in the first column.
+# Translators: This is for navigating document content by moving from table
+# cell to table cell. This is the message presented when the user attempts to
+# move to the left of the current cell and is already in the first column.
 TABLE_ROW_BEGINNING = _("Beginning of row.")
 
-# Translators: This is for navigating document content by moving from table cell
-# to table cell. This is the message presented when the user attempts to move to
-# the right of the current cell and is already in the last column.
+# Translators: This is for navigating document content by moving from table
+# cell to table cell. This is the message presented when the user attempts to
+# move to the right of the current cell and is already in the last column.
 TABLE_ROW_END = _("End of row.")
 
-# Translators: This message is presented to the user to confirm that he/she just
-# deleted a table row.
+# Translators: This message is presented to the user to confirm that he/she
+# just deleted a table row.
 TABLE_ROW_DELETED = _("Row deleted.")
 
-# Translators: This message is presented to the user to confirm that he/she just
-# deleted the last row of a table.
+# Translators: This message is presented to the user to confirm that he/she
+# just deleted the last row of a table.
 TABLE_ROW_DELETED_FROM_END = _("Last row deleted.")
 
-# Translators: This message is presented to the user to confirm that he/she just
-# inserted a table row.
+# Translators: This message is presented to the user to confirm that he/she
+# just inserted a table row.
 TABLE_ROW_INSERTED = _("Row inserted.")
 
-# Translators: This message is presented to the user to confirm that he/she just
-# inserted a table row at the end of the table. This typically happens when the
-# user presses Tab from within the last cell of the table.
+# Translators: This message is presented to the user to confirm that he/she
+# just inserted a table row at the end of the table. This typically happens
+# when the user presses Tab from within the last cell of the table.
 TABLE_ROW_INSERTED_AT_END = _("Row inserted at the end of the table.")
 
 # Translators: when the user selects (highlights) text in a document, Orca lets
@@ -1566,26 +1577,27 @@ UNICODE = _("Unicode %s")
 # Translators: This message presents the Orca version number.
 VERSION = _("Screen reader version %s.") % version
 
-# Translators: This is presented when the user has navigated to a line with only
-# whitespace characters (space, tab, etc.) on it.
+# Translators: This is presented when the user has navigated to a line with
+# only whitespace characters (space, tab, etc.) on it.
 WHITE_SPACE = _("white space")
 
-# Translators: when the user is attempting to locate a particular object and the
-# top of a page or list is reached without that object being found, we "wrap" to
-# the bottom and continue looking upwards. We need to inform the user when this
-# is taking place.
+# Translators: when the user is attempting to locate a particular object and
+# the top of a page or list is reached without that object being found, we
+# "wrap" to the bottom and continue looking upwards. We need to inform the user
+# when this is taking place.
 WRAPPING_TO_BOTTOM = _("Wrapping to bottom.")
 
-# Translators: when the user is attempting to locate a particular object and the
-# bottom of a page or list is reached without that object being found, we "wrap"
-# to the top and continue looking downwards. We need to inform the user when
-# this is taking place.
+# Translators: when the user is attempting to locate a particular object and
+# the bottom of a page or list is reached without that object being found, we
+# "wrap" to the top and continue looking downwards. We need to inform the user
+# when this is taking place.
 WRAPPING_TO_TOP = _("Wrapping to top.")
 
 # Translators, normally layered panes and tables have items in them. Thus it is
-# noteworthy when this is not the case. This message is presented to the user to
-# indicate the current layered pane or table contains zero items.
+# noteworthy when this is not the case. This message is presented to the user
+# to indicate the current layered pane or table contains zero items.
 ZERO_ITEMS = _("0 items")
+
 
 def cellSpan(rowspan, colspan):
     spanString = ""
@@ -1618,6 +1630,7 @@ def cellSpan(rowspan, colspan):
 
     return spanString
 
+
 def charactersTooLong(count):
     # Translators: People can enter a string of text that is too wide to be
     # fully displayed in a spreadsheet cell. This message will be spoken if
@@ -1626,82 +1639,100 @@ def charactersTooLong(count):
                     "%d characters too long",
                     count) % count
 
+
 def dialogCountBraille(count):
     # Translators: This message informs the user how many unfocused alert and
     # dialog windows a newly (re)focused application has. It is added at the
     # end of a braille message containing the app which just claimed focus.
     return ngettext("(%d dialog)", "(%d dialogs)", count) % count
 
+
 def dialogCountSpeech(count):
     # Translators: This message informs the user how many unfocused alert and
     # dialog windows a newly (re)focused application has. It is added at the
     # end of a spoken message containing the app which just claimed focus.
-    return ngettext("%d unfocused dialog", "%d unfocused dialogs", count) % count
+    return (
+        ngettext("%d unfocused dialog", "%d unfocused dialogs", count) % count
+    )
+
 
 def fileSizeBytes(size):
     # Translators: This is the size of a file in bytes
     return ngettext("%d byte", "%d bytes", size) % size
+
 
 def filesFound(count):
     # Translators: This message informs the user who many files were found as
     # a result of a search.
     return ngettext("%d file found", "%d files found", count) % count
 
+
 def formCount(count):
     # Translators: This message presents the number of forms in a document.
     return ngettext("%d form", "%d forms", count) % count
 
+
 def headingCount(count):
     # Translators: This message presents the number of headings in a document.
     return ngettext("%d heading", "%d headings", count) % count
+
 
 def itemCount(count):
     # Translators: This message presents the number of items in a layered pane
     # or table.
     return ngettext("%d item", "%d items", count) % count
 
+
 def itemsFound(count):
-    # Translators: Orca has several commands that search for, and present a list
-    # of, objects based on one or more criteria. This is a message that will be
-    # presented to the user to indicate how many matching items were found.
+    # Translators: Orca has several commands that search for, and present a
+    # list of, objects based on one or more criteria. This is a message that
+    # will be presented to the user to indicate how many matching items were
+    # found.
     return ngettext("%d item found", "%d items found", count) % count
+
 
 def listItemCount(count):
     # Translators: This message describes a bulleted or numbered list.
     return ngettext("List with %d item", "List with %d items", count) % count
 
+
 def messagesCount(count):
-    # Translators: This message is presented to inform the user of the number of
-    # messages in a list.
+    # Translators: This message is presented to inform the user of the number
+    # of messages in a list.
     return ngettext("%d message.\n", "%d messages.\n", count) % count
+
 
 def percentage(value):
     # Translators: This message is presented to inform the user of the value of
     # a slider, progress bar, or other such component.
     return ngettext("%d percent.", "%d percent.", value) % value
 
+
 def percentRead(value):
     # Translators: This message announces the percentage of the document that
-    # has been read. The value is calculated by knowing the index of the current
-    # position divided by the total number of objects on the page.
-    return ngettext ("%d percent of document read",
-                     "%d percent of document read",
-                     value) % value
+    # has been read. The value is calculated by knowing the index of the
+    # current position divided by the total number of objects on the page.
+    return ngettext("%d percent of document read",
+                    "%d percent of document read",
+                    value) % value
+
 
 def repeatedCharCount(repeatChar, count):
-    # Translators: Orca will tell you how many characters are repeated on a line
-    # of text. For example: "22 space characters". The %d is the number and the
-    # %s is the spoken word for the character.
+    # Translators: Orca will tell you how many characters are repeated on a
+    # line of text. For example: "22 space characters". The %d is the number
+    # and the %s is the spoken word for the character.
     return ngettext("%(count)d %(repeatChar)s character",
                     "%(count)d %(repeatChar)s characters",
-                    count) % {"count" : count, "repeatChar": repeatChar}
+                    count) % {"count": count, "repeatChar": repeatChar}
+
 
 def selectedItemsCount(selected, total):
     # Translators: This message is presented to indicate the number of selected
     # objects (e.g. icons) and the total number of those objects.
     return ngettext("%(index)d of %(total)d item selected",
                     "%(index)d of %(total)d items selected",
-                    total) % {"index" : selected, "total" : total}
+                    total) % {"index": selected, "total": total}
+
 
 def shortcutsFoundOrca(count):
     # Translators: This message is presented when the user is in a list of
@@ -1712,6 +1743,7 @@ def shortcutsFoundOrca(count):
                     "%d Screen reader default shortcuts found.",
                     count) % count
 
+
 def shortcutsFoundApp(count, appName):
     # Translators: This message is presented when the user is in a list of
     # shortcuts associated with Orca commands specific to the current
@@ -1719,21 +1751,25 @@ def shortcutsFoundApp(count, appName):
     return ngettext(
         "%(count)d Screen reader shortcut for %(application)s found.",
         "%(count)d Screen reader shortcuts for %(application)s found.",
-        count) % {"count" : count, "application" : appName}
+        count) % {"count": count, "application": appName}
+
 
 def spacesCount(count):
-    # Translators: This message is presented to inform the user of the number of
-    # space characters in a string.
+    # Translators: This message is presented to inform the user of the number
+    # of space characters in a string.
     return ngettext("%d space", "%d spaces", count) % count
 
+
 def tabsCount(count):
-    # Translators: This message is presented to inform the user of the number of
-    # tab characters in a string.
+    # Translators: This message is presented to inform the user of the number
+    # of tab characters in a string.
     return ngettext("%d tab", "%d tabs", count) % count
+
 
 def tableCount(count):
     # Translators: This message presents the number of tables in a document.
     return ngettext("%d table", "%d tables", count) % count
+
 
 def tableSize(nRows, nColumns):
     # Translators: this represents the number of rows in a table.
@@ -1747,10 +1783,12 @@ def tableSize(nRows, nColumns):
 
     return rowString + " " + colString
 
+
 def unvisitedLinkCount(count):
     # Translators: This message presents the number of unvisited links in a
     # document.
     return ngettext("%d unvisited link", "%d unvisited links", count) % count
+
 
 def visitedLinkCount(count):
     # Translators: This message presents the number of visited links in a

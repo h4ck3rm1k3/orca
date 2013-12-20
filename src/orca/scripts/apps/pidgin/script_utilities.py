@@ -23,21 +23,22 @@
    gotten way too large as a result of including these methods."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
 import orca.debug as debug
 import orca.script_utilities as script_utilities
 
-#############################################################################
-#                                                                           #
+#
+#
 # Utilities                                                                 #
-#                                                                           #
-#############################################################################
+#
+#
+
 
 class Utilities(script_utilities.Utilities):
 
@@ -50,11 +51,11 @@ class Utilities(script_utilities.Utilities):
 
         script_utilities.Utilities.__init__(self, script)
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Utilities for finding, identifying, and comparing accessibles         #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def childNodes(self, obj):
         """Gets all of the children that have RELATION_NODE_CHILD_OF pointing
@@ -79,7 +80,7 @@ class Utilities(script_utilities.Utilities):
             if not obj.getState().contains(pyatspi.STATE_EXPANDED):
                 return []
 
-        nodes = []        
+        nodes = []
         index = self.cellIndex(obj)
         row = table.getRowAtIndex(index)
         col = table.getColumnAtIndex(index + 1)
@@ -91,13 +92,13 @@ class Utilities(script_utilities.Utilities):
         # soon as the node level of a candidate is equal or less
         # than our current level.
         #
-        for i in range(row+1, table.nRows):
+        for i in range(row + 1, table.nRows):
             cell = table.getAccessibleAt(i, col)
             nodeCell = cell.parent[cell.getIndexInParent() - 1]
             relations = nodeCell.getRelationSet()
             for relation in relations:
                 if relation.getRelationType() \
-                       == pyatspi.RELATION_NODE_CHILD_OF:
+                        == pyatspi.RELATION_NODE_CHILD_OF:
                     nodeOf = relation.getTarget(0)
                     if self.isSameObject(obj, nodeOf):
                         nodes.append(cell)
@@ -133,7 +134,7 @@ class Utilities(script_utilities.Utilities):
             return -1
 
         try:
-            #table = 
+            # table =
             obj.parent.queryTable()
         except:
             return -1
@@ -146,7 +147,7 @@ class Utilities(script_utilities.Utilities):
             node = None
             for relation in relations:
                 if relation.getRelationType() \
-                       == pyatspi.RELATION_NODE_CHILD_OF:
+                        == pyatspi.RELATION_NODE_CHILD_OF:
                     node = relation.getTarget(0)
                     break
 
@@ -167,16 +168,16 @@ class Utilities(script_utilities.Utilities):
 
         return len(nodes) - 1
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Utilities for working with the accessible text interface              #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
 
 
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Miscellaneous Utilities                                               #
-    #                                                                       #
-    #########################################################################
+    #
+    #

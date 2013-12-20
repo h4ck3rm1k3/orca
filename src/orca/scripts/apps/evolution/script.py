@@ -20,12 +20,12 @@
 
 """Custom script for Evolution."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc." \
                 "Copyright (c) 2013 Igalia, S.L."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -39,11 +39,12 @@ from .speech_generator import SpeechGenerator
 
 _settingsManager = settings_manager.getManager()
 
-########################################################################
-#                                                                      #
+#
+#
 # The Evolution script class.                                          #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(WebKitGtk.Script):
 
@@ -95,11 +96,11 @@ class Script(WebKitGtk.Script):
 
         return False
 
-    ########################################################################
-    #                                                                      #
+    #
+    #
     # AT-SPI OBJECT EVENT HANDLERS                                         #
-    #                                                                      #
-    ########################################################################
+    #
+    #
 
     def onFocus(self, event):
         """Callback for focus: accessibility events."""
@@ -119,7 +120,7 @@ class Script(WebKitGtk.Script):
 
     def onShowingChanged(self, event):
         """Callback for object:state-changed:showing accessibility events."""
- 
+
         if not event.detail1:
             gtk.Script.onShowingChanged(self, event)
             return
@@ -141,7 +142,7 @@ class Script(WebKitGtk.Script):
         focusedObj = self.utilities.focusedObject(window)
         if self.utilities.spatialComparison(obj, focusedObj) >= 0:
             return
- 
+
         # TODO - JD: The very last screen results in a crazy-huge number
         # of events, and they come in an order that is not good for this
         # approach. So we'll need to handle this particular case elsewhere.

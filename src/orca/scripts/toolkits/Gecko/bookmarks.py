@@ -23,11 +23,11 @@ implementation in Gecko:
 http://developer.mozilla.org/en/docs/Accessibility/ATSPI_Support
 """
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 import urllib.parse
@@ -36,16 +36,18 @@ import orca.bookmarks as bookmarks
 import orca.messages as messages
 import orca.speech as speech
 
-####################################################################
-#                                                                  #
+#
+#
 # Custom bookmarks class                                           #
-#                                                                  #
-####################################################################
+#
+#
+
+
 class GeckoBookmarks(bookmarks.Bookmarks):
+
     def __init__(self, script):
         bookmarks.Bookmarks.__init__(self, script)
         self._currentbookmarkindex = {}
-
 
     def addBookmark(self, inputEvent):
         """ Add an in-page accessible object bookmark for this key and
@@ -76,7 +78,7 @@ class GeckoBookmarks(bookmarks.Bookmarks):
             # restore the location
             self._script.setCaretPosition(obj, characterOffset)
             self._script.updateBraille(obj)
-            self._script.speakContents( \
+            self._script.speakContents(
                 self._script.getObjectContentsAtOffset(obj, characterOffset))
             # update the currentbookmark
             self._currentbookmarkindex[index[1]] = index[0]
@@ -165,17 +167,17 @@ class GeckoBookmarks(bookmarks.Bookmarks):
             return
         # only 1 bookmark or we are just starting out
         elif len(thispage_hwkeys) == 1 or \
-                         current_uri not in self._currentbookmarkindex:
+                current_uri not in self._currentbookmarkindex:
             self.goToBookmark(None, index=(thispage_hwkeys[0], current_uri))
             return
 
         # find current bookmark hw_code in our sorted list.
         # Go to next one if possible
         try:
-            index = thispage_hwkeys.index( \
-                                 self._currentbookmarkindex[current_uri])
-            self.goToBookmark(None, index=( \
-                                 thispage_hwkeys[index+1], current_uri))
+            index = thispage_hwkeys.index(
+                self._currentbookmarkindex[current_uri])
+            self.goToBookmark(None, index=(
+                thispage_hwkeys[index + 1], current_uri))
         except (ValueError, KeyError, IndexError):
             self.goToBookmark(None, index=(thispage_hwkeys[0], current_uri))
 
@@ -198,17 +200,17 @@ class GeckoBookmarks(bookmarks.Bookmarks):
             return
         # only 1 bookmark or we are just starting out
         elif len(thispage_hwkeys) == 1 or \
-                         current_uri not in self._currentbookmarkindex:
+                current_uri not in self._currentbookmarkindex:
             self.goToBookmark(None, index=(thispage_hwkeys[0], current_uri))
             return
 
         # find current bookmark hw_code in our sorted list.
         # Go to next one if possible
         try:
-            index = thispage_hwkeys.index( \
-                            self._currentbookmarkindex[current_uri])
+            index = thispage_hwkeys.index(
+                self._currentbookmarkindex[current_uri])
             self.goToBookmark(None,
-                              index=(thispage_hwkeys[index-1], current_uri))
+                              index=(thispage_hwkeys[index - 1], current_uri))
         except (ValueError, KeyError, IndexError):
             self.goToBookmark(None, index=(thispage_hwkeys[0], current_uri))
 
@@ -226,14 +228,14 @@ class GeckoBookmarks(bookmarks.Bookmarks):
             [start_obj, characterOffset] = self._script.getCaretContext()
 
         if start_obj is None \
-                     or start_obj.getRole() == pyatspi.ROLE_DOCUMENT_FRAME:
+                or start_obj.getRole() == pyatspi.ROLE_DOCUMENT_FRAME:
             return []
         else:
             path = []
             path.append(start_obj.getIndexInParent())
             p = start_obj.parent
             while p:
-                if p.getRole()  == pyatspi.ROLE_DOCUMENT_FRAME:
+                if p.getRole() == pyatspi.ROLE_DOCUMENT_FRAME:
                     path.reverse()
                     return path
                 path.append(p.getIndexInParent())

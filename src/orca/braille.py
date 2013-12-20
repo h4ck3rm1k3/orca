@@ -25,11 +25,11 @@ operations on the Accessible object, such as invoking default actions or
 moving the text caret.
 """
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import signal
 import os
@@ -94,7 +94,7 @@ if louis and not tablesdir:
     debug.println(debug.LEVEL_SEVERE,
                   "not be available.")
     louis = None
-    
+
 # The braille monitor
 #
 _monitor = None
@@ -103,8 +103,8 @@ _monitor = None
 #
 dontInteruptSpeechKeys = []
 if _brlAPIAvailable:
-    dontInteruptSpeechKeys = [brlapi.KEY_CMD_FWINLT, brlapi.KEY_CMD_FWINRT, \
-        brlapi.KEY_CMD_LNUP, brlapi.KEY_CMD_LNDN]
+    dontInteruptSpeechKeys = [brlapi.KEY_CMD_FWINLT, brlapi.KEY_CMD_FWINRT,
+                              brlapi.KEY_CMD_LNUP, brlapi.KEY_CMD_LNDN]
 
 # Common names for most used BrlTTY commands, to be shown in the GUI:
 # ATM, the ones used in default.py are:
@@ -112,18 +112,18 @@ if _brlAPIAvailable:
 command_name = {}
 
 if _brlAPIAvailable:
-    command_name[brlapi.KEY_CMD_FWINLT]   = cmdnames.BRAILLE_LINE_LEFT
-    command_name[brlapi.KEY_CMD_FWINRT]   = cmdnames.BRAILLE_LINE_RIGHT
-    command_name[brlapi.KEY_CMD_LNUP]     = cmdnames.BRAILLE_LINE_UP
-    command_name[brlapi.KEY_CMD_LNDN]     = cmdnames.BRAILLE_LINE_DOWN
-    command_name[brlapi.KEY_CMD_FREEZE]   = cmdnames.BRAILLE_FREEZE
+    command_name[brlapi.KEY_CMD_FWINLT] = cmdnames.BRAILLE_LINE_LEFT
+    command_name[brlapi.KEY_CMD_FWINRT] = cmdnames.BRAILLE_LINE_RIGHT
+    command_name[brlapi.KEY_CMD_LNUP] = cmdnames.BRAILLE_LINE_UP
+    command_name[brlapi.KEY_CMD_LNDN] = cmdnames.BRAILLE_LINE_DOWN
+    command_name[brlapi.KEY_CMD_FREEZE] = cmdnames.BRAILLE_FREEZE
     command_name[brlapi.KEY_CMD_TOP_LEFT] = cmdnames.BRAILLE_TOP_LEFT
     command_name[brlapi.KEY_CMD_BOT_LEFT] = cmdnames.BRAILLE_BOTTOM_LEFT
-    command_name[brlapi.KEY_CMD_HOME]     = cmdnames.BRAILLE_HOME
-    command_name[brlapi.KEY_CMD_SIXDOTS]  = cmdnames.BRAILLE_SIX_DOTS
-    command_name[brlapi.KEY_CMD_ROUTE]    = cmdnames.BRAILLE_ROUTE_CURSOR
+    command_name[brlapi.KEY_CMD_HOME] = cmdnames.BRAILLE_HOME
+    command_name[brlapi.KEY_CMD_SIXDOTS] = cmdnames.BRAILLE_SIX_DOTS
+    command_name[brlapi.KEY_CMD_ROUTE] = cmdnames.BRAILLE_ROUTE_CURSOR
     command_name[brlapi.KEY_CMD_CUTBEGIN] = cmdnames.BRAILLE_CUT_BEGIN
-    command_name[brlapi.KEY_CMD_CUTLINE]  = cmdnames.BRAILLE_CUT_LINE
+    command_name[brlapi.KEY_CMD_CUTLINE] = cmdnames.BRAILLE_CUT_LINE
 
 # The size of the physical display (width, height).  The coordinate system of
 # the display is set such that the upper left is (0,0), x values increase from
@@ -221,6 +221,7 @@ TABLE_NAMES = {"Cz-Cz-g1": brltablenames.CZ_CZ_G1,
                "it-it-g1": brltablenames.IT_IT_G1,
                "nl-be-g1": brltablenames.NL_BE_G1}
 
+
 def listTables():
     tables = {}
     try:
@@ -233,6 +234,7 @@ def listTables():
         pass
 
     return tables
+
 
 def getDefaultTable():
     try:
@@ -248,6 +250,7 @@ def getDefaultTable():
 if louis:
     _defaultContractionTable = getDefaultTable()
 
+
 def _printBrailleEvent(level, command):
     """Prints out a Braille event.  The given level may be overridden
     if the eventDebugLevel (see debug.setEventDebugLevel) is greater in
@@ -261,7 +264,9 @@ def _printBrailleEvent(level, command):
         level,
         "BRAILLE EVENT: %s" % repr(command))
 
+
 class Region(object):
+
     """A Braille region to be displayed on the display.  The width of
     each region is determined by its string.
     """
@@ -280,7 +285,7 @@ class Region(object):
 
         # If louis is None, then we don't go into contracted mode.
         self.contracted = settings.enableContractedBraille and \
-                          louis is not None
+            louis is not None
         self.brailleOffset = None
         self.expandOnCursor = expandOnCursor
 
@@ -290,11 +295,11 @@ class Region(object):
 
         if self.contracted:
             self.contractionTable = settings.brailleContractionTable or \
-                                    _defaultContractionTable
+                _defaultContractionTable
 
             self.string, self.inPos, self.outPos, self.cursorOffset = \
-                         self.contractLine(self.rawLine,
-                                           cursorOffset, expandOnCursor)
+                self.contractLine(self.rawLine,
+                                  cursorOffset, expandOnCursor)
         else:
             self.string = self.rawLine
             self.cursorOffset = cursorOffset
@@ -335,9 +340,9 @@ class Region(object):
         """
         if self.contracted:
             self.string, self.inPos, self.outPos, self.cursorOffset = \
-                       self.contractLine(self.rawLine,
-                                         self.cursorOffset,
-                                         self.expandOnCursor)
+                self.contractLine(self.rawLine,
+                                  self.cursorOffset,
+                                  self.expandOnCursor)
 
     def contractLine(self, line, cursorOffset=0, expandOnCursor=False):
         """Contract the given line. Returns the contracted line, and the
@@ -386,7 +391,7 @@ class Region(object):
     def setContractedBraille(self, contracted):
         if contracted:
             self.contractionTable = settings.brailleContractionTable or \
-                                    _defaultContractionTable
+                _defaultContractionTable
             self.contractRegion()
         else:
             self.expandRegion()
@@ -395,9 +400,9 @@ class Region(object):
         if self.contracted:
             return
         self.string, self.inPos, self.outPos, self.cursorOffset = \
-                     self.contractLine(self.rawLine,
-                                       self.cursorOffset,
-                                       self.expandOnCursor)
+            self.contractLine(self.rawLine,
+                              self.cursorOffset,
+                              self.expandOnCursor)
         self.contracted = True
 
     def expandRegion(self):
@@ -410,7 +415,9 @@ class Region(object):
             self.cursorOffset = len(self.string)
         self.contracted = False
 
+
 class Component(Region):
+
     """A subclass of Region backed by an accessible.  This Region will react
     to any cursor routing key events and perform the default action on the
     accessible, if a default action exists.
@@ -454,7 +461,7 @@ class Component(Region):
         associated with this region.  Note that the zeroeth character may have
         been scrolled off the display."""
 
-        if orca_state.activeScript and orca_state.activeScript.utilities.\
+        if orca_state.activeScript and orca_state.activeScript.utilities. \
            grabFocusBeforeRouting(self.accessible, offset):
             try:
                 self.accessible.queryComponent().grabFocus()
@@ -479,7 +486,9 @@ class Component(Region):
         else:
             action.doAction(0)
 
+
 class Link(Component):
+
     """A subclass of Component backed by an accessible.  This Region will be
     marked as a link by dots 7 or 8, depending on the user's preferences.
     """
@@ -508,7 +517,9 @@ class Link(Component):
         #
         return chr(settings.brailleLinkIndicator) * len(self.string)
 
+
 class Text(Region):
+
     """A subclass of Region backed by a Text object.  This Region will
     react to any cursor routing key events by positioning the caret in
     the associated text object. The line displayed will be the
@@ -528,8 +539,8 @@ class Text(Region):
         self.accessible = accessible
         if orca_state.activeScript and self.accessible:
             [string, self.caretOffset, self.lineOffset] = \
-                 orca_state.activeScript.getTextLineAtCaret(self.accessible,
-                                                            startOffset)
+                orca_state.activeScript.getTextLineAtCaret(self.accessible,
+                                                           startOffset)
         else:
             string = ""
             self.caretOffset = 0
@@ -585,8 +596,8 @@ class Text(Region):
         """
 
         [string, caretOffset, lineOffset] = \
-                 orca_state.activeScript.getTextLineAtCaret(self.accessible,
-                                                            self.startOffset)
+            orca_state.activeScript.getTextLineAtCaret(self.accessible,
+                                                       self.startOffset)
 
         cursorOffset = min(caretOffset - lineOffset, len(string))
 
@@ -600,7 +611,7 @@ class Text(Region):
 
         if self.contracted:
             self.string, self.inPos, self.outPos, cursorOffset = \
-                       self.contractLine(self.rawLine, cursorOffset, True)
+                self.contractLine(self.rawLine, cursorOffset, True)
 
         self.cursorOffset = cursorOffset
 
@@ -648,7 +659,7 @@ class Text(Region):
         """
 
         try:
-            #text = 
+            # text =
             self.accessible.queryText()
         except NotImplementedError:
             return ''
@@ -657,7 +668,7 @@ class Text(Region):
         #
         stringLength = len(self.rawLine) - len(self.label)
         lineEndOffset = self.lineOffset + stringLength
-        regionMask = [settings.TEXT_ATTR_BRAILLE_NONE]*stringLength
+        regionMask = [settings.TEXT_ATTR_BRAILLE_NONE] * stringLength
 
         attrIndicator = settings.textAttributesBrailleIndicator
         selIndicator = settings.brailleSelectorIndicator
@@ -720,7 +731,7 @@ class Text(Region):
             if self.label:
                 # Transform the offsets.
                 outPos = \
-                       [_offset - len(self.label) - 1 for _offset in outPos]
+                    [_offset - len(self.label) - 1 for _offset in outPos]
             for i, m in enumerate(regionMask):
                 try:
                     contractedMask[outPos[i]] |= m
@@ -731,10 +742,10 @@ class Text(Region):
         # Add empty mask characters for the EOL character as well as for
         # any label that might be present.
         #
-        regionMask += [0]*len(self.eol)
+        regionMask += [0] * len(self.eol)
 
         if self.label:
-            regionMask = [0]*len(self.label) + regionMask
+            regionMask = [0] * len(self.label) + regionMask
 
         return ''.join(map(chr, regionMask))
 
@@ -755,7 +766,9 @@ class Text(Region):
         if not contracted:
             self.string += self.eol
 
+
 class ReviewComponent(Component):
+
     """A subclass of Component that is to be used for flat review mode."""
 
     def __init__(self, accessible, string, cursorOffset, zone):
@@ -772,7 +785,9 @@ class ReviewComponent(Component):
                            cursorOffset, expandOnCursor=True)
         self.zone = zone
 
+
 class ReviewText(Region):
+
     """A subclass of Region backed by a Text object.  This Region will
     does not react to the caret changes, but will react if one updates
     the cursorPosition.  This class is meant to be used by flat review
@@ -817,7 +832,9 @@ class ReviewText(Region):
         orca_state.activeScript.utilities.setCaretOffset(
             self.accessible, caretOffset)
 
+
 class Line(object):
+
     """A horizontal line on the display.  Each Line is composed of a sequential
     set of Regions.
     """
@@ -908,6 +925,7 @@ class Line(object):
         for region in self.regions:
             region.setContractedBraille(contracted)
 
+
 def getRegionAtCell(cell):
     """Given a 1-based cell offset, return the braille region
     associated with that cell in the form of [region, offsetinregion]
@@ -922,6 +940,7 @@ def getRegionAtCell(cell):
         return _lines[lineNum].getRegionAtOffset(offset)
     else:
         return [None, -1]
+
 
 def getCaretContext(event):
     """Gets the accesible and caret offset associated with the given
@@ -944,6 +963,7 @@ def getCaretContext(event):
 
     return [accessible, caretOffset]
 
+
 def clear():
     """Clears the logical structure, but keeps the Braille display as is
     (until a refresh operation).
@@ -957,9 +977,11 @@ def clear():
     _regionWithFocus = None
     viewport = [0, 0]
 
+
 def setLines(lines):
     global _lines
     _lines = lines
+
 
 def addLine(line):
     """Adds a line to the logical display for painting.  The line is added to
@@ -974,10 +996,12 @@ def addLine(line):
     _lines.append(line)
     line._index = len(_lines)
 
+
 def getShowingLine():
     """Returns the Line that is currently being painted on the display.
     """
     return _lines[viewport[1]]
+
 
 def setFocus(region, panToFocus=True, getLinkMask=True):
     """Specififes the region with focus.  This region will be positioned
@@ -1000,7 +1024,6 @@ def setFocus(region, panToFocus=True, getLinkMask=True):
 
     if not panToFocus or (not _regionWithFocus):
         return
-
     # Adjust the viewport according to the new region with focus.
     # The goal is to have the first cell of the region be in the
     # home position, but we will give priority to make sure the
@@ -1031,6 +1054,7 @@ def setFocus(region, panToFocus=True, getLinkMask=True):
         offset += _regionWithFocus.cursorOffset - _displaySize[0] + 1
 
     viewport[0] = max(0, offset)
+
 
 def _realignViewport(string, focusOffset, cursorOffset):
     """Realigns the braille display to account for braille alignment
@@ -1075,7 +1099,7 @@ def _realignViewport(string, focusOffset, cursorOffset):
         #
         leftMargin = viewport[0] + settings.brailleAlignmentMargin - 1
         rightMargin = (viewport[0] + _displaySize[0]) \
-                      - settings.brailleAlignmentMargin
+            - settings.brailleAlignmentMargin
 
         # This represents how far left in the string we want to search
         # and also how far left we'll realign the viewport. Setting it
@@ -1137,7 +1161,7 @@ def _realignViewport(string, focusOffset, cursorOffset):
             # dirty way to retain the sign (i.e., +1 or -1).
             #
             if abs(jump) > settings.brailleMaximumJump:
-                jump = settings.brailleMaximumJump * (jump/abs(jump))
+                jump = settings.brailleMaximumJump * (jump / abs(jump))
 
     if jump:
         # Set the viewport's left edge based upon the jump, making
@@ -1151,6 +1175,7 @@ def _realignViewport(string, focusOffset, cursorOffset):
         #
         viewport[0] = min(viewport[0],
                           max(leftMostEdge, len(string) - _displaySize[0]))
+
 
 def refresh(panToCursor=True,
             targetCursorCell=0,
@@ -1244,11 +1269,11 @@ def refresh(panToCursor=True,
             targetCursorCell = lastCursorCell
         elif lastCaretOffset < currentCaretOffset:
             targetCursorCell = min(_displaySize[0],
-                                   lastCursorCell \
+                                   lastCursorCell
                                    + (currentCaretOffset - lastCaretOffset))
         elif lastCaretOffset > currentCaretOffset:
             targetCursorCell = max(1,
-                                   lastCursorCell \
+                                   lastCursorCell
                                    - (lastCaretOffset - currentCaretOffset))
 
     # Now, we figure out the 0-based offset for where the cursor
@@ -1291,14 +1316,14 @@ def refresh(panToCursor=True,
     if (cursorCell < 0) or (cursorCell >= _displaySize[0]):
         cursorCell = 0
     else:
-        cursorCell += 1 # Normalize to 1-based offset
+        cursorCell += 1  # Normalize to 1-based offset
 
     logLine = "BRAILLE LINE:  '%s'" % string
     debug.println(debug.LEVEL_INFO, logLine)
     log.info(logLine)
 
     logLine = "     VISIBLE:  '%s', cursor=%d" % \
-                    (string[startPos:endPos], cursorCell)
+        (string[startPos:endPos], cursorCell)
     debug.println(debug.LEVEL_INFO, logLine)
     log.info(logLine)
 
@@ -1328,7 +1353,7 @@ def refresh(panToCursor=True,
         # all the text.]]]
         #
         #myUnderline = ""
-        #for i in range(0, _displaySize[0]):
+        # for i in range(0, _displaySize[0]):
         #    myUnderline += '\xc0'
         #writeStruct.attrOr = myUnderline
 
@@ -1377,6 +1402,7 @@ def refresh(panToCursor=True,
     else:
         _lastTextInfo = (None, 0, 0, 0)
 
+
 def _flashCallback():
     global _lines
     global _regionWithFocus
@@ -1389,6 +1415,7 @@ def _flashCallback():
         _flashEventSourceId = 0
 
     return False
+
 
 def killFlash(restoreSaved=True):
     global _flashEventSourceId
@@ -1403,12 +1430,14 @@ def killFlash(restoreSaved=True):
             refresh(panToCursor=False, stopFlash=False)
         _flashEventSourceId = 0
 
+
 def resetFlashTimer():
     global _flashEventSourceId
     if _flashEventSourceId > 0:
         GLib.source_remove(_flashEventSourceId)
         flashTime = _saved[3]
         _flashEventSourceId = GLib.timeout_add(flashTime, _flashCallback)
+
 
 def _initFlash(flashTime):
     """Sets up the state needed to flash a message or clears any existing
@@ -1436,6 +1465,7 @@ def _initFlash(flashTime):
         _flashEventSourceId = GLib.timeout_add(flashTime, _flashCallback)
     elif flashTime < 0:
         _flashEventSourceId = -666
+
 
 def displayRegions(regionInfo, flashTime=0):
     """Displays a list of regions on a single line, setting focus to the
@@ -1465,6 +1495,7 @@ def displayRegions(regionInfo, flashTime=0):
     setFocus(focusedRegion)
     refresh(stopFlash=False)
 
+
 def displayMessage(message, cursor=-1, flashTime=0):
     """Displays a single line, setting the cursor to the given position,
     ensuring that the cursor is in view.
@@ -1486,6 +1517,7 @@ def displayMessage(message, cursor=-1, flashTime=0):
     setFocus(region)
     refresh(True, stopFlash=False)
 
+
 def displayKeyEvent(event):
     """Displays a KeyboardEvent. Typically reserved for locking keys like
     Caps Lock and Num Lock."""
@@ -1495,6 +1527,7 @@ def displayKeyEvent(event):
         keyname = event.getKeyName()
         msg = "%s %s" % (keyname, lockingStateString)
         displayMessage(msg, flashTime=settings.brailleFlashTime)
+
 
 def panLeft(panAmount=0):
     """Pans the display to the left, limiting the pan to the beginning
@@ -1516,6 +1549,7 @@ def panLeft(panAmount=0):
         viewport[0] = max(0, viewport[0] - panAmount)
 
     return oldX != viewport[0]
+
 
 def panRight(panAmount=0):
     """Pans the display to the right, limiting the pan to the length
@@ -1542,6 +1576,7 @@ def panRight(panAmount=0):
 
     return oldX != viewport[0]
 
+
 def panToOffset(offset):
     """Automatically pan left or right to make sure the current offset is
     showing."""
@@ -1558,6 +1593,7 @@ def panToOffset(offset):
         if not panRight():
             break
 
+
 def returnToRegionWithFocus(inputEvent=None):
     """Pans the display so the region with focus is displayed.
 
@@ -1572,6 +1608,7 @@ def returnToRegionWithFocus(inputEvent=None):
 
     return True
 
+
 def setContractedBraille(event):
     """Turns contracted braille on or off based upon the event.
 
@@ -1585,6 +1622,7 @@ def setContractedBraille(event):
     for line in _lines:
         line.setContractedBraille(settings.enableContractedBraille)
     refresh()
+
 
 def processRoutingKey(event):
     """Processes a cursor routing key event.
@@ -1608,6 +1646,7 @@ def processRoutingKey(event):
         _lines[lineNum].processRoutingKey(cursor)
 
     return True
+
 
 def _processBrailleEvent(event):
     """Handles BrlTTY command events.  This passes commands on to Orca for
@@ -1641,6 +1680,7 @@ def _processBrailleEvent(event):
 
     return consumed
 
+
 def _brlAPIKeyReader(source, condition):
     """Method to read a key from the BrlAPI bindings.  This is a
     gobject IO watch handler.
@@ -1655,6 +1695,7 @@ def _brlAPIKeyReader(source, condition):
     if key:
         _processBrailleEvent(_brlAPI.expandKeyCode(key))
     return _brlAPIRunning
+
 
 def setupKeyRanges(keys):
     """Hacky method to tell BrlTTY what to send and not send us via
@@ -1682,6 +1723,7 @@ def setupKeyRanges(keys):
         keySet.append(brlapi.KEY_TYPE_CMD | key)
 
     _brlAPI.acceptKeys(brlapi.rangeType_command, keySet)
+
 
 def init(callback=None, tty=7):
     """Initializes the braille module, connecting to the BrlTTY driver.
@@ -1715,14 +1757,14 @@ def init(callback=None, tty=7):
             windowPath = os.environ["WINDOWPATH"]
             _brlAPI.enterTtyModeWithPath()
             _brlAPIRunning = True
-            debug.println(\
+            debug.println(
                 debug.LEVEL_CONFIGURATION,
-                "Braille module has been initialized using WINDOWPATH=" \
+                "Braille module has been initialized using WINDOWPATH="
                 + "%s" % windowPath)
         except:
             _brlAPI.enterTtyMode(tty)
             _brlAPIRunning = True
-            debug.println(\
+            debug.println(
                 debug.LEVEL_CONFIGURATION,
                 "Braille module has been initialized using tty=%d" % tty)
         _brlAPISourceId = GLib.io_add_watch(_brlAPI.fileDescriptor,
@@ -1753,13 +1795,14 @@ def init(callback=None, tty=7):
         _monitor = None
 
     debug.println(debug.LEVEL_CONFIGURATION,
-                  "braille display size = (%d, %d)" \
+                  "braille display size = (%d, %d)"
                   % (_displaySize[0], _displaySize[1]))
 
     clear()
     refresh(True)
 
     return True
+
 
 def shutdown():
     """Shuts down the braille module.   Returns True if the shutdown procedure

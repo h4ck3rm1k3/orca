@@ -22,12 +22,12 @@
 can present them in the correct language when users change the language on the
 fly without having to reload a bunch of modules."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2004-2009 Sun Microsystems Inc." \
                 "Copyright (c) 2010-2013 The Orca Team"
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from .orca_i18n import _, C_
 
@@ -40,7 +40,7 @@ from .orca_i18n import _, C_
 ACTIVATE = _("_Activate")
 
 # Translators: A single braille cell on a refreshable braille display consists
-# of 8 dots. Dot 7 is the dot in the bottom left corner. If the user selects 
+# of 8 dots. Dot 7 is the dot in the bottom left corner. If the user selects
 # this option, Dot 7 will be used to 'underline' text of interest, e.g. when
 # "marking"/indicating that a given word is bold.
 BRAILLE_DOT_7 = _("Dot _7")
@@ -70,8 +70,8 @@ BTN_OK = _("_OK")
 # around issues in Gecko/Firefox. In some versions of Firefox, we must perform
 # a focus grab on each object being navigated in order for things to work as
 # expected; in other versions of Firefox, we must avoid doing so in order for
-# things# to work as expected. We cannot identify with certainty which situation
-# the user is in, so we must provide this as an option within Orca.
+# things# to work as expected. We cannot identify with certainty which
+# situation the user is in, so we must provide this as an option within Orca.
 CARET_NAVIGATION_GRAB_FOCUS = _("_Grab focus on objects when navigating")
 
 # Translators: When the user arrows up and down in HTML content, and Orca is
@@ -87,35 +87,38 @@ CARET_NAVIGATION_START_OF_LINE = \
 # your buddies is typing a message.
 CHAT_ANNOUNCE_BUDDY_TYPING = _("Announce when your _buddies are typing")
 
-# Translators: If this checkbox is checked, then Orca will provide the user with
-# chat room specific message histories rather than just a single history which
-# contains the latest messages from all the chat rooms that they are in.
-CHAT_SEPARATE_MESSAGE_HISTORIES = _("Provide chat room specific _message histories")
+# Translators: If this checkbox is checked, then Orca will provide the user
+# with chat room specific message histories rather than just a single history
+# which contains the latest messages from all the chat rooms that they are in.
+CHAT_SEPARATE_MESSAGE_HISTORIES = _(
+    "Provide chat room specific _message histories")
 
 # Translators: This is the label of a panel holding options for how messages in
-# this application's chat rooms should be spoken. The options are: Speak messages
-# from all channels (i.e. even if the chat application doesn't have focus); speak
-# messages from a channel only if it is the active channel; speak messages from
-# any channel, but only if the chat application has focus.
+# this application's chat rooms should be spoken. The options are: Speak
+# messages from all channels (i.e. even if the chat application doesn't have
+# focus); speak messages from a channel only if it is the active channel; speak
+# messages from any channel, but only if the chat application has focus.
 CHAT_SPEAK_MESSAGES_FROM = _("Speak messages from")
 
-# Translators: This is the label of a radio button. If it is selected, Orca will
-# speak all new chat messages as they appear irrespective of whether or not the
-# chat application currently has focus. This is the default behaviour.
+# Translators: This is the label of a radio button. If it is selected, Orca
+# will speak all new chat messages as they appear irrespective of whether or
+# not the chat application currently has focus. This is the default behaviour.
 CHAT_SPEAK_MESSAGES_ALL = _("All cha_nnels")
 
-# Translators: This is the label of a radio button. If it is selected, Orca will
-# speak all new chat messages as they appear if and only if the chat application
-# has focus. The string substituion is for the application name (e.g Pidgin).
-CHAT_SPEAK_MESSAGES_ALL_IF_FOCUSED = _("All channels when an_y %s window is active")
+# Translators: This is the label of a radio button. If it is selected, Orca
+# will speak all new chat messages as they appear if and only if the chat
+# application has focus. The string substituion is for the application name
+# (e.g Pidgin).
+CHAT_SPEAK_MESSAGES_ALL_IF_FOCUSED = _(
+    "All channels when an_y %s window is active")
 
-# Translators: This is the label of a radio button. If it is selected, Orca will
-# only speak new chat messages for the currently active channel, irrespective of
-# whether the chat application has focus.
+# Translators: This is the label of a radio button. If it is selected, Orca
+# will only speak new chat messages for the currently active channel,
+# irrespective of whether the chat application has focus.
 CHAT_SPEAK_MESSAGES_ACTIVE = _("A channel only if its _window is active")
 
-# Translators: If this checkbox is checked, then Orca will speak the name of the
-# chat room prior to presenting an incoming message.
+# Translators: If this checkbox is checked, then Orca will speak the name of
+# the chat room prior to presenting an incoming message.
 CHAT_SPEAK_ROOM_NAME = _("_Speak Chat Room name")
 
 # Translators: Orca's keybindings support double and triple "clicks" or key
@@ -128,10 +131,11 @@ CLICK_COUNT_DOUBLE = _("double click")
 # dialog after a keybinding which requires a triple click.
 CLICK_COUNT_TRIPLE = _("triple click")
 
-# Translators: This is a label which will appear in the list of available speech
-# engines as a special item. It refers to the default engine configured within
-# the speech subsystem. Apart from this item, the user will have a chance to
-# select a particular speech engine by its real name (Festival, IBMTTS, etc.)
+# Translators: This is a label which will appear in the list of available
+# speech engines as a special item. It refers to the default engine configured
+# within the speech subsystem. Apart from this item, the user will have a
+# chance to select a particular speech engine by its real name (Festival,
+# IBMTTS, etc.)
 DEFAULT_SYNTHESIZER = _("Default Synthesizer")
 
 # Translators: This is a label for a column header in Orca's pronunciation
@@ -151,15 +155,15 @@ DICTIONARY_ACTUAL_STRING = _("Actual String")
 # Example: "L O L" or "Laughing Out Loud" (for Actual String "LOL").
 DICTIONARY_REPLACEMENT_STRING = _("Replacement String")
 
-# Translators: Orca has an "echo" feature to present text as it is being written
-# by the user. While Orca's "key echo" options present the actual keyboard keys
-# being pressed, "character echo" presents the character/string of length 1 that
-# is inserted as a result of the keypress.
+# Translators: Orca has an "echo" feature to present text as it is being
+# written by the user. While Orca's "key echo" options present the actual
+# keyboard keys being pressed, "character echo" presents the character/string
+# of length 1 that is inserted as a result of the keypress.
 ECHO_CHARACTER = _("Enable echo by cha_racter")
 
-# Translators: Orca has an "echo" feature to present text as it is being written
-# by the user. This string refers to a "key echo" option. When this option is
-# enabled, dead keys will be announced when pressed.
+# Translators: Orca has an "echo" feature to present text as it is being
+# written by the user. This string refers to a "key echo" option. When this
+# option is enabled, dead keys will be announced when pressed.
 ECHO_DIACRITICAL = _("Enable non-spacing _diacritical keys")
 
 # Translators: Orca has a "find" feature which allows the user to search the
@@ -174,7 +178,8 @@ FIND_START_AT_CURRENT_LOCATION = _("C_urrent location")
 FIND_MINIMUM_MATCH_LENGTH = _("Minimum length of matched text:")
 
 # Translators: This is the label of a panel containing options for what Orca
-# presents when the user is in the Find toolbar of an application, e.g. Firefox.
+# presents when the user is in the Find toolbar of an application, e.g.
+# Firefox.
 FIND_OPTIONS = _("Find Options")
 
 # Translators: This is the label for a checkbox. This option controls whether
@@ -183,9 +188,9 @@ FIND_OPTIONS = _("Find Options")
 # which contained the last match.
 FIND_ONLY_SPEAK_CHANGED_LINES = _("Onl_y speak changed lines during find")
 
-# Translators: This is the label for a checkbox. This option controls whether or
-# not Orca will automatically speak the line that contains the match while the
-# user is performing a search from the Find toolbar of an application, e.g.
+# Translators: This is the label for a checkbox. This option controls whether
+# or not Orca will automatically speak the line that contains the match while
+# the user is performing a search from the Find toolbar of an application, e.g.
 # Firefox.
 FIND_SPEAK_RESULTS = _("Speak results during _find")
 
@@ -245,9 +250,9 @@ PRESENTATION_MARK_IN_BRAILLE = _("Mark in braille")
 # to always speak/braille a text attribute *unless* its value is equal to the
 # value given by the user in this column of the list. For example, given the
 # text attribute "underline" and a present unless value of "none", the user is
-# stating that he/she would like to have underlined text announced for all cases
-# (single, double, low, etc.) except when the value of underline is none (i.e.
-# when it's not underlined). "Present" here is being used as a verb.
+# stating that he/she would like to have underlined text announced for all
+# cases (single, double, low, etc.) except when the value of underline is none
+# (i.e. when it's not underlined). "Present" here is being used as a verb.
 PRESENTATION_PRESENT_UNLESS = _("Present Unless")
 
 # Translators: This is a table column header. The "Speak" column consists of a
@@ -258,62 +263,63 @@ PRESENTATION_PRESENT_UNLESS = _("Present Unless")
 PRESENTATION_SPEAK = _("Speak")
 
 # Translators: This is the title of a message dialog informing the user that
-# he/she attempted to save a new user profile under a name which already exists.
-# A "user profile" is a collection of settings which apply to a given task, such
-# as a "Spanish" profile which would use Spanish text-to-speech and Spanish
-# braille and selected when reading Spanish content.
+# he/she attempted to save a new user profile under a name which already
+# exists. A "user profile" is a collection of settings which apply to a given
+# task, such as a "Spanish" profile which would use Spanish text-to-speech and
+# Spanish braille and selected when reading Spanish content.
 PROFILE_CONFLICT_TITLE = _("Save Profile As Conflict")
 
 # Translators: This is the label of a message dialog informing the user that
-# he/she attempted to save a new user profile under a name which already exists.
-# A "user profile" is a collection of settings which apply to a given task, such
-# as a "Spanish" profile which would use Spanish text-to-speech and Spanish
-# braille and selected when reading Spanish content.
+# he/she attempted to save a new user profile under a name which already
+# exists. A "user profile" is a collection of settings which apply to a given
+# task, such as a "Spanish" profile which would use Spanish text-to-speech and
+# Spanish braille and selected when reading Spanish content.
 PROFILE_CONFLICT_LABEL = _("User Profile Conflict!")
 
 # Translators: This is the message in a dialog informing the user that he/she
-# attempted to save a new user profile under a name which already exists.
-# A "user profile" is a collection of settings which apply to a given task, such
+# attempted to save a new user profile under a name which already exists. A
+# "user profile" is a collection of settings which apply to a given task, such
 # as a "Spanish" profile which would use Spanish text-to-speech and Spanish
 # braille and selected when reading Spanish content.
-PROFILE_CONFLICT_MESSAGE = _("Profile %s already exists.\n" \
-                             "Continue updating the existing profile with " \
+PROFILE_CONFLICT_MESSAGE = _("Profile %s already exists.\n"
+                             "Continue updating the existing profile with "
                              "these new changes?")
 
 # Translators: This text is displayed in a message dialog when a user indicates
 # he/she wants to switch to a new user profile which will cause him/her to lose
 # settings which have been altered but not yet saved. A "user profile" is a
-# collection of settings which apply to a given task such as a "Spanish" profile
-# which would use Spanish text-to-speech and Spanish braille and selected when
-# reading Spanish content.
+# collection of settings which apply to a given task such as a "Spanish"
+# profile which would use Spanish text-to-speech and Spanish braille and
+# selected when reading Spanish content.
 PROFILE_LOAD_LABEL = _("Load user profile")
 
 # Translators: This text is displayed in a message dialog when a user indicates
 # he/she wants to switch to a new user profile which will cause him/her to lose
 # settings which have been altered but not yet saved. A "user profile" is a
-# collection of settings which apply to a given task such as a "Spanish" profile
-# which would use Spanish text-to-speech and Spanish braille and selected when
-# reading Spanish content.
+# collection of settings which apply to a given task such as a "Spanish"
+# profile which would use Spanish text-to-speech and Spanish braille and
+# selected when reading Spanish content.
 PROFILE_LOAD_MESSAGE = \
-    _("You are about to change the active profile. If you\n" \
-      "have just made changes in your preferences, they will\n" \
-      "be dropped at profile load.\n\n" \
+    _("You are about to change the active profile. If you\n"
+      "have just made changes in your preferences, they will\n"
+      "be dropped at profile load.\n\n"
       "Continue loading profile discarding previous changes?")
 
 # Translators: Profiles in Orca make it possible for users to quickly switch
-# amongst a group of pre-defined settings (e.g. an 'English' profile for reading
-# text written in English using an English-language speech synthesizer and 
-# braille rules, and a similar 'Spanish' profile for reading Spanish text. The
-# following string is the title of a dialog in which users can save a newly-
-# defined profile.
+# amongst a group of pre-defined settings (e.g. an 'English' profile for
+# reading text written in English using an English-language speech synthesizer
+# and braille rules, and a similar 'Spanish' profile for reading Spanish text.
+# The following string is the title of a dialog in which users can save a
+# newly- defined profile.
 PROFILE_SAVE_AS_TITLE = _("Save Profile As")
 
 # Translators: Profiles in Orca make it possible for users to quickly switch
-# amongst a group of pre-defined settings (e.g. an 'English' profile for reading
-# text written in English using an English-language speech synthesizer and
-# braille rules, and a similar 'Spanish' profile for reading Spanish text. The
-# following string is the label for a text entry in which the user enters the
-# name of a new settings profile being saved via the 'Save Profile As' dialog.
+# amongst a group of pre-defined settings (e.g. an 'English' profile for
+# reading text written in English using an English-language speech synthesizer
+# and braille rules, and a similar 'Spanish' profile for reading Spanish text.
+# The following string is the label for a text entry in which the user enters
+# the name of a new settings profile being saved via the 'Save Profile As'
+# dialog.
 PROFILE_NAME_LABEL = _("_Profile Name:")
 
 # Translators: Orca has a setting which determines which progress bar updates
@@ -412,8 +418,8 @@ SN_HEADER_LANDMARK = C_("structural navigation", "Landmark")
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
 # could with native keyboard navigation. This is the title of a column which
-# contains the level of a heading. Level will be a "1" for <h1>, a "2" for <h2>,
-# and so on.
+# contains the level of a heading. Level will be a "1" for <h1>, a "2" for
+# <h2>, and so on.
 SN_HEADER_LEVEL = C_("structural navigation", "Level")
 
 # Translators: Orca has a command that presents a list of structural navigation
@@ -492,97 +498,112 @@ SN_HEADER_VALUE = C_("structural navigation", "Value")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
+# could with native keyboard navigation. This is the title of such a
+# dialog box.
 SN_TITLE_BLOCKQUOTE = C_("structural navigation", "Blockquotes")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
+# could with native keyboard navigation. This is the title of such a
+# dialog box.
 SN_TITLE_BUTTON = C_("structural navigation", "Buttons")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
+# could with native keyboard navigation. This is the title of such a
+# dialog box.
 SN_TITLE_CHECK_BOX = C_("structural navigation", "Check Boxes")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
+# could with native keyboard navigation. This is the title of such a
+# dialog box.
 SN_TITLE_COMBO_BOX = C_("structural navigation", "Combo Boxes")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
+# could with native keyboard navigation. This is the title of such a
+# dialog box.
 SN_TITLE_ENTRY = C_("structural navigation", "Entries")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
+# could with native keyboard navigation. This is the title of such a
+# dialog box.
 SN_TITLE_FORM_FIELD = C_("structural navigation", "Form Fields")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
+# could with native keyboard navigation. This is the title of such a
+# dialog box.
 SN_TITLE_HEADING = C_("structural navigation", "Headings")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
-# Level will be a "1" for <h1>, a "2" for <h2>, and so on.
+# could with native keyboard navigation. This is the title of such a dialog
+# box. Level will be a "1" for <h1>, a "2" for <h2>, and so on.
 SN_TITLE_HEADING_AT_LEVEL = C_("structural navigation", "Headings at Level %d")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
-# ARIA role landmarks are the W3C defined HTML tag attribute 'role' used to
-# identify important part of webpage like banners, main context, search etc.
+# could with native keyboard navigation. This is the title of such a dialog
+# box. ARIA role landmarks are the W3C defined HTML tag attribute 'role' used
+# to identify important part of webpage like banners, main context, search etc.
 SN_TITLE_LANDMARK = C_("structural navigation", "Landmarks")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
-# A 'large object' is a logical chunk of text, such as a paragraph, a list,
-# a table, etc.
+# could with native keyboard navigation. This is the title of such a dialog
+# box. A 'large object' is a logical chunk of text, such as a paragraph, a
+# list, a table, etc.
 SN_TITLE_LARGE_OBJECT = C_("structural navigation", "Large Objects")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
+# could with native keyboard navigation. This is the title of such a
+# dialog box.
 SN_TITLE_LINK = C_("structural navigation", "Links")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
+# could with native keyboard navigation. This is the title of such a
+# dialog box.
 SN_TITLE_LIST = C_("structural navigation", "Lists")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
+# could with native keyboard navigation. This is the title of such a
+# dialog box.
 SN_TITLE_LIST_ITEM = C_("structural navigation", "List Items")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
+# could with native keyboard navigation. This is the title of such a
+# dialog box.
 SN_TITLE_PARAGRAPH = C_("structural navigation", "Paragraphs")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
+# could with native keyboard navigation. This is the title of such a
+# dialog box.
 SN_TITLE_RADIO_BUTTON = C_("structural navigation", "Radio Buttons")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
+# could with native keyboard navigation. This is the title of such a
+# dialog box.
 SN_TITLE_TABLE = C_("structural navigation", "Tables")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
+# could with native keyboard navigation. This is the title of such a
+# dialog box.
 SN_TITLE_UNVISITED_LINK = C_("structural navigation", "Unvisited Links")
 
 # Translators: Orca has a command that presents a list of structural navigation
 # objects in a dialog box so that users can navigate more quickly than they
-# could with native keyboard navigation. This is the title of such a dialog box.
+# could with native keyboard navigation. This is the title of such a
+# dialog box.
 SN_TITLE_VISITED_LINK = C_("structural navigation", "Visited Links")
 
 # Translators: This is the title of a panel holding options for how to navigate
@@ -590,46 +611,46 @@ SN_TITLE_VISITED_LINK = C_("structural navigation", "Visited Links")
 # navigation, etc.).
 PAGE_NAVIGATION = _("Page Navigation")
 
-# Translators: When the user loads a new web page, they can optionally have Orca
-# automatically start reading the page from beginning to end. This is the label
-# of a checkbox in which users can indicate their preference.
+# Translators: When the user loads a new web page, they can optionally have
+# Orca automatically start reading the page from beginning to end. This is the
+# label of a checkbox in which users can indicate their preference.
 READ_PAGE_UPON_LOAD = \
     _("Automatically start speaking a page when it is first _loaded")
 
-# Translators: Different speech systems and speech engines work differently when
-# it comes to handling pauses (e.g. sentence boundaries). This property allows
-# the user to specify whether speech should be sent to the speech synthesis
-# system immediately when a pause directive is enountered or if it should be
-# queued up and sent to the speech synthesis system once the entire set of
-# utterances has been calculated.
+# Translators: Different speech systems and speech engines work differently
+# when it comes to handling pauses (e.g. sentence boundaries). This property
+# allows the user to specify whether speech should be sent to the speech
+# synthesis system immediately when a pause directive is enountered or if it
+# should be queued up and sent to the speech synthesis system once the entire
+# set of utterances has been calculated.
 SPEECH_BREAK_INTO_CHUNKS = _("Break speech into ch_unks between pauses")
 
 # Translators: This string will appear in the list of available voices for the
-# current speech engine. "%s" will be replaced by the name of the current speech
-# engine, such as "Festival default voice" or "IBMTTS default voice". It refers
-# to the default voice configured for given speech engine within the speech
-# subsystem. Apart from this item, the list will contain the names of all
-# available "real" voices provided by the speech engine.
+# current speech engine. "%s" will be replaced by the name of the current
+# speech engine, such as "Festival default voice" or "IBMTTS default voice". It
+# refers to the default voice configured for given speech engine within the
+# speech subsystem. Apart from this item, the list will contain the names of
+# all available "real" voices provided by the speech engine.
 SPEECH_DEFAULT_VOICE = _("%s default voice")
 
-# Translators: This refers to the voice used by Orca when presenting the content
-# of the screen and other messages.
+# Translators: This refers to the voice used by Orca when presenting the
+# content of the screen and other messages.
 SPEECH_VOICE_TYPE_DEFAULT = C_("VoiceType", "Default")
 
-# Translators: This refers to the voice used by Orca when presenting one or more
-# characters which is part of a hyperlink.
+# Translators: This refers to the voice used by Orca when presenting one or
+# more characters which is part of a hyperlink.
 SPEECH_VOICE_TYPE_HYPERLINK = C_("VoiceType", "Hyperlink")
 
-# Translators: This refers to the voice used by Orca when presenting information
-# which is not displayed on the screen as text, but is still being communicated
-# by the system in some visual fashion. For instance, Orca says "misspelled" to
-# indicate the presence of the red squiggly line found under a spelling error;
-# Orca might say "3 of 6" when a user Tabs into a list of six items and the 
-# third item is selected. And so on.
+# Translators: This refers to the voice used by Orca when presenting
+# information which is not displayed on the screen as text, but is still being
+# communicated by the system in some visual fashion. For instance, Orca says
+# "misspelled" to indicate the presence of the red squiggly line found under a
+# spelling error; Orca might say "3 of 6" when a user Tabs into a list of six
+# items and the third item is selected. And so on.
 SPEECH_VOICE_TYPE_SYSTEM = C_("VoiceType", "System")
 
-# Translators: This refers to the voice used by Orca when presenting one or more
-# characters which is written in uppercase.
+# Translators: This refers to the voice used by Orca when presenting one or
+# more characters which is written in uppercase.
 SPEECH_VOICE_TYPE_UPPERCASE = C_("VoiceType", "Uppercase")
 
 # Translators this label refers to the name of particular speech synthesis
@@ -637,8 +658,8 @@ SPEECH_VOICE_TYPE_UPPERCASE = C_("VoiceType", "Uppercase")
 SPEECH_DISPATCHER = _("Speech Dispatcher")
 
 # Translators: This is a label for an option to tell Orca whether or not it
-# should speak the coordinates of the current spread sheet cell. Coordinates are
-# the row and column position within the spread sheet (i.e. A1, B1, C2 ...)
+# should speak the coordinates of the current spread sheet cell. Coordinates
+# are the row and column position within the spread sheet (i.e. A1, B1, C2 ...)
 SPREADSHEET_SPEAK_CELL_COORDINATES = _("Speak spread sheet cell coordinates")
 
 # Translators: This is a label for an option for whether or not to speak the
@@ -653,9 +674,10 @@ TABLE_NAVIGATION = _("Table Navigation")
 # blank cells when navigating tables in document content.
 TABLE_SKIP_BLANK_CELLS = _("Skip _blank cells")
 
-# Translators: When users are navigating a table, they sometimes want the entire
-# row of a table read; other times they want just the current cell presented to
-# them. This label is associated with the default presentation to be used.
+# Translators: When users are navigating a table, they sometimes want the
+# entire row of a table read; other times they want just the current cell
+# presented to them. This label is associated with the default presentation to
+# be used.
 TABLE_SPEAK_CELL = _("Speak _cell")
 
 # Translators: This is a label for an option to tell Orca whether or not it
@@ -678,9 +700,9 @@ TEXT_ATTRIBUTE_NAME = _("Attribute Name")
 # label of a checkbox in which users can indicate their default preference.
 USE_CARET_NAVIGATION = _("Control caret navigation")
 
-# Translators: Orca provides keystrokes to navigate HTML content in a structural
-# manner: go to previous/next header, list item, table, etc. This is the label
-# of a checkbox in which users can indicate their default preference.
+# Translators: Orca provides keystrokes to navigate HTML content in a
+# structural manner: go to previous/next header, list item, table, etc. This is
+# the label of a checkbox in which users can indicate their default preference.
 USE_STRUCTURAL_NAVIGATION = _("Enable _structural navigation")
 
 # Translators: This refers to the amount of information Orca provides about a

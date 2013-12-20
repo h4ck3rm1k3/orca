@@ -23,10 +23,10 @@
 """
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010-2011 The Orca Team"
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from . import settings
 
@@ -43,158 +43,158 @@ SHIFT_ALT_MODIFIER_MASK = settings.SHIFT_ALT_MODIFIER_MASK
 keymap = (
 
     ("F11", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "toggleTableCellReadModeHandler"),
+     "toggleTableCellReadModeHandler"),
 
     ("f", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "readCharAttributesHandler"),
+     "readCharAttributesHandler"),
 
     ("h", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "enterLearnModeHandler", 1),
+     "enterLearnModeHandler", 1),
 
     ("space", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "preferencesSettingsHandler"),
+     "preferencesSettingsHandler"),
 
     ("space", defaultModifierMask, ORCA_CTRL_MODIFIER_MASK,
-    "appPreferencesSettingsHandler"),
+     "appPreferencesSettingsHandler"),
 
     ("s", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "toggleSilenceSpeechHandler"),
+     "toggleSilenceSpeechHandler"),
 
     ("t", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "presentTimeHandler", 1),
+     "presentTimeHandler", 1),
 
     ("t", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "presentDateHandler", 2),
+     "presentDateHandler", 2),
 
-    #####################################################################
-    #                                                                   #
-    #  Bookmark key bindings                                            #
-    #                                                                   #
-    #####################################################################
+    #
+    #
+    # Bookmark key bindings                                            #
+    #
+    #
 
     # key binding to save bookmark information to disk
     ("b", defaultModifierMask, ORCA_ALT_MODIFIER_MASK,
-    "saveBookmarks"),
+     "saveBookmarks"),
 
     # key binding to move to the previous bookmark
     ("b", defaultModifierMask, ORCA_SHIFT_MODIFIER_MASK,
-    "goToPrevBookmark"),
+     "goToPrevBookmark"),
 
     # key binding to move to the next bookmark
     ("b", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "goToNextBookmark"),
+     "goToNextBookmark"),
 
     # key bindings for '1' through '6' for relevant commands
 
     # 'Add bookmark' key bindings
     ("1", defaultModifierMask, ORCA_ALT_MODIFIER_MASK,
-    "addBookmark"),
+     "addBookmark"),
     ("2", defaultModifierMask, ORCA_ALT_MODIFIER_MASK,
-    "addBookmark"),
+     "addBookmark"),
     ("3", defaultModifierMask, ORCA_ALT_MODIFIER_MASK,
-    "addBookmark"),
+     "addBookmark"),
     ("4", defaultModifierMask, ORCA_ALT_MODIFIER_MASK,
-    "addBookmark"),
+     "addBookmark"),
     ("5", defaultModifierMask, ORCA_ALT_MODIFIER_MASK,
-    "addBookmark"),
+     "addBookmark"),
     ("6", defaultModifierMask, ORCA_ALT_MODIFIER_MASK,
-    "addBookmark"),
+     "addBookmark"),
 
     # 'Go to bookmark' key bindings
 
     ("1", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "goToBookmark"),
+     "goToBookmark"),
     ("2", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "goToBookmark"),
+     "goToBookmark"),
     ("3", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "goToBookmark"),
+     "goToBookmark"),
     ("4", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "goToBookmark"),
+     "goToBookmark"),
     ("5", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "goToBookmark"),
+     "goToBookmark"),
     ("6", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "goToBookmark"),
+     "goToBookmark"),
 
     # key binding for WhereAmI information with respect to root acc
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "bookmarkCurrentWhereAmI"),
+     "bookmarkCurrentWhereAmI"),
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "bookmarkCurrentWhereAmI"),
+     "bookmarkCurrentWhereAmI"),
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "bookmarkCurrentWhereAmI"),
+     "bookmarkCurrentWhereAmI"),
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "bookmarkCurrentWhereAmI"),
+     "bookmarkCurrentWhereAmI"),
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "bookmarkCurrentWhereAmI"),
+     "bookmarkCurrentWhereAmI"),
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "bookmarkCurrentWhereAmI"),
+     "bookmarkCurrentWhereAmI"),
 
 
     ("BackSpace", defaultModifierMask, ORCA_MODIFIER_MASK,
-    "bypassNextCommandHandler"),
+     "bypassNextCommandHandler"),
 
 
-    #####################################################################
-    #                                                                   #
-    #  Unbound handlers                                                 #
-    #                                                                   #
-    #####################################################################
-
-    ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "cycleSettingsProfileHandler"),
+    #
+    #
+    # Unbound handlers                                                 #
+    #
+    #
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "cycleCapitalizationStyleHandler"),
+     "cycleSettingsProfileHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "cycleDebugLevelHandler"),
+     "cycleCapitalizationStyleHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "decreaseSpeechRateHandler"),
+     "cycleDebugLevelHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "increaseSpeechRateHandler"),
+     "decreaseSpeechRateHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "decreaseSpeechPitchHandler"),
+     "increaseSpeechRateHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "increaseSpeechPitchHandler"),
+     "decreaseSpeechPitchHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "panBrailleLeftHandler"),
+     "increaseSpeechPitchHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "panBrailleRightHandler"),
+     "panBrailleLeftHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "toggleMouseReviewHandler"),
+     "panBrailleRightHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "toggleSpeakingIndentationJustificationHandler"),
+     "toggleMouseReviewHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "cycleSpeakingPunctuationLevelHandler"),
+     "toggleSpeakingIndentationJustificationHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "cycleKeyEchoHandler"),
+     "cycleSpeakingPunctuationLevelHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "repeatLastNotificationMessageHandler"),
+     "cycleKeyEchoHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "repeatPreviousNotificationMessageHandler"),
+     "repeatLastNotificationMessageHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "enableNotificationMessageListModeHandler"),
+     "repeatPreviousNotificationMessageHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "flatReviewCopyHandler"),
+     "enableNotificationMessageListModeHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "flatReviewAppendHandler"),
+     "flatReviewCopyHandler"),
 
     ("", defaultModifierMask, NO_MODIFIER_MASK,
-    "shutdownHandler"),
+     "flatReviewAppendHandler"),
+
+    ("", defaultModifierMask, NO_MODIFIER_MASK,
+     "shutdownHandler"),
 )

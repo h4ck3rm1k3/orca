@@ -20,15 +20,16 @@
 """Custom script for gnome-screensaver-dialog."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
 import orca.scripts.toolkits.gtk as gtk
 import orca.speech as speech
+
 
 class Script(gtk.Script):
 

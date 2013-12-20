@@ -21,11 +21,11 @@
 """Implements structural navigation."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc." \
                 "Copyright (c) 2010-2013 The Orca Team"
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -42,13 +42,14 @@ from . import orca_state
 from . import settings
 from . import speech
 
-#############################################################################
-#                                                                           #
+#
+#
 # MatchCriteria                                                             #
-#                                                                           #
-#############################################################################
+#
+#
 
 class MatchCriteria(object):
+
     """Contains the criteria which will be used to generate a collection
     matchRule.  We don't want to create the rule until we need it and
     are ready to use it. In addition, the creation of an AT-SPI match
@@ -60,17 +61,16 @@ class MatchCriteria(object):
 
     def __init__(self,
                  collection,
-                 states = [],
-                 matchStates = None,
-                 objAttrs = [],
-                 matchObjAttrs = None,
-                 roles = [],
-                 matchRoles = None,
-                 interfaces = "",
-                 matchInterfaces = None,
-                 invert = False,
-                 applyPredicate = False):
-
+                 states=[],
+                 matchStates=None,
+                 objAttrs=[],
+                 matchObjAttrs=None,
+                 roles=[],
+                 matchRoles=None,
+                 interfaces="",
+                 matchInterfaces=None,
+                 invert=False,
+                 applyPredicate=False):
         """Creates a new match criteria object.
 
         Arguments:
@@ -114,13 +114,14 @@ class MatchCriteria(object):
         for state in states:
             self.states.add(state)
 
-###########################################################################
-#                                                                         #
+#
+#
 # StructuralNavigationObject                                              #
-#                                                                         #
-###########################################################################
+#
+#
 
 class StructuralNavigationObject(object):
+
     """Represents a document object which has identifiable characteristics
     which can be used for the purpose of navigation to and among instances
     of that object. These characteristics may be something as simple as a
@@ -130,7 +131,6 @@ class StructuralNavigationObject(object):
 
     def __init__(self, structuralNavigation, objType, bindings, predicate,
                  criteria, presentation, dialogData):
-
         """Creates a new structural navigation object.
 
         Arguments:
@@ -283,12 +283,12 @@ class StructuralNavigationObject(object):
         # so we'll handle that here as well).
         #
         directions = {}
-        directions["Left"]  = self.bindings.get("left")
+        directions["Left"] = self.bindings.get("left")
         directions["Right"] = self.bindings.get("right")
-        directions["Up"]    = self.bindings.get("up")
-        directions["Down"]  = self.bindings.get("down")
+        directions["Up"] = self.bindings.get("up")
+        directions["Down"] = self.bindings.get("down")
         directions["First"] = self.bindings.get("first")
-        directions["Last"]  = self.bindings.get("last")
+        directions["Last"] = self.bindings.get("last")
 
         for direction in directions:
             binding = directions.get(direction)
@@ -326,10 +326,10 @@ class StructuralNavigationObject(object):
         [keysymstring, modifiers, description] = binding
         handler = input_event.InputEventHandler(function, description)
         keyBinding = keybindings.KeyBinding(
-                         keysymstring,
-                         settings.defaultModifierMask,
-                         modifiers,
-                         handler)
+            keysymstring,
+            settings.defaultModifierMask,
+            modifiers,
+            handler)
 
         self.inputEventHandlers[handlerName] = handler
         self.structuralNavigation.inputEventHandlers[handlerName] = handler
@@ -450,7 +450,7 @@ class StructuralNavigationObject(object):
         """
 
         def goCell(script, inputEvent):
-            thisCell = self.structuralNavigation.getCellForObj(\
+            thisCell = self.structuralNavigation.getCellForObj(
                 self.structuralNavigation.getCurrentObject())
             currentCoordinates = \
                 self.structuralNavigation.getCellCoordinates(thisCell)
@@ -491,16 +491,17 @@ class StructuralNavigationObject(object):
         if self.objType == StructuralNavigation.TABLE_CELL:
             return goCell
         elif self.objType == StructuralNavigation.LIVE_REGION \
-             and direction == "Last":
+                and direction == "Last":
             return goLastLiveRegion
 
-#############################################################################
-#                                                                           #
+#
+#
 # StructuralNavigation                                                      #
-#                                                                           #
-#############################################################################
+#
+#
 
 class StructuralNavigation(object):
+
     """This class implements the structural navigation functionality which
     is available to scripts. Scripts interested in implementing structural
     navigation need to override getEnabledStructuralNavigationTypes() and
@@ -523,27 +524,27 @@ class StructuralNavigation(object):
     # should be all that is needed to implement navigation by blockquote
     # in OOo Writer documents.
     #
-    ANCHOR          = "anchor"
-    BLOCKQUOTE      = "blockquote"
-    BUTTON          = "button"
-    CHECK_BOX       = "checkBox"
-    CHUNK           = "chunk"
-    COMBO_BOX       = "comboBox"
-    ENTRY           = "entry"
-    FORM_FIELD      = "formField"
-    HEADING         = "heading"
-    LANDMARK        = "landmark"
-    LINK            = "link"
-    LIST            = "list"        # Bulleted/numbered lists
-    LIST_ITEM       = "listItem"    # Bulleted/numbered list items
-    LIVE_REGION     = "liveRegion"
-    PARAGRAPH       = "paragraph"
-    RADIO_BUTTON    = "radioButton"
-    SEPARATOR       = "separator"
-    TABLE           = "table"
-    TABLE_CELL      = "tableCell"
-    UNVISITED_LINK  = "unvisitedLink"
-    VISITED_LINK    = "visitedLink"
+    ANCHOR = "anchor"
+    BLOCKQUOTE = "blockquote"
+    BUTTON = "button"
+    CHECK_BOX = "checkBox"
+    CHUNK = "chunk"
+    COMBO_BOX = "comboBox"
+    ENTRY = "entry"
+    FORM_FIELD = "formField"
+    HEADING = "heading"
+    LANDMARK = "landmark"
+    LINK = "link"
+    LIST = "list"        # Bulleted/numbered lists
+    LIST_ITEM = "listItem"    # Bulleted/numbered list items
+    LIVE_REGION = "liveRegion"
+    PARAGRAPH = "paragraph"
+    RADIO_BUTTON = "radioButton"
+    SEPARATOR = "separator"
+    TABLE = "table"
+    TABLE_CELL = "tableCell"
+    UNVISITED_LINK = "unvisitedLink"
+    VISITED_LINK = "visitedLink"
 
     # Roles which are recognized as being a form field. Note that this
     # is for the purpose of match rules and predicates and refers to
@@ -666,7 +667,7 @@ class StructuralNavigation(object):
                 cmdnames.STRUCTURAL_NAVIGATION_TOGGLE)
 
         for structuralNavigationObject in list(self.enabledObjects.values()):
-            self.inputEventHandlers.update(\
+            self.inputEventHandlers.update(
                 structuralNavigationObject.inputEventHandlers)
             self.functions.extend(structuralNavigationObject.functions)
 
@@ -694,12 +695,11 @@ class StructuralNavigation(object):
                 keyBindings.add(keybinding)
 
         return keyBindings
-
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Input Event Handler Methods                                           #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def toggleStructuralNavigation(self, script, inputEvent):
         """Toggles structural navigation keys."""
@@ -713,12 +713,11 @@ class StructuralNavigation(object):
 
         debug.println(debug.LEVEL_CONFIGURATION, string)
         self._script.presentMessage(string)
-
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Methods for Moving to Objects                                         #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def goCell(self, structuralNavigationObject, thisCell,
                currentCoordinates, desiredCoordinates):
@@ -769,7 +768,7 @@ class StructuralNavigation(object):
                     self._script.presentMessage(messages.TABLE_COLUMN_BOTTOM)
                     desiredRow = iTable.nRows - 1
             elif self._script.utilities.isSameObject(thisCell, cell) \
-                 or settings.skipBlankCells and self._isBlankCell(cell):
+                    or settings.skipBlankCells and self._isBlankCell(cell):
                 if colDiff < 0:
                     desiredCol -= 1
                 elif colDiff > 0:
@@ -893,12 +892,11 @@ class StructuralNavigation(object):
                 self._script.presentMessage(messages.WRAPPING_TO_TOP)
 
         structuralNavigationObject.present(obj, arg)
-
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Utility Methods for Finding Objects                                   #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def getCurrentObject(self):
         """Returns the current object.  Normally, the locusOfFocus. But
@@ -990,7 +988,7 @@ class StructuralNavigation(object):
                     # the startobj is the doc frame.
                     #
                     secondLastObj = self._findPreviousObject(lastObj, document)
-                    results = collection.getMatchesFrom(\
+                    results = collection.getMatchesFrom(
                         secondLastObj,
                         matchRule,
                         collection.SORT_ORDER_CANONICAL,
@@ -1002,7 +1000,7 @@ class StructuralNavigation(object):
                        and (not predicate or predicate(results[0])):
                         match = results[0]
                     else:
-                        results = collection.getMatchesTo(\
+                        results = collection.getMatchesTo(
                             lastObj,
                             matchRule,
                             collection.SORT_ORDER_CANONICAL,
@@ -1013,7 +1011,7 @@ class StructuralNavigation(object):
             elif len(results) > 0:
                 if results[0] in ancestors \
                    or predicate and not predicate(results[0]):
-                    results = collection.getMatchesTo(\
+                    results = collection.getMatchesTo(
                         results[0],
                         matchRule,
                         collection.SORT_ORDER_CANONICAL,
@@ -1054,7 +1052,7 @@ class StructuralNavigation(object):
 
         match, wrapped = None, False
         while not match:
-            results = collection.getMatchesFrom(\
+            results = collection.getMatchesFrom(
                 currentObj,
                 matchRule,
                 collection.SORT_ORDER_CANONICAL,
@@ -1207,12 +1205,11 @@ class StructuralNavigation(object):
         """
 
         return False
-
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Methods for Presenting Objects                                        #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     def _getTableCaption(self, obj):
         """Returns a string which contains the table caption, or
@@ -1257,7 +1254,7 @@ class StructuralNavigation(object):
         else:
             for i in range(obj.childCount):
                 [isCell, row, col, rowExtents, colExtents, isSelected] = \
-                                       table.getRowColumnExtentsAtIndex(i)
+                    table.getRowColumnExtentsAtIndex(i)
                 if (rowExtents > 1) or (colExtents > 1):
                     return True
 
@@ -1455,7 +1452,7 @@ class StructuralNavigation(object):
                 # the headers that apply.
                 #
                 rowspan = table.getRowExtentAt(row, col)
-                for r in range(row, row+rowspan):
+                for r in range(row, row + rowspan):
                     # We could have multiple headers for a given row, one
                     # header per column.  Presumably all of the headers are
                     # prior to our present location.
@@ -1503,7 +1500,7 @@ class StructuralNavigation(object):
                 # the headers that apply.
                 #
                 colspan = table.getColumnExtentAt(row, col)
-                for c in range(col, col+colspan):
+                for c in range(col, col + colspan):
                     # We could have multiple headers for a given column, one
                     # header per row.  Presumably all of the headers are
                     # prior to our present location.
@@ -1726,7 +1723,8 @@ class StructuralNavigation(object):
         # For now, we'll just grab the spoken indicator from settings.
         # When object presentation is refactored, we can clean this up.
         if role == pyatspi.ROLE_CHECK_BOX:
-            unchecked, checked, partially = object_properties.CHECK_BOX_INDICATORS_SPEECH
+            unchecked, checked, partially = (object_properties.
+                CHECK_BOX_INDICATORS_SPEECH)
             if state.contains(pyatspi.STATE_INDETERMINATE):
                 return partially
             if state.contains(pyatspi.STATE_CHECKED):
@@ -1734,7 +1732,8 @@ class StructuralNavigation(object):
             return unchecked
 
         if role == pyatspi.ROLE_RADIO_BUTTON:
-            unselected, selected = object_properties.RADIO_BUTTON_INDICATORS_SPEECH
+            unselected, selected = (object_properties.
+                RADIO_BUTTON_INDICATORS_SPEECH)
             if state.contains(pyatspi.STATE_CHECKED):
                 return selected
             return unselected
@@ -1751,12 +1750,11 @@ class StructuralNavigation(object):
         # Another case where we'll do this for now, and clean it up when
         # object presentation is refactored.
         return self._getState(obj) or self._getText(obj)
-
-    #########################################################################
-    #                                                                       #
+    #
+    #
     # Objects                                                               #
-    #                                                                       #
-    #########################################################################
+    #
+    #
 
     # All structural navigation objects have the following essential
     # characteristics:
@@ -1782,17 +1780,16 @@ class StructuralNavigation(object):
     # in OOo Writer documents.
     #
 
-    ########################
-    #                      #
+    #
+    #
     # Anchors              #
-    #                      #
-    ########################
+    #
+    #
 
     def _anchorBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
         lists for navigating amongst anchors.
         """
-
         # NOTE: This doesn't handle the case where the anchor is not an
         # old-school <a name/id="foo"></a> anchor. For instance on the
         # GNOME wiki, an "anchor" is actually an id applied to some other
@@ -1862,12 +1859,11 @@ class StructuralNavigation(object):
             full = messages.NO_MORE_ANCHORS
             brief = messages.STRUCTURAL_NAVIGATION_NOT_FOUND
             self._script.presentMessage(full, brief)
-
-    ########################
-    #                      #
+    #
+    #
     # Blockquotes          #
-    #                      #
-    ########################
+    #
+    #
 
     def _blockquoteBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -1948,12 +1944,11 @@ class StructuralNavigation(object):
             return [self._getText(obj)]
 
         return guilabels.SN_TITLE_BLOCKQUOTE, columnHeaders, rowData
-
-    ########################
-    #                      #
+    #
+    #
     # Buttons              #
-    #                      #
-    ########################
+    #
+    #
 
     def _buttonBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -2003,7 +1998,7 @@ class StructuralNavigation(object):
         if obj and obj.getRole() == pyatspi.ROLE_PUSH_BUTTON:
             state = obj.getState()
             isMatch = state.contains(pyatspi.STATE_FOCUSABLE) \
-                  and state.contains(pyatspi.STATE_SENSITIVE)
+                and state.contains(pyatspi.STATE_SENSITIVE)
 
         return isMatch
 
@@ -2030,12 +2025,11 @@ class StructuralNavigation(object):
             return [self._getText(obj)]
 
         return guilabels.SN_TITLE_BUTTON, columnHeaders, rowData
-
-    ########################
-    #                      #
+    #
+    #
     # Check boxes          #
-    #                      #
-    ########################
+    #
+    #
 
     def _checkBoxBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -2085,7 +2079,7 @@ class StructuralNavigation(object):
         if obj and obj.getRole() == pyatspi.ROLE_CHECK_BOX:
             state = obj.getState()
             isMatch = state.contains(pyatspi.STATE_FOCUSABLE) \
-                  and state.contains(pyatspi.STATE_SENSITIVE)
+                and state.contains(pyatspi.STATE_SENSITIVE)
 
         return isMatch
 
@@ -2113,12 +2107,11 @@ class StructuralNavigation(object):
             return [self._getLabel(obj), self._getState(obj)]
 
         return guilabels.SN_TITLE_CHECK_BOX, columnHeaders, rowData
-
-    ########################
-    #                      #
+    #
+    #
     # Chunks/Large Objects #
-    #                      #
-    ########################
+    #
+    #
 
     def _chunkBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -2204,12 +2197,11 @@ class StructuralNavigation(object):
             return [self._getText(obj), self._getRoleName(obj)]
 
         return guilabels.SN_TITLE_LARGE_OBJECT, columnHeaders, rowData
-
-    ########################
-    #                      #
+    #
+    #
     # Combo Boxes          #
-    #                      #
-    ########################
+    #
+    #
 
     def _comboBoxBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -2259,7 +2251,7 @@ class StructuralNavigation(object):
         if obj and obj.getRole() == pyatspi.ROLE_COMBO_BOX:
             state = obj.getState()
             isMatch = state.contains(pyatspi.STATE_FOCUSABLE) \
-                  and state.contains(pyatspi.STATE_SENSITIVE)
+                and state.contains(pyatspi.STATE_SENSITIVE)
 
         return isMatch
 
@@ -2287,12 +2279,11 @@ class StructuralNavigation(object):
             return [self._getLabel(obj), self._getText(obj)]
 
         return guilabels.SN_TITLE_COMBO_BOX, columnHeaders, rowData
-
-    ########################
-    #                      #
+    #
+    #
     # Entries              #
-    #                      #
-    ########################
+    #
+    #
 
     def _entryBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -2353,8 +2344,8 @@ class StructuralNavigation(object):
                                      pyatspi.ROLE_TEXT]:
             state = obj.getState()
             isMatch = state.contains(pyatspi.STATE_FOCUSABLE) \
-                  and state.contains(pyatspi.STATE_SENSITIVE) \
-                  and state.contains(pyatspi.STATE_EDITABLE)
+                and state.contains(pyatspi.STATE_SENSITIVE) \
+                and state.contains(pyatspi.STATE_EDITABLE)
 
         return isMatch
 
@@ -2382,12 +2373,11 @@ class StructuralNavigation(object):
             return [self._getLabel(obj), self._getText(obj)]
 
         return guilabels.SN_TITLE_ENTRY, columnHeaders, rowData
-
-    ########################
-    #                      #
+    #
+    #
     # Form Fields          #
-    #                      #
-    ########################
+    #
+    #
 
     def _formFieldBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -2442,7 +2432,7 @@ class StructuralNavigation(object):
         if obj and obj.getRole() in self.FORM_ROLES:
             state = obj.getState()
             isMatch = state.contains(pyatspi.STATE_FOCUSABLE) \
-                  and state.contains(pyatspi.STATE_SENSITIVE)
+                and state.contains(pyatspi.STATE_SENSITIVE)
 
         return isMatch
 
@@ -2475,12 +2465,11 @@ class StructuralNavigation(object):
                     self._getValue(obj)]
 
         return guilabels.SN_TITLE_FORM_FIELD, columnHeaders, rowData
-
-    ########################
-    #                      #
+    #
+    #
     # Headings             #
-    #                      #
-    ########################
+    #
+    #
 
     def _headingBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -2607,12 +2596,11 @@ class StructuralNavigation(object):
                 return [self._getText(obj)]
 
         return title, columnHeaders, rowData
-
-    ########################
-    #                      #
+    #
+    #
     # Landmarks            #
-    #                      #
-    ########################
+    #
+    #
 
     def _landmarkBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -2671,8 +2659,8 @@ class StructuralNavigation(object):
 
         attrs = dict([attr.split(':', 1) for attr in obj.getAttributes()])
         try:
-            if set(attrs['xml-roles']).intersection(\
-                set(settings.ariaLandmarks)):
+            if set(attrs['xml-roles']).intersection(
+                    set(settings.ariaLandmarks)):
                 return True
             else:
                 return False
@@ -2704,12 +2692,11 @@ class StructuralNavigation(object):
             return [self._getText(obj)]
 
         return guilabels.SN_TITLE_LANDMARK, columnHeaders, rowData
-
-    ########################
-    #                      #
+    #
+    #
     # Lists                #
-    #                      #
-    ########################
+    #
+    #
 
     def _listBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -2804,12 +2791,11 @@ class StructuralNavigation(object):
             return [self._getText(obj)]
 
         return guilabels.SN_TITLE_LIST, columnHeaders, rowData
-
-    ########################
-    #                      #
+    #
+    #
     # List Items           #
-    #                      #
-    ########################
+    #
+    #
 
     def _listItemBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -2892,12 +2878,11 @@ class StructuralNavigation(object):
             return [self._getText(obj)]
 
         return guilabels.SN_TITLE_LIST_ITEM, columnHeaders, rowData
-
-    ########################
-    #                      #
+    #
+    #
     # Live Regions         #
-    #                      #
-    ########################
+    #
+    #
 
     def _liveRegionBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -2972,12 +2957,11 @@ class StructuralNavigation(object):
             full = messages.NO_MORE_LIVE_REGIONS
             brief = messages.STRUCTURAL_NAVIGATION_NOT_FOUND
             self._script.presentMessage(full, brief)
-
-    ########################
-    #                      #
+    #
+    #
     # Paragraphs           #
-    #                      #
-    ########################
+    #
+    #
 
     def _paragraphBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -3058,12 +3042,11 @@ class StructuralNavigation(object):
             return [self._getText(obj)]
 
         return guilabels.SN_TITLE_PARAGRAPH, columnHeaders, rowData
-
-    ########################
-    #                      #
+    #
+    #
     # Radio Buttons        #
-    #                      #
-    ########################
+    #
+    #
 
     def _radioButtonBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -3113,7 +3096,7 @@ class StructuralNavigation(object):
         if obj and obj.getRole() == pyatspi.ROLE_RADIO_BUTTON:
             state = obj.getState()
             isMatch = state.contains(pyatspi.STATE_FOCUSABLE) \
-                  and state.contains(pyatspi.STATE_SENSITIVE)
+                and state.contains(pyatspi.STATE_SENSITIVE)
 
         return isMatch
 
@@ -3141,12 +3124,11 @@ class StructuralNavigation(object):
             return [self._getLabel(obj), self._getState(obj)]
 
         return guilabels.SN_TITLE_RADIO_BUTTON, columnHeaders, rowData
-
-    ########################
-    #                      #
+    #
+    #
     # Separators           #
-    #                      #
-    ########################
+    #
+    #
 
     def _separatorBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -3203,12 +3185,11 @@ class StructuralNavigation(object):
             full = messages.NO_MORE_SEPARATORS
             brief = messages.STRUCTURAL_NAVIGATION_NOT_FOUND
             self._script.presentMessage(full, brief)
-
-    ########################
-    #                      #
+    #
+    #
     # Tables               #
-    #                      #
-    ########################
+    #
+    #
 
     def _tableBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -3290,12 +3271,11 @@ class StructuralNavigation(object):
                     self._getTableDescription(obj)]
 
         return guilabels.SN_TITLE_TABLE, columnHeaders, rowData
-
-    ########################
-    #                      #
+    #
+    #
     # Table Cells          #
-    #                      #
-    ########################
+    #
+    #
 
     def _tableCellBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -3378,18 +3358,17 @@ class StructuralNavigation(object):
 
         if settings.speakCellCoordinates:
             [row, col] = self.getCellCoordinates(cell)
-            self._script.presentMessage(messages.TABLE_CELL_COORDINATES \
-                                        % {"row" : row + 1, "column" : col + 1})
+            self._script.presentMessage(messages.TABLE_CELL_COORDINATES
+                                        % {"row": row + 1, "column": col + 1})
 
         spanString = self._getCellSpanInfo(cell)
         if spanString and settings.speakCellSpan:
             self._script.presentMessage(spanString)
-
-    ########################
-    #                      #
+    #
+    #
     # Unvisited Links      #
-    #                      #
-    ########################
+    #
+    #
 
     def _unvisitedLinkBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -3477,12 +3456,11 @@ class StructuralNavigation(object):
             return [self._getText(obj), self._script.utilities.uri(obj)]
 
         return guilabels.SN_TITLE_UNVISITED_LINK, columnHeaders, rowData
-
-    ########################
-    #                      #
+    #
+    #
     # Visited Links        #
-    #                      #
-    ########################
+    #
+    #
 
     def _visitedLinkBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]
@@ -3562,12 +3540,11 @@ class StructuralNavigation(object):
             return [self._getText(obj), self._script.utilities.uri(obj)]
 
         return guilabels.SN_TITLE_VISITED_LINK, columnHeaders, rowData
-
-    ########################
-    #                      #
+    #
+    #
     # Plain ol' Links      #
-    #                      #
-    ########################
+    #
+    #
 
     def _linkBindings(self):
         """Returns a dictionary of [keysymstring, modifiers, description]

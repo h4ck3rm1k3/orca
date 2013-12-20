@@ -20,10 +20,10 @@
 """Custom formatting for Gecko."""
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import copy
 
@@ -34,36 +34,36 @@ import orca.settings
 
 # pylint: disable-msg=C0301
 
-########################################################################
-#                                                                      #
+#
+#
 # Formatting for things that are not ARIA widgets.  For things that    #
 # are ARIA widgets, we use the default formatting (see the             #
 # getFormat method).                                                   #
-#                                                                      #
-########################################################################
+#
+#
 formatting = {
     'speech': {
         'suffix': {
             'focused': '[]',
             'unfocused': 'newNodeLevel + unselectedCell + ' + orca.formatting.TUTORIAL,
             'basicWhereAmI': orca.formatting.TUTORIAL + ' + description + liveRegionDescription',
-            'detailedWhereAmI' : '[]'
-            },
+            'detailedWhereAmI': '[]'
+        },
         'default': {
             'focused': '[]',
             'unfocused': 'labelAndName + allTextSelection + roleName + availability + ' + orca.formatting.MNEMONIC + ' + accelerator',
             'basicWhereAmI': 'labelAndName + roleName',
-            'detailedWhereAmI' : 'pageSummary'
-            },
+            'detailedWhereAmI': 'pageSummary'
+        },
         pyatspi.ROLE_ALERT: {
             'unfocused': 'expandedEOCs or (labelAndName + unrelatedLabels)'
-            },
+        },
         pyatspi.ROLE_DIALOG: {
             'unfocused': 'expandedEOCs or (labelAndName + unrelatedLabels)'
-            },
+        },
         pyatspi.ROLE_DOCUMENT_FRAME: {
             'unfocused': 'name + roleName'
-            },
+        },
         # [[[TODO: JD - We should decide if we want to provide
         # information about the table dimensions, whether or not
         # this is a layout table versus a data table, etc.  For now,
@@ -72,7 +72,7 @@ formatting = {
         #
         pyatspi.ROLE_TABLE: {
             'unfocused': '[]'
-            },
+        },
     },
     'braille': {
         # [[[TODO: WDW - we're doing very little here.  The goal for
@@ -95,7 +95,7 @@ formatting = {
             'unfocused': '[Component(obj,\
                                      asString(label + name + roleName),\
                                      asString(label) and (len(asString(label)) + 1) or 0)]'
-            },
+        },
         pyatspi.ROLE_IMAGE: {
             'unfocused':  '(imageLink\
                            and [Link(obj, (asString(label + displayedText)\
@@ -127,6 +127,7 @@ formatting = {
         }
     }
 }
+
 
 class Formatting(orca.formatting.Formatting):
 

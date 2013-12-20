@@ -19,11 +19,11 @@
 
 """Custom script for gnome-mud."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
@@ -35,16 +35,18 @@ import orca.orca_state as orca_state
 import orca.settings as settings
 import orca.speech as speech
 
-from orca.orca_i18n import _ # for gettext support
+from orca.orca_i18n import _  # for gettext support
 
-########################################################################
-#                                                                      #
+#
+#
 # Ring List. A fixed size circular list by Flavio Catalani             #
 # http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/435902       #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class RingList(object):
+
     def __init__(self, length):
         self.__data__ = []
         self.__full__ = 0
@@ -53,7 +55,7 @@ class RingList(object):
 
     def append(self, x):
         if self.__full__ == 1:
-            for i in range (0, self.__cur__ - 1):
+            for i in range(0, self.__cur__ - 1):
                 self.__data__[i] = self.__data__[i + 1]
             self.__data__[self.__cur__ - 1] = x
         else:
@@ -108,7 +110,6 @@ class Script(default.Script):
 
         default.Script.__init__(self, app)
 
-
     def setupInputEventHandlers(self):
         debug.println(self.debugLevel, "gnome-mud.setupInputEventHandlers.")
 
@@ -124,7 +125,7 @@ class Script(default.Script):
 
         keyBindings = keybindings.KeyBindings()
 
-        messageKeys = [ "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9"]
+        messageKeys = ["F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9"]
         for messagekey in messageKeys:
             keyBindings.add(
                 keybindings.KeyBinding(
@@ -136,8 +137,8 @@ class Script(default.Script):
         return keyBindings
 
     def readPreviousMessage(self, inputEvent):
-        #This function speaks the latest n messages. Orca+F1 the latest one,
-        #Orca+F2 the latest two and so.
+        # This function speaks the latest n messages. Orca+F1 the latest one,
+        # Orca+F2 the latest two and so.
 
         debug.println(self.debugLevel, "gnome-mud.readPreviousMessage.")
 
@@ -146,19 +147,18 @@ class Script(default.Script):
 
         text = ""
         messages = self.previousMessages.get()
-        for i in range (messageNo, Script.MESSAGE_LIST_LENGTH):
+        for i in range(messageNo, Script.MESSAGE_LIST_LENGTH):
             message = messages[i]
             text += message
 
         speech.speak(text)
 
-
     def onTextInserted(self, event):
 
-        #Whenever a new text is inserted in the incoming message text area,
-        #We want to speak and add it to the ringList structure only those lines
-        #that contain some text and if the application is the current
-        #locusOfFocus.
+        # Whenever a new text is inserted in the incoming message text area,
+        # We want to speak and add it to the ringList structure only those lines
+        # that contain some text and if the application is the current
+        # locusOfFocus.
         rolesList = [pyatspi.ROLE_TERMINAL,
                      pyatspi.ROLE_FILLER]
         if self.utilities.hasMatchingHierarchy(event.source, rolesList):
@@ -166,8 +166,8 @@ class Script(default.Script):
                 self.toggleFlatReviewMode()
             message = event.any_data
             if message and (not message.isspace()) and message != "\n":
-                debug.println(debug.LEVEL_FINEST, \
-                    message + " inserted in ringlist:")
+                debug.println(debug.LEVEL_FINEST,
+                              message + " inserted in ringlist:")
                 self.previousMessages.append(message)
                 if event.source.getApplication() == \
                    orca_state.locusOfFocus.getApplication():

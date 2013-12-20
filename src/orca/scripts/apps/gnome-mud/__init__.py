@@ -20,4 +20,3 @@
 """Custom script for gnome-mud."""
 
 from .script import Script
-

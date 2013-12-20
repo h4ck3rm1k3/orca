@@ -19,20 +19,21 @@
 """Custom script for gdmlogin - this makes sure the focused item is spoken
 when Orca starts."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import orca.scripts.default as default
 import orca.orca as orca
 
-########################################################################
-#                                                                      #
+#
+#
 # The gdmlogin script class.                                           #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(default.Script):
 

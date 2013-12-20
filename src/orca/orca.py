@@ -21,13 +21,13 @@
 
 """The main module for the Orca screen reader."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2004-2009 Sun Microsystems Inc." \
                 "Copyright (c) 2010-2011 The Orca Team" \
                 "Copyright (c) 2012 Igalia, S.L."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import importlib
 import os
@@ -82,6 +82,7 @@ try:
 except RuntimeError:
     pass
 
+
 def onEnabledChanged(gsetting, key):
     try:
         enabled = gsetting.get_boolean(key)
@@ -91,8 +92,10 @@ def onEnabledChanged(gsetting, key):
     if key == 'screen-reader-enabled' and not enabled:
         shutdown()
 
+
 def getSettingsManager():
     return _settingsManager
+
 
 def getLogger():
     return _logger
@@ -111,11 +114,11 @@ _orcaModifiers = settings.DESKTOP_MODIFIER_KEYS + settings.LAPTOP_MODIFIER_KEYS
 _capsLockCleared = False
 _restoreOrcaKeys = False
 
-########################################################################
-#                                                                      #
+#
+#
 # METHODS TO HANDLE APPLICATION LIST AND FOCUSED OBJECTS               #
-#                                                                      #
-########################################################################
+#
+#
 
 def setLocusOfFocus(event, obj, notifyScript=True, force=False):
     """Sets the locus of focus (i.e., the object with visual focus) and
@@ -143,7 +146,7 @@ def setLocusOfFocus(event, obj, notifyScript=True, force=False):
         except (LookupError, RuntimeError):
             appList = []
             debug.println(debug.LEVEL_SEVERE,
-                           "orca.setLocusOfFocus() application Error")
+                          "orca.setLocusOfFocus() application Error")
         if not currentApp in appList:
             return
 
@@ -172,7 +175,7 @@ def setLocusOfFocus(event, obj, notifyScript=True, force=False):
         except:
             appname = "None"
         debug.println(debug.LEVEL_FINE,
-                      "LOCUS OF FOCUS: app=%s name='%s' role='%s'" \
+                      "LOCUS OF FOCUS: app=%s name='%s' role='%s'"
                       % (appname,
                          orca_state.locusOfFocus.name,
                          orca_state.locusOfFocus.getRoleName()))
@@ -187,14 +190,14 @@ def setLocusOfFocus(event, obj, notifyScript=True, force=False):
     if notifyScript and orca_state.activeScript:
         orca_state.activeScript.locusOfFocusChanged(
             event, oldLocusOfFocus, orca_state.locusOfFocus)
-
-########################################################################
-#                                                                      #
+#
+#
 # METHODS FOR PRE-PROCESSING AND MASSAGING KEYBOARD EVENTS.            #
-#                                                                      #
-########################################################################
+#
+#
 
 _orcaModifierPressed = False
+
 
 def _processKeyboardEvent(event):
     """The primary key event handler for Orca.  Keeps track of various
@@ -276,11 +279,11 @@ def _processKeyboardEvent(event):
 
     return isOrcaModifier or orca_state.learnModeEnabled
 
-########################################################################
-#                                                                      #
+#
+#
 # METHODS FOR PRE-PROCESSING AND MASSAGING BRAILLE EVENTS.             #
-#                                                                      #
-########################################################################
+#
+#
 
 def _processBrailleEvent(event):
     """Called whenever a  key is pressed on the Braille display.
@@ -310,28 +313,30 @@ def _processBrailleEvent(event):
 
     return consumed
 
-########################################################################
-#                                                                      #
+#
+#
 # METHODS FOR HANDLING INITIALIZATION, SHUTDOWN, AND USE.              #
-#                                                                      #
-########################################################################
+#
+#
 
 def _setXmodmap(xkbmap):
     """Set the keyboard map using xkbcomp."""
     p = subprocess.Popen(['xkbcomp', '-w0', '-', os.environ['DISPLAY']],
-        stdin=subprocess.PIPE, stdout=None, stderr=None)
+                         stdin=subprocess.PIPE, stdout=None, stderr=None)
     p.communicate(xkbmap)
+
 
 def _setCapsLockAsOrcaModifier(enable):
     """Enable or disable use of the caps lock key as an Orca modifier key."""
     interpretCapsLineProg = re.compile(
         r'^\s*interpret\s+Caps[_+]Lock[_+]AnyOfOrNone\s*\(all\)\s*{\s*$', re.I)
-    capsModLineProg = re.compile(
-        r'^\s*action\s*=\s*SetMods\s*\(\s*modifiers\s*=\s*Lock\s*,\s*clearLocks\s*\)\s*;\s*$', re.I)
+    capsModLineProg = re.compile(r'^\s*action\s*=\s*SetMods\s*\(\s*modifiers\s*=\s*Lock\s*,\s*clearLocks\s*\)\s*;\s*$',
+        re.I)
     normalCapsLineProg = re.compile(
-        r'^\s*action\s*=\s*LockMods\s*\(\s*modifiers\s*=\s*Lock\s*\)\s*;\s*$', re.I)
+        r'^\s*action\s*=\s*LockMods\s*\(\s*modifiers\s*=\s*Lock\s*\)\s*;\s*$',
+        re.I)
     normalCapsLine = '        action= LockMods(modifiers=Lock);'
-    capsModLine =    '        action= SetMods(modifiers=Lock,clearLocks);'
+    capsModLine = '        action= SetMods(modifiers=Lock,clearLocks);'
     lines = _originalXmodmap.decode('UTF-8').split('\n')
     foundCapsInterpretSection = False
     for i in range(len(lines)):
@@ -354,6 +359,7 @@ def _setCapsLockAsOrcaModifier(enable):
                 # Failed to find the line we need to change
                 return
 
+
 def _createOrcaXmodmap():
     """Makes an Orca-specific Xmodmap so that the keys behave as we
     need them to do. This is especially the case for the Orca modifier.
@@ -369,6 +375,7 @@ def _createOrcaXmodmap():
         _setCapsLockAsOrcaModifier(False)
         _capsLockCleared = False
 
+
 def _storeXmodmap(keyList):
     """Save the original xmodmap for the keys in keyList before we alter it.
 
@@ -377,7 +384,9 @@ def _storeXmodmap(keyList):
     """
 
     global _originalXmodmap
-    _originalXmodmap = subprocess.check_output(['xkbcomp', os.environ['DISPLAY'], '-'])
+    _originalXmodmap = subprocess.check_output(
+        ['xkbcomp', os.environ['DISPLAY'], '-'])
+
 
 def _restoreXmodmap(keyList=[]):
     """Restore the original xmodmap values for the keys in keyList.
@@ -390,8 +399,9 @@ def _restoreXmodmap(keyList=[]):
     global _capsLockCleared
     _capsLockCleared = False
     p = subprocess.Popen(['xkbcomp', '-w0', '-', os.environ['DISPLAY']],
-        stdin=subprocess.PIPE, stdout=None, stderr=None)
+                         stdin=subprocess.PIPE, stdout=None, stderr=None)
     p.communicate(_originalXmodmap)
+
 
 def loadUserSettings(script=None, inputEvent=None, skipReloadMessage=False):
     """Loads (and reloads) the user settings module, reinitializing
@@ -403,7 +413,6 @@ def loadUserSettings(script=None, inputEvent=None, skipReloadMessage=False):
     debug.println(debug.LEVEL_FINEST, 'INFO: Loading User Settings')
 
     global _userSettings
-
     # Shutdown the output drivers and give them a chance to die.
 
     speech.shutdown()
@@ -479,6 +488,7 @@ def loadUserSettings(script=None, inputEvent=None, skipReloadMessage=False):
 
     return True
 
+
 def showAppPreferencesGUI(script=None, inputEvent=None):
     """Displays the user interace to configure the settings for a
     specific applications within Orca and set up those app-specific
@@ -495,6 +505,7 @@ def showAppPreferencesGUI(script=None, inputEvent=None):
 
     return True
 
+
 def showPreferencesGUI(script=None, inputEvent=None):
     """Displays the user interace to configure Orca and set up
     user preferences using a GUI.
@@ -510,6 +521,7 @@ def showPreferencesGUI(script=None, inputEvent=None):
 
     return True
 
+
 def helpForOrca(script=None, inputEvent=None, page=""):
     """Show Orca Help window (part of the GNOME Access Guide).
 
@@ -523,6 +535,7 @@ def helpForOrca(script=None, inputEvent=None, page=""):
                  Gtk.get_current_event_time())
     return True
 
+
 def quitOrca(script=None, inputEvent=None):
     """Quit Orca. Check if the user wants to confirm this action.
     If so, show the confirmation GUI otherwise just shutdown.
@@ -533,6 +546,7 @@ def quitOrca(script=None, inputEvent=None):
     shutdown()
 
     return True
+
 
 def showFindGUI(script=None, inputEvent=None):
     """Displays the user interace to perform an Orca Find.
@@ -549,6 +563,7 @@ def showFindGUI(script=None, inputEvent=None):
 # If True, this module has been initialized.
 #
 _initialized = False
+
 
 def init(registry):
     """Initialize the orca module, which initializes the speech and braille
@@ -589,6 +604,7 @@ def init(registry):
 
     return True
 
+
 def start(registry):
     """Starts Orca.
     """
@@ -613,6 +629,7 @@ def start(registry):
     debug.println(debug.LEVEL_FINEST, 'INFO: Orca starting registry')
     registry.start(gil=settings.useGILIdleHandler)
 
+
 def die(exitCode=1):
     pid = os.getpid()
     if exitCode == EXIT_CODE_HANG:
@@ -625,12 +642,14 @@ def die(exitCode=1):
     if exitCode > 1:
         os.kill(pid, signal.SIGTERM)
 
+
 def timeout(signum=None, frame=None):
     debug.println(debug.LEVEL_SEVERE,
                   "TIMEOUT: something has hung.  Aborting.")
     debug.printStack(debug.LEVEL_ALL)
     debug.examineProcesses()
     die(EXIT_CODE_HANG)
+
 
 def shutdown(script=None, inputEvent=None):
     """Exits Orca.  Unregisters any event listeners and cleans up.
@@ -678,11 +697,13 @@ def shutdown(script=None, inputEvent=None):
     return True
 
 exitCount = 0
+
+
 def shutdownOnSignal(signum, frame):
     global exitCount
 
     debug.println(debug.LEVEL_ALL,
-                  "Shutting down and exiting due to signal = %d" \
+                  "Shutting down and exiting due to signal = %d"
                   % signum)
 
     debug.println(debug.LEVEL_ALL, "Current stack is:")
@@ -721,11 +742,13 @@ def shutdownOnSignal(signum, frame):
     if not cleanExit:
         die(EXIT_CODE_HANG)
 
+
 def abortOnSignal(signum, frame):
     debug.println(debug.LEVEL_ALL,
-                  "Aborting due to signal = %d" \
+                  "Aborting due to signal = %d"
                   % signum)
     die(signum)
+
 
 def main():
     """The main entry point for Orca.  The exit codes for Orca will
@@ -768,7 +791,7 @@ def main():
             setLocusOfFocus(None, window)
 
     try:
-        start(pyatspi.Registry) # waits until we stop the registry
+        start(pyatspi.Registry)  # waits until we stop the registry
     except:
         die(EXIT_CODE_HANG)
     return 0

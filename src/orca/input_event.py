@@ -20,12 +20,12 @@
 
 """Provides support for handling input events."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc." \
                 "Copyright (c) 2011 Igalia, S.L."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 import time
@@ -37,9 +37,10 @@ from . import messages
 from . import orca_state
 from . import settings
 
-KEYBOARD_EVENT     = "keyboard"
-BRAILLE_EVENT      = "braille"
+KEYBOARD_EVENT = "keyboard"
+BRAILLE_EVENT = "braille"
 MOUSE_BUTTON_EVENT = "mouse:button"
+
 
 class InputEvent(object):
 
@@ -69,7 +70,6 @@ class InputEvent(object):
         Arguments:
         - inputEvent: the current input event.
         """
-
         # TODO - JD: This setter for the getter I found in script.py was
         # in orca.py. :-/ Again, this needs sorting out. But for now it
         # is less out of place here.
@@ -87,7 +87,7 @@ class InputEvent(object):
             return
 
         if self.time - lastInputEvent.time < settings.doubleClickTimeout \
-            and lastInputEvent.event_string == self.event_string:
+                and lastInputEvent.event_string == self.event_string:
             # Cap the possible number of clicks at 3.
             if orca_state.clickCount < 3:
                 orca_state.clickCount += 1
@@ -95,16 +95,17 @@ class InputEvent(object):
 
         orca_state.clickCount = 1
 
+
 class KeyboardEvent(InputEvent):
 
-    TYPE_UNKNOWN          = "unknown"
-    TYPE_PRINTABLE        = "printable"
-    TYPE_MODIFIER         = "modifier"
-    TYPE_LOCKING          = "locking"
-    TYPE_FUNCTION         = "function"
-    TYPE_ACTION           = "action"
-    TYPE_NAVIGATION       = "navigation"
-    TYPE_DIACRITICAL      = "diacritical"
+    TYPE_UNKNOWN = "unknown"
+    TYPE_PRINTABLE = "printable"
+    TYPE_MODIFIER = "modifier"
+    TYPE_LOCKING = "locking"
+    TYPE_FUNCTION = "function"
+    TYPE_ACTION = "action"
+    TYPE_NAVIGATION = "navigation"
+    TYPE_DIACRITICAL = "diacritical"
 
     def __init__(self, event):
         """Creates a new InputEvent of type KEYBOARD_EVENT.
@@ -146,7 +147,7 @@ class KeyboardEvent(InputEvent):
         # mapping ASCII control characters to UTF-8.]]]
         #
         if (self.modifiers & settings.CTRL_MODIFIER_MASK) \
-            and (not self.is_text) and (len(self.event_string) == 1):
+                and (not self.is_text) and (len(self.event_string) == 1):
             value = ord(self.event_string[0])
             if value < 32:
                 self.event_string = chr(value + 0x40)
@@ -395,7 +396,7 @@ class KeyboardEvent(InputEvent):
                 try:
                     text = orca_state.locusOfFocus.queryText()
                     o = text.caretOffset
-                    string = text.getText(o-1, o)
+                    string = text.getText(o - 1, o)
                 except:
                     pass
                 else:
@@ -417,6 +418,7 @@ class KeyboardEvent(InputEvent):
 
         return False
 
+
 class BrailleEvent(InputEvent):
 
     def __init__(self, event):
@@ -427,6 +429,7 @@ class BrailleEvent(InputEvent):
         """
         InputEvent.__init__(self, BRAILLE_EVENT)
         self.event = event
+
 
 class MouseButtonEvent(InputEvent):
 
@@ -439,6 +442,7 @@ class MouseButtonEvent(InputEvent):
         self.pressed = event.type.endswith('p')
         self.button = event.type[len("mouse:button:"):-1]
         self.time = time.time()
+
 
 class InputEventHandler(object):
 

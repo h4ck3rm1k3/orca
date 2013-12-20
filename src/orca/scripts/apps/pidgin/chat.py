@@ -19,19 +19,20 @@
 
 """Custom chat module for Pidgin."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Joanmarie Diggs."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import orca.chat as chat
 
-########################################################################
-#                                                                      #
+#
+#
 # The Pidgin chat class.                                               #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Chat(chat.Chat):
 

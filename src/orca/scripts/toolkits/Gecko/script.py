@@ -35,11 +35,11 @@ implementation in Gecko:
 http://developer.mozilla.org/en/docs/Accessibility/ATSPI_Support
 """
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2010 Orca Team."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 from gi.repository import Gtk
 import pyatspi
@@ -79,20 +79,22 @@ from orca.acss import ACSS
 
 _settingsManager = settings_manager.getManager()
 
-########################################################################
-#                                                                      #
+#
+#
 # Script                                                               #
-#                                                                      #
-########################################################################
+#
+#
+
 
 class Script(default.Script):
+
     """The script for Firefox."""
 
-    ####################################################################
-    #                                                                  #
+    #
+    #
     # Overridden Script Methods                                        #
-    #                                                                  #
-    ####################################################################
+    #
+    #
 
     def __init__(self, app):
         default.Script.__init__(self, app)
@@ -207,24 +209,24 @@ class Script(default.Script):
         # no longer have a single reverse translation.
         #
         self.attributeNamesDict = {
-            "font-weight"             : "weight",
-            "font-family"             : "family-name",
-            "font-style"              : "style",
-            "text-align"              : "justification",
-            "text-indent"             : "indent",
-            "font-size"               : "size",
-            "background-color"        : "bg-color",
-            "color"                   : "fg-color",
-            "text-line-through-style" : "strikethrough",
-            "text-underline-style"    : "underline",
-            "text-position"           : "vertical-align",
-            "writing-mode"            : "direction",
-            "-moz-left"               : "left",
-            "-moz-right"              : "right",
-            "-moz-center"             : "center",
-            "start"                   : "no justification",
-            "underlinesolid"          : "single",
-            "line-throughsolid"       : "solid"}
+            "font-weight": "weight",
+            "font-family": "family-name",
+            "font-style": "style",
+            "text-align": "justification",
+            "text-indent": "indent",
+            "font-size": "size",
+            "background-color": "bg-color",
+            "color": "fg-color",
+            "text-line-through-style": "strikethrough",
+            "text-underline-style": "underline",
+            "text-position": "vertical-align",
+            "writing-mode": "direction",
+            "-moz-left": "left",
+            "-moz-right": "right",
+            "-moz-center": "center",
+            "start": "no justification",
+            "underlinesolid": "single",
+            "line-throughsolid": "solid"}
 
         # Keep track of the last object which appeared as a result of
         # the user routing the mouse pointer over an object. Also keep
@@ -308,7 +310,7 @@ class Script(default.Script):
         """
 
         default.Script.setupInputEventHandlers(self)
-        self.inputEventHandlers.update(\
+        self.inputEventHandlers.update(
             self.structuralNavigation.inputEventHandlers)
 
         self.inputEventHandlers["goNextCharacterHandler"] = \
@@ -410,13 +412,13 @@ class Script(default.Script):
             input_event.InputEventHandler(
                 Script.panBrailleLeft,
                 cmdnames.PAN_BRAILLE_LEFT,
-                False) # Do not enable learn mode for this action
+                False)  # Do not enable learn mode for this action
 
         self.inputEventHandlers["panBrailleRightHandler"] = \
             input_event.InputEventHandler(
                 Script.panBrailleRight,
                 cmdnames.PAN_BRAILLE_RIGHT,
-                False) # Do not enable learn mode for this action
+                False)  # Do not enable learn mode for this action
 
         self.inputEventHandlers["moveToMouseOverHandler"] = \
             input_event.InputEventHandler(
@@ -574,12 +576,12 @@ class Script(default.Script):
         findGrid.attach(hgrid, 0, 2, 1, 1)
 
         self.minimumFindLengthLabel = \
-              Gtk.Label(label=guilabels.FIND_MINIMUM_MATCH_LENGTH)
+            Gtk.Label(label=guilabels.FIND_MINIMUM_MATCH_LENGTH)
         self.minimumFindLengthLabel.set_alignment(0, 0.5)
         hgrid.attach(self.minimumFindLengthLabel, 0, 0, 1, 1)
 
         self.minimumFindLengthAdjustment = \
-                   Gtk.Adjustment(script_settings.minimumFindLength, 0, 20, 1)
+            Gtk.Adjustment(script_settings.minimumFindLength, 0, 20, 1)
         self.minimumFindLengthSpinButton = Gtk.SpinButton()
         self.minimumFindLengthSpinButton.set_adjustment(
             self.minimumFindLengthAdjustment)
@@ -608,7 +610,7 @@ class Script(default.Script):
         script_settings.controlCaretNavigation = value
 
         value = self.structuralNavigationCheckButton.get_active()
-        prefs.writelines("%s.structuralNavigationEnabled = %s\n" \
+        prefs.writelines("%s.structuralNavigationEnabled = %s\n"
                          % (prefix, value))
         script_settings.structuralNavigationEnabled = value
 
@@ -625,7 +627,7 @@ class Script(default.Script):
         script_settings.speakResultsDuringFind = value
 
         value = self.changedLinesOnlyCheckButton.get_active()
-        prefs.writelines("%s.onlySpeakChangedLinesDuringFind = %s\n"\
+        prefs.writelines("%s.onlySpeakChangedLinesDuringFind = %s\n"
                          % (prefix, value))
         script_settings.onlySpeakChangedLinesDuringFind = value
 
@@ -714,8 +716,8 @@ class Script(default.Script):
             if handler and handler.function in self._caretNavigationFunctions:
                 return self.useCaretNavigationModel(keyboardEvent)
             elif handler \
-                 and (handler.function in self.structuralNavigation.functions \
-                      or handler.function in self._liveRegionFunctions):
+                and (handler.function in self.structuralNavigation.functions
+                     or handler.function in self._liveRegionFunctions):
                 return self.useStructuralNavigationModel()
             else:
                 consumes = handler != None
@@ -724,8 +726,8 @@ class Script(default.Script):
             if handler and handler.function in self._caretNavigationFunctions:
                 return self.useCaretNavigationModel(keyboardEvent)
             elif handler \
-                 and (handler.function in self.structuralNavigation.functions \
-                      or handler.function in self._liveRegionFunctions):
+                and (handler.function in self.structuralNavigation.functions
+                     or handler.function in self._liveRegionFunctions):
                 return self.useStructuralNavigationModel()
             else:
                 consumes = handler != None
@@ -787,7 +789,7 @@ class Script(default.Script):
             clumped = self.clumpUtterances(utterances)
             for i in range(len(clumped)):
                 [obj, startOffset, endOffset, text] = \
-                                             contents[min(i, len(contents)-1)]
+                    contents[min(i, len(contents) - 1)]
                 [element, voice] = clumped[i]
                 if isinstance(element, str):
                     element = self.utilities.adjustForRepeats(element)
@@ -814,7 +816,7 @@ class Script(default.Script):
 
     def __sayAllProgressCallback(self, context, callbackType):
         if callbackType == speechserver.SayAllContext.PROGRESS:
-            #print "PROGRESS", context.utterance, context.currentOffset
+            # print "PROGRESS", context.utterance, context.currentOffset
             #
             # Attempt to keep the content visible on the screen as
             # it is being read, but avoid links as grabFocus sometimes
@@ -826,22 +828,22 @@ class Script(default.Script):
                                          pyatspi.ROLE_PARAGRAPH] \
                and context.obj.parent.getRole() != pyatspi.ROLE_LINK:
                 characterCount = context.obj.queryText().characterCount
-                self.setCaretPosition(context.obj, characterCount-1)
+                self.setCaretPosition(context.obj, characterCount - 1)
         elif callbackType == speechserver.SayAllContext.INTERRUPTED:
-            #print "INTERRUPTED", context.utterance, context.currentOffset
+            # print "INTERRUPTED", context.utterance, context.currentOffset
             try:
                 self.setCaretPosition(context.obj, context.currentOffset)
             except:
                 characterCount = context.obj.queryText().characterCount
-                self.setCaretPosition(context.obj, characterCount-1)
+                self.setCaretPosition(context.obj, characterCount - 1)
             self.updateBraille(context.obj)
         elif callbackType == speechserver.SayAllContext.COMPLETED:
-            #print "COMPLETED", context.utterance, context.currentOffset
+            # print "COMPLETED", context.utterance, context.currentOffset
             try:
                 self.setCaretPosition(context.obj, context.currentOffset)
             except:
                 characterCount = context.obj.queryText().characterCount
-                self.setCaretPosition(context.obj, characterCount-1)
+                self.setCaretPosition(context.obj, characterCount - 1)
             self.updateBraille(context.obj)
 
     def presentFindResults(self, obj, offset):
@@ -1111,7 +1113,7 @@ class Script(default.Script):
             utterances.append(messages.NEW_ITEM_ADDED)
             utterances.extend(
                 self.speechGenerator.generateSpeech(event.any_data,
-                                                    force = True))
+                                                    force=True))
             speech.speak(utterances)
             self.lastMouseOverObject = event.any_data
             self.preMouseOverContext = self.getCaretContext()
@@ -1129,7 +1131,7 @@ class Script(default.Script):
             except:
                 return
 
-            if not (childRole == pyatspi.ROLE_ALERT \
+            if not (childRole == pyatspi.ROLE_ALERT
                and role in [pyatspi.ROLE_SCROLL_PANE, pyatspi.ROLE_FRAME]):
                 return
 
@@ -1297,9 +1299,9 @@ class Script(default.Script):
         - obj:  the Accessible progress bar object.
         """
 
-        rolesList = [pyatspi.ROLE_PROGRESS_BAR, \
-                     pyatspi.ROLE_STATUS_BAR, \
-                     pyatspi.ROLE_FRAME, \
+        rolesList = [pyatspi.ROLE_PROGRESS_BAR,
+                     pyatspi.ROLE_STATUS_BAR,
+                     pyatspi.ROLE_FRAME,
                      pyatspi.ROLE_APPLICATION]
         if not self.utilities.hasMatchingHierarchy(event.source, rolesList):
             default.Script.handleProgressBarUpdate(self, event, obj)
@@ -1533,7 +1535,7 @@ class Script(default.Script):
                or self.utilities.isPasswordText(obj) \
                or role in [pyatspi.ROLE_LINK, pyatspi.ROLE_PUSH_BUTTON]:
                 [regions, fRegion] = \
-                          self.brailleGenerator.generateBraille(obj)
+                    self.brailleGenerator.generateBraille(obj)
 
                 if isFocusedObj:
                     focusedRegion = fRegion
@@ -1772,11 +1774,11 @@ class Script(default.Script):
             self.refreshBraille(False)
         return True
 
-    ####################################################################
-    #                                                                  #
+    #
+    #
     # Utility Methods                                                  #
-    #                                                                  #
-    ####################################################################
+    #
+    #
 
     def inDocumentContent(self, obj=None):
         """Returns True if the given object (defaults to the current
@@ -1834,10 +1836,10 @@ class Script(default.Script):
         obj = orca_state.locusOfFocus
         role = obj.getRole()
         if self.utilities.isEntry(obj):
-            text        = obj.queryText()
-            length      = text.characterCount
+            text = obj.queryText()
+            length = text.characterCount
             caretOffset = text.caretOffset
-            singleLine  = obj.getState().contains(
+            singleLine = obj.getState().contains(
                 pyatspi.STATE_SINGLE_LINE)
 
             # Single line entries have an additional newline character
@@ -1861,11 +1863,11 @@ class Script(default.Script):
                 weHandleIt = True
             elif caretOffset <= 0:
                 weHandleIt = keyboardEvent.event_string \
-                             in ["Up", "Left"]
+                    in ["Up", "Left"]
             elif caretOffset >= length - newLineAdjustment \
-                 and not self._autocompleteVisible:
+                    and not self._autocompleteVisible:
                 weHandleIt = keyboardEvent.event_string \
-                             in ["Down", "Right"]
+                    in ["Down", "Right"]
             else:
                 weHandleIt = False
 
@@ -1986,7 +1988,7 @@ class Script(default.Script):
 
         try:
             # ARIA landmark widgets
-            if set(attrs['xml-roles'].split()).intersection(\
+            if set(attrs['xml-roles'].split()).intersection(
                set(settings.ariaLandmarks)):
                 return True
             # ARIA live region
@@ -2094,7 +2096,7 @@ class Script(default.Script):
                 # events from other tabs.
                 stateset = event.any_data.getState()
                 if stateset.contains(pyatspi.STATE_SELECTABLE) \
-                    or not stateset.contains(pyatspi.STATE_VISIBLE):
+                        or not stateset.contains(pyatspi.STATE_VISIBLE):
                     return False
 
                 # Now we need to look at the object attributes
@@ -2133,8 +2135,8 @@ class Script(default.Script):
             # Filter out events from hidden tabs (not VISIBLE)
             stateset = event.source.getState()
             if stateset.contains(pyatspi.STATE_FOCUSABLE) \
-                   or stateset.contains(pyatspi.STATE_SELECTABLE) \
-                   or not stateset.contains(pyatspi.STATE_VISIBLE):
+                or stateset.contains(pyatspi.STATE_SELECTABLE) \
+                    or not stateset.contains(pyatspi.STATE_VISIBLE):
                 return False
 
             attrs = self._getAttrDictionary(event.source)
@@ -2161,8 +2163,8 @@ class Script(default.Script):
             #
             stateset = event.source.getState()
             if stateset.contains(pyatspi.STATE_FOCUSABLE) \
-                   or stateset.contains(pyatspi.STATE_SELECTABLE) \
-                   or not stateset.contains(pyatspi.STATE_VISIBLE):
+                or stateset.contains(pyatspi.STATE_SELECTABLE) \
+                    or not stateset.contains(pyatspi.STATE_VISIBLE):
                 return False
             attrs = self._getAttrDictionary(event.source)
             return 'container-live' in attrs \
@@ -2212,7 +2214,7 @@ class Script(default.Script):
         if text and obj.getRole() != pyatspi.ROLE_MENU_ITEM:
             extents = text.getRangeExtents(startOffset, endOffset, 0)
         elif obj.getRole() == pyatspi.ROLE_MENU \
-             and obj.parent.getRole() == pyatspi.ROLE_COMBO_BOX:
+                and obj.parent.getRole() == pyatspi.ROLE_COMBO_BOX:
             ext = obj.parent.queryComponent().getExtents(0)
             extents = [ext.x, ext.y, ext.width, ext.height]
         else:
@@ -2252,7 +2254,7 @@ class Script(default.Script):
         # screen, but that the value is the y coordinate.
         #
         highestBottom = min(a[1] + a[3], b[1] + b[3])
-        lowestTop     = max(a[1],        b[1])
+        lowestTop = max(a[1],        b[1])
         if lowestTop >= highestBottom - 1:
             return False
 
@@ -2261,11 +2263,11 @@ class Script(default.Script):
         # If we do overlap, lets see how much.  We'll require a 25% overlap
         # for now...
         #
-        #if lowestTop < highestBottom:
+        # if lowestTop < highestBottom:
         #    overlapAmount = highestBottom - lowestTop
         #    shortestHeight = min(a[3], b[3])
         #    return ((1.0 * overlapAmount) / shortestHeight) > 0.25
-        #else:
+        # else:
         #    return False
 
     def isLabellingContents(self, obj, contents):
@@ -2284,7 +2286,7 @@ class Script(default.Script):
 
         for relation in relationSet:
             if relation.getRelationType() \
-                == pyatspi.RELATION_LABEL_FOR:
+                    == pyatspi.RELATION_LABEL_FOR:
                 for i in range(0, relation.getNTargets()):
                     target = relation.getTarget(i)
                     for content in contents:
@@ -2361,8 +2363,8 @@ class Script(default.Script):
 
         state = obj.getState()
         isField = obj.getRole() in formRoles \
-                  and state.contains(pyatspi.STATE_FOCUSABLE) \
-                  and state.contains(pyatspi.STATE_SENSITIVE)
+            and state.contains(pyatspi.STATE_FOCUSABLE) \
+            and state.contains(pyatspi.STATE_SENSITIVE)
 
         if obj.getRole() == pyatspi.ROLE_DOCUMENT_FRAME:
             isField = isField and state.contains(pyatspi.STATE_EDITABLE)
@@ -2385,8 +2387,8 @@ class Script(default.Script):
             # if it is the child of a link.
             #
             return True
-        elif obj.getRole() in [pyatspi.ROLE_IMAGE, \
-                               pyatspi.ROLE_TABLE_CELL, \
+        elif obj.getRole() in [pyatspi.ROLE_IMAGE,
+                               pyatspi.ROLE_TABLE_CELL,
                                pyatspi.ROLE_SECTION]:
             text = self.utilities.displayedText(obj)
             if (not text) or (len(text) == 0):
@@ -2432,7 +2434,7 @@ class Script(default.Script):
                                 self.utilities.queryNonEmptyText(obj.parent)
                             if textObj:
                                 text = textObj.getText(0, -1)
-                                text = text.replace(\
+                                text = text.replace(
                                     self.EMBEDDED_OBJECT_CHARACTER, "").strip()
                                 if not text:
                                     # There's no other text on this line inside
@@ -2464,7 +2466,7 @@ class Script(default.Script):
             return False
         else:
             return state.contains(pyatspi.STATE_SHOWING) \
-                   and state.contains(pyatspi.STATE_VISIBLE)
+                and state.contains(pyatspi.STATE_VISIBLE)
 
     def getHeadingLevel(self, obj):
         """Determines the heading level of the given object.  A value
@@ -2642,7 +2644,7 @@ class Script(default.Script):
             elif role == pyatspi.ROLE_FORM:
                 forms += 1
             elif role == pyatspi.ROLE_TABLE \
-                      and not self.utilities.isLayoutOnly(obj):
+                    and not self.utilities.isLayoutOnly(obj):
                 tables += 1
             elif role == pyatspi.ROLE_LINK:
                 if obj.getState().contains(pyatspi.STATE_VISITED):
@@ -2652,11 +2654,11 @@ class Script(default.Script):
 
         return [headings, forms, tables, vlinks, uvlinks, percentRead]
 
-    ####################################################################
-    #                                                                  #
+    #
+    #
     # Methods to find previous and next objects.                       #
-    #                                                                  #
-    ####################################################################
+    #
+    #
 
     def findFirstCaretContext(self, obj, characterOffset):
         """Given an object and a character offset, find the first
@@ -2742,15 +2744,15 @@ class Script(default.Script):
             return [None, -1]
 
         if obj.getRole() == pyatspi.ROLE_INVALID:
-            debug.println(debug.LEVEL_SEVERE, \
+            debug.println(debug.LEVEL_SEVERE,
                           "findNextCaretInOrder: object is invalid")
             return [None, -1]
 
         # We do not want to descend objects of certain role types.
         #
         doNotDescend = obj.getState().contains(pyatspi.STATE_FOCUSABLE) \
-                       and obj.getRole() in [pyatspi.ROLE_COMBO_BOX,
-                                             pyatspi.ROLE_LIST]
+            and obj.getRole() in [pyatspi.ROLE_COMBO_BOX,
+                                  pyatspi.ROLE_LIST]
 
         text = self.utilities.queryNonEmptyText(obj)
         if text:
@@ -2775,7 +2777,7 @@ class Script(default.Script):
                     if child:
                         return self.findNextCaretInOrder(child,
                                                          -1,
-                                                       includeNonText)
+                                                         includeNonText)
                     else:
                         nextOffset += 1
                 else:
@@ -2851,15 +2853,15 @@ class Script(default.Script):
             return [None, -1]
 
         if obj.getRole() == pyatspi.ROLE_INVALID:
-            debug.println(debug.LEVEL_SEVERE, \
+            debug.println(debug.LEVEL_SEVERE,
                           "findPreviousCaretInOrder: object is invalid")
             return [None, -1]
 
         # We do not want to descend objects of certain role types.
         #
         doNotDescend = obj.getState().contains(pyatspi.STATE_FOCUSABLE) \
-                       and obj.getRole() in [pyatspi.ROLE_COMBO_BOX,
-                                             pyatspi.ROLE_LIST]
+            and obj.getRole() in [pyatspi.ROLE_COMBO_BOX,
+                                  pyatspi.ROLE_LIST]
 
         text = self.utilities.queryNonEmptyText(obj)
         if text:
@@ -2877,7 +2879,7 @@ class Script(default.Script):
             previousOffset = startOffset - 1
             while previousOffset >= 0:
                 if unicodeText[previousOffset] \
-                    != self.EMBEDDED_OBJECT_CHARACTER:
+                        != self.EMBEDDED_OBJECT_CHARACTER:
                     return [obj, previousOffset]
                 elif obj.childCount:
                     child = obj[self.getChildIndex(obj, previousOffset)]
@@ -2974,7 +2976,7 @@ class Script(default.Script):
             #
             while not isinstance(previousObj,
                                  pyatspi.Accessibility.Accessible) \
-                and index >= 0:
+                    and index >= 0:
                 previousObj = obj.parent[index]
                 index -= 1
 
@@ -3009,8 +3011,8 @@ class Script(default.Script):
                 if role in [pyatspi.ROLE_COMBO_BOX, pyatspi.ROLE_MENU]:
                     break
                 elif role == pyatspi.ROLE_LIST \
-                     and state.contains(pyatspi.STATE_FOCUSABLE) \
-                     and not self.isAriaWidget(previousObj):
+                    and state.contains(pyatspi.STATE_FOCUSABLE) \
+                        and not self.isAriaWidget(previousObj):
                     break
                 elif previousObj.childCount > 1000:
                     break
@@ -3021,8 +3023,8 @@ class Script(default.Script):
                     childOffset = self.utilities.characterOffsetInParent(child)
                     if isinstance(child, pyatspi.Accessibility.Accessible) \
                        and not (self.utilities.isSameObject(
-                            previousObj, documentFrame) \
-                        and childOffset > characterOffset):
+                            previousObj, documentFrame)
+                           and childOffset > characterOffset):
                         previousObj = child
                         break
                     else:
@@ -3067,7 +3069,7 @@ class Script(default.Script):
             descend = False
         elif role == pyatspi.ROLE_LIST \
             and obj.getState().contains(pyatspi.STATE_FOCUSABLE) \
-            and not self.isAriaWidget(obj):
+                and not self.isAriaWidget(obj):
             descend = False
         elif obj.childCount > 1000:
             descend = False
@@ -3083,7 +3085,7 @@ class Script(default.Script):
                 continue
             childOffset = self.utilities.characterOffsetInParent(child)
             if isinstance(child, pyatspi.Accessibility.Accessible) \
-               and not (self.utilities.isSameObject(obj, documentFrame) \
+               and not (self.utilities.isSameObject(obj, documentFrame)
                         and childOffset < characterOffset):
                 nextObj = child
                 break
@@ -3113,9 +3115,9 @@ class Script(default.Script):
             # the right for us.
             #
             while candidate and candidate.parent \
-                  and candidate.getIndexInParent() >= \
-                      candidate.parent.childCount - 1 \
-                  and not self.utilities.isSameObject(candidate, documentFrame):
+                and candidate.getIndexInParent() >= \
+                candidate.parent.childCount - 1 \
+                    and not self.utilities.isSameObject(candidate, documentFrame):
                 candidate = candidate.parent
 
             # Now...let's get the sibling.
@@ -3143,11 +3145,11 @@ class Script(default.Script):
 
         return nextObj
 
-    ####################################################################
-    #                                                                  #
+    #
+    #
     # Methods to get information about current object.                 #
-    #                                                                  #
-    ####################################################################
+    #
+    #
 
     def clearCaretContext(self):
         """Deletes all knowledge of a character context for the current
@@ -3236,7 +3238,7 @@ class Script(default.Script):
         # shouldn't happen, but if it does we'll let the default script
         # handle it for now.
         #
-        #print "getTextLineAtCaret failed"
+        # print "getTextLineAtCaret failed"
         return default.Script.getTextLineAtCaret(self, obj, offset)
 
     def searchForCaretLocation(self, acc):
@@ -3338,7 +3340,8 @@ class Script(default.Script):
             if word[1] < characterOffset <= word[2]:
                 characterOffset = word[1]
 
-        contents = self.utilities.getObjectsFromEOCs(obj, characterOffset, boundary)
+        contents = self.utilities.getObjectsFromEOCs(
+            obj, characterOffset, boundary)
         if len(contents) > 1 \
            and contents[0][0].getRole() == pyatspi.ROLE_LIST_ITEM:
             contents = [contents[0]]
@@ -3444,7 +3447,7 @@ class Script(default.Script):
                             #
                             offset = start + 1
                         elif obj.getRole() == pyatspi.ROLE_PARAGRAPH \
-                             and child.getRole() == pyatspi.ROLE_PARAGRAPH:
+                                and child.getRole() == pyatspi.ROLE_PARAGRAPH:
                             # We don't normally see nested paragraphs. But
                             # they occur at least when a paragraph begins
                             # with a multi-line-high character. If we set
@@ -3472,8 +3475,8 @@ class Script(default.Script):
                             [cLine, cStart, cEnd] = \
                                 childText.getTextAtOffset(cOffset, boundary)
                             if cStart == 0 \
-                               and not cLine.startswith(\
-                                self.EMBEDDED_OBJECT_CHARACTER) \
+                               and not cLine.startswith(
+                                   self.EMBEDDED_OBJECT_CHARACTER) \
                                and obj.getRole() != pyatspi.ROLE_PANEL:
                                 # It starts on this line.
                                 #
@@ -3513,7 +3516,8 @@ class Script(default.Script):
             if self.onSameLine(extents, prevExtents) \
                and extents != prevExtents \
                and lastExtents != prevExtents:
-                toAdd = self.utilities.getObjectsFromEOCs(prevObj, pOffset, boundary)
+                toAdd = self.utilities.getObjectsFromEOCs(
+                    prevObj, pOffset, boundary)
                 toAdd = [x for x in toAdd if x not in objects]
                 if not toAdd:
                     break
@@ -3557,14 +3561,16 @@ class Script(default.Script):
                and extents != nextExtents \
                and lastExtents != nextExtents \
                or nextExtents == (0, 0, 0, 0):
-                toAdd = self.utilities.getObjectsFromEOCs(nextObj, nOffset, boundary)
+                toAdd = self.utilities.getObjectsFromEOCs(
+                    nextObj, nOffset, boundary)
                 toAdd = [x for x in toAdd if x not in objects]
                 objects.extend(toAdd)
                 done = not toAdd
             elif (nextObj.getRole() in [pyatspi.ROLE_SECTION,
-                                        pyatspi.ROLE_TABLE_CELL] \
+                                        pyatspi.ROLE_TABLE_CELL]
                   and self.isUselessObject(nextObj)):
-                toAdd = self.utilities.getObjectsFromEOCs(nextObj, nOffset, boundary)
+                toAdd = self.utilities.getObjectsFromEOCs(
+                    nextObj, nOffset, boundary)
                 toAdd = [x for x in toAdd if x not in objects]
                 done = True
                 for item in toAdd:
@@ -3592,11 +3598,11 @@ class Script(default.Script):
 
         return self.utilities.getObjectsFromEOCs(obj, characterOffset)
 
-    ####################################################################
-    #                                                                  #
+    #
+    #
     # Methods to speak current objects.                                #
-    #                                                                  #
-    ####################################################################
+    #
+    #
 
     # [[[TODO: WDW - this needs to be moved to the speech generator.]]]
     #
@@ -3607,7 +3613,7 @@ class Script(default.Script):
             acss = self.voices[settings.HYPERLINK_VOICE]
         elif string and isinstance(string, str) \
             and string.isupper() \
-            and string.strip().isalpha():
+                and string.strip().isalpha():
             acss = self.voices[settings.UPPERCASE_VOICE]
         else:
             acss = self.voices[settings.DEFAULT_VOICE]
@@ -3678,7 +3684,7 @@ class Script(default.Script):
             # text), ignore it, unless it's the only thing here.
             #
             elif role == pyatspi.ROLE_IMAGE and self.isUselessObject(obj) \
-                 and len(contents) > 1:
+                    and len(contents) > 1:
                 continue
 
             # If the focused item is a checkbox or a radio button for which
@@ -3754,8 +3760,8 @@ class Script(default.Script):
             if len(clumped) == 0:
                 clumped = [[element, acss]]
             elif acss == clumped[-1][1] \
-                 and isinstance(element, str) \
-                 and isinstance(clumped[-1][0], str):
+                and isinstance(element, str) \
+                    and isinstance(clumped[-1][0], str):
                 clumped[-1][0] = clumped[-1][0].rstrip(" ")
                 clumped[-1][0] += " " + element
             else:
@@ -3796,11 +3802,11 @@ class Script(default.Script):
                 utterances = self.speechGenerator.generateSpeech(obj)
                 speech.speak(utterances)
 
-    ####################################################################
-    #                                                                  #
+    #
+    #
     # Methods to navigate to previous and next objects.                #
-    #                                                                  #
-    ####################################################################
+    #
+    #
 
     def setCaretPosition(self, obj, characterOffset):
         """Sets the caret position to the given character offset in the
@@ -4023,7 +4029,7 @@ class Script(default.Script):
                                   currentLine[0][2])
         prevExtents = self.getExtents(prevObj, prevOffset, prevOffset + 1)
         while self.onSameLine(extents, prevExtents) \
-              and (extents != prevExtents):
+                and (extents != prevExtents):
             [prevObj, prevOffset] = \
                 self.findPreviousCaretInOrder(prevObj, prevOffset)
             prevExtents = self.getExtents(prevObj, prevOffset, prevOffset + 1)
@@ -4049,7 +4055,7 @@ class Script(default.Script):
             #
             # print "find prev line failed", prevObj, prevOffset
             [prevObj, prevOffset] = \
-                      self.findPreviousCaretInOrder(prevObj, prevOffset)
+                self.findPreviousCaretInOrder(prevObj, prevOffset)
             prevLine = self.getLineContentsAtOffset(prevObj, prevOffset)
             failureCount += 1
         if currentLine == prevLine:
@@ -4121,7 +4127,7 @@ class Script(default.Script):
                                   currentLine[-1][2])
         nextExtents = self.getExtents(nextObj, nextOffset, nextOffset + 1)
         while self.onSameLine(extents, nextExtents) \
-              and (extents != nextExtents):
+                and (extents != nextExtents):
             [nextObj, nextOffset] = \
                 self.findNextCaretInOrder(nextObj, nextOffset)
             nextExtents = self.getExtents(nextObj, nextOffset, nextOffset + 1)
@@ -4142,15 +4148,15 @@ class Script(default.Script):
             # For some reason we're stuck. We'll try a few times by
             # caret before trying by object.
             #
-            #print "find next line failed", nextObj, nextOffset
+            # print "find next line failed", nextObj, nextOffset
             [nextObj, nextOffset] = \
-                      self.findNextCaretInOrder(nextObj, nextOffset)
+                self.findNextCaretInOrder(nextObj, nextOffset)
             if nextObj:
                 nextLine = self.getLineContentsAtOffset(nextObj, nextOffset)
                 failureCount += 1
 
         if currentLine == nextLine:
-            #print "find next line still stuck", nextObj, nextOffset
+            # print "find next line still stuck", nextObj, nextOffset
             documentFrame = self.utilities.documentFrame()
             nextObj = self.findNextObject(nextObj, documentFrame)
             nextOffset = 0
@@ -4166,11 +4172,11 @@ class Script(default.Script):
         if nextOffset == 0 \
            and self.getCharacterAtOffset(nextObj, nextOffset) == "\n" \
            and self.getCharacterAtOffset(nextObj, nextOffset + 1) == \
-               self.EMBEDDED_OBJECT_CHARACTER:
+                self.EMBEDDED_OBJECT_CHARACTER:
             nextOffset += 1
 
         [nextObj, nextOffset] = \
-                  self.findNextCaretInOrder(nextObj, max(0, nextOffset) - 1)
+            self.findNextCaretInOrder(nextObj, max(0, nextOffset) - 1)
 
         if not script_settings.arrowToLineBeginning:
             extents = self.getExtents(obj,
@@ -4211,7 +4217,8 @@ class Script(default.Script):
         if not prevObj:
             return False
 
-        [obj, caretOffset] = self.findFirstCaretContext(prevObj, prevCharOffset)
+        [obj, caretOffset] = self.findFirstCaretContext(
+            prevObj, prevCharOffset)
         self.setCaretPosition(obj, caretOffset)
         self.presentLine(prevObj, prevCharOffset)
 
@@ -4229,7 +4236,8 @@ class Script(default.Script):
         if not nextObj:
             return False
 
-        [obj, caretOffset] = self.findFirstCaretContext(nextObj, nextCharOffset)
+        [obj, caretOffset] = self.findFirstCaretContext(
+            nextObj, nextCharOffset)
         self.setCaretPosition(obj, caretOffset)
         self.presentLine(nextObj, nextCharOffset)
 
@@ -4240,7 +4248,8 @@ class Script(default.Script):
 
         [obj, characterOffset] = self.getCaretContext()
         line = self.getLineContentsAtOffset(obj, characterOffset)
-        obj, characterOffset = self.findFirstCaretContext(line[0][0], line[0][1])
+        obj, characterOffset = self.findFirstCaretContext(
+            line[0][0], line[0][1])
         self.setCaretPosition(obj, characterOffset)
         if not isinstance(orca_state.lastInputEvent, input_event.BrailleEvent):
             self.speakCharacterAtOffset(obj, characterOffset)
@@ -4306,6 +4315,7 @@ class Script(default.Script):
                 if name in ["open", _("open")]:
                     action.doAction(i)
                     break
+
     def goPreviousObjectInOrder(self, inputEvent):
         """Go to the previous object in order, regardless of type or size."""
 
@@ -4324,7 +4334,7 @@ class Script(default.Script):
         mayHaveGoneTooFar = False
 
         line = self.currentLineContents \
-               or self.getLineContentsAtOffset(obj, characterOffset)
+            or self.getLineContentsAtOffset(obj, characterOffset)
         startingPoint = line
         useful = self.getMeaningfulObjectsFromLine(line)
 
@@ -4337,7 +4347,7 @@ class Script(default.Script):
                 # it's safe to assume we've found the beginning.
                 #
                 found = (prevOffset == 0) \
-                        or (len(useful) > 1 and line != startingPoint)
+                    or (len(useful) > 1 and line != startingPoint)
 
                 # Otherwise, we won't know for certain until we've gone
                 # to the line(s) before this one and found a different
@@ -4356,7 +4366,7 @@ class Script(default.Script):
                     mayHaveGoneTooFar = True
 
             elif self.utilities.isSameObject(obj, prevObj) \
-                 and 0 == prevOffset < characterOffset:
+                    and 0 == prevOffset < characterOffset:
                 found = True
 
             if not found:
@@ -4410,7 +4420,7 @@ class Script(default.Script):
         found = False
 
         line = self.currentLineContents \
-               or self.getLineContentsAtOffset(obj, characterOffset)
+            or self.getLineContentsAtOffset(obj, characterOffset)
 
         while line and not found:
             useful = self.getMeaningfulObjectsFromLine(line)
@@ -4474,8 +4484,8 @@ class Script(default.Script):
 
     def reviewLiveAnnouncement(self, inputEvent):
         if _settingsManager.getSetting('inferLiveRegions'):
-            self.liveMngr.reviewLiveAnnouncement( \
-                                    int(inputEvent.event_string[1:]))
+            self.liveMngr.reviewLiveAnnouncement(
+                int(inputEvent.event_string[1:]))
         else:
             self.presentMessage(messages.LIVE_REGIONS_OFF)
 
@@ -4507,7 +4517,7 @@ class Script(default.Script):
         """
         if self.inDocumentContent(acc):
             try:
-                #ai = NOT USED
+                # ai = NOT USED
                 acc.queryAction()
             except NotImplementedError:
                 return True

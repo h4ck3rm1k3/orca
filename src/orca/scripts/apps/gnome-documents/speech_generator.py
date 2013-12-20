@@ -19,13 +19,14 @@
 
 """Custom speech generator for gnome-documents."""
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2013 The Orca Team"
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import orca.speech_generator as speech_generator
+
 
 class SpeechGenerator(speech_generator.SpeechGenerator):
 

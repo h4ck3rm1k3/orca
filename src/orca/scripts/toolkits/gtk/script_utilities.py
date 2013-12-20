@@ -20,14 +20,15 @@
 # Boston MA  02110-1301 USA.
 
 __id__ = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2013 Igalia, S.L."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 import pyatspi
 
 import orca.script_utilities as script_utilities
+
 
 class Utilities(script_utilities.Utilities):
 

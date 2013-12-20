@@ -26,13 +26,13 @@ import orca.speech as speech
 import orca.eventsynthesizer as eventsynthesizer
 import pyatspi
 
-from orca.orca_i18n import _ # for gettext support
+from orca.orca_i18n import _  # for gettext support
 
-__id__        = "$Id$"
-__version__   = "$Revision$"
-__date__      = "$Date$"
+__id__ = "$Id$"
+__version__ = "$Revision$"
+__date__ = "$Date$"
 __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
-__license__   = "LGPL"
+__license__ = "LGPL"
 
 
 class Script(default.Script):
@@ -141,7 +141,7 @@ class Script(default.Script):
         # http://bugzilla.gnome.org/show_bug.cgi?id=350233
         #
         if orca_state.locusOfFocus.getRole() == \
-                                        pyatspi.ROLE_TABLE_COLUMN_HEADER:
+                pyatspi.ROLE_TABLE_COLUMN_HEADER:
             table = event.source.parent
             cells = self.utilities.descendantsWithRole(
                 table, pyatspi.ROLE_TABLE_CELL)
