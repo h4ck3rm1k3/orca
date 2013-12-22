@@ -1,0 +1,53 @@
+def load_data():
+    #'braille':
+    return { 3: {'unfocused': '[Component(obj,asString(label + displayedText + roleName + (description and space(": ") + description)))]'},
+             6: {'unfocused': '[Component(obj,asString(((label + displayedText + imageDescription) or name) + roleName))]'},
+             7: {'unfocused': '[Component(obj,asString(label + displayedText + roleName),indicator=asString(checkedState))]'},
+             8: {'unfocused': '[Component(obj,asString(label + displayedText + roleName + availability) + asString(accelerator),indicator=asString(checkedState))]'},
+             11: {'unfocused': '((comboBoxTextObj and [Text(comboBoxTextObj[0], asString(label), asString(eol))]) or [Component(obj, asString(label + displayedText), label and (len(asString(label)) + 1) or 0)])+ [Region(" " + asString(roleName))]'},
+             23: {'focused': '[Component(obj,asString(((label + displayedText) or name) + value + roleName + alertAndDialogCount))]',
+                  'unfocused': '[Component(obj,asString(((label + displayedText) or name) + value + roleName + alertAndDialogCount))]'},
+             26: {'unfocused': '[Component(obj,asString(((label + displayedText + imageDescription) or name) + roleName))]'},
+             27: {'focused': '[Component(obj,asString(labelAndName + value + roleName + required))]',
+                  'unfocused': '[Component(obj,asString(labelAndName + value + roleName + required))]'},
+             29: {'unfocused': '[Text(obj,      asString(label),      asString(eol))]'},
+             31: {'unfocused': '[Component(obj,asString(label + focusedItem + roleName),asString(label) and (len(asString(label)) + 1) or 0)]'},
+             32: {'focused': '[Component(obj,asString(label + displayedText + expandableState + roleName + availability) + asString(accelerator))]+ (nestingLevel and [Region(" " + asString(nestingLevel))])+ (childWidget and ([Region(" ")] + childWidget))',
+                  'unfocused': '[Component(obj,asString(label + displayedText + expandableState))]+ (nestingLevel and [Region(" " + asString(nestingLevel))])+ (childWidget and ([Region(" ")] + childWidget))'},
+             33: {'focused': '[Component(obj,asString(label + displayedText + roleName + availability) + asString(accelerator))]',
+                  'unfocused': '[Component(obj,asString(label + displayedText + roleName))]'},
+             35: {'unfocused': '[Component(obj,asString(label + displayedText + expandableState + availability) + asString(accelerator),indicator=asString(menuItemCheckedState))]'},
+             37: {'focused': '[Component(obj,asString(label + displayedText + roleName + availability) + asString(accelerator))]',
+                  'unfocused': '[Component(obj,asString(label + displayedText + roleName))]'},
+             39: {'unfocused': '[Component(obj,asString((label or displayedText) + roleName))]+ (childWidget and ([Region(" ")] + childWidget))'},
+             40: {'unfocused': '[Text(obj, asString(label + placeholderText), asString(eol))]                + (required and [Region(" " + asString(required))])                + (readOnly and [Region(" " + asString(readOnly))])'},
+             43: {'unfocused': '[Component(obj,asString(((label + displayedText) or description) + expandableState + roleName))]'},
+             44: {'unfocused': '[Component(obj,asString(((label + displayedText) or description) + roleName),indicator=asString(radioState))]'},
+             45: {'focused': '[Component(obj,asString(((label + displayedText) or description) + roleName + availability)+ asString(accelerator),indicator=asString(radioState))]',
+                  'unfocused': '[Component(obj,asString((label + displayedText) or description)+ asString(accelerator),indicator=asString(radioState))]'},
+             49: {'unfocused': 'asPageTabOrScrollPane'},
+             51: {'unfocused': '[Component(obj,asString(labelOrName + value + roleName + required))]'},
+             52: {'unfocused': '[Text(obj, asString(label), asString(eol))]+ (required and [Region(" " + asString(required))] or [])+ (readOnly and [Region(" " + asString(readOnly))] or [])'},
+             56: {'unfocused': 'tableCellRow'},
+             59: {'unfocused': '[Component(obj,asString(roleName))]'},
+             60: {'unfocused': '[Text(obj)]'},
+             61: {'unfocused': '[Text(obj, asString(label + placeholderText), asString(eol))]                + (required and [Region(" " + asString(required))])                + (readOnly and [Region(" " + asString(readOnly))])'},
+             62: {'unfocused': '[Component(obj,asString(((label + displayedText) or description) + expandableState + roleName),indicator=asString(toggleState))]'},
+             73: {'unfocused': '[Text(obj, asString(label + placeholderText), asString(eol))]                + (required and [Region(" " + asString(required))])                + (readOnly and [Region(" " + asString(readOnly))])'},
+             78: {'unfocused': '[Component(obj,asString(label + displayedText) or asString(applicationName))]'},
+             79: {'unfocused': '[Text(obj, asString(label + placeholderText), asString(eol))]                + (required and [Region(" " + asString(required))])                + (readOnly and [Region(" " + asString(readOnly))])'},
+             83: {'unfocused': '[Text(obj)] + [Region(" " + asString(roleName))]'},
+             88: {'unfocused': '[Link(obj, asString(currentLineText)or asString(displayedText)or asString(name))]'},
+
+             'REAL_ROLE_TABLE_CELL': {
+                 'unfocused': '(tableCell2ChildToggle + tableCell2ChildLabel)or (cellCheckedState    + (columnHeaderIfToggleAndNoText and [Region(" "), Component(obj, asString(columnHeaderIfToggleAndNoText))])    + ((realActiveDescendantDisplayedText and [Component(obj, asString(realActiveDescendantDisplayedText))])       or (imageDescription and [Region(" "), Component(obj, asString(imageDescription))]))+ (realActiveDescendantRoleName and [Component(obj, (realActiveDescendantDisplayedText and " " or "") + asString(realActiveDescendantRoleName))])+ (expandableState and [Region(" " + asString(expandableState))])+ (required and [Region(" " + asString(required))]))or ([Component(obj,"")])'},
+             
+             'other' : {
+             'default': {'focused': '[Component(obj,asString(label + displayedText + value + roleName + required))]',
+                         'unfocused': '[Component(obj,asString(label + displayedText + value + roleName + required))]'},
+             'prefix': {'focused': '(includeContext and (ancestors  + (rowHeader and [Region(" " + asString(rowHeader))])  + (columnHeader and [Region(" " + asString(columnHeader))])  + (radioButtonGroup and [Region(" " + asString(radioButtonGroup))])  + [Region(" ")]) or [])',
+                        'unfocused': '(includeContext and (ancestors  + (rowHeader and [Region(" " + asString(rowHeader))])  + (columnHeader and [Region(" " + asString(columnHeader))])  + (radioButtonGroup and [Region(" " + asString(radioButtonGroup))])  + [Region(" ")]) or [])'},
+             'suffix': {'focused': '(nodeLevel and [Region(" " + asString(nodeLevel))])',
+                        'unfocused': '(nodeLevel and [Region(" " + asString(nodeLevel))])'}
+              }
+    }
