@@ -57,7 +57,8 @@ try:
 except:
     pass
 
-from . import braille
+#from . import braille
+import braille
 from . import debug
 from . import event_manager
 from . import logger

@@ -52,7 +52,8 @@ except:
     _brlAPIAvailable = False
     _brlAPIRunning = False
 
-from . import settings
+#from . import settings
+import settings
 
 try:
     # This can fail due to gtk not being available.  We want to
@@ -64,12 +65,12 @@ try:
 except:
     settings.enableBrailleMonitor = False
 
-from . import brltablenames
-from . import cmdnames
-from . import debug
-from . import eventsynthesizer
-from . import logger
-from . import orca_state
+import brltablenames
+import cmdnames
+import debug
+import eventsynthesizer
+import logger
+import orca_state
 
 _logger = logger.getLogger()
 log = _logger.newLog("braille")
