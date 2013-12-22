@@ -30,8 +30,8 @@ __copyright__ = "Copyright (c) 2004-2009 Sun Microsystems Inc." \
                 "Copyright (c) 2010-2013 The Orca Team"
 __license__ = "LGPL"
 
-from .orca_i18n import _, C_, ngettext
-from .orca_platform import version
+from orca.orca_i18n import _, C_, ngettext
+from orca.orca_platform import version
 
 # Translators: Sometimes when we attempt to get the name of an accessible
 # software application, we fail because the app or one of its elements is

@@ -26,8 +26,8 @@ __copyright__ = "Copyright (c) 2005-2009 Sun Microsystems Inc."
 __license__ = "LGPL"
 
 import pyatspi
-from . import debug
-from . import speech
+import orca.debug as debug
+import orca.speech as speech
 
 # [[[TODO: WDW - need to handle the old _speakText functionality that changes
 # settings.verbalizePunctuationStyle = settings.PUNCTUATION_STYLE_SOME

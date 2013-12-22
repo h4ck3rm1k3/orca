@@ -26,7 +26,7 @@ __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
 __license__ = "LGPL"
 
 import pyatspi
-from . import debug
+import  orca.debug as debug
 
 
 def generateMouseEvent(x, y, eventName):

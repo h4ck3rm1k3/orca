@@ -28,10 +28,10 @@ __license__ = "LGPL"
 import copy
 import re
 
-from . import debug
-from . import flat_review
-from . import messages
-from . import orca_state
+import  debug
+import  flat_review
+import  messages
+import  orca_state
 
 
 class SearchQuery(object):

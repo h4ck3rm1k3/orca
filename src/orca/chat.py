@@ -27,15 +27,15 @@ __license__ = "LGPL"
 
 import pyatspi
 
-from . import cmdnames
-from . import guilabels
-from . import input_event
-from . import keybindings
-from . import messages
-from . import orca_state
-from . import settings
-from . import settings_manager
-from . import speech
+import  cmdnames
+import  guilabels
+import  input_event
+import  keybindings
+import  messages
+import  orca_state
+import  settings
+import  settings_manager
+import  speech
 
 _settingsManager = settings_manager.getManager()
 

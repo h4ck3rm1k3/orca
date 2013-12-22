@@ -31,14 +31,14 @@ __copyright__ = "Copyright (c) 2005-2008 Sun Microsystems Inc."
 __license__ = "LGPL"
 
 import logging
-from . import settings
-from . import orca_state
+import  settings
+import  orca_state
 
 log = logging.getLogger("speech")
 
-from . import debug
+import  debug
 
-from .acss import ACSS
+from acss import ACSS
 
 
 class VoiceFamily(dict):

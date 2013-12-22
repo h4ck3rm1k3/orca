@@ -31,11 +31,11 @@ import pyatspi
 import time
 import unicodedata
 
-from . import debug
-from . import keynames
-from . import messages
-from . import orca_state
-from . import settings
+import  orca.debug as debug
+import  orca.keynames as keynames
+import  orca.messages as messages
+import  orca.orca_state as orca_state
+import  orca.settings as settings
 
 KEYBOARD_EVENT = "keyboard"
 BRAILLE_EVENT = "braille"

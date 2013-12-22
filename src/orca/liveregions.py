@@ -4,9 +4,9 @@ import pyatspi
 import time
 from gi.repository import GLib
 
-from . import messages
-from . import orca_state
-from . import speech
+import  messages
+import  orca_state
+import  speech
 
 # define 'live' property types
 LIVE_OFF = -1

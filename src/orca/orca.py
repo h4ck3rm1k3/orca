@@ -57,20 +57,20 @@ try:
 except:
     pass
 
-#from . import braille
-import braille
-from . import debug
-from . import event_manager
-from . import logger
-from . import messages
-from . import notification_messages
-from . import orca_state
-from . import script_manager
-from . import settings
-from . import settings_manager
-from . import speech
-from .input_event import BrailleEvent
-from .input_event import KeyboardEvent
+#import  braille
+import orca.braille as braille
+import orca.debug as debug
+import orca.event_manager as event_manager
+import orca.logger as logger
+import orca.messages as messages
+import orca.notification_messages
+import orca.orca_state as orca_state
+import orca.script_manager as script_manager
+import orca.settings as settings
+import orca.settings_manager as settings_manager
+import orca.speech as speech
+from orca.input_event import BrailleEvent
+from orca.input_event import KeyboardEvent
 
 _eventManager = event_manager.getManager()
 _scriptManager = script_manager.getManager()
@@ -79,7 +79,7 @@ _logger = logger.getLogger()
 
 try:
     # If we don't have an active desktop, we will get a RuntimeError.
-    from . import mouse_review
+    import orca.mouse_review
 except RuntimeError:
     pass
 

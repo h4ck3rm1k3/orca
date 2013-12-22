@@ -29,11 +29,11 @@ __license__ = "LGPL"
 import re
 import sys
 
-from . import acss
-from . import messages
-from . import settings
-from . import speech
-from . import speechserver
+import  acss
+import  messages
+import  settings
+import  speech
+import  speechserver
 
 workingFactories = []
 speechServerChoice = None

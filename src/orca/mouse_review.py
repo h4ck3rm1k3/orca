@@ -25,7 +25,7 @@ __date__ = "$Date$"
 __copyright__ = "Copyright (c) 2008 Eitan Isaacson"
 __license__ = "LGPL"
 
-from . import debug
+import orca.debug
 
 try:
     from gi.repository import Wnck
@@ -39,11 +39,11 @@ import pyatspi
 from gi.repository import Gdk
 from gi.repository import GLib
 
-from . import event_manager
-from . import script_manager
-from . import speech
-from . import braille
-from . import settings
+import orca.event_manager as event_manager
+import orca.script_manager as script_manager
+import orca.speech
+import orca.braille
+import orca.settings
 
 _eventManager = event_manager.getManager()
 _scriptManager = script_manager.getManager()

@@ -31,10 +31,10 @@ from gi.repository import Gdk
 import functools
 import pyatspi
 
-from . import debug
-from . import settings
+import  orca.debug as debug
+import  orca.settings as settings
 
-from .orca_i18n import _
+from orca.orca_i18n import _
 
 _keysymsCache = {}
 _keycodeCache = {}

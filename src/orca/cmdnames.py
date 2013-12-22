@@ -30,7 +30,7 @@ __copyright__ = "Copyright (c) 2004-2009 Sun Microsystems Inc." \
                 "Copyright (c) 2010-2013 The Orca Team"
 __license__ = "LGPL"
 
-from .orca_i18n import _
+from orca.orca_i18n import _
 
 # Translators: this command will move the mouse pointer to the current item
 #  without clicking on it.

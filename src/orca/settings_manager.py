@@ -32,13 +32,13 @@ import imp
 import importlib
 import os
 from gi.repository import Gio, GLib
-
-from . import debug
-from . import orca_i18n
-from . import script_manager
-from . import settings
-from . import pronunciation_dict
-from .keybindings import KeyBinding
+import pprint
+import  orca.debug as debug
+import  orca.orca_i18n as orca_i18n
+import  orca.script_manager as script_manager
+import  orca.settings as settings
+import  orca.pronunciation_dict as pronunciation_dict
+from orca.keybindings import KeyBinding
 
 try:
     _proxy = Gio.DBusProxy.new_for_bus_sync(
@@ -277,13 +277,25 @@ class SettingsManager(object):
         return getattr(settings, settingName)
 
     def getVoiceLocale(self, voice='default'):
+        u'''
+        TODO: 
+        '''
         voices = self.getSetting('voices')
         v = voices.get(voice, {})
-        lang = v.getLocale()
-        dialect = v.getDialect()
-        if dialect and len(str(dialect)) == 2:
-            lang = "%s_%s" % (lang, dialect.upper())
-        return lang
+
+        #print ("VOICE:")
+        #pprint.pprint(v)
+
+        if isinstance(v, dict):
+            #print ("VOICE DICT:")
+            #pprint.pprint(v)
+            return "en"
+        else:
+            lang = v.getLocale()
+            dialect = v.getDialect()
+            if dialect and len(str(dialect)) == 2:
+                lang = "%s_%s" % (lang, dialect.upper())
+            return lang
 
     def _getGeneral(self, profile=None):
         """Get from the active backend the general settings for
@@ -462,6 +474,8 @@ class SettingsManager(object):
     def saveSettings(self, general, pronunciations, keybindings):
         """Let the active backend to store the default settings and
         the profiles' ones."""
+        if general is None :
+            raise Exception("general null")
         # Assign current profile
         _profile = general.get('profile', settings.profile)
         currentProfile = _profile[1]

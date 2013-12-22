@@ -32,15 +32,15 @@ __license__ = "LGPL"
 from gi.repository import GLib
 import re
 
-from . import chnames
-from . import debug
-from . import guilabels
-from . import messages
-from . import speechserver
-from . import settings
-from . import orca_state
-from . import punctuation_settings
-from .acss import ACSS
+import  chnames
+import  debug
+import  guilabels
+import  messages
+import  speechserver
+import  settings
+import  orca_state
+import  punctuation_settings
+from acss import ACSS
 
 try:
     import speechd

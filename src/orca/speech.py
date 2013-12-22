@@ -31,15 +31,15 @@ import importlib
 import re
 import time
 
-from . import chnames
-from . import debug
-from . import logger
-from . import orca_state
-from . import settings
-from . import sound
-from . import speech_generator
+import orca.chnames
+import orca.debug
+import orca.logger as logger
+import orca.orca_state
+import orca.settings
+import orca.sound
+import orca.speech_generator
 
-from .acss import ACSS
+from orca.acss import ACSS
 
 _logger = logger.getLogger()
 log = _logger.newLog("speech")
@@ -391,7 +391,7 @@ def testNoSettingsInit():
 
 
 def test():
-    from . import speechserver
+    import orca.speechserver
     factories = getSpeechServerFactories()
     for factory in factories:
         print(factory.__name__)

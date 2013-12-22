@@ -28,14 +28,14 @@ __license__ = "LGPL"
 import pyatspi
 from gi.repository import Atspi, Atk
 
-from . import braille
-from . import debug
-from . import generator
-from . import messages
-from . import orca_state
-from . import settings
-from . import settings_manager
-from .braille_rolenames import shortRoleNames
+import  orca.braille as braille
+import  orca.debug as debug
+import  orca.generator as generator
+import  orca.messages as messages
+import  orca.orca_state as orca_state
+import  orca.settings as settings
+import  orca.settings_manager as settings_manager
+from orca.braille_rolenames import shortRoleNames
 
 _settingsManager = settings_manager.getManager()
 

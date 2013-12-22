@@ -30,9 +30,9 @@ __license__ = "LGPL"
 import os
 import pprint
 
-from . import debug
-from . import settings
-from . import settings_manager
+import  debug
+import  settings
+import  settings_manager
 
 _settingsManager = settings_manager.getManager()
 

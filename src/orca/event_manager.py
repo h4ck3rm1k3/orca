@@ -30,12 +30,12 @@ import queue
 import threading
 import time
 
-from . import debug
-from . import input_event
-from . import messages
-from . import orca_state
-from . import script_manager
-from . import settings
+import  orca.debug as debug
+import  orca.input_event as input_event
+import  orca.messages as messages
+import  orca.orca_state as orca_state
+import  orca.script_manager as script_manager
+import  orca.settings as settings
 
 _scriptManager = script_manager.getManager()
 

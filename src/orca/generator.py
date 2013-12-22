@@ -31,12 +31,12 @@ import traceback
 
 import pyatspi
 
-from . import braille
-from . import debug
-from . import messages
-from . import settings
+import  orca.braille as braille
+import  orca.debug as debug
+import  orca.messages as messages
+import  orca.settings as settings
 
-from .orca_i18n import _         # for gettext support
+from orca.orca_i18n import _         # for gettext support
 import collections
 
 
@@ -109,22 +109,23 @@ class Generator(object):
         self._addGlobals(globalsDict)
 
         #This is like duplicate
-        for roleKey in self._script.formatting[self._mode]:
+        # TODO acccessing 
+        for roleKey in self._script.get_formatting_role_keys(self._mode):
             for key in ["focused", "unfocused"]:
                 try:
-                    evalString = \
-                        self._script.formatting[self._mode][roleKey][key]
+                    function_pointer =  self._script.get_formatting_code(self._mode,roleKey,key)
                 except:
                     continue
                 else:
-                    if not evalString:
-                        # It's legal to have an empty string.
+                    if not function_pointer:
+                        # It's legal to have an empty function
                         #
                         continue
                     while True:
                         try:
                             #TODO remove this. call a function instead
-                            eval(evalString, globalsDict)
+                            #eval(evalString, globalsDict)
+                            function_pointer()
                             break
                         except NameError:
                             info = _formatExceptionInfo()

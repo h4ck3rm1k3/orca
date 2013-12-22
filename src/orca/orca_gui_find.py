@@ -30,11 +30,11 @@ import sys
 from gi.repository import Gtk
 import locale
 
-from . import find
-from . import guilabels
-from . import orca_gtkbuilder
-from . import orca_state
-from . import orca_platform
+import  find
+import  guilabels
+import  orca_gtkbuilder
+import  orca_state
+import  orca_platform
 
 OS = None
 

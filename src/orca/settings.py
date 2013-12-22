@@ -29,11 +29,11 @@ __license__ = "LGPL"
 
 import pyatspi
 
-#from .acss import ACSS
-from acss import ACSS
-#from .orca_i18n import _
-from orca_i18n import _
-#from .orca_i18n import C_
+#from acss import ACSS
+from orca.acss import ACSS
+#from orca_i18n import _
+from orca.orca_i18n import _
+#from orca_i18n import C_
 
 # These are the settings that Orca supports the user customizing.
 #
@@ -614,7 +614,7 @@ chatRoomHistories = False
 #
 
 def overrideKeyBindings(script, keyBindings):
-    from . import settings_manager
+    import  settings_manager
     _settingsManager = settings_manager.getManager()
     return _settingsManager.overrideKeyBindings(script, keyBindings)
 

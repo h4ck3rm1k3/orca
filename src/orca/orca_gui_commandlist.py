@@ -28,8 +28,8 @@ __copyright__ = "Copyright (c) 2013 Igalia, S.L."
 __license__ = "LGPL"
 
 from gi.repository import GObject, Gdk, Gtk
-from . import guilabels
-from . import orca_state
+import  guilabels
+import  orca_state
 
 
 class OrcaCommandListGUI(object):

@@ -29,7 +29,7 @@ __copyright__ = "Copyright (c) 2004-2009 Sun Microsystems Inc." \
                 "Copyright (c) 2010-2013 The Orca Team"
 __license__ = "LGPL"
 
-from .orca_i18n import _, C_
+from orca.orca_i18n import _, C_
 
 # Translators: this is a indication of the focused icon and the count of the
 # total number of icons within an icon panel. An example of an icon panel is

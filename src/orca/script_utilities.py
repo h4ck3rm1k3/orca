@@ -33,14 +33,14 @@ import math
 import pyatspi
 import re
 
-from . import chnames
-from . import debug
-from . import keynames
-from . import input_event
-from . import messages
-from . import mouse_review
-from . import orca_state
-from . import settings
+import orca.chnames
+import orca.debug
+import orca.keynames
+import orca.input_event
+import orca.messages
+import orca.mouse_review
+import orca.orca_state
+import orca.settings
 
 #
 #
@@ -2347,7 +2347,7 @@ class Utilities(object):
         adjusting for repeat character counts and punctuation.
         """
 
-        from . import punctuation_settings
+        import orca.punctuation_settings
 
         style = settings.verbalizePunctuationStyle
         isPunctChar = True
@@ -2385,7 +2385,7 @@ class Utilities(object):
         was no dictionary entry.
         """
 
-        from . import pronunciation_dict
+        import orca.pronunciation_dict
 
         newSegment = pronunciation_dict.getPronunciation(
             segment, self._script.app_pronunciation_dict)
@@ -2406,7 +2406,7 @@ class Utilities(object):
         text which is also a link.
         """
 
-        from . import punctuation_settings
+        import orca.punctuation_settings
 
         endOffset = startOffset + len(line)
         try:

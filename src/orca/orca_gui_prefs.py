@@ -36,25 +36,25 @@ import locale
 import pyatspi
 import time
 
-from . import acss
-from . import debug
-from . import guilabels
-from . import messages
-from . import orca
-from . import orca_gtkbuilder
-from . import orca_gui_profile
-from . import orca_state
-from . import orca_platform
-from . import script_manager
-from . import settings
-from . import settings_manager
-from . import input_event
-from . import keybindings
-from . import pronunciation_dict
-from . import braille
-from . import speech
-from . import speechserver
-from . import text_attribute_names
+import  acss
+import  debug
+import  guilabels
+import  messages
+import  orca
+import  orca_gtkbuilder
+import  orca_gui_profile
+import  orca_state
+import  orca_platform
+import  script_manager
+import  settings
+import  settings_manager
+import  input_event
+import  keybindings
+import  pronunciation_dict
+import  braille
+import  speech
+import  speechserver
+import  text_attribute_names
 
 _scriptManager = script_manager.getManager()
 _settingsManager = settings_manager.getManager()
@@ -63,7 +63,7 @@ try:
     import louis
 except ImportError:
     louis = None
-from .orca_platform import tablesdir
+from orca_platform import tablesdir
 if louis and not tablesdir:
     louis = None
 

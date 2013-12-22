@@ -35,7 +35,7 @@ import pyatspi
 import subprocess
 import sys
 
-from . import orca_state
+import  orca.orca_state
 
 # Used to turn off all debugging.
 #

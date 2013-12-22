@@ -29,9 +29,9 @@ __license__ = "LGPL"
 
 from gi.repository import GObject, Gdk, Gtk
 
-from . import debug
-from . import guilabels
-from . import orca_state
+import orca.debug as debug
+import orca.guilabels as guilabels
+import orca.orca_state as orca_state
 
 
 class OrcaNavListGUI(object):

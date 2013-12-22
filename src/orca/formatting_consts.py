@@ -115,7 +115,7 @@ def emit():
         v = g[n]
 
         if isinstance(v,str):
-            print n,v
+            print (n,v)
 
 def replace(t):
     g = globals()

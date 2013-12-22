@@ -29,7 +29,7 @@ __copyright__ = "Copyright (c) 2004-2009 Sun Microsystems Inc." \
                 "Copyright (c) 2010-2013 The Orca Team"
 __license__ = "LGPL"
 
-from .orca_i18n import _, C_
+from orca.orca_i18n import _, C_
 
 # Translators: This string appears on a button in a dialog. "Activating" the
 # selected item will perform the action that one would expect to occur if the

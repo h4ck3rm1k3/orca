@@ -32,14 +32,14 @@ import urllib.error
 import urllib.parse
 from gi.repository import Atspi, Atk
 
-from . import debug
-from . import generator
-from . import messages
-from . import object_properties
-from . import settings
-from . import settings_manager
-from . import sound
-from . import text_attribute_names
+import orca.debug
+import orca.generator as generator
+import orca.messages
+import orca.object_properties
+import orca.settings as settings
+import orca.settings_manager as settings_manager
+import orca.sound
+import orca.text_attribute_names
 
 
 class Pause(object):

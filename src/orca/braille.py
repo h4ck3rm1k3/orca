@@ -52,8 +52,8 @@ except:
     _brlAPIAvailable = False
     _brlAPIRunning = False
 
-#from . import settings
-import settings
+#import  settings
+import orca.settings as settings
 
 try:
     # This can fail due to gtk not being available.  We want to
@@ -61,16 +61,16 @@ try:
     # for this is to allow "orca --text-setup" to work even if
     # the desktop is not running.
     #
-    from . import brlmon
+    import  brlmon
 except:
     settings.enableBrailleMonitor = False
 
-import brltablenames
-import cmdnames
-import debug
-import eventsynthesizer
-import logger
-import orca_state
+import orca.brltablenames as brltablenames
+import orca.cmdnames as cmdnames
+import orca.debug as debug
+import orca.eventsynthesizer as eventsynthesizer
+import orca.logger as logger
+import orca.orca_state as orca_state
 
 _logger = logger.getLogger()
 log = _logger.newLog("braille")
@@ -84,7 +84,8 @@ log = _logger.newLog("braille")
 # liblouis bindings can give us the tablesdir information at runtime
 # http://code.google.com/p/liblouis/issues/detail?id=9]]
 #
-from .orca_platform import tablesdir
+from orca.orca_platform import tablesdir
+
 if louis and not tablesdir:
     debug.println(debug.LEVEL_SEVERE,
                   "Contraction tables for liblouis cannot be found.")

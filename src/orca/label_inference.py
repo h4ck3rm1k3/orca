@@ -29,7 +29,7 @@ __license__ = "LGPL"
 
 import pyatspi
 
-from . import debug
+import orca.debug
 
 
 class LabelInference(object):

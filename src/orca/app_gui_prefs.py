@@ -30,20 +30,20 @@ import locale
 import os
 import sys
 
-from . import app_prefs
-from . import braille
-from . import debug
-from . import guilabels
-from . import input_event
-from . import keybindings
-from . import messages
-from . import orca_gui_prefs
-from . import orca_state
-from . import orca_platform
-from . import script_manager
-from . import settings_manager
-from . import settings
-from . import speech
+import  app_prefs
+import  braille
+import  debug
+import  guilabels
+import  input_event
+import  keybindings
+import  messages
+import  orca_gui_prefs
+import  orca_state
+import  orca_platform
+import  script_manager
+import  settings_manager
+import  settings
+import  speech
 
 _scriptManager = script_manager.getManager()
 _settingsManager = settings_manager.getManager()

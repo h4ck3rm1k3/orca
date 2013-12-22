@@ -49,3 +49,6 @@ patch.*
 !/help/C/*.xml
 /help/*/*.mo
 /help/*/*.stamp
+\#*.py\#
+.\#*.py
+*.py.bak

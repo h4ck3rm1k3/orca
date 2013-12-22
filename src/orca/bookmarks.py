@@ -22,10 +22,10 @@
 import pickle
 import os
 
-from . import messages
-from . import speech
-from . import orca_state
-from . import settings_manager
+import orca.messages as messages
+import orca.speech as speech
+import orca.orca_state as orca_state
+import orca.settings_manager as settings_manager
 
 _settingsManager = settings_manager.getManager()
 

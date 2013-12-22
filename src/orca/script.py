@@ -43,23 +43,23 @@ import imp
 import importlib
 import pyatspi
 
-from . import braille_generator
-from . import debug
-from . import event_manager
-from . import flat_review
-from . import formatting
-from . import label_inference
-from . import keybindings
-from . import orca_state
-from . import script_manager
-from . import script_utilities
-from . import settings
-from . import settings_manager
-from . import speech_generator
-from . import structural_navigation
-from . import where_am_I
-from . import bookmarks
-from . import tutorialgenerator
+import  orca.braille_generator as braille_generator
+import  orca.debug as debug
+import  orca.event_manager as event_manager
+import  orca.flat_review as flat_review
+#import  orca.formatting as formatting
+import  orca.label_inference as label_inference
+import  orca.keybindings as keybindings
+import  orca.orca_state as orca_state
+import  orca.script_manager as script_manager
+import  orca.script_utilities as script_utilities
+import  orca.settings as settings
+import  orca.settings_manager as settings_manager
+import  orca.speech_generator as speech_generator
+import  orca.structural_navigation as structural_navigation
+import  orca.where_am_I as where_am_I
+import  orca.bookmarks as bookmarks
+import  orca.tutorialgenerator as tutorialgenerator
 
 _eventManager = event_manager.getManager()
 _scriptManager = script_manager.getManager()
@@ -110,7 +110,7 @@ class Script(object):
         self.brailleBindings = self.getBrailleBindings()
         self.app_pronunciation_dict = self.getPronunciations()
 
-        self.formatting = self.getFormatting()
+        #self.formatting = self.getFormatting()
         self.brailleGenerator = self.getBrailleGenerator()
         self.speechGenerator = self.getSpeechGenerator()
         self.generatorCache = {}
@@ -206,9 +206,9 @@ class Script(object):
                 for command, handler in list(self.brailleBindings.items())
                 if inputEventHandler == handler]
 
-    def getFormatting(self):
-        """Returns the formatting strings for this script."""
-        return formatting.Formatting(self)
+    # def getFormatting(self):
+    #     """Returns the formatting strings for this script."""
+    #     return formatting.Formatting(self)
 
     def getBrailleGenerator(self):
         """Returns the braille generator for this script.
@@ -689,3 +689,12 @@ class Script(object):
     def deactivate(self):
         """Called when this script is deactivated."""
         pass
+
+    def get_formatting_role_keys(self, mode):
+        return ["TODO"]
+
+    def foo(self):
+        print ("FOO")
+
+    def get_formatting_code(self, mode,roleKey,key) :
+        return self.foo

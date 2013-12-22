@@ -29,18 +29,18 @@ __license__ = "LGPL"
 
 import pyatspi
 
-from . import cmdnames
-from . import debug
-from . import guilabels
-from . import input_event
-from . import keybindings
-from . import messages
-from . import object_properties
-from . import orca
-from . import orca_gui_navlist
-from . import orca_state
-from . import settings
-from . import speech
+import orca.cmdnames
+import orca.debug
+import orca.guilabels
+import orca.input_event
+import orca.keybindings as keybindings
+import orca.messages
+import orca.object_properties
+import orca.orca
+import orca.orca_gui_navlist
+import orca.orca_state
+import orca.settings
+import orca.speech
 
 #
 #

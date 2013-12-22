@@ -31,8 +31,8 @@ import locale
 import sys
 from gi.repository import Gtk
 
-from . import guilabels
-from . import orca_state
+import  guilabels
+import  orca_state
 
 OS = None
 newProfile = None
