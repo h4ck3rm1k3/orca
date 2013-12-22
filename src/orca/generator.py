@@ -108,6 +108,7 @@ class Generator(object):
             globalsDict[key] = []
         self._addGlobals(globalsDict)
 
+        #This is like duplicate
         for roleKey in self._script.formatting[self._mode]:
             for key in ["focused", "unfocused"]:
                 try:
@@ -122,6 +123,7 @@ class Generator(object):
                         continue
                     while True:
                         try:
+                            #TODO remove this. call a function instead
                             eval(evalString, globalsDict)
                             break
                         except NameError:
@@ -216,6 +218,7 @@ class Generator(object):
                 else:
                     args['formatType'] = 'unfocused'
 
+            #TODO
             formatting = self._script.formatting.getFormat(**args)
 
             # Add in the context if this is the first time
@@ -247,6 +250,7 @@ class Generator(object):
             while True:
                 currentTime = time.time()
                 try:
+                    #TODO : remove the formatting make a function call
                     result = eval(formatting, globalsDict)
                     break
                 except NameError:

@@ -503,7 +503,7 @@ class Formatting(dict):
     def __init__(self, script):
         dict.__init__(self)
         self._script = script
-        self.update(copy.deepcopy(formatting))
+        #self.update(copy.deepcopy(formatting))
 
     def update(self, newDict):
         for key, val in list(newDict.items()):

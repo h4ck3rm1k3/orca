@@ -630,6 +630,7 @@ class StructuralNavigation(object):
         # method.  (See the Objects section towards the end of this
         # class for examples of each.)
         #
+        #TODO remove eval
         bindings = eval("self._%sBindings()" % name)
         criteria = eval("self._%sCriteria" % name)
         predicate = eval("self._%sPredicate" % name)
