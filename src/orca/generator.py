@@ -220,16 +220,16 @@ class Generator(object):
                     args['formatType'] = 'unfocused'
 
             #TODO
-            formatting = self._script.formatting.getFormat(**args)
+            formatting = self._script.get_format(**args)
 
             # Add in the context if this is the first time
             # we've been called.
             #
             if not args.get('recursing', False):
                 if args.get('includeContext', True):
-                    prefix = self._script.formatting.getPrefix(**args)
-                    suffix = self._script.formatting.getSuffix(**args)
-                    formatting = '%s + %s + %s' % (prefix, formatting, suffix)
+                    prefix = self._script.get_format_prefix(**args)
+                    suffix = self._script.get_format_suffix(**args)
+                    formatting = formatting # TODO
                 args['recursing'] = True
                 #firstTimeCalled = True
             # else:
@@ -252,7 +252,7 @@ class Generator(object):
                 currentTime = time.time()
                 try:
                     #TODO : remove the formatting make a function call
-                    result = eval(formatting, globalsDict)
+                    result = formatting()
                     break
                 except NameError:
                     result = []

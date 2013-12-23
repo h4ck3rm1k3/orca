@@ -66,6 +66,19 @@ _scriptManager = script_manager.getManager()
 _settingsManager = settings_manager.getManager()
 
 
+class MyRegion :
+
+    @property
+    def string(self):
+        return "FOO"
+
+    @property
+    def cursorOffset(self):
+        return 0
+
+    def getAttributeMask(self, getLinkMask=True):
+        return "0"
+        
 class Script(object):
 
     """The specific focus tracking scripts for applications.
@@ -694,7 +707,23 @@ class Script(object):
         return ["TODO"]
 
     def foo(self):
-        print ("FOO")
+        print ("Foo called")
+        return [
+            MyRegion()
+        ]
 
     def get_formatting_code(self, mode,roleKey,key) :
+        print ("get formatting code %s %s %s " % (mode,roleKey,key))
+        return self.foo
+
+    def get_format(self, **kwargs) :
+        print ("get format %s" % kwargs)
+        return self.foo
+
+    def get_format_prefix(self, **kwargs) :
+        print ("get prefix %s" % kwargs)
+        return self.foo
+
+    def get_format_suffix(self, **kwargs) :
+        print ("get suffix %s" % kwargs)
         return self.foo

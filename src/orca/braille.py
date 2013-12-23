@@ -874,7 +874,7 @@ class Line(object):
         attributeMask = ""
         for region in self.regions:
             if region == _regionWithFocus:
-                focusOffset = len(string)
+                focusOffset = len(string)            
             if region.string:
                 # [[[TODO: WDW - HACK: Replace ellipses with "..."
                 # The ultimate solution is to get i18n support into
