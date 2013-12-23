@@ -29,6 +29,7 @@ import importlib
 import  orca.debug as debug
 import  orca.orca_state as orca_state
 from orca.scripts import apps, toolkits
+import orca.scripts as scripts
 
 
 class ScriptManager(object):
@@ -203,7 +204,7 @@ class ScriptManager(object):
         if not app and self._defaultScript:
             return self._defaultScript
 
-        from scripts import default
+        from orca.scripts import default
         script = default.Script(app)
 
         if not app:

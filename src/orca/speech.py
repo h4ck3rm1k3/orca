@@ -31,13 +31,13 @@ import importlib
 import re
 import time
 
-import orca.chnames
-import orca.debug
+import orca.chnames as chnames
+import orca.debug as debug
 import orca.logger as logger
-import orca.orca_state
-import orca.settings
-import orca.sound
-import orca.speech_generator
+import orca.orca_state as orca_state
+import orca.settings as settings
+import orca.sound as sound
+import orca.speech_generator as speech_generator
 
 from orca.acss import ACSS
 
@@ -87,7 +87,8 @@ def _initSpeechServer(moduleName, speechServerInfo):
     factory = None
     try:
         factory = importlib.import_module('orca.%s' % moduleName)
-    except:
+    except Exception as exp:
+        print(exp)
         try:
             factory = importlib.import_module(moduleName)
         except:

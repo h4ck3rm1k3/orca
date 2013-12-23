@@ -36,10 +36,11 @@ import os
 
 from gi.repository import GLib
 
-try:
-    import louis
-except ImportError:
-    louis = None
+#try:
+import louis
+#except ImportError:
+#    louis = None
+import brlapi
 
 try:
     import brlapi
@@ -54,7 +55,7 @@ except:
 
 #import  settings
 import orca.settings as settings
-
+import  orca.brlmon as brlmon
 try:
     # This can fail due to gtk not being available.  We want to
     # be able to recover from that if possible.  The main driver

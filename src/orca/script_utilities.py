@@ -33,14 +33,14 @@ import math
 import pyatspi
 import re
 
-import orca.chnames
-import orca.debug
-import orca.keynames
-import orca.input_event
-import orca.messages
-import orca.mouse_review
-import orca.orca_state
-import orca.settings
+import orca.chnames as chnames
+import orca.debug as debug
+import orca.keynames as keynames
+import orca.input_event as input_event
+import orca.messages as messages
+import orca.mouse_review as mouse_review
+import orca.orca_state as orca_state
+import orca.settings as settings
 
 #
 #
@@ -2385,7 +2385,7 @@ class Utilities(object):
         was no dictionary entry.
         """
 
-        import orca.pronunciation_dict
+        import orca.pronunciation_dict as pronunciation_dict
 
         newSegment = pronunciation_dict.getPronunciation(
             segment, self._script.app_pronunciation_dict)

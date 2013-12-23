@@ -57,13 +57,14 @@ try:
 except:
     pass
 
-#import  braille
+
 import orca.braille as braille
 import orca.debug as debug
 import orca.event_manager as event_manager
+#import event_manager
 import orca.logger as logger
 import orca.messages as messages
-import orca.notification_messages
+import orca.notification_messages as notification_messages
 import orca.orca_state as orca_state
 import orca.script_manager as script_manager
 import orca.settings as settings

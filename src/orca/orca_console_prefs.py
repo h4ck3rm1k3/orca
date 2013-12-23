@@ -29,11 +29,11 @@ __license__ = "LGPL"
 import re
 import sys
 
-import  acss
-import  messages
-import  settings
-import  speech
-import  speechserver
+import orca.acss as acss
+import orca.messages as messages
+import orca.settings as settings
+import orca.speech as speech
+import orca.speechserver as speechserver
 
 workingFactories = []
 speechServerChoice = None
