@@ -720,6 +720,8 @@ class Script(object):
             MyRegion(args)
         ]
 
+        #debug.printDetails(debug.LEVEL_FINEST, "    ", event.source)
+
     def get_formatting_code(self, mode,roleKey,key) :
         print ("get formatting code %s %s %s " % (mode,roleKey,key))
         return lambda : self.bar("get formatting code %s %s %s " % (mode,roleKey,key))

@@ -97,7 +97,7 @@ LEVEL_FINEST = 400
 #
 LEVEL_ALL = 0
 
-debugLevel = LEVEL_SEVERE
+debugLevel = LEVEL_ALL # LEVEL_SEVERE
 
 # The debug file.  If this is not set, then all debug output is done
 # via stdout.  If this is set, then all debug output is sent to the

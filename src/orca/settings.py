@@ -614,7 +614,7 @@ chatRoomHistories = False
 #
 
 def overrideKeyBindings(script, keyBindings):
-    import  settings_manager
+    import  orca.settings_manager as settings_manager
     _settingsManager = settings_manager.getManager()
     return _settingsManager.overrideKeyBindings(script, keyBindings)
 
