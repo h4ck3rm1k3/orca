@@ -68,16 +68,18 @@ _settingsManager = settings_manager.getManager()
 
 class MyRegion :
 
+    def __init__(self, var):
+        self.data= var
     @property
     def string(self):
-        return "FOO"
+        return "FOO %s" % self.data
 
     @property
     def cursorOffset(self):
         return 0
 
     def getAttributeMask(self, getLinkMask=True):
-        return "0"
+        return "9999"
         
 class Script(object):
 
@@ -709,21 +711,28 @@ class Script(object):
     def foo(self):
         print ("Foo called")
         return [
-            MyRegion()
+            MyRegion("FOO")
+        ]
+
+    def bar(self, args):
+        print ("BAR called")
+        return [
+            MyRegion(args)
         ]
 
     def get_formatting_code(self, mode,roleKey,key) :
         print ("get formatting code %s %s %s " % (mode,roleKey,key))
-        return self.foo
+        return lambda : self.bar("get formatting code %s %s %s " % (mode,roleKey,key))
 
     def get_format(self, **kwargs) :
         print ("get format %s" % kwargs)
-        return self.foo
+        return lambda : self.bar("get format %s" % kwargs)
 
     def get_format_prefix(self, **kwargs) :
         print ("get prefix %s" % kwargs)
-        return self.foo
+        return lambda : self.bar("get prefix %s" % kwargs)
 
     def get_format_suffix(self, **kwargs) :
         print ("get suffix %s" % kwargs)
-        return self.foo
+        #return self.foo
+        return lambda : self.bar("get suffix %s" % kwargs)
